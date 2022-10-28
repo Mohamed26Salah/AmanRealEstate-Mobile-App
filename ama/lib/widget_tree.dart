@@ -18,57 +18,13 @@ class _WidgetTreeState extends State<WidgetTree> {
 
   final List<Widget> _icons = [
     const Icon(Icons.add, size: 30),
-    const Icon(Icons.list, size: 30),
     const Icon(Icons.compare_arrows, size: 30),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 100),
-        child: (ResponsiveLayout.isTinyLimit(context) ||
-                ResponsiveLayout.isTinyHeightLimit(context))
-            ? Container()
-            : AppBarWidget(),
-      ),
-      body: ResponsiveLayout(
-        tiny: Container(),
-        phone: currentIndex == 0
-            ? PanelLeftPage()
-            : currentIndex == 1
-                ? PanelCenterPage()
-                : PanelRightPage(),
-        tablet: Row(
-          children: [
-            Expanded(child: PanelLeftPage()),
-            Expanded(
-              child: PanelCenterPage(),
-            )
-          ],
-        ),
-        largeTablet: Row(
-          children: [
-            Expanded(child: PanelLeftPage()),
-            Expanded(child: PanelCenterPage()),
-            Expanded(
-              child: PanelRightPage(),
-            )
-          ],
-        ),
-        computer: Row(
-          children: [
-            Expanded(child: DrawerPage()),
-            Expanded(child: PanelLeftPage()),
-            Expanded(
-              child: PanelCenterPage(),
-            ),
-            Expanded(
-              child: PanelRightPage(),
-            )
-          ],
-        ),
-      ),
+      body: currentIndex == 0 ? PanelLeftPage() : PanelRightPage(),
       bottomNavigationBar: ResponsiveLayout.isPhone(context)
           ? CurvedNavigationBar(
               index: currentIndex,
