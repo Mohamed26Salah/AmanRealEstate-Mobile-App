@@ -36,6 +36,24 @@ class AddFormState extends State<AddForm> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey[300],
+                            elevation: 0 // Background color
+                            ),
+                        child: Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
                   //Owner Name
                   Padding(
                     padding: const EdgeInsets.only(
