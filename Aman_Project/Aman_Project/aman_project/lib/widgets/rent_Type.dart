@@ -54,7 +54,7 @@ class _RentTypeState extends State<RentType> {
                         ),
                     child: Icon(
                       Icons.arrow_back_ios_new_outlined,
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     onPressed: () {
                       Navigator.pop(context);

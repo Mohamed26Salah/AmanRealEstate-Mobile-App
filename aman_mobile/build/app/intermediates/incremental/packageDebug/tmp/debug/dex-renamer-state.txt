@@ -1,0 +1,4 @@
+#Thu Oct 27 22:18:46 EET 2022
+base.0=C\:\\Users\\pc\\devolopment\\projects\\AmanRealEstate-Mobile-App\\aman_mobile\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
