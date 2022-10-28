@@ -1,5 +1,4 @@
 // ignore: unused_import
-import 'dart:ffi';
 
 import 'package:aman_project/constants.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class cards1 extends StatelessWidget {
                     Color.fromARGB(255, 79, 10, 68),
                   ])),
           child: Padding(
-              padding: const EdgeInsets.all(50),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
                   Icon(

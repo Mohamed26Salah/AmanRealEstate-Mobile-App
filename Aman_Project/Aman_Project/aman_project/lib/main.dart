@@ -1,4 +1,4 @@
-import 'package:aman_project/widgets/login_page.dart';
+import './widgets/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

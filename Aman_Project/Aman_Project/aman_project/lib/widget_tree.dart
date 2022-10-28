@@ -1,11 +1,4 @@
-import 'package:aman_project/constants.dart';
-import 'package:aman_project/pages/drawer/drawer_page.dart';
-import 'package:aman_project/pages/panel_center/panel_center_page.dart';
-import 'package:aman_project/pages/panel_left/panel_left_page.dart';
-import 'package:aman_project/pages/panel_right/panel_right_page.dart';
-import 'package:aman_project/pages/widgets/app_bar_widget.dart';
-import 'package:aman_project/responsive_layout.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import './pages/panel_left/panel_left_page.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -18,25 +11,12 @@ class _WidgetTreeState extends State<WidgetTree> {
 
   final List<Widget> _icons = [
     const Icon(Icons.add, size: 30),
-    const Icon(Icons.compare_arrows, size: 30),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentIndex == 0 ? PanelLeftPage() : PanelRightPage(),
-      bottomNavigationBar: ResponsiveLayout.isPhone(context)
-          ? CurvedNavigationBar(
-              index: currentIndex,
-              backgroundColor: Constants.purpleDark,
-              items: _icons,
-              onTap: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-            )
-          : const SizedBox(),
+      body: PanelLeftPage(),
     );
   }
 }

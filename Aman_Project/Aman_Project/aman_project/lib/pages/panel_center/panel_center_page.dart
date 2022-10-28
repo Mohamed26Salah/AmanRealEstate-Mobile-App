@@ -1,4 +1,3 @@
-import 'package:aman_project/pages/panel_right/list.dart';
 import 'package:flutter/material.dart';
 
 List<bool> isSelected = [true, false];
@@ -70,7 +69,7 @@ class PanelCenterPageState extends State<PanelCenterPage> {
                       }
                     });
                   }),
-              isSelected[0] ? list1() : list2(),
+              // isSelected[0] ? list1() : list2(),
             ],
           )
         ],
