@@ -1,12 +1,9 @@
-import 'dart:ui';
-import 'package:ama/pages/charts.dart';
 import 'package:ama/pages/panel_right/list.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-
 List<bool> isSelected = [true, false];
 
+// ignore: use_key_in_widget_constructors
 class PanelCenterPage extends StatefulWidget {
   @override
 
@@ -45,7 +42,7 @@ class PanelCenterPageState extends State<PanelCenterPage> {
                   borderColor: Colors.black,
                   borderWidth: 1.5,
                   borderRadius: BorderRadius.circular(10),
-                  selectedBorderColor: Color.fromARGB(255, 255, 255, 255),
+                  selectedBorderColor: const Color.fromARGB(255, 255, 255, 255),
 // add widgets for which the users need to toggle
                   children: const [
                     Padding(
@@ -73,7 +70,7 @@ class PanelCenterPageState extends State<PanelCenterPage> {
                       }
                     });
                   }),
-              isSelected[0] ? const list1() : Container(),
+              isSelected[0] ? list1() : list2(),
             ],
           )
         ],

@@ -15,11 +15,11 @@ class ResponsiveLayout extends StatelessWidget {
     required this.computer,
   });
 
-  static final int tinyHeightLimit = 100;
-  static final int tinyLimit = 270;
-  static final int phoneLimit = 550;
-  static final int tabletLimit = 800;
-  static final int largeTabletLimit = 1100;
+  static final int tinyHeightLimit = 9800;
+  static final int tinyLimit = 9900;
+  static final int phoneLimit = 9999;
+  static final int tabletLimit = 9999;
+  static final int largeTabletLimit = 9999;
 
   static bool isTinyHeightLimit(BuildContext context) =>
       MediaQuery.of(context).size.height < tinyHeightLimit;
@@ -29,7 +29,7 @@ class ResponsiveLayout extends StatelessWidget {
 
   static bool isPhone(BuildContext context) =>
       MediaQuery.of(context).size.width < phoneLimit &&
-      MediaQuery.of(context).size.width >= tinyLimit;
+      MediaQuery.of(context).size.width >= 0;
 
   static bool isTablet(BuildContext context) =>
       MediaQuery.of(context).size.width < tabletLimit &&
