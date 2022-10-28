@@ -1,4 +1,5 @@
 import 'package:aman_project/widget_tree.dart';
+import 'package:aman_project/widgets/wish_list.dart';
 import '/widgets/edit_profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../widgets/search.dart';
@@ -42,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     Search(),
     Rents(),
+    wish_list(),
     EditProfile(),
     WidgetTree(),
   ];
@@ -100,6 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
               GButton(
                 icon: Icons.person,
                 text: 'Profile',
+              ),
+              GButton(
+                icon: Icons.dashboard,
+                text: 'Dashboard',
               ),
             ],
           ),
