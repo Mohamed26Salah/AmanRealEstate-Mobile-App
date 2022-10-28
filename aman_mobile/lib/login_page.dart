@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'validation.dart';
 import 'Register_page.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -66,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidEmail) {
+                          return 'Enter valid email';
                         }
                         return null;
                       },
@@ -95,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidPassword) {
+                          return 'enter At Least 8 characters one letter and one number';
                         }
                         return null;
                       },

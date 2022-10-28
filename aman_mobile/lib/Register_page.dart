@@ -1,3 +1,4 @@
+import 'package:aman_mobile/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,8 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidName) {
+                          return 'Please enter a valid name';
                         }
                         return null;
                       },
@@ -88,8 +89,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidName) {
+                          return 'Please enter a valid name';
                         }
                         return null;
                       },
@@ -115,8 +116,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidEmail) {
+                          return 'Enter valid email';
                         }
                         return null;
                       },
@@ -144,8 +145,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidPassword) {
+                          return 'enter At Least 8 characters one letter and one number';
                         }
                         return null;
                       },
@@ -173,8 +174,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         filled: true,
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                        if (!value!.isValidPassword) {
+                          return 'enter At Least 8 characters one letter and one number';
                         }
                         return null;
                       },

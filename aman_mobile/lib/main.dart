@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 
 import 'package:aman_mobile/data/data.dart';
 
+import 'login_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -43,13 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Aman Real Estate"),
+      // appBar: AppBar(
+      //   title: const Text("Aman Real Estate"),
+      // ),
+      body: SafeArea(
+        child: LoginPage(),
       ),
-      body: const SafeArea(
-        child: Search(),
-      ),
-      bottomNavigationBar: NavBar(),
+      // bottomNavigationBar: NavBar(),
     );
   }
 }
