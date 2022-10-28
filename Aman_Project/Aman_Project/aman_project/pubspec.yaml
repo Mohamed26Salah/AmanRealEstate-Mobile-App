@@ -44,6 +44,7 @@ dependencies:
   fl_chart: ^0.55.2
   search_page: ^2.2.0
   focused_menu: ^1.0.5
+  dropdown_button2: ^1.8.9
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"

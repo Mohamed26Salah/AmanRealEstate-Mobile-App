@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/data.dart';
 import './property_description.dart';
 import './filter.dart';
+import 'AddForm.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -156,6 +157,15 @@ class _SearchState extends State<Search> {
         ],
       ),
       // bottomNavigationBar: NavBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 205, 153, 51),
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (builder) => AddForm()));
+        },
+      ),
     );
   }
 
