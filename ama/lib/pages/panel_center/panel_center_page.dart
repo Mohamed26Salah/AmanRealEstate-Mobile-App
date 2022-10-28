@@ -1,104 +1,81 @@
 import 'dart:ui';
 import 'package:ama/pages/charts.dart';
+import 'package:ama/pages/panel_right/list.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-class Person {
-  String name;
-  Color color;
-  Person({required this.name, required this.color});
+List<bool> isSelected = [true, false];
+
+class PanelCenterPage extends StatefulWidget {
+  @override
+
+  // ignore: library_private_types_in_public_api
+  PanelCenterPageState createState() => PanelCenterPageState();
 }
 
-class PanelCenterPage extends StatelessWidget {
+class PanelCenterPageState extends State<PanelCenterPage> {
   @override
   Widget build(BuildContext context) {
-    List<Person> _persons = [
-      Person(name: "Theia Bowen", color: Color(0xfff8b250)),
-      Person(name: "Fariha Odling", color: Color(0xffff5182)),
-      Person(name: "Viola Willis", color: Color(0xff0293ee)),
-      Person(name: "Emmett Forrest", color: Color(0xfff8b250)),
-      Person(name: "Nick Jarvis", color: Color(0xff13d38e)),
-      Person(name: "ThAmit Clayeia", color: Color(0xfff8b250)),
-      Person(name: "ThAmalie Howardeia", color: Color(0xffff5182)),
-      Person(name: "Campbell Britton", color: Color(0xff0293ee)),
-      Person(name: "Haley Mellor", color: Color(0xffff5182)),
-      Person(name: "Harlen Higgins", color: Color(0xff13d38e)),
-    ];
-    return SingleChildScrollView(
-      child: Column(
+    return Scaffold(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: Constants.kPadding / 2,
-                right: Constants.kPadding / 2,
-                left: Constants.kPadding / 2),
-            child: Card(
-              color: Constants.purpleLight,
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Container(
-                width: double.infinity,
-                child: ListTile(
-                  //leading: Icon(Icons.sell),
-                  title: Text(
-                    "Products Available",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  subtitle: Text(
-                    "82% of Products Avail.",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  trailing: Chip(
-                    label: Text(
-                      "20,500",
-                      style: TextStyle(color: Colors.white),
+          Column(
+            children: [
+              const SizedBox(height: 10),
+              ToggleButtons(
+                  // list of booleans
+                  isSelected: isSelected,
+                  // text color of selected toggle
+                  selectedColor: Colors.white,
+                  // text color of not selected toggle
+                  color: Colors.blue,
+                  // fill color of selected toggle
+                  fillColor: Colors.lightBlue.shade900,
+                  // when pressed, splash color is seen
+                  splashColor: Colors.red,
+                  // long press to identify highlight color
+                  highlightColor: Colors.orange,
+                  // if consistency is needed for all text style
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  // border properties for each toggle
+                  renderBorder: true,
+                  borderColor: Colors.black,
+                  borderWidth: 1.5,
+                  borderRadius: BorderRadius.circular(10),
+                  selectedBorderColor: Color.fromARGB(255, 255, 255, 255),
+// add widgets for which the users need to toggle
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: Text('Propreties', style: TextStyle(fontSize: 18)),
                     ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                top: Constants.kPadding,
-                left: Constants.kPadding / 2,
-                right: Constants.kPadding / 2,
-                bottom: Constants.kPadding),
-            child: Card(
-              color: Constants.purpleLight,
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(
-                children: List.generate(
-                  _persons.length,
-                  (index) => ListTile(
-                    leading: CircleAvatar(
-                      radius: 15,
-                      child: Text(
-                        _persons[index].name.substring(0, 1),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: _persons[index].color,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: Text('Rents', style: TextStyle(fontSize: 18)),
                     ),
-                    title: Text(
-                      _persons[index].name,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.message,
-                          color: Colors.white,
-                        )),
-                  ),
-                ),
-              ),
-            ),
-          ),
+                  ],
+// to select or deselect when pressed
+                  onPressed: (int newIndex) {
+                    setState(() {
+                      // looping through the list of booleans values
+                      for (int index = 0; index < isSelected.length; index++) {
+                        // checking for the index value
+                        if (index == newIndex) {
+                          // one button is always set to true
+                          isSelected[index] = true;
+                        } else {
+                          // other two will be set to false and not selected
+                          isSelected[index] = false;
+                        }
+                      }
+                    });
+                  }),
+              isSelected[0] ? const list1() : Container(),
+            ],
+          )
         ],
       ),
     );
