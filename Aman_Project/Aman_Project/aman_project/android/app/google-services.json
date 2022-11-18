@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "487416111209",
+    "project_id": "aman-real-estate",
+    "storage_bucket": "aman-real-estate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487416111209:android:ea52d5298f98334225c2f8",
+        "android_client_info": {
+          "package_name": "com.example.aman_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487416111209-4solovrih21md610ohprc08a2q7jkf8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB17fZVgpVuyNgdNqRu303NM2aSKc3dIis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487416111209-4solovrih21md610ohprc08a2q7jkf8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
