@@ -1,9 +1,12 @@
 import 'package:aman_project/widgets/navBar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../data/CustomTextField.dart';
 import 'Register_page.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -15,6 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,6 +181,20 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  SignInButton(
+                    Buttons.Google,
+                    text: "Sign in with Google",
+                    onPressed: () async {
+                     await signInWithGoogle();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => navBar(),
+                      //   ),
+                      // );
+                    },
+                  ),
+
                   SizedBox(height: 15),
                   Text(
                     'Do Not Have An Account ? ',
@@ -190,5 +209,22 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+    GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+
+    AuthCredential authCredential =  GoogleAuthProvider.credential(idToken: googleSignInAuthentication.idToken , accessToken: googleSignInAuthentication.accessToken );
+
+      //_auth.signInWithCredential(authCredential);
+
+    UserCredential authResult = await _auth.signInWithCredential(authCredential);
+
+    User? user = authResult.user;
+    print('hi');
+    print('user email = ${user!.email}');
+    
   }
 }
