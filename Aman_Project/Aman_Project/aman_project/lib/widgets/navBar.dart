@@ -7,42 +7,34 @@ import 'package:flutter/material.dart';
 import '../../data/data.dart';
 import 'rent.dart';
 
-class navBar extends StatelessWidget {
-  const navBar({super.key});
+// class navBar extends StatelessWidget {
+//   const navBar({super.key});
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // initialRoute: 'mainPage',
-      // routes: {
-      //   'mainPage': (context) => const Search(),
-      //   'profile': (context) => const EditProfile(),
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Flutter Demo',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: const NavBar(title: 'Flutter Demo Home Page'),
+//     );
+//   }
+// }
 
-      // } ,
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NavBarState extends State<NavBar> {
   List<Widget> pages = [
     Search(),
-    Rents(),
+    RentsPage(),
     wish_list(),
     EditProfile(),
     WidgetTree(),

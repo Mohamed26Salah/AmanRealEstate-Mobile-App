@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../data/data.dart';
 import './property_description.dart';
 import './filter.dart';
 import 'AddForm.dart';
+import 'navBar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+
+import 'nav_bar_gr.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -17,6 +22,8 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const NavBarGR(),
+
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,8 +169,9 @@ class _SearchState extends State<Search> {
         backgroundColor: Color.fromARGB(255, 205, 153, 51),
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (builder) => AddForm()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (builder) => AddForm()));
+          context.push('/addFormUnits');
         },
       ),
     );
@@ -206,10 +214,11 @@ class _SearchState extends State<Search> {
   Widget buildProperty(Property property, int index) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Details(property: property)),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => Details(property: property)),
+        // );
+        GoRouter.of(context).push('/details', extra: property);
       },
       child: Card(
         margin: const EdgeInsets.only(bottom: 24),

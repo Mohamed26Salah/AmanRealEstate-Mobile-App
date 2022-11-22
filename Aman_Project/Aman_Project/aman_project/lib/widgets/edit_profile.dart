@@ -1,6 +1,8 @@
 import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
 
+import 'nav_bar_gr.dart';
+
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
 
@@ -14,6 +16,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const NavBarGR(),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
         child: GestureDetector(

@@ -1,8 +1,11 @@
 import 'package:aman_project/widgets/navBar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../data/CustomTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'nav_bar_gr.dart';
 
 class wish_list extends StatefulWidget {
   wish_list({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class _wish_listState extends State<wish_list> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const NavBarGR(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -46,12 +50,7 @@ class _wish_listState extends State<wish_list> {
                       backgroundColor: Color.fromARGB(255, 205, 153, 51),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => navBar(),
-                        ),
-                      );
+                      context.push('/');
                     },
                   )
                 ],

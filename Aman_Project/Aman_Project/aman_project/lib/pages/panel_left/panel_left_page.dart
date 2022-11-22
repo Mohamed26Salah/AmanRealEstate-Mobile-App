@@ -1,4 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors
+import '../../widgets/nav_bar_gr.dart';
 import '/./pages/DummyData/person.dart';
 import '/./responsive_layout.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
           ),
         );
     return Scaffold(
+      bottomNavigationBar: const NavBarGR(),
       body: Stack(
         children: [
           ListView(

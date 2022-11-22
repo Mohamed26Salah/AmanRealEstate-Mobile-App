@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import './rent_Type.dart';
+import 'nav_bar_gr.dart';
 
-class Rents extends StatelessWidget {
-  const Rents({super.key});
+class RentsPage extends StatelessWidget {
+  const RentsPage({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const NavBarGR(),
       backgroundColor: const Color.fromARGB(255, 231, 231, 231),
       body: SafeArea(
         child: Padding(
@@ -22,12 +25,13 @@ class Rents extends StatelessWidget {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RentType(rentID: 2),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => RentType(rentID: 2),
+                    //   ),
+                    // );
+                    context.push('/Rents/RentType/${2}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
@@ -56,12 +60,13 @@ class Rents extends StatelessWidget {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RentType(rentID: 1),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => RentType(rentID: 1),
+                    //   ),
+                    // );
+                    context.push('/Rents/RentType/${1}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
@@ -90,12 +95,14 @@ class Rents extends StatelessWidget {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RentType(rentID: 4),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => RentType(rentID: 4),
+                    //   ),
+                    // );
+                    // GoRouter.of(context).push('/RentType/${4}');
+                    context.push('/Rents/RentType/${4}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
@@ -124,12 +131,13 @@ class Rents extends StatelessWidget {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RentType(rentID: 3),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => RentType(rentID: 3),
+                    //   ),
+                    // );
+                    context.push('/Rents/RentType/${3}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
