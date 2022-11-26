@@ -33,29 +33,20 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   List<Widget> pages = [
-    Search(),
-    RentsPage(),
+    const Search(),
+    const RentsPage(),
     wish_list(),
-    EditProfile(),
+    const EditProfile(),
     WidgetTree(),
   ];
 
   int index = 0;
 
-  List<Property> properties = getPropertyList();
+  // List<Property> properties = getPropertyList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[index],
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: index,
-      //   onTap: (i) => setState((() => index = i)),
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home) , label: 'Home'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person) , label: 'Profile'),
-      //   ],
-      // ),
 
       bottomNavigationBar: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

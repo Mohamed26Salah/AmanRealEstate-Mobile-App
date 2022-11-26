@@ -18,7 +18,7 @@ class _wish_listState extends State<wish_list> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavBarGR(),
+      // bottomNavigationBar: const NavBarGR(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -50,7 +50,7 @@ class _wish_listState extends State<wish_list> {
                       backgroundColor: Color.fromARGB(255, 205, 153, 51),
                     ),
                     onPressed: () {
-                      context.push('/');
+                      Navigator.of(context).pushNamed('/home');
                     },
                   )
                 ],

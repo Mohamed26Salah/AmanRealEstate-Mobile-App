@@ -3,24 +3,38 @@ import 'package:flutter/material.dart';
 
 
 class Details extends StatelessWidget {
-  final Property? property;
-  const Details({super.key , @required this.property});
+  // final Property? property;
+  const Details({super.key , /*@required this.property */ });
 
   @override
   Widget build(BuildContext context) {
     
+    final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+    final propertyFrontImage = routeArgs['frontImage'] as String;
+    final propertyLabel = routeArgs['label'] as String;
+    final propertyName = routeArgs['name'] as String;
+    final propertyLocation= routeArgs['location'] as String;
+    final propertySqm= routeArgs['sqm'] as String;
+    final propertyPrice= routeArgs['price'] as String;
+    final propertyOwnerImage= routeArgs['ownerImage'] as String;
+    final propertyOwnerName= routeArgs['ownerName'] as String;
+    final propertyDescription= routeArgs['description'] as String;
+    final propertyImages= routeArgs['images'] as List<String>;
+    final propertyFloor = routeArgs['floor'] as String;
+
+    print(propertyDescription);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Hero(
-              tag: property!.frontImage,
+              tag: propertyFrontImage,
               child: Container(
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(property!.frontImage),
+                    image: AssetImage(propertyFrontImage),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -88,7 +102,7 @@ class Details extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "FOR ${property?.label}",
+                          "FOR $propertyLabel",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -106,7 +120,7 @@ class Details extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                          Text(
-                          property!.name,
+                          propertyName,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 32,
@@ -156,7 +170,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              property!.location,
+                              propertyLocation,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -174,7 +188,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                             "${property!.sqm} sq/m",
+                             "$propertySqm sq/m",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -189,7 +203,7 @@ class Details extends StatelessWidget {
                           ),
 
                           Text(
-                            r"$" + property!.price,
+                            r"$" + propertyPrice,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -234,7 +248,7 @@ class Details extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image:
-                                          AssetImage(property!.ownerImage),
+                                          AssetImage(propertyOwnerImage),
                                       fit: BoxFit.cover, //FrontImage
                                     ),
                                     shape: BoxShape.circle,
@@ -247,7 +261,7 @@ class Details extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                      Text(
-                                     property!.ownerName,
+                                     propertyOwnerName,
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -314,7 +328,7 @@ class Details extends StatelessWidget {
                                   const SizedBox(width: 10,),
                                   buildFeature(Icons.house, "Furnished"),
                                   const SizedBox(width: 10,),
-                                  buildFeature(Icons.stairs, "3rd Floor"),
+                                  buildFeature(Icons.stairs, "$propertyFloor"),
                                  
                                 ],
                               ),
@@ -337,7 +351,7 @@ class Details extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 24, left: 24, bottom: 24),
                         child: Text(
-                          property!.description,
+                          propertyDescription,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[500],
@@ -362,7 +376,7 @@ class Details extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            children: buildPhotos(property!.images),
+                            children: buildPhotos(propertyImages),
                           ),
                         ),
                       ),

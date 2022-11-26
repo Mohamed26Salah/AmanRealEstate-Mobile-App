@@ -49,7 +49,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
           ),
         );
     return Scaffold(
-      bottomNavigationBar: const NavBarGR(),
+      // bottomNavigationBar: const NavBarGR(),
       body: Stack(
         children: [
           ListView(

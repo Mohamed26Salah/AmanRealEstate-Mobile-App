@@ -3,35 +3,34 @@ import '/data/rent_data.dart';
 
 class RentType extends StatefulWidget {
   // const RentType({Key? key}) : super(key: key);
-  int rentID;
-  RentType({super.key, required this.rentID});
+  // int rentID;
+  RentType({super.key, /*required this.rentID*/});
   @override
-  _RentTypeState createState() => _RentTypeState(this.rentID);
+  _RentTypeState createState() => _RentTypeState();
 }
 
 class _RentTypeState extends State<RentType> {
   List<Rents> rentsArray = getRentsList();
   Iterable<Rents> rentsArray2 = [];
   List<Rents> rentsArray3 = [];
-  int rentID2;
-  _RentTypeState(this.rentID2);
-
   @override
   Widget build(BuildContext context) {
+     final routeArgs = ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>;
+     final rentID = routeArgs['rentID'];
     String image = "";
-    if (rentID2 == 2) {
+    if (rentID == 2) {
       image = "assets/images/dont-touch.png";
       rentsArray2 = rentsArray.where((e) => e.rentType == 2);
       rentsArray3 = rentsArray2.toList();
-    } else if (rentID2 == 1) {
+    } else if (rentID == 1) {
       image = "assets/images/paid.png";
       rentsArray2 = rentsArray.where((e) => e.rentType == 1);
       rentsArray3 = rentsArray2.toList();
-    } else if (rentID2 == 3) {
+    } else if (rentID == 3) {
       image = "assets/images/calendar.png";
       rentsArray2 = rentsArray.where((e) => e.rentType == 3);
       rentsArray3 = rentsArray2.toList();
-    } else if (rentID2 == 4) {
+    } else if (rentID == 4) {
       image = "assets/images/dead 2.png";
       rentsArray2 = rentsArray.where((e) => e.rentType == 4);
       rentsArray3 = rentsArray2.toList();

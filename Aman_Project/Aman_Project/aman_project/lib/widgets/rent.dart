@@ -10,7 +10,7 @@ class RentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavBarGR(),
+      // bottomNavigationBar: const NavBarGR(),
       backgroundColor: const Color.fromARGB(255, 231, 231, 231),
       body: SafeArea(
         child: Padding(
@@ -31,16 +31,16 @@ class RentsPage extends StatelessWidget {
                     //     builder: (context) => RentType(rentID: 2),
                     //   ),
                     // );
-                    context.push('/Rents/RentType/${2}');
+
+                    Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 2});
+                    // context.push('/Rents/RentType/${2}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 30,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        child: Image.asset("assets/images/dont-touch.png"),
-                      ),
+                      child: Image.asset("assets/images/dont-touch.png"),
                     ),
                   ),
                   title: Text(
@@ -66,16 +66,15 @@ class RentsPage extends StatelessWidget {
                     //     builder: (context) => RentType(rentID: 1),
                     //   ),
                     // );
-                    context.push('/Rents/RentType/${1}');
+                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 1});
+                    // context.push('/Rents/RentType/${1}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 30,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        child: Image.asset("assets/images/paid.png"),
-                      ),
+                      child: Image.asset("assets/images/paid.png"),
                     ),
                   ),
                   title: Text(
@@ -102,16 +101,15 @@ class RentsPage extends StatelessWidget {
                     //   ),
                     // );
                     // GoRouter.of(context).push('/RentType/${4}');
-                    context.push('/Rents/RentType/${4}');
+                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 4});
+                    // context.push('/Rents/RentType/${4}');
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 30,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        child: Image.asset("assets/images/dead 2.png"),
-                      ),
+                      child: Image.asset("assets/images/dead 2.png"),
                     ),
                   ),
                   title: Text(
@@ -137,16 +135,15 @@ class RentsPage extends StatelessWidget {
                     //     builder: (context) => RentType(rentID: 3),
                     //   ),
                     // );
-                    context.push('/Rents/RentType/${3}');
+                    // context.push('/Rents/RentType/${3}');
+                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 3});
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 30,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        child: Image.asset("assets/images/calendar.png"),
-                      ),
+                      child: Image.asset("assets/images/calendar.png"),
                     ),
                   ),
                   title: Text(
