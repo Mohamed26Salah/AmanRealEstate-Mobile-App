@@ -9,6 +9,10 @@ import '../data/CustomTextField.dart';
 import 'Register_page.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import '../data/globals.dart' as val;
+import 'custom_message.dart';
+
 final _formKey = GlobalKey<FormState>();
 
 class LoginPage extends StatefulWidget {
@@ -68,7 +72,12 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: ("Email".tr),
                       validator: (value) {
                         if (!value!.isValidEmail) {
-                          return ('Enter valid email'.tr);
+                          // return ('Enter valid email'.tr);
+
+                          errormessage('Email'.tr, 'Enter valid email'.tr);
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(val.snackBar);
                         }
                         return null;
                       },
@@ -85,7 +94,14 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: ("Password".tr),
                       validator: (value) {
                         if (!value!.isValidPassword) {
-                          return 'enter At Least 8 characters one letter and one number';
+                          // return 'enter At Least 8 characters one letter and one number';
+                          errormessage(
+                              'Password'.tr,
+                              'enter At Least 8 characters one letter and one number'
+                                  .tr);
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(val.snackBar);
                         }
                         return null;
                       },

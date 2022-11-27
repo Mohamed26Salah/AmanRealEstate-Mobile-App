@@ -1,0 +1,2 @@
+var snackBar;
+var materialBanner;
