@@ -7,7 +7,7 @@ class LocaleString extends Translations {
         //ENGLISH LANGUAGE
         'en_US': {
           'title': 'title',
-          'changelang': 'Change Language',
+          'change Language': 'Change Language',
           'Full Name': 'Full Name',
           'Email': 'Email',
           'Password': 'Password',
@@ -23,7 +23,7 @@ class LocaleString extends Translations {
 
         'ar_EG': {
           'title': 'عنوان',
-          'changelang': 'تغير اللغة',
+          'change Language': 'تغير اللغة',
           'Full Name': 'الاسم الكامل',
           'Email': 'البريد الالكتروني',
           'Password': 'كلمه المرور',
