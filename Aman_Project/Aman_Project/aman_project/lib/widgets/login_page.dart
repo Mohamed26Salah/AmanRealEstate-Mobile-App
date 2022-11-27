@@ -72,12 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: ("Email".tr),
                       validator: (value) {
                         if (!value!.isValidEmail) {
-                          // return ('Enter valid email'.tr);
+                          return ('Enter valid email'.tr);
 
-                          errormessage('Email'.tr, 'Enter valid email'.tr);
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(val.snackBar);
+                     
                         }
                         return null;
                       },
@@ -94,14 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: ("Password".tr),
                       validator: (value) {
                         if (!value!.isValidPassword) {
-                          // return 'enter At Least 8 characters one letter and one number';
-                          errormessage(
-                              'Password'.tr,
-                              'enter At Least 8 characters one letter and one number'
-                                  .tr);
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(val.snackBar);
+                          return 'enter At Least 8 characters one letter and one number';
+                        
                         }
                         return null;
                       },
