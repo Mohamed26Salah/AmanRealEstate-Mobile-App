@@ -1,16 +1,59 @@
 import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'nav_bar_gr.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  EditProfile({super.key});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  final List locale = [
+    {'name': 'ENGLISH', 'locale': Locale('en', 'US')},
+    {'name': 'العربيه', 'locale': Locale('ar', 'EG')},
+  ];
+  updateLanguage(Locale locale) {
+    Get.back();
+    Get.updateLocale(locale);
+  }
+
+  buildLanguageDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (builder) {
+          return AlertDialog(
+            title: Text('Choose Your Language'),
+            content: Container(
+              width: double.maxFinite,
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        child: Text(locale[index]['name']),
+                        onTap: () {
+                          print(locale[index]['name']);
+                          updateLanguage(locale[index]['locale']);
+                        },
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      color: Colors.blue,
+                    );
+                  },
+                  itemCount: locale.length),
+            ),
+          );
+        });
+  }
+
   List<Users> user1 = getUsers();
   bool isObscurePassword = true;
   @override
@@ -67,15 +110,20 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                     ),
+                    ElevatedButton(
+                        onPressed: () {
+                          buildLanguageDialog(context);
+                        },
+                        child: Text('changelang'.tr)),
                   ],
                 ),
               ),
               const SizedBox(
                 height: 30,
               ),
-              buildTextField("Full Name", user1[0].name, false),
-              buildTextField("Email", user1[0].email, false),
-              buildTextField("Password", user1[0].passwrod, true),
+              buildTextField('Full Name'.tr, user1[0].name, false),
+              buildTextField("Email".tr, user1[0].email, false),
+              buildTextField("Password".tr, user1[0].passwrod, true),
               const SizedBox(
                 height: 30,
               ),

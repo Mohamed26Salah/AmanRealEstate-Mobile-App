@@ -2,6 +2,7 @@ import 'package:aman_project/widgets/navBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../data/CustomTextField.dart';
@@ -18,10 +19,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
- 
-
-   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
@@ -47,13 +45,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Text(
-                    'Hello',
+                    ('Hello'.tr),
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52, color: const Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52,
+                        color: const Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Welcome To Aman',
+                  Text(
+                    ('Welcome To Aman'.tr),
                     style: TextStyle(
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
@@ -65,11 +64,11 @@ class _LoginPageState extends State<LoginPage> {
                         top: 0, left: 15, right: 15, bottom: 0),
                     child: CustomTextField(
                       obscureText: false,
-                      labelText: "Enter your Email",
-                      hintText: "Email",
+                      labelText: ("Enter your Email".tr),
+                      hintText: ("Email".tr),
                       validator: (value) {
                         if (!value!.isValidEmail) {
-                          return 'Enter valid email';
+                          return ('Enter valid email'.tr);
                         }
                         return null;
                       },
@@ -82,8 +81,8 @@ class _LoginPageState extends State<LoginPage> {
                         top: 10, left: 15, right: 15, bottom: 0),
                     child: CustomTextField(
                       obscureText: true,
-                      labelText: "Enter your Password",
-                      hintText: "Password",
+                      labelText: ("Enter your Password".tr),
+                      hintText: ("Password".tr),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
@@ -110,23 +109,24 @@ class _LoginPageState extends State<LoginPage> {
                           if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
-                           Navigator.of(context).pushReplacementNamed('/home');
+                            Navigator.of(context).pushReplacementNamed('/home');
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
                             );
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
-                          shape: const RoundedRectangleBorder(
+                          elevation: 0.0,
+                          primary: Colors.red.withOpacity(0),
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),
                             ),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Sign In',
+                            ('Sign In'.tr),
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -154,16 +154,17 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.of(context).pushNamed('/register');
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
+                          elevation: 0.0,
+                          backgroundColor: Colors.red.withOpacity(0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),
                             ),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Register',
+                            ('Register'.tr),
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -204,34 +205,34 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  final googleSignIn = GoogleSignIn();
+  GoogleSignInAccount? _user;
 
-    final googleSignIn = GoogleSignIn();
-    GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
 
-    GoogleSignInAccount get user =>_user!;
-
-   Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     //-------------------------------------1st method--------------------------------------------------
     GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
 
-    GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
 
-    AuthCredential authCredential =  GoogleAuthProvider.credential(idToken: googleSignInAuthentication.idToken , accessToken: googleSignInAuthentication.accessToken );
+    AuthCredential authCredential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
 
-      //_auth.signInWithCredential(authCredential);
-   
-    UserCredential authResult = await _auth.signInWithCredential(authCredential);
+    //_auth.signInWithCredential(authCredential);
 
-    
+    UserCredential authResult =
+        await _auth.signInWithCredential(authCredential);
 
     User? user = authResult.user;
     print('hi');
     print('user email = ${user!.email}');
     //----------------------------------------------------------------------------------------------------------------------------------------------------
-    
 
     // final googleUser = await googleSignIn.signIn();
-    
+
     // if(googleUser == null) return;
 
     // _user = googleUser;
@@ -241,9 +242,5 @@ class _LoginPageState extends State<LoginPage> {
     // final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
 
     // await FirebaseAuth.instance.signInWithCredential(credential);
-
-    
   }
-
-  
 }

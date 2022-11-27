@@ -36,7 +36,7 @@ class _NavBarState extends State<NavBar> {
     const Search(),
     const RentsPage(),
     wish_list(),
-    const EditProfile(),
+    EditProfile(),
     WidgetTree(),
   ];
 
@@ -47,7 +47,6 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[index],
-
       bottomNavigationBar: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Container(
