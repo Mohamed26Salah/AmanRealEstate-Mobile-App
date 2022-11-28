@@ -1,6 +1,8 @@
 import 'package:aman_project/data/data.dart';
 import 'package:aman_project/data/rent_data.dart';
 import 'package:aman_project/firebase_options.dart';
+import 'package:aman_project/theme/theme_constants.dart';
+import 'package:aman_project/theme/theme_manager.dart';
 import 'package:aman_project/widgets/AddForm.dart';
 import 'package:aman_project/widgets/edit_profile.dart';
 import 'package:aman_project/widgets/nav_bar_gr.dart';
@@ -15,6 +17,8 @@ import 'package:go_router/go_router.dart';
 import '/widgets/rent.dart';
 import 'pages/panel_left/panel_left_page.dart';
 
+ThemeManager _themeManager = ThemeManager();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,7 +26,7 @@ void main() async {
   );
 
   String initialPath = "/";
-  Search homePage = const Search();
+  Search homePage = Search();
   LoginPage loginPage = LoginPage();
   final GoRouter router = GoRouter(
     initialLocation: initialPath,
@@ -56,7 +60,8 @@ void main() async {
           ),
           GoRoute(
             path: 'Profile',
-            builder: (context, state) => const EditProfile(),
+            builder: (context, state) =>
+                EditProfile(themeManager: _themeManager),
           ),
           GoRoute(
             path: 'Dashboard',
@@ -68,11 +73,47 @@ void main() async {
     ],
   );
   runApp(
-    MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
-    ),
+    MyWidget(router: router),
   );
+}
+
+class MyWidget extends StatefulWidget {
+  final GoRouter router;
+  MyWidget({super.key, required this.router});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  void dispose() {
+    _themeManager.removeListener(themeListener);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _themeManager.addListener(themeListener);
+    super.initState();
+  }
+
+  themeListener() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routeInformationProvider: widget.router.routeInformationProvider,
+      routeInformationParser: widget.router.routeInformationParser,
+      routerDelegate: widget.router.routerDelegate,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: _themeManager.themeMode,
+    );
+  }
 }

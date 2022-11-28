@@ -1,10 +1,12 @@
 import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/theme_manager.dart';
 import 'nav_bar_gr.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  final ThemeManager? themeManager;
+  const EditProfile({super.key, this.themeManager});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -116,6 +118,11 @@ class _EditProfileState extends State<EditProfile> {
                           color: Colors.white,
                         ),
                       )),
+                  Switch(
+                      value: widget.themeManager!.themeMode == ThemeMode.dark,
+                      onChanged: (newValue) {
+                        widget.themeManager!.toggleTheme(newValue);
+                      })
                 ],
               )
             ],
