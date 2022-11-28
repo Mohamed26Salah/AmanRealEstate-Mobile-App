@@ -1,5 +1,6 @@
 import 'package:aman_project/widget_tree.dart';
 import 'package:aman_project/widgets/wish_list.dart';
+import '../theme/theme_manager.dart';
 import '/widgets/edit_profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../widgets/search.dart';
@@ -25,26 +26,26 @@ import 'rent.dart';
 // }
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final ThemeManager? themeManager;
+  const NavBar({super.key, required this.themeManager});
 
   @override
   State<NavBar> createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
-  List<Widget> pages = [
-    const Search(),
-    const RentsPage(),
-    wish_list(),
-    EditProfile(),
-    WidgetTree(),
-  ];
-
   int index = 0;
 
   // List<Property> properties = getPropertyList();
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [
+      const Search(),
+      const RentsPage(),
+      wish_list(),
+      EditProfile(themeManager: widget.themeManager),
+      WidgetTree(),
+    ];
     return Scaffold(
       body: pages[index],
       bottomNavigationBar: SingleChildScrollView(

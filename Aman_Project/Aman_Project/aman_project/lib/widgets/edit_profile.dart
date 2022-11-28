@@ -1,12 +1,15 @@
 import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../theme/theme_manager.dart';
 import 'change_lang.dart';
 import 'nav_bar_gr.dart';
 
+ThemeManager _themeManager = ThemeManager();
+
 class EditProfile extends StatefulWidget {
-  EditProfile({super.key});
+  final ThemeManager? themeManager;
+  const EditProfile({super.key, this.themeManager});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -69,11 +72,6 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          buildLanguageDialog(context);
-                        },
-                        child: Text('change Language'.tr)),
                   ],
                 ),
               ),
@@ -123,6 +121,22 @@ class _EditProfileState extends State<EditProfile> {
                           color: Colors.white,
                         ),
                       )),
+                ],
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                  onPressed: () {
+                    buildLanguageDialog(context);
+                  },
+                  child: Text('change Language'.tr)),
+              Row(
+                children: [
+                  const Text("Dark Mode:"),
+                  Switch(
+                      value: widget.themeManager!.themeMode == ThemeMode.dark,
+                      onChanged: (newValue) {
+                        widget.themeManager!.toggleTheme(newValue);
+                      }),
                 ],
               )
             ],
