@@ -5,8 +5,6 @@ import '../data/CustomTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'nav_bar_gr.dart';
-
 class wish_list extends StatefulWidget {
   wish_list({Key? key}) : super(key: key);
 

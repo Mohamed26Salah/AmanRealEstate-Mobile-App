@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/theme_manager.dart';
 import 'change_lang.dart';
-import 'nav_bar_gr.dart';
 
 ThemeManager _themeManager = ThemeManager();
 

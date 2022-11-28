@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final bool obscureText;
+
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 

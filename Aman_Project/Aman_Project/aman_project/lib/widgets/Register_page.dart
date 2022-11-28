@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import '../data/CustomTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'custom_message.dart';
+import '../data/globals.dart' as val;
 
 final _formKey = GlobalKey<FormState>();
 
@@ -12,6 +15,48 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordConfirmController = TextEditingController();
+  //Verification
+
+  Future signUp() async {
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      Navigator.of(context).pushReplacementNamed('/verify');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        errormessage("Error!", "The password provided is too weak.");
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(val.snackBar);
+      } else if (e.code == 'email-already-in-use') {
+        errormessage("Error!", "The account already exists for that email.");
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(val.snackBar);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,42 +111,45 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height: 50),
                   //First name
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      obscureText: false,
-                      labelText: "Enter your First Name",
-                      hintText: "First Name",
-                      validator: (value) {
-                        if (!value!.isValidName) {
-                          return 'Please enter a valid name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Last name
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      obscureText: false,
-                      labelText: "Enter your Last Name",
-                      hintText: "Last Name",
-                      validator: (value) {
-                        if (!value!.isValidName) {
-                          return 'Please enter a valid name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 0, left: 15, right: 15, bottom: 10),
+                  //   child: CustomTextField(
+                  //     controller: _firstNameController,
+                  //     obscureText: false,
+                  //     labelText: "Enter your First Name",
+                  //     hintText: "First Name",
+                  //     validator: (value) {
+                  //       if (!value!.isValidName) {
+                  //         return 'Please enter a valid name';
+                  //       }
+                  //       return null;
+                  //     },
+                  //   ),
+                  // ),
+                  // //Last name
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 0, left: 15, right: 15, bottom: 10),
+                  //   child: CustomTextField(
+                  //     controller: _lastNameController,
+                  //     obscureText: false,
+                  //     labelText: "Enter your Last Name",
+                  //     hintText: "Last Name",
+                  //     validator: (value) {
+                  //       if (!value!.isValidName) {
+                  //         return 'Please enter a valid name';
+                  //       }
+                  //       return null;
+                  //     },
+                  //   ),
+                  // ),
                   //email
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 0),
                     child: CustomTextField(
+                      controller: _emailController,
                       obscureText: false,
                       labelText: "Enter your Email",
                       hintText: "Email",
@@ -119,6 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: const EdgeInsets.only(
                         top: 10, left: 15, right: 15, bottom: 0),
                     child: CustomTextField(
+                      controller: _passwordController,
                       obscureText: true,
                       labelText: "Enter your Password",
                       hintText: "Password",
@@ -136,6 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomTextField(
+                      controller: _passwordConfirmController,
                       obscureText: true,
                       labelText: "Confirm your Password",
                       hintText: "Password",
@@ -161,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: ElevatedButton(
                         child: Center(
                           child: Text(
-                            'Sign In',
+                            'Sign Up',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -172,11 +222,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
+                            signUp();
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   const SnackBar(content: Text('Processing Data')),
+                            // );
                           }
                         },
                         style: ElevatedButton.styleFrom(

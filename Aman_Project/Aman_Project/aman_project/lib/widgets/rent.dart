@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import './rent_Type.dart';
-import 'nav_bar_gr.dart';
 
 class RentsPage extends StatelessWidget {
   const RentsPage({super.key});
@@ -32,7 +31,8 @@ class RentsPage extends StatelessWidget {
                     //   ),
                     // );
 
-                    Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 2});
+                    Navigator.of(context)
+                        .pushNamed('/rents', arguments: {'rentID': 2});
                     // context.push('/Rents/RentType/${2}');
                   },
                   leading: CircleAvatar(
@@ -66,7 +66,8 @@ class RentsPage extends StatelessWidget {
                     //     builder: (context) => RentType(rentID: 1),
                     //   ),
                     // );
-                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 1});
+                    Navigator.of(context)
+                        .pushNamed('/rents', arguments: {'rentID': 1});
                     // context.push('/Rents/RentType/${1}');
                   },
                   leading: CircleAvatar(
@@ -101,7 +102,8 @@ class RentsPage extends StatelessWidget {
                     //   ),
                     // );
                     // GoRouter.of(context).push('/RentType/${4}');
-                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 4});
+                    Navigator.of(context)
+                        .pushNamed('/rents', arguments: {'rentID': 4});
                     // context.push('/Rents/RentType/${4}');
                   },
                   leading: CircleAvatar(
@@ -136,7 +138,8 @@ class RentsPage extends StatelessWidget {
                     //   ),
                     // );
                     // context.push('/Rents/RentType/${3}');
-                     Navigator.of(context).pushNamed('/rents' , arguments: {'rentID' : 3});
+                    Navigator.of(context)
+                        .pushNamed('/rents', arguments: {'rentID': 3});
                   },
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,

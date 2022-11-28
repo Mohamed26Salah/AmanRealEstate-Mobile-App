@@ -2,10 +2,13 @@ import 'package:get/get.dart';
 import 'widgets/local_strings.dart';
 import 'package:aman_project/firebase_options.dart';
 import 'package:aman_project/widgets/AddForm.dart';
+import 'package:aman_project/widgets/email_verification.dart';
+import 'package:aman_project/widgets/forget_password.dart';
 import './widgets/Register_page.dart';
 import './widgets/navBar.dart';
 import 'package:aman_project/theme/theme_constants.dart';
 import 'package:aman_project/theme/theme_manager.dart';
+import 'package:aman_project/widgets/edit_profile.dart';
 import 'package:aman_project/widgets/property_description.dart';
 import 'package:aman_project/widgets/rent_Type.dart';
 import 'package:aman_project/widgets/search.dart';
@@ -63,6 +66,8 @@ class _MyAppState extends State<MyApp> {
         '/addForm': (context) => AddForm(),
         '/rents': (context) => RentType(),
         '/search': (context) => const Search(),
+        '/forget': (context) => const ForgetPassword(),
+        '/verify': (context) => const EmailVerification(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,
