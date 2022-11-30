@@ -7,12 +7,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../data/CustomTextField.dart';
+import '../models/user_management.dart';
 import 'Register_page.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../data/globals.dart' as val;
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import '../data/globals.dart' as val;
 import 'custom_message.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -36,6 +35,9 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
       if (FirebaseAuth.instance.currentUser!.emailVerified) {
+        final user = FirebaseAuth.instance.currentUser!;
+        UserHelper.saveUser(user);
+
         Navigator.of(context).pushNamed('/home');
       } else {
         Navigator.of(context).pushNamed('/verify');

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../models/user_management.dart';
+
 class EmailVerification extends StatefulWidget {
   const EmailVerification({super.key});
 
@@ -38,6 +40,8 @@ class _EmailVerificationState extends State<EmailVerification> {
 
   void redirectToHome() {
     if (isEmailVerified) {
+      final user = FirebaseAuth.instance.currentUser!;
+      UserHelper.saveUser(user);
       Navigator.of(context).pushNamed('/home');
     }
   }

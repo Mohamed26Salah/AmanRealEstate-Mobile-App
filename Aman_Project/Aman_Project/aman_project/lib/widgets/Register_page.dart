@@ -1,3 +1,4 @@
+import 'package:aman_project/models/user_management.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../data/CustomTextField.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,15 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      // StreamBuilder<User>(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: ((context, snapshot) {
+      //     if (snapshot.hasData && snapshot.data != null) {
+      //       UserHelper.saveUser(snapshot.data);
+      //     }
+      //   }),
+      // );
+
       Navigator.of(context).pushReplacementNamed('/verify');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
