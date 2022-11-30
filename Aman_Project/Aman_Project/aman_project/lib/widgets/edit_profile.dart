@@ -1,3 +1,4 @@
+import 'package:aman_project/data/CustomTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data/usersJoex.dart';
@@ -20,29 +21,36 @@ class _EditProfileState extends State<EditProfile> {
   final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
   var newPassword = " ";
   final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     newPasswordController.dispose();
     super.dispose();
   }
+
   final user = FirebaseAuth.instance.currentUser!;
 
   changePassword() async {
     try {
       await user.updatePassword(newPassword);
-      
+
       FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/');
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
+        const SnackBar(
           backgroundColor: Colors.black26,
-          content: Text(newPassword),
+          content: Text('Password Changed successfully.. Login again please'),
         ),
       );
-    } catch (error) {
-      print('error');
-    }
+      // ignore: empty_catches
+    } catch (error) {}
+  }
+
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
+
+    Navigator.of(context).pushReplacementNamed('/');
   }
 
   bool isObscurePassword = true;
@@ -114,8 +122,49 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(
                 height: 30,
               ),
-              buildTextField(
-                  "New Password".tr, 'Type your new password'.tr, true),
+              Form(
+                key: _formKey1,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: CustomTextField(
+                        controller: newPasswordController,
+                        obscureText: true,
+                        labelText: ("New Password".tr),
+                        hintText: ("Type your new password".tr),
+                        validator: (value) {
+                          if (!value!.isValidPassword) {
+                            return 'enter At Least 8 characters one letter and one number'
+                                .tr;
+                          }
+
+                          if (value.isEmpty) {
+                            return 'Password cannot be empty'.tr;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: CustomTextField(
+                        controller: confirmPasswordController,
+                        obscureText: true,
+                        labelText: ("Confirm Password".tr),
+                        hintText: ("Type your new password".tr),
+                        validator: (value) {
+                          if (value != newPasswordController.value.text) {
+                            return 'Passwords do not match!'.tr;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               // buildTextField(
               //     "Confirm Password".tr, 'Type your new password'.tr, true),
               const SizedBox(
@@ -143,7 +192,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        if(_formKey1.currentState!.validate()) {
+                        if (_formKey1.currentState!.validate()) {
                           setState(() {
                             newPassword = newPasswordController.text;
                           });
@@ -181,6 +230,11 @@ class _EditProfileState extends State<EditProfile> {
                       onChanged: (newValue) {
                         widget.themeManager!.toggleTheme(newValue);
                       }),
+                  ElevatedButton(
+                      onPressed: signOut,
+                      child: Text(
+                        'Sign out',
+                      ))
                 ],
               )
             ],
@@ -190,37 +244,34 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, String? placeholder, bool isPasswordTextField) {
-    return Form(
-      key:_formKey1,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
-        child: TextField(
-          controller: newPasswordController,
-          obscureText: isPasswordTextField ? isObscurePassword : false,
-          decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isObscurePassword = !isObscurePassword;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null,
-            contentPadding: const EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
+  Widget buildTextField(String labelText, String? placeholder,
+      bool isPasswordTextField, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30),
+      child: TextField(
+        controller: controller,
+        obscureText: isPasswordTextField ? isObscurePassword : false,
+        decoration: InputDecoration(
+          suffixIcon: isPasswordTextField
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isObscurePassword = !isObscurePassword;
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.remove_red_eye,
+                    color: Colors.grey,
+                  ),
+                )
+              : null,
+          contentPadding: const EdgeInsets.only(bottom: 5),
+          labelText: labelText,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: placeholder,
+          hintStyle: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

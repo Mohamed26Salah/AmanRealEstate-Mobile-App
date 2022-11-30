@@ -87,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             backgroundColor: Colors.grey[300],
                             elevation: 0 // Background color
                             ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back_ios_new_outlined,
                           color: Colors.black,
                         ),
@@ -100,8 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   Container(
                     width: 150,
                     height: 150,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
                         image: AssetImage(
                             'assets/images/App_Icon-removebg-preview.png'),
                         fit: BoxFit.cover,
@@ -111,15 +111,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text(
                     'Hello',
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52, color: Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52, color: const Color.fromARGB(255, 205, 153, 51)),
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Welcome To Aman',
                     style: TextStyle(
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   //First name
                   // Padding(
                   //   padding: const EdgeInsets.only(
@@ -189,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // Confirm password
                   Padding(
                     padding: const EdgeInsets.only(
@@ -202,6 +202,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
+                        }
+                        if (value != _passwordController.value.text) {
+                          return 'Passwords do not match';
                         }
                         return null;
                       },
@@ -219,16 +222,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
-                        child: Center(
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
@@ -241,16 +234,26 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0.0,
                           primary: Colors.red.withOpacity(0),
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),
+                            ),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                 ],
               ),
             ),
