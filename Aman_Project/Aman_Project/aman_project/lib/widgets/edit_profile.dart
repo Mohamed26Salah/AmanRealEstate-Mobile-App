@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +17,34 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  List<Users> user1 = getUsers();
+  final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
+  var newPassword = " ";
+  final newPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    newPasswordController.dispose();
+    super.dispose();
+  }
+  final user = FirebaseAuth.instance.currentUser!;
+
+  changePassword() async {
+    try {
+      await user.updatePassword(newPassword);
+      
+      FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushReplacementNamed('/');
+      ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+          backgroundColor: Colors.black26,
+          content: Text(newPassword),
+        ),
+      );
+    } catch (error) {
+      print('error');
+    }
+  }
+
   bool isObscurePassword = true;
   @override
   Widget build(BuildContext context) {
@@ -29,57 +58,66 @@ class _EditProfileState extends State<EditProfile> {
           },
           child: ListView(
             children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1),
+              Column(
+                children: [
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 4, color: Colors.white),
+                            boxShadow: [
+                              BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                              ),
+                            ],
+                            shape: BoxShape.circle,
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/owner.jpg'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ],
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/owner.jpg'),
-                          fit: BoxFit.cover,
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 4,
-                            color: Colors.white,
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 4,
+                                color: Colors.white,
+                              ),
+                              color: Colors.blue,
+                            ),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
                           ),
-                          color: Colors.blue,
                         ),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text('${user.email}'),
+                ],
               ),
               const SizedBox(
                 height: 30,
               ),
-              buildTextField('Full Name'.tr, user1[0].name, false),
-              buildTextField("Email".tr, user1[0].email, false),
-              buildTextField("Password".tr, user1[0].passwrod, true),
+              buildTextField(
+                  "New Password".tr, 'Type your new password'.tr, true),
+              // buildTextField(
+              //     "Confirm Password".tr, 'Type your new password'.tr, true),
               const SizedBox(
                 height: 30,
               ),
@@ -94,9 +132,9 @@ class _EditProfileState extends State<EditProfile> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(
+                    child: Text(
+                      "Cancel".tr,
+                      style: const TextStyle(
                         fontSize: 15,
                         letterSpacing: 2,
                         color: Colors.black,
@@ -104,7 +142,14 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if(_formKey1.currentState!.validate()) {
+                          setState(() {
+                            newPassword = newPasswordController.text;
+                          });
+                          changePassword();
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -112,9 +157,9 @@ class _EditProfileState extends State<EditProfile> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: const Text(
-                        "SAVE",
-                        style: TextStyle(
+                      child: Text(
+                        "SAVE".tr,
+                        style: const TextStyle(
                           fontSize: 15,
                           letterSpacing: 2,
                           color: Colors.white,
@@ -122,7 +167,7 @@ class _EditProfileState extends State<EditProfile> {
                       )),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () {
                     buildLanguageDialog(context);
@@ -130,7 +175,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Text('change Language'.tr)),
               Row(
                 children: [
-                  const Text("Dark Mode:"),
+                  Text("Dark Mode:".tr),
                   Switch(
                       value: widget.themeManager!.themeMode == ThemeMode.dark,
                       onChanged: (newValue) {
@@ -147,31 +192,35 @@ class _EditProfileState extends State<EditProfile> {
 
   Widget buildTextField(
       String labelText, String? placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-          suffixIcon: isPasswordTextField
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscurePassword = !isObscurePassword;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.grey,
-                  ),
-                )
-              : null,
-          contentPadding: const EdgeInsets.only(bottom: 5),
-          labelText: labelText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: placeholder,
-          hintStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    return Form(
+      key:_formKey1,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: TextField(
+          controller: newPasswordController,
+          obscureText: isPasswordTextField ? isObscurePassword : false,
+          decoration: InputDecoration(
+            suffixIcon: isPasswordTextField
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscurePassword = !isObscurePassword;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                    ),
+                  )
+                : null,
+            contentPadding: const EdgeInsets.only(bottom: 5),
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: placeholder,
+            hintStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

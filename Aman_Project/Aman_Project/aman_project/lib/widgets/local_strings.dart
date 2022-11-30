@@ -17,7 +17,12 @@ class LocaleString extends Translations {
           'Hello': 'Hello',
           'Welcome To Aman': 'Welcome To Aman',
           'Sign In': 'Sign In',
-          'Register': 'Register'
+          'Register': 'Register',
+          'Current Password': 'Current Password',
+          'Type Your Current Password': 'Type Your Current Password',
+          'New Password': 'New Password',
+          'Type Your New Password': 'Type Your New Password',
+          'Dark Mode:': 'Dark Mode'
         },
         //arabic LANGUAGE
 
@@ -33,7 +38,13 @@ class LocaleString extends Translations {
           'Hello': 'أهلا',
           'Welcome To Aman': 'مرحبا بك في أمان',
           'Sign In': 'تسجيل الدخول',
-          'Register': 'أنشاء حساب'
+          'Register': 'أنشاء حساب',
+          'Current Password': 'كلمة المرور الحالية',
+          'Type Your Current Password': 'اكنب كلمة المرور الحالية',
+          'New Password':'كلمة المرور الجديدة',
+          'Type Your New Password': 'اكتب كلمة المرور الجديدة',
+          'Dark Mode:': 'الوضع الليلي:'
+         
         },
       };
 }

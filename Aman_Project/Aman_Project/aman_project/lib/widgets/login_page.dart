@@ -14,7 +14,7 @@ import '../data/globals.dart' as val;
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'custom_message.dart';
 
-final _formKey = GlobalKey<FormState>();
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -24,6 +24,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final _emailController = TextEditingController();
