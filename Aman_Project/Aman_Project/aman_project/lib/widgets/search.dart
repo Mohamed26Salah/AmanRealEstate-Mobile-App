@@ -23,7 +23,6 @@ class _SearchState extends State<Search> {
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
 
-      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -184,7 +183,7 @@ class _SearchState extends State<Search> {
       // bottomNavigationBar: NavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 205, 153, 51),
+        backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).pushNamed('/addForm');

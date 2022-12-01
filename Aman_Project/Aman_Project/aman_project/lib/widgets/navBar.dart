@@ -66,7 +66,7 @@ class _NavBarState extends State<NavBar> {
             backgroundColor: (Colors.grey[300])!,
             color: Colors.black,
             activeColor: Colors.white,
-            tabBackgroundColor: Colors.orange,
+            tabBackgroundColor: Theme.of(context).primaryColor,
             gap: 8,
             // onTabChange: (value) => print,
             tabs: const [

@@ -42,8 +42,8 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Delete",
-                      style: TextStyle(color: Color.fromARGB(255, 255, 0, 0))))
+                  child: Text("Delete",
+                      style: TextStyle(color: Theme.of(context).errorColor)))
             ],
           ),
         );

@@ -24,8 +24,8 @@ class LocaleString extends Translations {
           'Type Your New Password': 'Type Your New Password',
           'Dark Mode': 'Dark Mode',
           'Change Language': 'Change Language',
-          'Save' : 'Save',
-           'Cancel': 'الغاء'
+          'Save': 'Save',
+          'Cancel': 'Cancel'
         },
         //arabic LANGUAGE
 
@@ -44,13 +44,12 @@ class LocaleString extends Translations {
           'Register': 'أنشاء حساب',
           'Current Password': 'كلمة المرور الحالية',
           'Type Your Current Password': 'اكنب كلمة المرور الحالية',
-          'New Password':'كلمة المرور الجديدة',
+          'New Password': 'كلمة المرور الجديدة',
           'Type Your New Password': 'اكتب كلمة المرور الجديدة',
           'Dark Mode': 'الوضع الليلي:',
           'Change Language': 'تغيير اللغة',
-          'Save' : 'حفظ',
+          'Save': 'حفظ',
           'Cancel': 'الغاء'
-         
         },
       };
 }
