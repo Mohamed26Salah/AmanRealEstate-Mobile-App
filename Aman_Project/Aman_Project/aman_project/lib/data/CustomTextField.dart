@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.inputFormatters,
     this.validator,
+    this.cursorColor = Colors.black,
   }) : super(key: key);
   final String hintText;
   final String labelText;
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
+  final Color cursorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,18 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       inputFormatters: inputFormatters,
       validator: validator,
+      cursorColor: Colors.black,
+
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
+        labelStyle: const TextStyle(color: Colors.black),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
           borderRadius: BorderRadius.circular(12),
         ),
         fillColor: Colors.grey[200],

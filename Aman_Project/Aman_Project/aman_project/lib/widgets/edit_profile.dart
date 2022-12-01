@@ -84,31 +84,19 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                             ],
                             shape: BoxShape.circle,
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/owner.jpg'),
-                              fit: BoxFit.cover,
-                            ),
+
+                            // image: const DecorationImage(
+                            //   image: AssetImage('assets/images/owner.jpg'),
+                            //   fit: BoxFit.cover,
+                            // ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 4,
-                                color: Colors.white,
-                              ),
-                              color: Colors.blue,
+                          child: Center(
+                              child: Text(
+                            '${user.email![0].capitalize}',
+                            style: const TextStyle(
+                              fontSize: 50,
                             ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                          ),
+                          )),
                         ),
                       ],
                     ),
@@ -174,7 +162,12 @@ class _EditProfileState extends State<EditProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        newPasswordController.text = "";
+                        confirmPasswordController.text = "";
+                      });
+                    },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
@@ -191,52 +184,88 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        if (_formKey1.currentState!.validate()) {
-                          setState(() {
-                            newPassword = newPasswordController.text;
-                          });
-                          changePassword();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                    onPressed: () {
+                      if (_formKey1.currentState!.validate()) {
+                        setState(() {
+                          newPassword = newPasswordController.text;
+                        });
+                        changePassword();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Text(
-                        "SAVE".tr,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.white,
-                        ),
-                      )),
+                    ),
+                    child: Text(
+                      "Save".tr,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
-              ElevatedButton(
-                  onPressed: () {
-                    buildLanguageDialog(context);
-                  },
-                  child: Text('change Language'.tr)),
-              Row(
+
+              Column(
                 children: [
-                  Text("Dark Mode:".tr),
-                  Switch(
-                      value: widget.themeManager!.themeMode == ThemeMode.dark,
-                      onChanged: (newValue) {
-                        widget.themeManager!.toggleTheme(newValue);
-                      }),
+                  Card(
+                    elevation: 3,
+                    child: ListTile(
+                      trailing: Switch(
+                          value:
+                              widget.themeManager!.themeMode == ThemeMode.dark,
+                          onChanged: (newValue) {
+                            widget.themeManager!.toggleTheme(newValue);
+                          }),
+                      title: Text("Dark Mode".tr),
+                    ),
+                  ),
+                  Card(
+                    elevation: 3,
+                    child: ListTile(
+                      trailing: const Icon(
+                        Icons.keyboard_arrow_right,
+                      ),
+                      title: Text("Change Language".tr),
+                      onTap: () {
+                        buildLanguageDialog(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   ElevatedButton(
-                      onPressed: signOut,
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0.0,
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                    onPressed: signOut,
+                    child: const Center(
                       child: Text(
                         'Sign out',
-                      ))
+                        style: TextStyle(
+                          fontSize: 18,
+                          letterSpacing: 2,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
-              )
+              ),
             ],
           ),
         ),

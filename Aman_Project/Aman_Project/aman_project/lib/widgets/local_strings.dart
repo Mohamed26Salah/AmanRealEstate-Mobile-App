@@ -22,7 +22,10 @@ class LocaleString extends Translations {
           'Type Your Current Password': 'Type Your Current Password',
           'New Password': 'New Password',
           'Type Your New Password': 'Type Your New Password',
-          'Dark Mode:': 'Dark Mode'
+          'Dark Mode': 'Dark Mode',
+          'Change Language': 'Change Language',
+          'Save' : 'Save',
+           'Cancel': 'الغاء'
         },
         //arabic LANGUAGE
 
@@ -43,7 +46,10 @@ class LocaleString extends Translations {
           'Type Your Current Password': 'اكنب كلمة المرور الحالية',
           'New Password':'كلمة المرور الجديدة',
           'Type Your New Password': 'اكتب كلمة المرور الجديدة',
-          'Dark Mode:': 'الوضع الليلي:'
+          'Dark Mode': 'الوضع الليلي:',
+          'Change Language': 'تغيير اللغة',
+          'Save' : 'حفظ',
+          'Cancel': 'الغاء'
          
         },
       };
