@@ -3,7 +3,7 @@
 import 'package:aman_project/constants.dart';
 import 'package:aman_project/pages/charts.dart';
 import 'package:flutter/material.dart';
-import 'package:aman_project/pages/panel_left/cards.dart';
+import 'package:aman_project/pages/panel_left/Components/cards.dart';
 
 class PanelRightPage extends StatefulWidget {
   @override

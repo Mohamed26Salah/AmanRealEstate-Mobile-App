@@ -73,8 +73,6 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
             child: Column(
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
                         textDirection: TextDirection.ltr,
@@ -85,13 +83,22 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
                       children: [
                         Text(
                           "200",
-                          textScaleFactor: 1.5,
+                          textScaleFactor: 2.5,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: widget.expand
+                                  ? Theme.of(context).focusColor
+                                  : null),
                         ),
                         Text(
                           textAlign: TextAlign.right,
                           textDirection: TextDirection.rtl,
                           widget.text,
                           textScaleFactor: 1,
+                          style: TextStyle(
+                              color: widget.expand
+                                  ? Theme.of(context).focusColor
+                                  : null),
                         ),
                       ],
                     )

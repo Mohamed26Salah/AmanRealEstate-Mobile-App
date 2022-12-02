@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import '/./pages/panel_left/edit_button.dart';
 import '../../constants.dart';
-import '/./pages/panel_left/cards.dart';
+import 'Components/bloc.dart';
+import 'Components/cards.dart';
 
 import 'Components/chart_widget.dart';
 
@@ -115,15 +116,13 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     ],
                   ),
                   const SizedBox(height: 25),
-                  InkWell(
-                    onTap: _toogleExpand,
-                    child: cards1(
-                        text: "Properites",
-                        icon: 0xf1e0,
-                        expand: _isExpanded,
-                        child: const CategoryChart()),
+                  Wrap(
+                    children: List.generate(3, (index) {
+                      return bloc(
+                          width: MediaQuery.of(context).size.width,
+                          index: index);
+                    }),
                   ),
-                  const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 0, bottom: 0, top: 0, left: 0),
