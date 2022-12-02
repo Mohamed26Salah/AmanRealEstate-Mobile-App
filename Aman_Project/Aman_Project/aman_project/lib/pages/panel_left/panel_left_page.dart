@@ -1,15 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors
-import 'package:aman_project/models/category_chart_data.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '/./pages/DummyData/person.dart';
-import '/./responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import '/./pages/panel_left/edit_button.dart';
 import '../../constants.dart';
 import '/./pages/panel_left/cards.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'Components/chart_widget.dart';
 
@@ -28,7 +24,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
     Person('Annette', 'Brooks'),
   ];
   bool visible = false;
-  bool _isExpanded = true;
+  bool _isExpanded = false;
   void _toogleExpand() {
     setState(() {
       _isExpanded = !_isExpanded;
@@ -112,7 +108,6 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                                         child: const Icon(
                                           Icons.edit_outlined,
                                         )),
-                                    textColor: Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                               ),
@@ -173,6 +168,5 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
         ],
       ),
     );
-    // ignore: dead_code
   }
 }

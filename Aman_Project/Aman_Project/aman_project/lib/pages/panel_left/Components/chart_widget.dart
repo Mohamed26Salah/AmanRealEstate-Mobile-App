@@ -46,6 +46,7 @@ class _CategoryChartState extends State<CategoryChart> {
                       //   end: Alignment.topRight,
                       // ),
                       borderRadius: BorderRadius.circular(10),
+                      animationDelay: 1300,
                     )
                   ]),
             ));

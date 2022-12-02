@@ -65,41 +65,43 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SizeTransition(
-      axisAlignment: 1.0,
-      sizeFactor: animation!,
-      child: Card(
-          elevation: 8,
-          shadowColor: const Color.fromARGB(255, 0, 0, 0),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          color: Constants.orange,
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: const LinearGradient(
-                    stops: [0.1, 0.3],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 63, 77, 120),
-                      Color.fromARGB(255, 79, 10, 68),
-                    ])),
-            child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
+    return Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
-                      IconData(widget.icon, fontFamily: 'MaterialIcons'),
-                      size: 100,
-                      color: Colors.white,
-                    ),
-                    Text(widget.text,
-                        textScaleFactor: 2,
-                        style: const TextStyle(color: Colors.white)),
+                        textDirection: TextDirection.ltr,
+                        IconData(widget.icon, fontFamily: 'MaterialIcons'),
+                        color: Theme.of(context).primaryColor,
+                        size: 50),
+                    Column(
+                      children: [
+                        Text(
+                          "200",
+                          textScaleFactor: 1.5,
+                        ),
+                        Text(
+                          textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
+                          widget.text,
+                          textScaleFactor: 1,
+                        ),
+                      ],
+                    )
                   ],
-                )),
-          )),
-    );
+                ),
+                SizeTransition(
+                    axisAlignment: 1.0,
+                    sizeFactor: animation!,
+                    child: widget.child),
+              ],
+            )));
   }
 }
