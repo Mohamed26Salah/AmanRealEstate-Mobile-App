@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '487416111209',
     projectId: 'aman-real-estate',
     storageBucket: 'aman-real-estate.appspot.com',
-    iosClientId: '487416111209-5e51gh1q1noggtksss2dskod76u2h5cv.apps.googleusercontent.com',
+    iosClientId:
+        '487416111209-5e51gh1q1noggtksss2dskod76u2h5cv.apps.googleusercontent.com',
     iosBundleId: 'com.example.amanProject',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '487416111209',
     projectId: 'aman-real-estate',
     storageBucket: 'aman-real-estate.appspot.com',
-    iosClientId: '487416111209-5e51gh1q1noggtksss2dskod76u2h5cv.apps.googleusercontent.com',
+    iosClientId:
+        '487416111209-5e51gh1q1noggtksss2dskod76u2h5cv.apps.googleusercontent.com',
     iosBundleId: 'com.example.amanProject',
   );
 }

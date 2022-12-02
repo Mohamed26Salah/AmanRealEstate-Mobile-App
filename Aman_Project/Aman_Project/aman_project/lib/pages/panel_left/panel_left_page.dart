@@ -28,6 +28,13 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
     Person('Annette', 'Brooks'),
   ];
   bool visible = false;
+  bool _isExpanded = true;
+  void _toogleExpand() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Future openDialog([String? name]) => showDialog(
@@ -113,9 +120,14 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     ],
                   ),
                   const SizedBox(height: 25),
-                  const CategoryChart(),
-                  const cards1(text: "Rents", icon: 0xf1e0),
-                  const cards1(text: "Users", icon: 0xf522),
+                  InkWell(
+                    onTap: _toogleExpand,
+                    child: cards1(
+                        text: "Properites",
+                        icon: 0xf1e0,
+                        expand: _isExpanded,
+                        child: const CategoryChart()),
+                  ),
                   const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(
