@@ -1,4 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
+import 'package:aman_project/models/category_chart_data.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
 import '/./pages/DummyData/person.dart';
 import '/./responsive_layout.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,9 @@ import 'package:search_page/search_page.dart';
 import '/./pages/panel_left/edit_button.dart';
 import '../../constants.dart';
 import '/./pages/panel_left/cards.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
+import 'Components/chart_widget.dart';
 
 class PanelLeftPage extends StatefulWidget {
   @override
@@ -107,7 +113,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     ],
                   ),
                   const SizedBox(height: 25),
-                  const cards1(),
+                  const CategoryChart(),
                   const cards1(text: "Rents", icon: 0xf1e0),
                   const cards1(text: "Users", icon: 0xf522),
                   const SizedBox(height: 25),

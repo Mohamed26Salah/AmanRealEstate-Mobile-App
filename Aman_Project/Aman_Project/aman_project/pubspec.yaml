@@ -55,6 +55,7 @@ dependencies:
   focused_menu: ^1.0.5
   dropdown_button2: ^1.8.9
   shared_preferences: ^2.0.15
+  syncfusion_flutter_charts: ^20.3.59
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
   flutter_test:
