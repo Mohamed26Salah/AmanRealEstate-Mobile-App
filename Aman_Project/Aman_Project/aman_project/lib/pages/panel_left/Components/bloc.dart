@@ -37,7 +37,6 @@ class _blocState extends State<bloc> {
         height: !widget.isExpanded ? widget.width * 0.4 : widget.width * 1.5,
         child: cards1(
           expand: widget.isExpanded,
-          child: Visibility(visible: widget.isExpanded, child: CategoryChart()),
         ),
       ),
     );
