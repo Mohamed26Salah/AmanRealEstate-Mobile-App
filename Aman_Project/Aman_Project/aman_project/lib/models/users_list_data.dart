@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChartData {
-  ChartData(this.x, this.y);
+class UserData {
+  UserData(this.email, this.role);
 
-  final String x;
-  final int y;
+  final String email;
+
+  final String role;
 }
 
-Future<List<ChartData>> getData() async {
-  List data = [];
-  Map datanum = {};
-  List<ChartData> datanum2 = [];
+Future<List<UserData>> getData() async {
+  List<UserData> datanum2 = [];
 
   await FirebaseFirestore.instance
-      .collection('properties')
+      .collection('Users')
+      .limit(100)
       .get()
       .then((QuerySnapshot querySnapshot) {
     for (var doc in querySnapshot.docs) {
-      data.add(doc["Type"]);
+      datanum2.add(UserData(doc["email"], doc["role"]));
     }
   });
   // await FirebaseFirestore.instance
@@ -30,10 +30,5 @@ Future<List<ChartData>> getData() async {
   //   }
   // });
 
-  for (var e in data) {
-    datanum.containsKey(e) ? datanum[e]++ : datanum[e] = 1;
-  }
-  datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
-  print("b3rs");
   return datanum2;
 }
