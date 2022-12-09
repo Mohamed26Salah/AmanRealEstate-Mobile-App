@@ -18,7 +18,6 @@ class LocaleString extends Translations {
           'Welcome To Aman': 'Welcome To Aman',
           'Sign In': 'Sign In',
           'Register': 'Register',
-<<<<<<< Updated upstream
           'Current Password': 'Current Password',
           'Type Your Current Password': 'Type Your Current Password',
           'New Password': 'New Password',
@@ -26,8 +25,7 @@ class LocaleString extends Translations {
           'Dark Mode': 'Dark Mode',
           'Change Language': 'Change Language',
           'Save': 'Save',
-          'Cancel': 'Cancel'
-=======
+          'Cancel': 'Cancel',
           'Flat': 'Flat',
           'Building': 'Building',
           'Villa': 'villa',
@@ -37,7 +35,6 @@ class LocaleString extends Translations {
           'Factory': 'Factory',
           'Land': 'Land',
           'Other': 'Other'
->>>>>>> Stashed changes
         },
         //arabic LANGUAGE
 
@@ -54,7 +51,6 @@ class LocaleString extends Translations {
           'Welcome To Aman': 'مرحبا بك في أمان',
           'Sign In': 'تسجيل الدخول',
           'Register': 'أنشاء حساب',
-<<<<<<< Updated upstream
           'Current Password': 'كلمة المرور الحالية',
           'Type Your Current Password': 'اكنب كلمة المرور الحالية',
           'New Password': 'كلمة المرور الجديدة',
@@ -62,8 +58,7 @@ class LocaleString extends Translations {
           'Dark Mode': 'الوضع الليلي:',
           'Change Language': 'تغيير اللغة',
           'Save': 'حفظ',
-          'Cancel': 'الغاء'
-=======
+          'Cancel': 'الغاء',
           'Flat': 'شقة',
           'Building': 'عمارة',
           'Villa': 'فيلا',
@@ -73,7 +68,6 @@ class LocaleString extends Translations {
           'Factory': 'مصنع',
           'Land': 'أرض',
           'Other': 'أخري'
->>>>>>> Stashed changes
         },
       };
 }

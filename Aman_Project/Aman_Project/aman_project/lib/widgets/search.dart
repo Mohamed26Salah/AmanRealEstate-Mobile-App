@@ -1,12 +1,10 @@
 import 'dart:ffi';
-
 import 'package:aman_project/models/property_managemnt.dart';
 import 'package:aman_project/widgets/property_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../data/data.dart';
 import './property_description.dart';
 import './filter.dart';
@@ -26,12 +24,9 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< Updated upstream
       // bottomNavigationBar: const NavBarGR(),
 
-=======
       backgroundColor: Colors.white,
->>>>>>> Stashed changes
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
