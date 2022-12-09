@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class propertyManagement {
+class PropertyManagement {
   //Get Cards List(Used At Search File)
   static List<String> docIDs = [];
   static Future getDocId() async {
@@ -21,3 +21,8 @@ class propertyManagement {
     // listNumber = docIDs.length;
   }
 }
+
+final propertyLengthProvider = FutureProvider((ref) {
+
+  return PropertyManagement.docIDs.length;
+});

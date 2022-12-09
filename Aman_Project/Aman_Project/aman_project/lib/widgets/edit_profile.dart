@@ -1,11 +1,11 @@
 import 'package:aman_project/data/CustomTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../data/usersJoex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../models/user_management.dart';
 import '../theme/theme_manager.dart';
 import 'change_lang.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 ThemeManager _themeManager = ThemeManager();
 
@@ -28,6 +28,8 @@ class _EditProfileState extends State<EditProfile> {
     newPasswordController.dispose();
     super.dispose();
   }
+
+  
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -104,7 +106,14 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text('${user.email}'),
+                  // Text('${user.email}'),
+
+                  Consumer(builder: (_, ref, __) {
+                    
+                    final userEmail = ref.watch(userEmailProvider);
+                    
+                    return Text(userEmail.value.toString());
+                  }),
                 ],
               ),
               const SizedBox(
