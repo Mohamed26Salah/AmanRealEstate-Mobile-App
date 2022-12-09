@@ -152,11 +152,10 @@ class _SearchState extends State<Search> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
-                Text(
+                const Text(
                   "Results found",
                   style: TextStyle(
                     fontSize: 24,

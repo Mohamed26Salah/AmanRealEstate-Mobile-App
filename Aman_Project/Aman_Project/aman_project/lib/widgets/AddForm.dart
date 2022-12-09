@@ -1,3 +1,4 @@
+import 'package:aman_project/models/property_managemnt.dart';
 import 'package:aman_project/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,9 @@ class AddForm extends StatefulWidget {
 }
 
 class AddFormState extends State<AddForm> {
+  //List For add
+  List<String> listAddFormFirebase = [];
+  late String userChoice;
   //Resposbile of Visibility of widgets
   bool visibleFinishing = false;
   bool visibleDoublex = false;
@@ -59,6 +63,8 @@ class AddFormState extends State<AddForm> {
   final _typeOFActivityController = TextEditingController();
   //Upload Image and Multi Images
   File? myImage;
+  late String singleImageURl;
+  List<File> images = [];
   @override
   void dispose() {
     _ownerNameController.dispose();
@@ -116,12 +122,9 @@ class AddFormState extends State<AddForm> {
                       ),
                     ],
                   ),
-                  const Text(
+                  Text(
                     "Select The type",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   CustomRadioButton(
                     elevation: 20,
@@ -230,7 +233,7 @@ class AddFormState extends State<AddForm> {
                         });
                       }
 
-                      print(value);
+                      userChoice = value;
                     },
                     selectedColor: Color.fromARGB(255, 205, 153, 51),
                     selectedBorderColor: const Color.fromARGB(255, 0, 0, 0),
@@ -272,6 +275,9 @@ class AddFormState extends State<AddForm> {
                       hintText: "Owner Number",
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(11),
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r"^[0-9]*$"),
+                        )
                       ],
                       validator: (value) {
                         if (!value!.isValidPhone) {
@@ -339,6 +345,9 @@ class AddFormState extends State<AddForm> {
                       hintText: "Area",
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(11),
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r"^[0-9]*$"),
+                        )
                       ],
                       validator: (value) {
                         if (!value!.isValidNumber) {
@@ -595,8 +604,10 @@ class AddFormState extends State<AddForm> {
                           )
                         ],
                         validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
+                          if (visibleNoRooms == true) {
+                            if (!value!.isValidNumber) {
+                              return 'Please enter a valid Number';
+                            }
                           }
                           return null;
                         },
@@ -622,9 +633,12 @@ class AddFormState extends State<AddForm> {
                           )
                         ],
                         validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
+                          if (visibleNOBathrooms) {
+                            if (!value!.isValidNumber) {
+                              return 'Please enter a valid Number';
+                            }
                           }
+
                           return null;
                         },
                       ),
@@ -649,8 +663,10 @@ class AddFormState extends State<AddForm> {
                           )
                         ],
                         validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
+                          if (visibleNOFloors) {
+                            if (!value!.isValidNumber) {
+                              return 'Please enter a valid Number';
+                            }
                           }
                           return null;
                         },
@@ -676,9 +692,12 @@ class AddFormState extends State<AddForm> {
                           )
                         ],
                         validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
+                          if (visibleNoAB) {
+                            if (!value!.isValidNumber) {
+                              return 'Please enter a valid Number';
+                            }
                           }
+
                           return null;
                         },
                       ),
@@ -703,8 +722,10 @@ class AddFormState extends State<AddForm> {
                           )
                         ],
                         validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
+                          if (visibleNOFlats) {
+                            if (!value!.isValidNumber) {
+                              return 'Please enter a valid Number';
+                            }
                           }
                           return null;
                         },
@@ -724,16 +745,44 @@ class AddFormState extends State<AddForm> {
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(25),
                         ],
+                        validator: (value) {
+                          if (visibleTypeOFAcitivity) {
+                            if (!value!.isValidAddress) {
+                              return 'Please enter a valid Type of Activity';
+                            }
+                          }
+                          return null;
+                        },
                       ),
                     ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        "Upload main image",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   InkWell(
                     onTap: () {
                       openBottomSheet();
                     },
                     child: Container(
-                        width: 200,
-                        height: 200,
+                        width: MediaQuery.of(context).size.width - 30,
+                        height: 180,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(8)),
@@ -749,6 +798,84 @@ class AddFormState extends State<AddForm> {
                                 myImage!,
                                 fit: BoxFit.cover,
                               ))),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Upload MuLtiple Sup-Images",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 20),
+                          ),
+                          Text(
+                            "(Limit 20 Images Only!)",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      getMultipImage();
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 30,
+                      height: 180,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: images.length == 0
+                          ? const Center(
+                              child: Icon(
+                                Icons.drive_folder_upload,
+                                size: 50,
+                              ),
+                            )
+                          : GridView.builder(
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 10,
+                              ),
+                              itemCount: images.length,
+                              itemBuilder: (_, index) {
+                                return Image.file(
+                                  images[index],
+                                  fit: BoxFit.cover,
+                                );
+                              }),
+                      // child: const Center(
+                      //   child: Icon(
+                      //     Icons.drive_folder_upload,
+                      //     size: 50,
+                      //   ),
+                      // )
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -771,9 +898,16 @@ class AddFormState extends State<AddForm> {
                             ),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
+                            //UploadSingleImage
+                            uploadFile();
+                            //UploadMutlipleImages
+                            uploadMutilbeImages().then((value) {
+                              if (userChoice == "Flat") {}
+                            });
+
                             // If the form is valid, display a snackbar. In the real world,
                             // you'd often call a server or save the information in a database.
                             Navigator.push(
@@ -803,6 +937,7 @@ class AddFormState extends State<AddForm> {
     );
   }
 
+//Single Image
   openBottomSheet() {
     Get.bottomSheet(Container(
       decoration: BoxDecoration(
@@ -856,5 +991,67 @@ class AddFormState extends State<AddForm> {
       setState(() {});
       Get.back();
     }
+  }
+
+  Future uploadFile() async {
+    final file = myImage!;
+    final metaData = SettableMetadata(contentType: 'image/jpeg');
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference ref = storageRef
+        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+    final uploadTask = ref.putFile(file, metaData);
+
+    uploadTask.snapshotEvents.listen((event) {
+      switch (event.state) {
+        case TaskState.running:
+          print("File is uploading");
+          break;
+        case TaskState.success:
+          ref.getDownloadURL().then((value) {
+            singleImageURl = value;
+          });
+          break;
+      }
+    });
+  }
+
+//Mutiple Images
+  List<String> downloadUrls = [];
+  final ImagePicker _pickerMutli = ImagePicker();
+  getMultipImage() async {
+    final List<XFile>? pickedImages = await _pickerMutli.pickMultiImage();
+    images = [];
+    int counter = 0;
+    if (pickedImages != null) {
+      // for (int i = 0; i < 20; i++) {
+      //   images.add(File(pickedImages[i].path));
+      // }
+      pickedImages.forEach((e) {
+        if (counter++ < 20) {
+          images.add(File(e.path));
+        }
+      });
+
+      setState(() {});
+    }
+  }
+
+  Future uploadMutilbeImages() async {
+    for (int i = 0; i < images.length; i++) {
+      String url = await uploadMutibleFiles(images[i]);
+      downloadUrls.add(url);
+    }
+  }
+
+  Future<String> uploadMutibleFiles(File file) async {
+    final metaData = SettableMetadata(contentType: 'image/jpeg');
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference ref = storageRef
+        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+    final uploadTask = ref.putFile(file, metaData);
+
+    final taskSnapshot = await uploadTask.whenComplete(() => null);
+    String url = await taskSnapshot.ref.getDownloadURL();
+    return url;
   }
 }
