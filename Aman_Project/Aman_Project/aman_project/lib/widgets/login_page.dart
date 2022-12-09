@@ -15,6 +15,8 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'custom_message.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+final _formKey = GlobalKey<FormState>();
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -230,6 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
                   // SignInButton(
                   //   Buttons.Google,
                   //   text: "Sign in with Google",
