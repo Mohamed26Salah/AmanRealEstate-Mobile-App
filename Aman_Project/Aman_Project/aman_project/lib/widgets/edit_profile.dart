@@ -29,8 +29,6 @@ class _EditProfileState extends State<EditProfile> {
     super.dispose();
   }
 
-  
-
   final user = FirebaseAuth.instance.currentUser!;
 
   changePassword() async {
@@ -109,10 +107,14 @@ class _EditProfileState extends State<EditProfile> {
                   // Text('${user.email}'),
 
                   Consumer(builder: (_, ref, __) {
-                    
-                    final userEmail = ref.watch(userEmailProvider);
-                    
-                    return Text(userEmail.value.toString());
+                    return ref.watch(userEmailProvider).when(
+                        data: (String value) {
+                      return Text(value);
+                    }, error: (Object error, StackTrace err) {
+                      return Text("error");
+                    }, loading: () {
+                      return CircularProgressIndicator();
+                    });
                   }),
                 ],
               ),

@@ -20,8 +20,7 @@ class UserHelper {
     }
   }
 
-  static getUser() async  {
-
+  Future<String> getUser() async {
     // List? itemsList;
     // String? data;
     // String? data2;
@@ -31,31 +30,28 @@ class UserHelper {
     String userEmail;
     String userRole;
     String userList;
-    
 
-    final DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    final DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
     userEmail = userDoc.get('email');
     userRole = userDoc.get('role');
 
-    userList=userEmail;
+    userList = userEmail;
     // userList.add(userRole);
     return userList;
-  //  try {
-  //   await _db.collection('users') .where('email', isEqualTo: user.email).get().then((QuerySnapshot querysnapshot) => {
-  //      data = querysnapshot.docs.first['email'],
-  //      data2 = querysnapshot.docs.first['role'],
-  //   });
-  //   itemsList!.add(data);
-  //   itemsList.add(data2);
-  //   return itemsList;
-  //  } catch(e) {
-  //   print(e.toString());
-  //   return itemsList!;
-  //  }
-    
+    //  try {
+    //   await _db.collection('users') .where('email', isEqualTo: user.email).get().then((QuerySnapshot querysnapshot) => {
+    //      data = querysnapshot.docs.first['email'],
+    //      data2 = querysnapshot.docs.first['role'],
+    //   });
+    //   itemsList!.add(data);
+    //   itemsList.add(data2);
+    //   return itemsList;
+    //  } catch(e) {
+    //   print(e.toString());
+    //   return itemsList!;
+    //  }
   }
-
-
 }
 
 // final productsListFutureProvider =
@@ -65,13 +61,9 @@ class UserHelper {
 // });
 
 final userEmailProvider = FutureProvider((ref) async {
- 
-  return await UserHelper.getUser();
+  return await UserHelper().getUser();
 });
 
-
-final userRoleProvider = FutureProvider((ref) async{
-  return await UserHelper.getUser();
-
+final userRoleProvider = FutureProvider((ref) async {
+  return await UserHelper().getUser();
 });
-

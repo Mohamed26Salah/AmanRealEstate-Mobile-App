@@ -13,9 +13,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../data/globals.dart' as val;
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'custom_message.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-
-
+// import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -38,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 //   print(InternetConnectionChecker().lastTryResults);
 // }
   Future signIn() async {
-    bool result = await InternetConnectionChecker().hasConnection;
+    bool result = true;
     if (result == true) {
       try {
         final credential =

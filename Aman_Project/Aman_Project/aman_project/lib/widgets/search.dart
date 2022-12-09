@@ -1,4 +1,3 @@
-
 import 'package:aman_project/models/property_managemnt.dart';
 import 'package:aman_project/widgets/property_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,9 +20,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,14 +144,14 @@ class _SearchState extends State<Search> {
                 //       ),
                 //     );
                 //   },
-                  /*child:*/
-                   Text(
-                    "${PropertyManagement.docIDs.length}",
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                /*child:*/
+                Text(
+                  "${PropertyManagement.docIDs.length}",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
                 // ),
                 SizedBox(
                   width: 8,
