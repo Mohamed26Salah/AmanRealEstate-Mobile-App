@@ -442,7 +442,7 @@ class AddFormState extends State<AddForm> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomDropdownButton2(
-                      dropdownItems: ["Cash", "installment"],
+                      dropdownItems: const ["Cash", "installment"],
                       hint: "Select Payment Method",
                       value: paymentMethod,
                       onChanged: (value) {
@@ -450,6 +450,12 @@ class AddFormState extends State<AddForm> {
                           paymentMethod = value;
                           print(paymentMethod);
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please Select';
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -459,13 +465,19 @@ class AddFormState extends State<AddForm> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomDropdownButton2(
-                      dropdownItems: ["High", "medium", "Low"],
+                      dropdownItems: const ["High", "medium", "Low"],
                       hint: "Select priority",
                       value: priority,
                       onChanged: (value) {
                         setState(() {
                           priority = value;
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please Select';
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -475,13 +487,19 @@ class AddFormState extends State<AddForm> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomDropdownButton2(
-                      dropdownItems: ["Yes", "No"],
+                      dropdownItems: const ["Yes", "No"],
                       hint: "Select visibility",
                       value: visible,
                       onChanged: (value) {
                         setState(() {
                           visible = value;
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please Select';
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -491,13 +509,19 @@ class AddFormState extends State<AddForm> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomDropdownButton2(
-                      dropdownItems: ["Yes", "No"],
+                      dropdownItems: const ["Yes", "No"],
                       hint: "Select offering",
                       value: offered,
                       onChanged: (value) {
                         setState(() {
                           offered = value;
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please Select';
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -509,13 +533,19 @@ class AddFormState extends State<AddForm> {
                       padding: const EdgeInsets.only(
                           top: 0, left: 15, right: 15, bottom: 10),
                       child: CustomDropdownButton2(
-                        dropdownItems: ["Yes", "Half", "No"],
+                        dropdownItems: const ["Yes", "Half", "No"],
                         hint: "Select Finishing",
                         value: finishing,
                         onChanged: (value) {
                           setState(() {
                             finishing = value;
                           });
+                        },
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
                         },
                       ),
                     ),
@@ -528,13 +558,19 @@ class AddFormState extends State<AddForm> {
                       padding: const EdgeInsets.only(
                           top: 0, left: 15, right: 15, bottom: 10),
                       child: CustomDropdownButton2(
-                        dropdownItems: ["Yes", "No"],
+                        dropdownItems: const ["Yes", "No"],
                         hint: "Select yes if Doublex",
                         value: doublex,
                         onChanged: (value) {
                           setState(() {
                             doublex = value;
                           });
+                        },
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
                         },
                       ),
                     ),
@@ -547,13 +583,19 @@ class AddFormState extends State<AddForm> {
                       padding: const EdgeInsets.only(
                           top: 0, left: 15, right: 15, bottom: 10),
                       child: CustomDropdownButton2(
-                        dropdownItems: ["Yes", "No"],
+                        dropdownItems: const ["Yes", "No"],
                         hint: "Select yes if Furnished",
                         value: furnished,
                         onChanged: (value) {
                           setState(() {
                             furnished = value;
                           });
+                        },
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
                         },
                       ),
                     ),

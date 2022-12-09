@@ -58,6 +58,7 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.scrollbarAlwaysShow,
     this.offset,
     Key? key,
+    required String? Function(dynamic value) validator,
   }) : super(key: key);
 
   @override
