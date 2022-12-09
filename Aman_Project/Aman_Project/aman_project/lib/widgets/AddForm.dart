@@ -99,7 +99,7 @@ class AddFormState extends State<AddForm> {
                             backgroundColor: Colors.grey[300],
                             elevation: 0 // Background color
                             ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back_ios_new_outlined,
                           color: Colors.black,
                         ),
@@ -107,7 +107,21 @@ class AddFormState extends State<AddForm> {
                           Navigator.pop(context);
                         },
                       ),
+                      const Text(
+                        "Add",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
+                  ),
+                  const Text(
+                    "Select The type",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   CustomRadioButton(
                     elevation: 20,
@@ -723,12 +737,18 @@ class AddFormState extends State<AddForm> {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
-                          child: Icon(
-                            Icons.upload_file,
-                            size: 50,
-                          ),
-                        )),
+                        child: myImage == null
+                            ? const Center(
+                                child: Icon(
+                                  Icons.upload_file,
+                                  size: 50,
+                                ),
+                              )
+                            : Center(
+                                child: Image.file(
+                                myImage!,
+                                fit: BoxFit.cover,
+                              ))),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
