@@ -1,5 +1,11 @@
+import 'dart:ffi';
+
+import 'package:aman_project/models/property_managemnt.dart';
 import 'package:aman_project/widgets/property_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../data/data.dart';
 import './property_description.dart';
@@ -7,6 +13,7 @@ import './filter.dart';
 import 'AddForm.dart';
 import 'navBar.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import '../models/user_management.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -16,13 +23,15 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  // List<Property> properties = getPropertyList();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
       // bottomNavigationBar: const NavBarGR(),
 
+=======
+      backgroundColor: Colors.white,
+>>>>>>> Stashed changes
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -129,9 +138,9 @@ class _SearchState extends State<Search> {
             padding:
                 const EdgeInsets.only(right: 24, left: 24, top: 24, bottom: 12),
             child: Row(
-              children: const [
+              children: [
                 Text(
-                  "53",
+                  "${propertyManagement.docIDs.length}",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -150,33 +159,50 @@ class _SearchState extends State<Search> {
             ),
           ),
           Expanded(
-            child: Container(
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                // children: buildProperties(),
-                children: DUMMY_PROPERTIES
-                    .map((propData) => PropertyItem(
-                        id: propData.id,
-                        label: propData.label,
-                        name: propData.name,
-                        price: propData.price,
-                        location: propData.location,
-                        sqm: propData.sqm,
-                        review: propData.review,
-                        description: propData.description,
-                        frontImage: propData.frontImage,
-                        ownerImage: propData.ownerImage,
-                        ownerName: propData.ownerName,
-                        floor: propData.floor,
-                        bathroom: propData.bathroom,
-                        bedroom: propData.bedroom,
-                        kitchen: propData.kitchen,
-                        images: propData.images))
-                    .toList(),
+              child: FutureBuilder(
+                future: propertyManagement.getDocId(),
+                builder: ((context, snapshot) {
+                  return ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: propertyManagement.docIDs.length,
+                      itemBuilder: (context, index) {
+                        return PropertyItem(
+                            documentID: propertyManagement.docIDs[index]);
+                      });
+                }),
               ),
             ),
+
+            // child: Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 24),
+            //   child: ListView(
+            //     physics: const BouncingScrollPhysics(),
+            //     scrollDirection: Axis.vertical,
+            //     // children: buildProperties(),
+            //     children: DUMMY_PROPERTIES
+            //         .map((propData) => PropertyItem(
+            //             id: propData.id,
+            //             label: propData.label,
+            //             name: propData.name,
+            //             price: propData.price,
+            //             location: propData.location,
+            //             sqm: propData.sqm,
+            //             review: propData.review,
+            //             description: propData.description,
+            //             frontImage: propData.frontImage,
+            //             ownerImage: propData.ownerImage,
+            //             ownerName: propData.ownerName,
+            //             floor: propData.floor,
+            //             bathroom: propData.bathroom,
+            //             bedroom: propData.bedroom,
+            //             kitchen: propData.kitchen,
+            //             images: propData.images))
+            //         .toList(),
+            //   ),
+            // ),
           ),
         ],
       ),
@@ -234,5 +260,22 @@ class _SearchState extends State<Search> {
             ],
           );
         });
+  }
+}
+
+class NumberOFResults extends StatelessWidget {
+  const NumberOFResults({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "0",
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }

@@ -32,6 +32,13 @@ dependencies:
   animated_text_kit: ^4.2.2
   carousel_slider: ^4.1.1
   google_nav_bar: ^5.0.6
+  cached_network_image: ^3.2.3
+  flutter_cache_manager: ^3.3.0
+  flutter_riverpod: ^2.1.1
+  custom_radio_grouped_button: ^2.1.2+2
+  image_picker: 
+  firebase_storage: 
+  internet_connection_checker: ^1.0.0+1
   flutter:
     sdk: flutter
   firebase_core: ^2.2.0  

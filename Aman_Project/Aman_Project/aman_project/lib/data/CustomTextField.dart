@@ -73,4 +73,19 @@ extension extString on String {
     final phoneRegExp = RegExp(r"^\+?0[0-9]{10}$");
     return phoneRegExp.hasMatch(this);
   }
+
+  bool get isValidAddress {
+    final phoneRegExp = RegExp(r"[A-Za-z0-9'\.\-\s\,]");
+    return phoneRegExp.hasMatch(this);
+  }
+
+  bool get isValidCode {
+    final phoneRegExp = RegExp(r"^[A-Z0-9]*$");
+    return phoneRegExp.hasMatch(this);
+  }
+
+  bool get isValidNumber {
+    final phoneRegExp = RegExp(r"^[0-9]*$");
+    return phoneRegExp.hasMatch(this);
+  }
 }

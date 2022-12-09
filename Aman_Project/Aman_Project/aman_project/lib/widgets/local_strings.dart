@@ -18,6 +18,7 @@ class LocaleString extends Translations {
           'Welcome To Aman': 'Welcome To Aman',
           'Sign In': 'Sign In',
           'Register': 'Register',
+<<<<<<< Updated upstream
           'Current Password': 'Current Password',
           'Type Your Current Password': 'Type Your Current Password',
           'New Password': 'New Password',
@@ -26,6 +27,17 @@ class LocaleString extends Translations {
           'Change Language': 'Change Language',
           'Save': 'Save',
           'Cancel': 'Cancel'
+=======
+          'Flat': 'Flat',
+          'Building': 'Building',
+          'Villa': 'villa',
+          'Store': 'Store',
+          'Clinic': 'Clinic',
+          'Farm': 'Farm',
+          'Factory': 'Factory',
+          'Land': 'Land',
+          'Other': 'Other'
+>>>>>>> Stashed changes
         },
         //arabic LANGUAGE
 
@@ -42,6 +54,7 @@ class LocaleString extends Translations {
           'Welcome To Aman': 'مرحبا بك في أمان',
           'Sign In': 'تسجيل الدخول',
           'Register': 'أنشاء حساب',
+<<<<<<< Updated upstream
           'Current Password': 'كلمة المرور الحالية',
           'Type Your Current Password': 'اكنب كلمة المرور الحالية',
           'New Password': 'كلمة المرور الجديدة',
@@ -50,6 +63,17 @@ class LocaleString extends Translations {
           'Change Language': 'تغيير اللغة',
           'Save': 'حفظ',
           'Cancel': 'الغاء'
+=======
+          'Flat': 'شقة',
+          'Building': 'عمارة',
+          'Villa': 'فيلا',
+          'Store': 'محل',
+          'Clinic': 'عيادة',
+          'Farm': 'مزرعة',
+          'Factory': 'مصنع',
+          'Land': 'أرض',
+          'Other': 'أخري'
+>>>>>>> Stashed changes
         },
       };
 }

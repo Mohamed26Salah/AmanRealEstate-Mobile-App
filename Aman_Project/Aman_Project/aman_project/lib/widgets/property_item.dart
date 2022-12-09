@@ -1,72 +1,136 @@
+import 'package:aman_project/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class PropertyItem extends StatelessWidget {
-  String id;
-  String label;
-  String name;
-  String price;
-  String location;
-  String sqm;
-  String review;
-  String description;
-  String frontImage;
-  String ownerImage;
-  String ownerName;
-  String floor;
-  String bedroom;
-  String bathroom;
-  String kitchen;
-  List<String> images;
+  final String documentID;
 
-  PropertyItem(
-      {super.key,
-      required this.id,
-      required this.label,
-      required this.name,
-      required this.price,
-      required this.location,
-      required this.sqm,
-      required this.review,
-      required this.description,
-      required this.frontImage,
-      required this.ownerImage,
-      required this.ownerName,
-      required this.floor,
-      required this.bedroom,
-      required this.bathroom,
-      required this.kitchen,
-      required this.images});
-
-  void selectedProperty(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed('/details', arguments: {
-      'id': id,
-      'label': label,
-      'name': name,
-      'price': price,
-      'location': location,
-      'sqm': sqm,
-      'review': review,
-      'description': description,
-      'frontImage': frontImage,
-      'ownerImage': ownerImage,
-      'ownerName' :ownerName,
-      'floor': floor,
-      'bedroom': bedroom,
-      'bathroom' : bathroom,
-      'kitchen': kitchen,
-      'images': images,
-    });
-  }
+  PropertyItem({required this.documentID});
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference properties =
+        FirebaseFirestore.instance.collection('properties');
+    return FutureBuilder<DocumentSnapshot>(
+      future: properties.doc(documentID).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          return PropertyWidget(
+              addressAdmin: data['AddressAdmin'],
+              addressUser: data['AddressUser'],
+              area: data['Area'],
+              code: data['Code'],
+              descriptionAdmin: data['DescriptionAdmin'],
+              descriptionUser: data['DescriptionUser'],
+              doublex: data['Doublex'],
+              finishing: data['Finishing'],
+              floor: data['Floor'],
+              furnished: data['Furnished'],
+              mainImage: data['MainImage'],
+              name: data['Name'],
+              noBarthrooms: data['No.Bathrooms'],
+              noFlats: data['No.Flats'],
+              noFloors: data['No.Floors'],
+              noRooms: data['No.Rooms'],
+              offered: data['Offered'],
+              owner: data['Owner'],
+              ownerNumber: data['OwnerNumber'],
+              paymentMethod: data['PaymentMethod'],
+              priority: data['Priority'],
+              theNumberOFAB: data['TheNumberOFAB'],
+              type: data['Type'],
+              typeOFActivity: data['TypeOfActivity'],
+              visible: data['Visible'],
+              price: data['price']);
+        }
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              child: const CircularProgressIndicator(
+                value: null,
+                strokeWidth: 7.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class PropertyWidget extends StatelessWidget {
+  String addressAdmin;
+  String addressUser;
+  String area;
+  String code;
+  String descriptionAdmin;
+  String descriptionUser;
+  bool doublex;
+  String finishing;
+  String floor;
+  bool furnished;
+  String mainImage;
+  String name;
+  String noBarthrooms;
+  String noFlats;
+  String noFloors;
+  String noRooms;
+  bool offered;
+  String owner;
+  String ownerNumber;
+  String paymentMethod;
+  String priority;
+  String theNumberOFAB;
+  String type;
+  String typeOFActivity;
+  bool visible;
+  String price;
+  final CacheManager cacheManager = CacheManager(Config('images_key',
+      maxNrOfCacheObjects: 100, stalePeriod: const Duration(days: 1)));
+  PropertyWidget({
+    super.key,
+    required this.addressAdmin,
+    required this.addressUser,
+    required this.area,
+    required this.code,
+    required this.descriptionAdmin,
+    required this.descriptionUser,
+    required this.doublex,
+    required this.finishing,
+    required this.floor,
+    required this.furnished,
+    required this.mainImage,
+    required this.name,
+    required this.noBarthrooms,
+    required this.noFlats,
+    required this.noFloors,
+    required this.noRooms,
+    required this.offered,
+    required this.owner,
+    required this.ownerNumber,
+    required this.paymentMethod,
+    required this.priority,
+    required this.theNumberOFAB,
+    required this.type,
+    required this.typeOFActivity,
+    required this.visible,
+    required this.price,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    print(mainImage);
     return Hero(
-      tag: frontImage,
+      tag: "assets/images/house_01.jpg",
       child: GestureDetector(
-        onTap: () => selectedProperty(context),
+        // onTap: () => selectedProperty(context),
         child: Card(
           margin: const EdgeInsets.only(bottom: 24),
           clipBehavior: Clip.antiAlias,
@@ -79,7 +143,9 @@ class PropertyItem extends StatelessWidget {
             height: 210,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(frontImage),
+                // image: NetworkImage(mainImage),
+                image: CachedNetworkImageProvider(mainImage,
+                    cacheManager: cacheManager),
                 fit: BoxFit.cover,
               ),
             ),
@@ -102,7 +168,7 @@ class PropertyItem extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "FOR $label",
+                        "FOR Sale",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -154,7 +220,7 @@ class PropertyItem extends StatelessWidget {
                                 width: 4,
                               ),
                               Text(
-                                location,
+                                addressAdmin,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -172,7 +238,7 @@ class PropertyItem extends StatelessWidget {
                                 width: 4,
                               ),
                               Text(
-                                "$sqm sq/m",
+                                "$area sq/m",
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,

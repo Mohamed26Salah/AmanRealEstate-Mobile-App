@@ -13,6 +13,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../data/globals.dart' as val;
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'custom_message.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 
 
@@ -29,32 +30,48 @@ class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  Future signIn() async {
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      if (FirebaseAuth.instance.currentUser!.emailVerified) {
-        final user = FirebaseAuth.instance.currentUser!;
-        UserHelper.saveUser(user);
 
-        Navigator.of(context).pushNamed('/home');
-      } else {
-        Navigator.of(context).pushNamed('/verify');
+// if(result == true) {
+//   print('YAY! Free cute dog pics!');
+// } else {
+//   print('No internet :( Reason:');
+//   print(InternetConnectionChecker().lastTryResults);
+// }
+  Future signIn() async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if (result == true) {
+      try {
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        if (FirebaseAuth.instance.currentUser!.emailVerified) {
+          final user = FirebaseAuth.instance.currentUser!;
+          UserHelper.saveUser(user);
+
+          Navigator.of(context).pushNamed('/home');
+        } else {
+          Navigator.of(context).pushNamed('/verify');
+        }
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          errormessage("Error!", "No user found for that email.");
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(val.snackBar);
+        } else if (e.code == 'wrong-password') {
+          errormessage("Error!", "Wrong password provided for that user.");
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(val.snackBar);
+        }
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        errormessage("Error!", "No user found for that email.");
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(val.snackBar);
-      } else if (e.code == 'wrong-password') {
-        errormessage("Error!", "Wrong password provided for that user.");
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(val.snackBar);
-      }
+    } else {
+      errormessage("Error!", "No Internet Connection!");
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(val.snackBar);
     }
   }
 

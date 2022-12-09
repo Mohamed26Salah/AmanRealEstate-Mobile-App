@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'custom_message.dart';
 import '../data/globals.dart' as val;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -24,36 +25,44 @@ class _RegisterPageState extends State<RegisterPage> {
   //Verification
 
   Future signUp() async {
-    try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      // StreamBuilder<User>(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: ((context, snapshot) {
-      //     if (snapshot.hasData && snapshot.data != null) {
-      //       UserHelper.saveUser(snapshot.data);
-      //     }
-      //   }),
-      // );
+    bool result = await InternetConnectionChecker().hasConnection;
+    if (result == true) {
+      try {
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        // StreamBuilder<User>(
+        //   stream: FirebaseAuth.instance.authStateChanges(),
+        //   builder: ((context, snapshot) {
+        //     if (snapshot.hasData && snapshot.data != null) {
+        //       UserHelper.saveUser(snapshot.data);
+        //     }
+        //   }),
+        // );
 
-      Navigator.of(context).pushReplacementNamed('/verify');
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        errormessage("Error!", "The password provided is too weak.");
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(val.snackBar);
-      } else if (e.code == 'email-already-in-use') {
-        errormessage("Error!", "The account already exists for that email.");
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(val.snackBar);
+        Navigator.of(context).pushReplacementNamed('/verify');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          errormessage("Error!", "The password provided is too weak.");
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(val.snackBar);
+        } else if (e.code == 'email-already-in-use') {
+          errormessage("Error!", "The account already exists for that email.");
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(val.snackBar);
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
+    } else {
+      errormessage("Error!", "No Internet Connection!");
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(val.snackBar);
     }
   }
 
