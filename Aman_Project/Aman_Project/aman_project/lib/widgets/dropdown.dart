@@ -10,24 +10,11 @@ class CustomDropdownButton2 extends StatelessWidget {
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
   final Alignment? valueAlignment;
-  final double? buttonHeight, buttonWidth;
-  final EdgeInsetsGeometry? buttonPadding;
-  final BoxDecoration? buttonDecoration;
-  final int? buttonElevation;
   final Widget? icon;
   final double? iconSize;
   final Color? iconEnabledColor;
   final Color? iconDisabledColor;
-  final double? itemHeight;
-  final EdgeInsetsGeometry? itemPadding;
-  final double? dropdownHeight, dropdownWidth;
-  final EdgeInsetsGeometry? dropdownPadding;
-  final BoxDecoration? dropdownDecoration;
-  final int? dropdownElevation;
-  final Radius? scrollbarRadius;
-  final double? scrollbarThickness;
-  final bool? scrollbarAlwaysShow;
-  final Offset? offset;
+  final String? Function(dynamic value) validatior;
 
   const CustomDropdownButton2({
     required this.hint,
@@ -37,101 +24,68 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.selectedItemBuilder,
     this.hintAlignment,
     this.valueAlignment,
-    this.buttonHeight,
-    this.buttonWidth,
-    this.buttonPadding,
-    this.buttonDecoration,
-    this.buttonElevation,
     this.icon,
     this.iconSize,
     this.iconEnabledColor,
     this.iconDisabledColor,
-    this.itemHeight,
-    this.itemPadding,
-    this.dropdownHeight,
-    this.dropdownWidth,
-    this.dropdownPadding,
-    this.dropdownDecoration,
-    this.dropdownElevation,
-    this.scrollbarRadius,
-    this.scrollbarThickness,
-    this.scrollbarAlwaysShow,
-    this.offset,
     Key? key,
-    required String? Function(dynamic value) validator,
+    // required String? Function(dynamic value) validator,
+    required this.validatior,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: DropdownButton2(
-        //To avoid long text overflowing.
-        isExpanded: true,
-        hint: Container(
-          alignment: hintAlignment,
-          child: Text(
-            hint,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 17,
-              color: Theme.of(context).hintColor,
-            ),
+    return DropdownButtonFormField(
+      //To avoid long text overflowing.
+      isExpanded: true,
+      hint: Container(
+        alignment: hintAlignment,
+        child: Text(
+          hint,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: TextStyle(
+            fontSize: 17,
+            color: Theme.of(context).hintColor,
           ),
         ),
-        value: value,
-        items: dropdownItems
-            .map((item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Container(
-                    alignment: valueAlignment,
-                    child: Text(
-                      item,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: const TextStyle(
-                        fontSize: 15,
-                      ),
+      ),
+      value: value,
+      items: dropdownItems
+          .map((item) => DropdownMenuItem<String>(
+                value: item,
+                child: Container(
+                  alignment: valueAlignment,
+                  child: Text(
+                    item,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 15,
                     ),
                   ),
-                ))
-            .toList(),
-        onChanged: onChanged,
-        selectedItemBuilder: selectedItemBuilder,
-        icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
-        iconSize: iconSize ?? 12,
-        iconEnabledColor: iconEnabledColor,
-        iconDisabledColor: iconDisabledColor,
-        buttonHeight: buttonHeight ?? 57,
-        buttonWidth: buttonWidth ?? double.infinity,
-        buttonPadding:
-            buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        buttonDecoration: buttonDecoration ??
-            BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: Color.fromARGB(255, 205, 153, 51),
-              ),
-            ),
-        buttonElevation: buttonElevation,
-        itemHeight: itemHeight ?? 40,
-        itemPadding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
-        dropdownMaxHeight: dropdownHeight ?? 200,
-        dropdownWidth: dropdownWidth ?? buttonWidth,
-        dropdownPadding: dropdownPadding,
-        dropdownDecoration: dropdownDecoration ??
-            BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-            ),
-        dropdownElevation: dropdownElevation ?? 8,
-        scrollbarRadius: scrollbarRadius ?? const Radius.circular(40),
-        scrollbarThickness: scrollbarThickness,
-        scrollbarAlwaysShow: scrollbarAlwaysShow,
-        //Null or Offset(0, 0) will open just under the button. You can edit as you want.
-        offset: offset,
-        dropdownOverButton: false, //Default is false to show menu below button
+                ),
+              ))
+          .toList(),
+      onChanged: onChanged,
+      selectedItemBuilder: selectedItemBuilder,
+      icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
+      iconSize: iconSize ?? 12,
+      iconEnabledColor: iconEnabledColor,
+      iconDisabledColor: iconDisabledColor,
+      validator: validatior,
+      dropdownColor: Colors.grey[200],
+      borderRadius: BorderRadius.circular(12),
+      decoration: InputDecoration(
+        enabledBorder: const OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Color.fromARGB(255, 205, 153, 51), width: 1)),
+        focusedBorder: const OutlineInputBorder(
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 205, 153, 51), width: 2),
+        ),
+        filled: true,
+        fillColor: Colors.grey[200],
       ),
     );
   }

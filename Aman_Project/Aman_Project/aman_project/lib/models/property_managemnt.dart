@@ -84,6 +84,7 @@ class PropertyManagement {
       required List<String> mutliImages,
       String type = "Villa"}) async {
     await FirebaseFirestore.instance.collection('properties').add({
+      'type': type,
       'ownerName': commonUnitPrpoerties[0],
       'ownerNumber': commonUnitPrpoerties[1],
       'addressForUser': commonUnitPrpoerties[2],
@@ -116,6 +117,7 @@ class PropertyManagement {
       required List<String> mutliImages,
       String type = "Building"}) async {
     await FirebaseFirestore.instance.collection('properties').add({
+      'type': type,
       'ownerName': commonUnitPrpoerties[0],
       'ownerNumber': commonUnitPrpoerties[1],
       'addressForUser': commonUnitPrpoerties[2],
@@ -125,25 +127,25 @@ class PropertyManagement {
       'descriptionForUser': commonUnitPrpoerties[6],
       'descriptionForAdmin': commonUnitPrpoerties[7],
       'unitName': commonUnitPrpoerties[8],
-      'OwnerName': commonUnitPrpoerties[9],
-      'paymentMethod': commonUnitPrpoerties[10],
-      'priority': commonUnitPrpoerties[11],
-      'visible': commonUnitPrpoerties[12],
-      'offered': commonUnitPrpoerties[13],
-      'singleImage': singleImage,
-      'mutliImages': mutliImages,
+      'paymentMethod': commonUnitPrpoerties[9],
+      'priority': commonUnitPrpoerties[10],
+      'visible': commonUnitPrpoerties[11],
+      'offered': commonUnitPrpoerties[12],
       'noFloors': noFloors,
-      'noFlats': noFlats
+      'noFlats': noFlats,
+      'singleImage': singleImage,
+      'mutliImages': mutliImages
     });
   }
 
-  static getClinicXStoreXLandXOtherData(
+  static getClinicXStoreXLandXFactoryXOtherData(
       {required List<String> commonUnitPrpoerties,
       required String typeOFActivity,
       required String singleImage,
       required List<String> mutliImages,
       required String type}) async {
     await FirebaseFirestore.instance.collection('properties').add({
+      'type': type,
       'ownerName': commonUnitPrpoerties[0],
       'ownerNumber': commonUnitPrpoerties[1],
       'addressForUser': commonUnitPrpoerties[2],
@@ -153,14 +155,13 @@ class PropertyManagement {
       'descriptionForUser': commonUnitPrpoerties[6],
       'descriptionForAdmin': commonUnitPrpoerties[7],
       'unitName': commonUnitPrpoerties[8],
-      'OwnerName': commonUnitPrpoerties[9],
-      'paymentMethod': commonUnitPrpoerties[10],
-      'priority': commonUnitPrpoerties[11],
-      'visible': commonUnitPrpoerties[12],
-      'offered': commonUnitPrpoerties[13],
+      'paymentMethod': commonUnitPrpoerties[9],
+      'priority': commonUnitPrpoerties[10],
+      'visible': commonUnitPrpoerties[11],
+      'offered': commonUnitPrpoerties[12],
+      'typeOFActivity': typeOFActivity,
       'singleImage': singleImage,
-      'mutliImages': mutliImages,
-      'typeOFActivity': typeOFActivity
+      'mutliImages': mutliImages
     });
   }
 
@@ -172,6 +173,7 @@ class PropertyManagement {
       required List<String> mutliImages,
       String type = "Farm"}) async {
     await FirebaseFirestore.instance.collection('properties').add({
+      'type': type,
       'ownerName': commonUnitPrpoerties[0],
       'ownerNumber': commonUnitPrpoerties[1],
       'addressForUser': commonUnitPrpoerties[2],
@@ -181,20 +183,18 @@ class PropertyManagement {
       'descriptionForUser': commonUnitPrpoerties[6],
       'descriptionForAdmin': commonUnitPrpoerties[7],
       'unitName': commonUnitPrpoerties[8],
-      'OwnerName': commonUnitPrpoerties[9],
-      'paymentMethod': commonUnitPrpoerties[10],
-      'priority': commonUnitPrpoerties[11],
-      'visible': commonUnitPrpoerties[12],
-      'offered': commonUnitPrpoerties[13],
-      'singleImage': singleImage,
-      'mutliImages': mutliImages,
+      'paymentMethod': commonUnitPrpoerties[9],
+      'priority': commonUnitPrpoerties[10],
+      'visible': commonUnitPrpoerties[11],
+      'offered': commonUnitPrpoerties[12],
       'typeOFActivity': typeOFActivity,
-      'noAB': noAB
+      'noAB': noAB,
+      'singleImage': singleImage,
+      'mutliImages': mutliImages
     });
   }
 }
 
 final propertyLengthProvider = FutureProvider((ref) {
-
   return PropertyManagement.docIDs.length;
 });

@@ -33,6 +33,16 @@ class _LoginPageState extends State<LoginPage> {
 
 // bool result = await InternetConnectionChecker().hasConnection;
   Future signIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+              child: CircularProgressIndicator(
+            backgroundColor: Colors.black26,
+            valueColor: AlwaysStoppedAnimation<Color>(
+                Color.fromARGB(255, 205, 153, 51)),
+          ));
+        });
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
       try {

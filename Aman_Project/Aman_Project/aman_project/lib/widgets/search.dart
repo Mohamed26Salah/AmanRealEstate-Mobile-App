@@ -156,7 +156,7 @@ class _SearchState extends State<Search> {
                   width: 8,
                 ),
                 const Text(
-                  "Results found",
+                  "متخفش من الشاشة الحمرا",
                   style: TextStyle(
                     fontSize: 24,
                   ),

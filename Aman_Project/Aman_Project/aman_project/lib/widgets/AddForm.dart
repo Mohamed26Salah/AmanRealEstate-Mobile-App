@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 // import 'CustomTextField.dart';
+import 'custom_message.dart';
 import 'dropdown.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'change_lang.dart';
@@ -11,6 +12,7 @@ import '../data/CustomTextField.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
+import '../data/globals.dart' as val;
 
 final _formKey = GlobalKey<FormState>();
 
@@ -23,8 +25,8 @@ class AddForm extends StatefulWidget {
 
 class AddFormState extends State<AddForm> {
   //List For add
-  List<String> listAddFormFirebase = [];
-  late String userChoice;
+  List<String> listAddTOFirebase = [];
+  String userChoice = "";
   //Resposbile of Visibility of widgets
   bool visibleFinishing = false;
   bool visibleDoublex = false;
@@ -203,6 +205,7 @@ class AddFormState extends State<AddForm> {
                       } else if (value == "Clinic" ||
                           value == "Store" ||
                           value == "Land" ||
+                          value == "Farm" ||
                           value == "Other") {
                         setState(() {
                           visibleTypeOFAcitivity = true;
@@ -242,6 +245,7 @@ class AddFormState extends State<AddForm> {
                   ),
                   //Owner Name
                   //Common
+
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 20, left: 15, right: 15, bottom: 10),
@@ -451,12 +455,18 @@ class AddFormState extends State<AddForm> {
                           print(paymentMethod);
                         });
                       },
-                      validator: (value) {
+                      validatior: (value) {
                         if (value == null) {
                           return 'Please Select';
                         }
                         return null;
                       },
+                      // validator: (value) {
+                      //   if (value == null) {
+                      //     return 'Please Select';
+                      //   }
+                      //   return null;
+                      // },
                     ),
                   ),
                   //priority
@@ -473,12 +483,18 @@ class AddFormState extends State<AddForm> {
                           priority = value;
                         });
                       },
-                      validator: (value) {
+                      validatior: (value) {
                         if (value == null) {
                           return 'Please Select';
                         }
                         return null;
                       },
+                      // validator: (value) {
+                      //   if (value == null) {
+                      //     return 'Please Select';
+                      //   }
+                      //   return null;
+                      // },
                     ),
                   ),
                   //visible
@@ -495,7 +511,7 @@ class AddFormState extends State<AddForm> {
                           visible = value;
                         });
                       },
-                      validator: (value) {
+                      validatior: (value) {
                         if (value == null) {
                           return 'Please Select';
                         }
@@ -517,7 +533,7 @@ class AddFormState extends State<AddForm> {
                           offered = value;
                         });
                       },
-                      validator: (value) {
+                      validatior: (value) {
                         if (value == null) {
                           return 'Please Select';
                         }
@@ -541,7 +557,7 @@ class AddFormState extends State<AddForm> {
                             finishing = value;
                           });
                         },
-                        validator: (value) {
+                        validatior: (value) {
                           if (value == null) {
                             return 'Please Select';
                           }
@@ -566,7 +582,7 @@ class AddFormState extends State<AddForm> {
                             doublex = value;
                           });
                         },
-                        validator: (value) {
+                        validatior: (value) {
                           if (value == null) {
                             return 'Please Select';
                           }
@@ -591,7 +607,7 @@ class AddFormState extends State<AddForm> {
                             furnished = value;
                           });
                         },
-                        validator: (value) {
+                        validatior: (value) {
                           if (value == null) {
                             return 'Please Select';
                           }
@@ -941,21 +957,96 @@ class AddFormState extends State<AddForm> {
                           ),
                         ),
                         onPressed: () async {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            //UploadSingleImage
-                            uploadFile();
-                            //UploadMutlipleImages
-                            uploadMutilbeImages().then((value) {
-                              if (userChoice == "Flat") {}
-                            });
+                          if (userChoice != "") {
+                            // Validate returns true if the form is valid, or false otherwise.
+                            if (_formKey.currentState!.validate()) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return const Center(
+                                        child: CircularProgressIndicator(
+                                      backgroundColor: Colors.black26,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Color.fromARGB(255, 205, 153, 51)),
+                                    ));
+                                  });
+                              //UploadSingleImage
+                              listAddTOFirebase.add(_ownerNameController.text);
+                              listAddTOFirebase
+                                  .add(_ownerNumberController.text);
+                              listAddTOFirebase
+                                  .add(_addressForUserController.text);
+                              listAddTOFirebase
+                                  .add(_addressForAdminController.text);
+                              listAddTOFirebase.add(_areaController.text);
+                              listAddTOFirebase.add(_priceController.text);
+                              listAddTOFirebase
+                                  .add(_descriptionForUserController.text);
+                              listAddTOFirebase
+                                  .add(_descriptionForAdminController.text);
+                              listAddTOFirebase.add(_nameController.text);
+                              listAddTOFirebase.add(paymentMethod!);
+                              listAddTOFirebase.add(priority!);
+                              listAddTOFirebase.add(visible!);
+                              listAddTOFirebase.add(offered!);
 
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (builder) => Search()));
+                              uploadFile().then((value) {
+                                uploadMutilbeImages().then((value) {
+                                  if (userChoice == "Flat") {
+                                  } else if (userChoice == "Villa") {
+                                    PropertyManagement.getFlatData(
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        floor: _floorController.text,
+                                        doublex: doublex!,
+                                        noRooms: _noOFRoomsController.text,
+                                        noBathrooms:
+                                            _noOFBathroomsController.text,
+                                        finishing: finishing!,
+                                        furnished: furnished!,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                  } else if (userChoice == "Building") {
+                                    PropertyManagement.getBuildingData(
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        noFlats: _noOFFlatsController.text,
+                                        noFloors: _noOFFloorsController.text,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                  } else if (userChoice == "Clinic" ||
+                                      userChoice == "Store" ||
+                                      userChoice == "Land" ||
+                                      userChoice == "Factory" ||
+                                      userChoice == "Other") {
+                                    PropertyManagement
+                                        .getClinicXStoreXLandXFactoryXOtherData(
+                                            commonUnitPrpoerties:
+                                                listAddTOFirebase,
+                                            type: userChoice,
+                                            typeOFActivity:
+                                                _typeOFActivityController.text,
+                                            singleImage: singleImageURl,
+                                            mutliImages: downloadUrls);
+                                  } else if (userChoice == "Farm") {
+                                    PropertyManagement.getFarmData(
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        typeOFActivity:
+                                            _typeOFActivityController.text,
+                                        noAB: _noOFABController.text,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                  }
+                                });
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (builder) => const Search()));
+                              });
+                            }
+                          } else {
+                            errormessage("Error!", "Please Choose a type!");
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(val.snackBar);
                           }
                         },
                         style: ElevatedButton.styleFrom(
