@@ -28,6 +28,16 @@ class _RegisterPageState extends State<RegisterPage> {
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
       try {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                backgroundColor: Colors.black26,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromARGB(255, 205, 153, 51)),
+              ));
+            });
         final credential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
@@ -45,11 +55,13 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.of(context).pushReplacementNamed('/verify');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
+          Navigator.of(context).pop();
           errormessage("Error!", "The password provided is too weak.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         } else if (e.code == 'email-already-in-use') {
+          Navigator.of(context).pop();
           errormessage("Error!", "The account already exists for that email.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -120,7 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text(
                     'Hello',
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52, color: const Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52,
+                        color: const Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 10),
                   const Text(

@@ -33,19 +33,19 @@ class _LoginPageState extends State<LoginPage> {
 
 // bool result = await InternetConnectionChecker().hasConnection;
   Future signIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-              child: CircularProgressIndicator(
-            backgroundColor: Colors.black26,
-            valueColor: AlwaysStoppedAnimation<Color>(
-                Color.fromARGB(255, 205, 153, 51)),
-          ));
-        });
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
       try {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                backgroundColor: Colors.black26,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromARGB(255, 205, 153, 51)),
+              ));
+            });
         final credential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
@@ -61,11 +61,13 @@ class _LoginPageState extends State<LoginPage> {
         }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
+          Navigator.of(context).pop();
           errormessage("Error!", "No user found for that email.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         } else if (e.code == 'wrong-password') {
+          Navigator.of(context).pop();
           errormessage("Error!", "Wrong password provided for that user.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
