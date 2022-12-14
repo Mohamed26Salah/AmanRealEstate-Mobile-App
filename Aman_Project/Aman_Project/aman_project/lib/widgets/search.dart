@@ -158,7 +158,7 @@ class _SearchState extends State<Search> {
                   width: 8,
                 ),
                 const Text(
-                  "في حاجة بايظة في ال insert",
+                  "Flat/villa حاجة بايظة في ال ",
                   style: TextStyle(
                     fontSize: 24,
                   ),

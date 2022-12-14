@@ -1012,11 +1012,11 @@ class AddFormState extends State<AddForm> {
                                               // Navigator.of(context).pop()
                                             });
                                   } else if (userChoice == "Villa") {
-                                    PropertyManagement.getFlatData(
+                                    PropertyManagement.getVillaData(
                                             commonUnitPrpoerties:
                                                 listAddTOFirebase,
-                                            floor: _floorController.text,
-                                            doublex: doublex!,
+                                            noFloors:
+                                                _noOFFloorsController.text,
                                             noRooms: _noOFRoomsController.text,
                                             noBathrooms:
                                                 _noOFBathroomsController.text,
