@@ -60,12 +60,16 @@ class PropertyManagement {
       'noBathrooms': noBathrooms,
       'finishing': finishing,
       'furnished': furnished,
+      'noFloors': "",
+      'typeOFActivity': "",
+      'noAB': "",
+      'noFlats': ""
     });
   }
 
   static Future getVillaData(
       {required List<String> commonUnitPrpoerties,
-      required String floor,
+      required String noFloors,
       required String noRooms,
       required String noBathrooms,
       required String finishing,
@@ -91,11 +95,16 @@ class PropertyManagement {
       'offered': commonUnitPrpoerties[13],
       'singleImage': singleImage,
       'multiImages': mutliImages,
-      'floor': floor,
+      'noFloors': noFloors,
       'noRooms': noRooms,
       'noBathrooms': noBathrooms,
       'finishing': finishing,
-      'furnished': furnished
+      'furnished': furnished,
+      'floor': "",
+      'doublex': "",
+      'typeOFActivity': "",
+      'noAB': "",
+      'noFlats': ""
     });
   }
 
@@ -121,10 +130,18 @@ class PropertyManagement {
       'priority': commonUnitPrpoerties[10],
       'visible': commonUnitPrpoerties[11],
       'offered': commonUnitPrpoerties[12],
+      'singleImage': singleImage,
+      'multiImages': mutliImages,
       'noFloors': noFloors,
       'noFlats': noFlats,
-      'singleImage': singleImage,
-      'multiImages': mutliImages
+      'noRooms': "",
+      'noBathrooms': "",
+      'finishing': "",
+      'furnished': "",
+      'floor': "",
+      'doublex': "",
+      'typeOFActivity': "",
+      'noAB': ""
     });
   }
 
@@ -149,9 +166,18 @@ class PropertyManagement {
       'priority': commonUnitPrpoerties[10],
       'visible': commonUnitPrpoerties[11],
       'offered': commonUnitPrpoerties[12],
-      'typeOFActivity': typeOFActivity,
       'singleImage': singleImage,
-      'multiImages': mutliImages
+      'multiImages': mutliImages,
+      'typeOFActivity': typeOFActivity,
+      'noFloors': "",
+      'noFlats': "",
+      'noRooms': "",
+      'noBathrooms': "",
+      'finishing': "",
+      'furnished': "",
+      'floor': "",
+      'doublex': "",
+      'noAB': ""
     });
   }
 
@@ -177,10 +203,18 @@ class PropertyManagement {
       'priority': commonUnitPrpoerties[10],
       'visible': commonUnitPrpoerties[11],
       'offered': commonUnitPrpoerties[12],
+      'singleImage': singleImage,
+      'multiImages': mutliImages,
       'typeOFActivity': typeOFActivity,
       'noAB': noAB,
-      'singleImage': singleImage,
-      'multiImages': mutliImages
+      'noFloors': "",
+      'noFlats': "",
+      'noRooms': "",
+      'noBathrooms': "",
+      'finishing': "",
+      'furnished': "",
+      'floor': "",
+      'doublex': "",
     });
   }
 }
@@ -189,63 +223,65 @@ final propertyLengthProvider = FutureProvider((ref) {
   return PropertyManagement.docIDs.length;
 });
 
-class PropertyItem extends StatelessWidget {
-  final String documentID;
+// class PropertyItem extends StatelessWidget {
+//   final String documentID;
 
-  PropertyItem({required this.documentID});
+//   PropertyItem({required this.documentID});
 
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference properties =
-        FirebaseFirestore.instance.collection('properties');
-    return FutureBuilder<DocumentSnapshot>(
-      future: properties.doc(documentID).get(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return PropertyWidget(
-            addressAdmin: data['addressForAdmin'],
-            addressUser: data['addressForUser'],
-            area: data['area'],
-            descriptionAdmin: data['descriptionForAdmin'],
-            descriptionUser: data['descriptionForUser'],
-            singleImage: data['singleImage'],
-            multiImages: data['multiImages'],
-            offered: data['offered'],
-            ownerName: data['ownerName'],
-            ownerNumber: data['ownerNumber'],
-            paymentMethod: data['paymentMethod'],
-            price: data['price'],
-            priority: data['priority'],
-            type: data['type'],
-            visible: data['visible'],
-            //Uncommon
-            doublex: data['Doublex'],
-            finishing: data['Finishing'],
-            floor: data['Floor'],
-            furnished: data['Furnished'],
-            unitName: data['unitName'],
-            noBarthrooms: data['No.Bathrooms'],
-            noFlats: data['No.Flats'],
-            noFloors: data['No.Floors'],
-            noRooms: data['No.Rooms'],
-            theNumberOFAB: data['TheNumberOFAB'],
-            typeOFActivity: data['TypeOfActivity'],
-          );
-        }
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              child: const CircularProgressIndicator(
-                value: null,
-                strokeWidth: 7.0,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     CollectionReference properties =
+//         FirebaseFirestore.instance.collection('properties');
+//     return FutureBuilder<DocumentSnapshot>(
+//       future: properties.doc(documentID).get(),
+//       builder: (context, snapshot) {
+//         print(documentID);
+//         print("Fasl");
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           Map<String, dynamic> data =
+//               snapshot.data!.data() as Map<String, dynamic>;
+//           return PropertyWidget(
+//             addressAdmin: data['addressForAdmin'],
+//             addressUser: data['addressForUser'],
+//             area: data['area'],
+//             descriptionAdmin: data['descriptionForAdmin'],
+//             descriptionUser: data['descriptionForUser'],
+//             singleImage: data['singleImage'],
+//             multiImages: data['multiImages'],
+//             offered: data['offered'],
+//             ownerName: data['ownerName'],
+//             ownerNumber: data['ownerNumber'],
+//             paymentMethod: data['paymentMethod'],
+//             price: data['price'],
+//             priority: data['priority'],
+//             type: data['type'],
+//             visible: data['visible'],
+//             //Uncommon
+//             doublex: data['Doublex'],
+//             finishing: data['Finishing'],
+//             floor: data['Floor'],
+//             furnished: data['Furnished'],
+//             unitName: data['unitName'],
+//             noBarthrooms: data['No.Bathrooms'],
+//             noFlats: data['No.Flats'],
+//             noFloors: data['No.Floors'],
+//             noRooms: data['No.Rooms'],
+//             theNumberOFAB: data['TheNumberOFAB'],
+//             typeOFActivity: data['TypeOfActivity'],
+//           );
+//         }
+//         return Center(
+//           child: Padding(
+//             padding: const EdgeInsets.all(20),
+//             child: Container(
+//               child: const CircularProgressIndicator(
+//                 value: null,
+//                 strokeWidth: 7.0,
+//               ),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

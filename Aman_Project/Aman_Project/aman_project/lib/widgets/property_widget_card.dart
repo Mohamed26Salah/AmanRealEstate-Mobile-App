@@ -39,8 +39,10 @@ class PropertyWidget extends StatelessWidget {
   String? noRooms;
   String? theNumberOFAB;
   String? typeOFActivity;
+  Color? color = Colors.yellow[700];
   final CacheManager cacheManager = CacheManager(Config('images_key',
       maxNrOfCacheObjects: 100, stalePeriod: const Duration(days: 1)));
+
   PropertyWidget({
     super.key,
     required this.addressAdmin,
@@ -74,9 +76,15 @@ class PropertyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (offered == "For Sale") {
+      offered = "For Sale";
+    } else {
+      offered = "For Rent";
+      color = Colors.red;
+    }
     // print(mainImage);
     return Hero(
-      tag: "assets/images/house_01.jpg",
+      tag: singleImage,
       child: GestureDetector(
         // onTap: () => selectedProperty(context),
         child: Card(
@@ -105,7 +113,7 @@ class PropertyWidget extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.yellow[700],
+                      color: color,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(5),
                       ),
@@ -116,7 +124,7 @@ class PropertyWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "FOR Sale",
+                        offered,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -133,12 +141,18 @@ class PropertyWidget extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            unitName,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                unitName,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
                           Text(
@@ -155,45 +169,51 @@ class PropertyWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Colors.white,
-                                size: 14,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                addressAdmin,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const Icon(
-                                Icons.zoom_out_map,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                "$area sq/m",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
+                          // Row(
+                          //   children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                            size: 14,
                           ),
+                          // const SizedBox(
+                          //   width: 4,
+                          // ),
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                addressUser,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          const Icon(
+                            Icons.zoom_out_map,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                          // const SizedBox(
+                          //   width: 4,
+                          // ),
+                          Text(
+                            "$area sq/m",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ],

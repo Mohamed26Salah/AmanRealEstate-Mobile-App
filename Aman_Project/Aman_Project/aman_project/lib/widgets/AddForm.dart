@@ -156,8 +156,7 @@ class AddFormState extends State<AddForm> {
                     ],
                     buttonTextStyle: const ButtonTextStyle(
                         selectedColor: Colors.black,
-                        unSelectedColor:
-                            const Color.fromARGB(255, 205, 153, 51),
+                        unSelectedColor: Color.fromARGB(255, 205, 153, 51),
                         textStyle: TextStyle(fontSize: 16)),
                     radioButtonValue: (value) {
                       if (value == "Flat") {
@@ -432,7 +431,7 @@ class AddFormState extends State<AddForm> {
                       labelText: "Unit Name",
                       hintText: "Unit Name",
                       validator: (value) {
-                        if (!value!.isValidName) {
+                        if (!value!.isValidAddress) {
                           return 'Please enter a valid Unit Name';
                         }
                         return null;
@@ -525,7 +524,7 @@ class AddFormState extends State<AddForm> {
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
                     child: CustomDropdownButton2(
-                      dropdownItems: const ["Yes", "No"],
+                      dropdownItems: const ["For Sale", "For Rent"],
                       hint: "Select offering",
                       value: offered,
                       onChanged: (value) {
@@ -961,6 +960,7 @@ class AddFormState extends State<AddForm> {
                             // Validate returns true if the form is valid, or false otherwise.
                             if (_formKey.currentState!.validate()) {
                               showDialog(
+                                  barrierDismissible: false,
                                   context: context,
                                   builder: (context) {
                                     return const Center(
@@ -993,6 +993,24 @@ class AddFormState extends State<AddForm> {
                               uploadFile().then((value) {
                                 uploadMutilbeImages().then((value) {
                                   if (userChoice == "Flat") {
+                                    PropertyManagement.getFlatData(
+                                            commonUnitPrpoerties:
+                                                listAddTOFirebase,
+                                            floor: _floorController.text,
+                                            doublex: doublex!,
+                                            noRooms: _noOFRoomsController.text,
+                                            noBathrooms:
+                                                _noOFBathroomsController.text,
+                                            finishing: finishing!,
+                                            furnished: furnished!,
+                                            singleImage: singleImageURl,
+                                            mutliImages: downloadUrls)
+                                        .then((value) => {
+                                              Navigator.of(context)
+                                                  .pushNamed('/home')
+                                              // Navigator.of(context).pop(),
+                                              // Navigator.of(context).pop()
+                                            });
                                   } else if (userChoice == "Villa") {
                                     PropertyManagement.getFlatData(
                                             commonUnitPrpoerties:
@@ -1008,7 +1026,9 @@ class AddFormState extends State<AddForm> {
                                             mutliImages: downloadUrls)
                                         .then((value) => {
                                               Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
+                                                  .pushNamed('/home')
+                                              // Navigator.of(context).pop(),
+                                              // Navigator.of(context).pop()
                                             });
                                   } else if (userChoice == "Building") {
                                     PropertyManagement.getBuildingData(
@@ -1021,7 +1041,9 @@ class AddFormState extends State<AddForm> {
                                             mutliImages: downloadUrls)
                                         .then((value) => {
                                               Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
+                                                  .pushNamed('/home')
+                                              // Navigator.of(context).pop(),
+                                              // Navigator.of(context).pop()
                                             });
                                   } else if (userChoice == "Clinic" ||
                                       userChoice == "Store" ||
@@ -1040,7 +1062,9 @@ class AddFormState extends State<AddForm> {
                                                 mutliImages: downloadUrls)
                                         .then((value) => {
                                               Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
+                                                  .pushNamed('/home')
+                                              // Navigator.of(context).pop(),
+                                              // Navigator.of(context).pop()
                                             });
                                   } else if (userChoice == "Farm") {
                                     PropertyManagement.getFarmData(
@@ -1053,7 +1077,9 @@ class AddFormState extends State<AddForm> {
                                             mutliImages: downloadUrls)
                                         .then((value) => {
                                               Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
+                                                  .pushNamed('/home')
+                                              // Navigator.of(context).pop(),
+                                              // Navigator.of(context).pop()
                                             });
                                   }
                                 });

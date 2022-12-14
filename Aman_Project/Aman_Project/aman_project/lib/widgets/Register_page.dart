@@ -29,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (result == true) {
       try {
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const Center(

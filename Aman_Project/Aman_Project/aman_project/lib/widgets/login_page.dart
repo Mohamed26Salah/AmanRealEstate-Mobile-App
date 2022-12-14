@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     if (result == true) {
       try {
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const Center(

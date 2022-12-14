@@ -20,6 +20,8 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  final Stream<QuerySnapshot> properties =
+      FirebaseFirestore.instance.collection('properties').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +158,7 @@ class _SearchState extends State<Search> {
                   width: 8,
                 ),
                 const Text(
-                  "متخفش من الشاشة الحمرا",
+                  "في حاجة بايظة في ال insert",
                   style: TextStyle(
                     fontSize: 24,
                   ),
@@ -166,49 +168,78 @@ class _SearchState extends State<Search> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: FutureBuilder(
-                future: PropertyManagement.getDocId(),
-                builder: ((context, snapshot) {
-                  return ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: PropertyManagement.docIDs.length,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: properties,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return const Card(
+                        color: Colors.red,
+                        margin: EdgeInsets.zero,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Something is not right here...",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.black26,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Color.fromARGB(255, 205, 153, 51)),
+                          ),
+                        ),
+                      );
+                    }
+                    final data = snapshot.requireData;
+                    return ListView.builder(
+                      itemCount: data.size,
                       itemBuilder: (context, index) {
-                        return PropertyItem(
-                            documentID: PropertyManagement.docIDs[index]);
-                      });
-                }),
-              ),
-            ),
-
-            // child: Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 24),
-            //   child: ListView(
-            //     physics: const BouncingScrollPhysics(),
-            //     scrollDirection: Axis.vertical,
-            //     // children: buildProperties(),
-            //     children: DUMMY_PROPERTIES
-            //         .map((propData) => PropertyItem(
-            //             id: propData.id,
-            //             label: propData.label,
-            //             name: propData.name,
-            //             price: propData.price,
-            //             location: propData.location,
-            //             sqm: propData.sqm,
-            //             review: propData.review,
-            //             description: propData.description,
-            //             frontImage: propData.frontImage,
-            //             ownerImage: propData.ownerImage,
-            //             ownerName: propData.ownerName,
-            //             floor: propData.floor,
-            //             bathroom: propData.bathroom,
-            //             bedroom: propData.bedroom,
-            //             kitchen: propData.kitchen,
-            //             images: propData.images))
-            //         .toList(),
-            //   ),
-            // ),
+                        return PropertyWidget(
+                          addressAdmin: data.docs[index]['addressForAdmin'],
+                          addressUser: data.docs[index]['addressForUser'],
+                          area: data.docs[index]['area'],
+                          descriptionAdmin: data.docs[index]
+                              ['descriptionForAdmin'],
+                          descriptionUser: data.docs[index]
+                              ['descriptionForUser'],
+                          singleImage: data.docs[index]['singleImage'],
+                          multiImages: data.docs[index]['multiImages'],
+                          offered: data.docs[index]['offered'],
+                          ownerName: data.docs[index]['ownerName'],
+                          ownerNumber: data.docs[index]['ownerNumber'],
+                          paymentMethod: data.docs[index]['paymentMethod'],
+                          price: data.docs[index]['price'],
+                          priority: data.docs[index]['priority'],
+                          type: data.docs[index]['type'],
+                          visible: data.docs[index]['visible'],
+                          //Uncommon
+                          doublex: data.docs[index]['doublex'],
+                          finishing: data.docs[index]['finishing'],
+                          floor: data.docs[index]['floor'],
+                          furnished: data.docs[index]['furnished'],
+                          unitName: data.docs[index]['unitName'],
+                          noBarthrooms: data.docs[index]['noBathrooms'],
+                          noFlats: data.docs[index]['noFlats'],
+                          noFloors: data.docs[index]['noFloors'],
+                          noRooms: data.docs[index]['noRooms'],
+                          theNumberOFAB: data.docs[index]['noAB'],
+                          typeOFActivity: data.docs[index]['typeOFActivity'],
+                        );
+                      },
+                    );
+                  },
+                )),
           ),
         ],
       ),
