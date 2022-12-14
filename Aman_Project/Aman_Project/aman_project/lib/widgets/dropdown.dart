@@ -29,7 +29,6 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.iconEnabledColor,
     this.iconDisabledColor,
     Key? key,
-    // required String? Function(dynamic value) validator,
     required this.validatior,
   }) : super(key: key);
 
@@ -73,6 +72,7 @@ class CustomDropdownButton2 extends StatelessWidget {
       iconSize: iconSize ?? 12,
       iconEnabledColor: iconEnabledColor,
       iconDisabledColor: iconDisabledColor,
+      //French accent
       validator: validatior,
       dropdownColor: Colors.grey[200],
       borderRadius: BorderRadius.circular(12),

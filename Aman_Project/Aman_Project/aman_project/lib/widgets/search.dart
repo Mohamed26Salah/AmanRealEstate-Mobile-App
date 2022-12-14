@@ -1,5 +1,5 @@
 import 'package:aman_project/models/property_managemnt.dart';
-import 'package:aman_project/widgets/property_item.dart';
+import 'package:aman_project/widgets/property_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

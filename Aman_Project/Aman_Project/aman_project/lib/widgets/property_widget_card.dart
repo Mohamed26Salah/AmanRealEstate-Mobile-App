@@ -6,92 +6,39 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-class PropertyItem extends StatelessWidget {
-  final String documentID;
-
-  PropertyItem({required this.documentID});
-
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference properties =
-        FirebaseFirestore.instance.collection('properties');
-    return FutureBuilder<DocumentSnapshot>(
-      future: properties.doc(documentID).get(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return PropertyWidget(
-              addressAdmin: data['AddressAdmin'],
-              addressUser: data['AddressUser'],
-              area: data['Area'],
-              code: data['Code'],
-              descriptionAdmin: data['DescriptionAdmin'],
-              descriptionUser: data['DescriptionUser'],
-              doublex: data['Doublex'],
-              finishing: data['Finishing'],
-              floor: data['Floor'],
-              furnished: data['Furnished'],
-              mainImage: data['MainImage'],
-              name: data['Name'],
-              noBarthrooms: data['No.Bathrooms'],
-              noFlats: data['No.Flats'],
-              noFloors: data['No.Floors'],
-              noRooms: data['No.Rooms'],
-              offered: data['Offered'],
-              owner: data['Owner'],
-              ownerNumber: data['OwnerNumber'],
-              paymentMethod: data['PaymentMethod'],
-              priority: data['Priority'],
-              theNumberOFAB: data['TheNumberOFAB'],
-              type: data['Type'],
-              typeOFActivity: data['TypeOfActivity'],
-              visible: data['Visible'],
-              price: data['price']);
-        }
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              child: const CircularProgressIndicator(
-                value: null,
-                strokeWidth: 7.0,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
+// final userRoleProvider = FutureProvider((ref) async {
+//   return await UserHelper().getUser();
+// });
 
 class PropertyWidget extends StatelessWidget {
   String addressAdmin;
   String addressUser;
   String area;
-  String code;
+  // String code;
   String descriptionAdmin;
   String descriptionUser;
-  bool doublex;
-  String finishing;
-  String floor;
-  bool furnished;
-  String mainImage;
-  String name;
-  String noBarthrooms;
-  String noFlats;
-  String noFloors;
-  String noRooms;
-  bool offered;
-  String owner;
+  String unitName;
+  String offered;
+  String ownerName;
   String ownerNumber;
   String paymentMethod;
   String priority;
-  String theNumberOFAB;
   String type;
-  String typeOFActivity;
-  bool visible;
+  String visible;
   String price;
+  List<dynamic> multiImages;
+  String singleImage;
+  //UnCommon
+  String? doublex;
+  String? finishing;
+  String? floor;
+  String? furnished;
+  String? noBarthrooms;
+  String? noFlats;
+  String? noFloors;
+  String? noRooms;
+  String? theNumberOFAB;
+  String? typeOFActivity;
   final CacheManager cacheManager = CacheManager(Config('images_key',
       maxNrOfCacheObjects: 100, stalePeriod: const Duration(days: 1)));
   PropertyWidget({
@@ -99,34 +46,35 @@ class PropertyWidget extends StatelessWidget {
     required this.addressAdmin,
     required this.addressUser,
     required this.area,
-    required this.code,
     required this.descriptionAdmin,
     required this.descriptionUser,
-    required this.doublex,
-    required this.finishing,
-    required this.floor,
-    required this.furnished,
-    required this.mainImage,
-    required this.name,
-    required this.noBarthrooms,
-    required this.noFlats,
-    required this.noFloors,
-    required this.noRooms,
+    required this.unitName,
     required this.offered,
-    required this.owner,
+    required this.ownerName,
     required this.ownerNumber,
     required this.paymentMethod,
     required this.priority,
-    required this.theNumberOFAB,
     required this.type,
-    required this.typeOFActivity,
     required this.visible,
     required this.price,
+    required this.singleImage,
+    required this.multiImages,
+    //UnCommon
+    this.doublex,
+    this.floor,
+    this.furnished,
+    this.finishing,
+    this.noBarthrooms,
+    this.noFlats,
+    this.noFloors,
+    this.noRooms,
+    this.theNumberOFAB,
+    this.typeOFActivity,
   });
 
   @override
   Widget build(BuildContext context) {
-    print(mainImage);
+    // print(mainImage);
     return Hero(
       tag: "assets/images/house_01.jpg",
       child: GestureDetector(
@@ -144,7 +92,7 @@ class PropertyWidget extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: NetworkImage(mainImage),
-                image: CachedNetworkImageProvider(mainImage,
+                image: CachedNetworkImageProvider(singleImage,
                     cacheManager: cacheManager),
                 fit: BoxFit.cover,
               ),
@@ -186,7 +134,7 @@ class PropertyWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            name,
+                            unitName,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,

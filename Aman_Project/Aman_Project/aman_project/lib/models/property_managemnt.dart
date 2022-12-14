@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:aman_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import '../widgets/property_widget_card.dart';
 
 class PropertyManagement {
   //Get Cards List(Used At Search File)
@@ -19,25 +22,12 @@ class PropertyManagement {
         .then((snapshot) => snapshot.docs.forEach((document) {
               docIDs.add(document.reference.id);
             }));
-    // listNumber = docIDs.length;
   }
 
-  static getFlatData(
-      {
-      // required String ownerName,
-      // required String ownerNumber,
-      // required String addressForUser,
-      // required String addressForAdmin,
-      // required String area,
-      // required String price,
-      // required String descriptionForUser,
-      // required String descriptionForAdmin,
-      // required String unitName,
-      // required String paymentMethod,
-      // required String priority,
-      // required String visible,
-      // required String offered,
-      required List<String> commonUnitPrpoerties,
+//Return DocID data For Each Card
+
+  static Future getFlatData(
+      {required List<String> commonUnitPrpoerties,
       required String floor,
       required String doublex,
       required String noRooms,
@@ -63,7 +53,7 @@ class PropertyManagement {
       'visible': commonUnitPrpoerties[12],
       'offered': commonUnitPrpoerties[13],
       'singleImage': singleImage,
-      'mutliImages': mutliImages,
+      'multiImages': mutliImages,
       'floor': floor,
       'doublex': doublex,
       'noRooms': noRooms,
@@ -73,7 +63,7 @@ class PropertyManagement {
     });
   }
 
-  static getVillaData(
+  static Future getVillaData(
       {required List<String> commonUnitPrpoerties,
       required String floor,
       required String noRooms,
@@ -100,7 +90,7 @@ class PropertyManagement {
       'visible': commonUnitPrpoerties[12],
       'offered': commonUnitPrpoerties[13],
       'singleImage': singleImage,
-      'mutliImages': mutliImages,
+      'multiImages': mutliImages,
       'floor': floor,
       'noRooms': noRooms,
       'noBathrooms': noBathrooms,
@@ -109,7 +99,7 @@ class PropertyManagement {
     });
   }
 
-  static getBuildingData(
+  static Future getBuildingData(
       {required List<String> commonUnitPrpoerties,
       required String noFloors,
       required String noFlats,
@@ -134,11 +124,11 @@ class PropertyManagement {
       'noFloors': noFloors,
       'noFlats': noFlats,
       'singleImage': singleImage,
-      'mutliImages': mutliImages
+      'multiImages': mutliImages
     });
   }
 
-  static getClinicXStoreXLandXFactoryXOtherData(
+  static Future getClinicXStoreXLandXFactoryXOtherData(
       {required List<String> commonUnitPrpoerties,
       required String typeOFActivity,
       required String singleImage,
@@ -161,11 +151,11 @@ class PropertyManagement {
       'offered': commonUnitPrpoerties[12],
       'typeOFActivity': typeOFActivity,
       'singleImage': singleImage,
-      'mutliImages': mutliImages
+      'multiImages': mutliImages
     });
   }
 
-  static getFarmData(
+  static Future getFarmData(
       {required List<String> commonUnitPrpoerties,
       required String typeOFActivity,
       required String noAB,
@@ -190,7 +180,7 @@ class PropertyManagement {
       'typeOFActivity': typeOFActivity,
       'noAB': noAB,
       'singleImage': singleImage,
-      'mutliImages': mutliImages
+      'multiImages': mutliImages
     });
   }
 }
@@ -198,3 +188,64 @@ class PropertyManagement {
 final propertyLengthProvider = FutureProvider((ref) {
   return PropertyManagement.docIDs.length;
 });
+
+class PropertyItem extends StatelessWidget {
+  final String documentID;
+
+  PropertyItem({required this.documentID});
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference properties =
+        FirebaseFirestore.instance.collection('properties');
+    return FutureBuilder<DocumentSnapshot>(
+      future: properties.doc(documentID).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          return PropertyWidget(
+            addressAdmin: data['addressForAdmin'],
+            addressUser: data['addressForUser'],
+            area: data['area'],
+            descriptionAdmin: data['descriptionForAdmin'],
+            descriptionUser: data['descriptionForUser'],
+            singleImage: data['singleImage'],
+            multiImages: data['multiImages'],
+            offered: data['offered'],
+            ownerName: data['ownerName'],
+            ownerNumber: data['ownerNumber'],
+            paymentMethod: data['paymentMethod'],
+            price: data['price'],
+            priority: data['priority'],
+            type: data['type'],
+            visible: data['visible'],
+            //Uncommon
+            doublex: data['Doublex'],
+            finishing: data['Finishing'],
+            floor: data['Floor'],
+            furnished: data['Furnished'],
+            unitName: data['unitName'],
+            noBarthrooms: data['No.Bathrooms'],
+            noFlats: data['No.Flats'],
+            noFloors: data['No.Floors'],
+            noRooms: data['No.Rooms'],
+            theNumberOFAB: data['TheNumberOFAB'],
+            typeOFActivity: data['TypeOfActivity'],
+          );
+        }
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              child: const CircularProgressIndicator(
+                value: null,
+                strokeWidth: 7.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

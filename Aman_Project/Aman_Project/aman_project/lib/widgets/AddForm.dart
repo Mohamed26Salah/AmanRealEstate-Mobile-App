@@ -276,7 +276,7 @@ class AddFormState extends State<AddForm> {
                       controller: _ownerNumberController,
                       obscureText: false,
                       labelText: "Owner Number",
-                      hintText: "Owner Number",
+                      hintText: "01144..",
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(11),
                         FilteringTextInputFormatter.allow(
@@ -396,7 +396,7 @@ class AddFormState extends State<AddForm> {
                       labelText: "Description For User",
                       hintText: "Description User",
                       validator: (value) {
-                        if (!value!.isValidName) {
+                        if (!value!.isValidAddress) {
                           return 'Please enter a valid Description';
                         }
                         return null;
@@ -414,7 +414,7 @@ class AddFormState extends State<AddForm> {
                       labelText: "Description For Admin",
                       hintText: "Description Admin",
                       validator: (value) {
-                        if (!value!.isValidName) {
+                        if (!value!.isValidAddress) {
                           return 'Please enter a valid Description';
                         }
                         return null;
@@ -995,51 +995,68 @@ class AddFormState extends State<AddForm> {
                                   if (userChoice == "Flat") {
                                   } else if (userChoice == "Villa") {
                                     PropertyManagement.getFlatData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        floor: _floorController.text,
-                                        doublex: doublex!,
-                                        noRooms: _noOFRoomsController.text,
-                                        noBathrooms:
-                                            _noOFBathroomsController.text,
-                                        finishing: finishing!,
-                                        furnished: furnished!,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
+                                            commonUnitPrpoerties:
+                                                listAddTOFirebase,
+                                            floor: _floorController.text,
+                                            doublex: doublex!,
+                                            noRooms: _noOFRoomsController.text,
+                                            noBathrooms:
+                                                _noOFBathroomsController.text,
+                                            finishing: finishing!,
+                                            furnished: furnished!,
+                                            singleImage: singleImageURl,
+                                            mutliImages: downloadUrls)
+                                        .then((value) => {
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed('/home')
+                                            });
                                   } else if (userChoice == "Building") {
                                     PropertyManagement.getBuildingData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        noFlats: _noOFFlatsController.text,
-                                        noFloors: _noOFFloorsController.text,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
+                                            commonUnitPrpoerties:
+                                                listAddTOFirebase,
+                                            noFlats: _noOFFlatsController.text,
+                                            noFloors:
+                                                _noOFFloorsController.text,
+                                            singleImage: singleImageURl,
+                                            mutliImages: downloadUrls)
+                                        .then((value) => {
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed('/home')
+                                            });
                                   } else if (userChoice == "Clinic" ||
                                       userChoice == "Store" ||
                                       userChoice == "Land" ||
                                       userChoice == "Factory" ||
                                       userChoice == "Other") {
                                     PropertyManagement
-                                        .getClinicXStoreXLandXFactoryXOtherData(
-                                            commonUnitPrpoerties:
-                                                listAddTOFirebase,
-                                            type: userChoice,
-                                            typeOFActivity:
-                                                _typeOFActivityController.text,
-                                            singleImage: singleImageURl,
-                                            mutliImages: downloadUrls);
+                                            .getClinicXStoreXLandXFactoryXOtherData(
+                                                commonUnitPrpoerties:
+                                                    listAddTOFirebase,
+                                                type: userChoice,
+                                                typeOFActivity:
+                                                    _typeOFActivityController
+                                                        .text,
+                                                singleImage: singleImageURl,
+                                                mutliImages: downloadUrls)
+                                        .then((value) => {
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed('/home')
+                                            });
                                   } else if (userChoice == "Farm") {
                                     PropertyManagement.getFarmData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        typeOFActivity:
-                                            _typeOFActivityController.text,
-                                        noAB: _noOFABController.text,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
+                                            commonUnitPrpoerties:
+                                                listAddTOFirebase,
+                                            typeOFActivity:
+                                                _typeOFActivityController.text,
+                                            noAB: _noOFABController.text,
+                                            singleImage: singleImageURl,
+                                            mutliImages: downloadUrls)
+                                        .then((value) => {
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed('/home')
+                                            });
                                   }
                                 });
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (builder) => const Search()));
                               });
                             }
                           } else {
