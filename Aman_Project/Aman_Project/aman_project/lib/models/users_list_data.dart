@@ -8,11 +8,11 @@ class UserData {
   final String role;
 }
 
-Future<List<UserData>> getData() async {
+Future<List<UserData>> getData2() async {
   List<UserData> datanum2 = [];
 
   await FirebaseFirestore.instance
-      .collection('Users')
+      .collection('users')
       .limit(100)
       .get()
       .then((QuerySnapshot querySnapshot) {
@@ -29,6 +29,6 @@ Future<List<UserData>> getData() async {
 
   //   }
   // });
-
+  print(datanum2);
   return datanum2;
 }

@@ -1,11 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import '/models/users_list_data.dart';
 import '/./pages/DummyData/person.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import '/./pages/panel_left/edit_button.dart';
 import '../../constants.dart';
 import 'Components/bloc.dart';
+import 'Components/users_list_widget.dart';
 
 class PanelLeftPage extends StatefulWidget {
   @override
@@ -31,29 +33,6 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
 
   @override
   Widget build(BuildContext context) {
-    Future openDialog([String? name]) => showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(name ?? "Yoo"),
-            content: const TextField(
-              decoration: InputDecoration(hintText: 'enter name'),
-            ),
-            actions: [
-              const TextButton(onPressed: null, child: Text("Submit")),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Cancel")),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Delete",
-                      style: TextStyle(color: Theme.of(context).errorColor)))
-            ],
-          ),
-        );
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
       body: Stack(
@@ -99,7 +78,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                                     subtitle: Text(person.surname),
                                     trailing: MyEditButton(
                                         onPressed: () {
-                                          openDialog(person.name);
+                                          // openDialog(person.name);
                                         },
                                         height: 35,
                                         borderRadius: BorderRadius.circular(20),
@@ -124,38 +103,11 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     padding: const EdgeInsets.only(
                         right: 0, bottom: 0, top: 0, left: 0),
                     child: Card(
-                      color: Constants.purpleLight,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: List.generate(
-                          people.length,
-                          (index) => ListTile(
-                            leading: CircleAvatar(
-                                radius: 15,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 148, 15, 15),
-                                child: Text(
-                                  people[index].name.substring(0, 1),
-                                  style: const TextStyle(color: Colors.white),
-                                )),
-                            title: Text(people[index].name),
-                            subtitle: Text(people[index].surname),
-                            textColor: const Color.fromARGB(255, 255, 255, 255),
-                            trailing: MyEditButton(
-                                onPressed: () {
-                                  openDialog(people[index].name);
-                                },
-                                height: 35,
-                                borderRadius: BorderRadius.circular(20),
-                                child: const Icon(
-                                  Icons.edit_outlined,
-                                )),
-                          ),
-                        ),
-                      ),
-                    ),
+                        color: Constants.purpleLight,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: UsersListWidget()),
                   ),
                 ],
               ),
