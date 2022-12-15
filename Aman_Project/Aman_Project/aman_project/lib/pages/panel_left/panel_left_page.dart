@@ -6,9 +6,6 @@ import 'package:search_page/search_page.dart';
 import '/./pages/panel_left/edit_button.dart';
 import '../../constants.dart';
 import 'Components/bloc.dart';
-import 'Components/cards.dart';
-
-import 'Components/chart_widget.dart';
 
 class PanelLeftPage extends StatefulWidget {
   @override
@@ -117,8 +114,8 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                   ),
                   const SizedBox(height: 25),
                   Wrap(
-                    children: List.generate(3, (index) {
-                      return bloc(
+                    children: List.generate(1, (index) {
+                      return ChartBlock(
                           width: MediaQuery.of(context).size.width,
                           index: index);
                     }),

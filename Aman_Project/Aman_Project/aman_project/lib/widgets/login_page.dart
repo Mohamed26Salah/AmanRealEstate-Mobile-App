@@ -33,7 +33,8 @@ class _LoginPageState extends State<LoginPage> {
 
 // bool result = await InternetConnectionChecker().hasConnection;
   Future signIn() async {
-    bool result = await InternetConnectionChecker().hasConnection;
+    // bool result = await InternetConnectionChecker().hasConnection;
+    bool result = true;
     if (result == true) {
       try {
         showDialog(

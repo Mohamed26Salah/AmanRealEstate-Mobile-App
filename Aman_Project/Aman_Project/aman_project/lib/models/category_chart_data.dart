@@ -17,7 +17,7 @@ Future<List<ChartData>> getData() async {
       .get()
       .then((QuerySnapshot querySnapshot) {
     for (var doc in querySnapshot.docs) {
-      data.add(doc["Type"]);
+      data.add(doc["type"]);
     }
   });
   // await FirebaseFirestore.instance
@@ -34,6 +34,6 @@ Future<List<ChartData>> getData() async {
     datanum.containsKey(e) ? datanum[e]++ : datanum[e] = 1;
   }
   datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
-  print("b3rs");
+
   return datanum2;
 }

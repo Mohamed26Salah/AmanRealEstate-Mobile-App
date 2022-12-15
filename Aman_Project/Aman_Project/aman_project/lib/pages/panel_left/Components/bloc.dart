@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import '../../../models/category_chart_data.dart';
 import 'cards.dart';
-import 'chart_widget.dart';
 
-class bloc extends StatefulWidget {
-  double width;
-  int index;
-  bool isExpanded = false;
-  bloc(
+class ChartBlock extends StatefulWidget {
+  final double width;
+  final int index;
+  bool isExpanded;
+  ChartBlock(
       {super.key,
       required this.width,
       required this.index,
       this.isExpanded = false});
 
   @override
-  State<bloc> createState() => _blocState();
+  State<ChartBlock> createState() => _ChartBlockState();
 }
 
-class _blocState extends State<bloc> {
+class _ChartBlockState extends State<ChartBlock> {
   Future<List<ChartData>>? chartData;
   @override
   void initState() {
@@ -41,7 +37,7 @@ class _blocState extends State<bloc> {
         future: chartData,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Text("error loading data");
+            return Text(snapshot.error.toString());
           } else if (snapshot.hasData) {
             return AnimatedContainer(
               curve: Curves.easeInOut,
