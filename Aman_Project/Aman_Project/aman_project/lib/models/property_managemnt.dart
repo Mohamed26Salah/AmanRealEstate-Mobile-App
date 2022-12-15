@@ -1,29 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:aman_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-
-import '../widgets/property_widget_card.dart';
 
 class PropertyManagement {
-  //Get Cards List(Used At Search File)
-  static List<String> docIDs = [];
-  // CollectionReference<Map<String, dynamic>> properties =FirebaseFirestore.instance.collection('properties');
-  static Future getDocId() async {
-    //There is a hidden feature here we need to test remove doIDS and see what happen when you navigate
-    docIDs = [];
-    await FirebaseFirestore.instance
-        .collection('properties')
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((document) {
-              docIDs.add(document.reference.id);
-            }));
-  }
-
 //Return DocID data For Each Card
 
   static Future getFlatData(
@@ -38,6 +15,7 @@ class PropertyManagement {
       required List<String> mutliImages,
       String type = "Flat"}) async {
     await FirebaseFirestore.instance.collection('properties').add({
+      'type': type,
       'ownerName': commonUnitPrpoerties[0],
       'ownerNumber': commonUnitPrpoerties[1],
       'addressForUser': commonUnitPrpoerties[2],
@@ -47,11 +25,10 @@ class PropertyManagement {
       'descriptionForUser': commonUnitPrpoerties[6],
       'descriptionForAdmin': commonUnitPrpoerties[7],
       'unitName': commonUnitPrpoerties[8],
-      'OwnerName': commonUnitPrpoerties[9],
-      'paymentMethod': commonUnitPrpoerties[10],
-      'priority': commonUnitPrpoerties[11],
-      'visible': commonUnitPrpoerties[12],
-      'offered': commonUnitPrpoerties[13],
+      'paymentMethod': commonUnitPrpoerties[9],
+      'priority': commonUnitPrpoerties[10],
+      'visible': commonUnitPrpoerties[11],
+      'offered': commonUnitPrpoerties[12],
       'singleImage': singleImage,
       'multiImages': mutliImages,
       'floor': floor,
@@ -88,11 +65,10 @@ class PropertyManagement {
       'descriptionForUser': commonUnitPrpoerties[6],
       'descriptionForAdmin': commonUnitPrpoerties[7],
       'unitName': commonUnitPrpoerties[8],
-      'OwnerName': commonUnitPrpoerties[9],
-      'paymentMethod': commonUnitPrpoerties[10],
-      'priority': commonUnitPrpoerties[11],
-      'visible': commonUnitPrpoerties[12],
-      'offered': commonUnitPrpoerties[13],
+      'paymentMethod': commonUnitPrpoerties[9],
+      'priority': commonUnitPrpoerties[10],
+      'visible': commonUnitPrpoerties[11],
+      'offered': commonUnitPrpoerties[12],
       'singleImage': singleImage,
       'multiImages': mutliImages,
       'noFloors': noFloors,
@@ -219,9 +195,24 @@ class PropertyManagement {
   }
 }
 
-final propertyLengthProvider = FutureProvider((ref) {
-  return PropertyManagement.docIDs.length;
-});
+
+  //Get Cards List(Used At Search File)
+  // static List<String> docIDs = [];
+  // // CollectionReference<Map<String, dynamic>> properties =FirebaseFirestore.instance.collection('properties');
+  // static Future getDocId() async {
+  //   //There is a hidden feature here we need to test remove doIDS and see what happen when you navigate
+  //   docIDs = [];
+  //   await FirebaseFirestore.instance
+  //       .collection('properties')
+  //       .get()
+  //       .then((snapshot) => snapshot.docs.forEach((document) {
+  //             docIDs.add(document.reference.id);
+  //           }));
+  // }
+
+// final propertyLengthProvider = FutureProvider((ref) {
+//   return PropertyManagement.docIDs.length;
+// });
 
 // class PropertyItem extends StatelessWidget {
 //   final String documentID;
