@@ -8,7 +8,6 @@ class Details extends StatelessWidget {
     /*@required this.property */
   });
 
-  
   @override
   Widget build(BuildContext context) {
     final routeArgs =
@@ -23,16 +22,22 @@ class Details extends StatelessWidget {
     final propertyOwnerName = routeArgs['ownerName'] as String;
     final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
     final propertyImages = routeArgs['multiImages'] as List<dynamic>;
-    final propertyFloor = routeArgs['noFloors'] as String;
-    // final propertyType = routeArgs['type'] as String;
-    // final propertyBathrooms = routeArgs['noBathrooms'] as String;
-    // final propertyRooms = routeArgs['noRooms'] as String;
-    // final propertyFurnished = routeArgs['noBathrooms'] as String;
+    // final propertyType = routeArgs['type'];
+
+    final propertyFloor = routeArgs['noFloors'];
+    final propertyBathrooms = routeArgs['noBathrooms'];
+    final propertyRooms = routeArgs['noRooms'];
+    final propertyFurnished = routeArgs['noBathrooms'];
+    final propertyDoublex = routeArgs['doublex'];
+    final propertyFlats = routeArgs['noFlats'];
+    final numberOFAB = routeArgs['theNumberOFAB'];
+    final typeOFActivity = routeArgs['typeOFActivity'];
 
     Color offeredColor;
-    propertyOffered=='For Rent' ? offeredColor = Colors.red : offeredColor = Colors.yellow[700]!;
-    
-    print(propertyDescriptionAdmin);
+    propertyOffered == 'For Rent'
+        ? offeredColor = Colors.red
+        : offeredColor = Colors.yellow[700]!;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -122,7 +127,6 @@ class Details extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -251,26 +255,12 @@ class Details extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 65,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    // image: DecorationImage(
-                                    //   // image: AssetImage(propertyOwnerImage),
-                                    //   fit: BoxFit.cover, //FrontImage
-                                    // ),
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 16,
-                                ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       propertyOwnerName,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -317,35 +307,19 @@ class Details extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              right: 24, left: 24, bottom: 24),
+                            right: 24, left: 24, bottom: 24),
                           child: ListView(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  buildFeature(Icons.hotel, "3 Bedroom"),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  buildFeature(Icons.wc, "2 Bathroom"),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  buildFeature(Icons.kitchen, "1 Kitchen"),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  buildFeature(Icons.house, "Furnished"),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  buildFeature(Icons.stairs, propertyFloor),
-                                ],
-                              ),
+                              buildFeature(Icons.hotel, propertyRooms),
+                              buildFeature(Icons.wc, propertyBathrooms),
+                              buildFeature(Icons.apartment_rounded, propertyFlats),
+                              buildFeature(Icons.house, propertyFurnished),
+                              buildFeature(Icons.stairs, propertyFloor),
+                              buildFeature(Icons.local_activity, typeOFActivity),
+                              buildFeature(Icons.business_outlined, numberOFAB),
                             ],
                           ),
                         ),
@@ -390,7 +364,7 @@ class Details extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            children: buildPhotos(propertyImages) ,
+                            children: buildPhotos(propertyImages),
                           ),
                         ),
                       ),
@@ -406,32 +380,47 @@ class Details extends StatelessWidget {
   }
 
   Widget buildFeature(IconData iconData, String? text) {
-    return Column(
-      children: [
-        Icon(
-          iconData,
-          color: Colors.yellow[700],
-          size: 28,
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          text!,
-          style: TextStyle(
-            color: Colors.grey[500],
-            fontSize: 14,
-          ),
-        ),
-      ],
-    );
+    print('sss $text');
+    if (text != null) {
+      if (text.isNotEmpty) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Icon(
+                  iconData,
+                  color: Colors.yellow[700],
+                  size: 28,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 20,
+            )
+          ],
+        );
+      } else {
+        return const SizedBox();
+      }
+    } else {
+      return const SizedBox();
+    }
   }
-
-  
 
   List<Widget> buildPhotos(List<dynamic> images) {
     List<Widget> list = [];
-    
+
     list.add(
       const SizedBox(
         width: 24,

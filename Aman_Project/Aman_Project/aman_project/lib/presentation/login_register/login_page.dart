@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
           Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home', (route) => false);
+              .pushReplacementNamed('/home');
           // Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushNamed('/verify');
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 10),
                   Text(
                     ('Welcome To Aman'.tr),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 50),
@@ -193,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Center(
                           child: Text(
                             ('Sign In'.tr),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Center(
                           child: Text(
                             ('Register'.tr),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
