@@ -70,6 +70,42 @@ class PropertyWidget extends StatelessWidget {
     this.typeOFActivity,
   });
 
+  selectedProperty(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      '/details',
+      arguments: {
+        'addressAdmin': addressAdmin,
+        'addressUser': addressUser,
+        'area':area,
+        'descriptionAdmin':descriptionAdmin,
+        'descriptionUser':descriptionUser,
+        'unitName':unitName,
+        'offered':offered,
+        'ownerName':ownerName,
+        'ownerNumber':ownerNumber,
+        'paymentMethod':paymentMethod,
+        'priority':priority,
+        'type':type,
+        'visible':visible,
+        'price':price,
+        'singleImage':singleImage,
+        'multiImages':multiImages,
+
+        'doublex':doublex,
+        'floor':floor,
+        'furnished':furnished,
+        'finishing':finishing,
+        'noBarthrooms':noBarthrooms,
+        'noFlats':noFlats,
+        'noFloors':noFloors,
+        'noRooms':noRooms,
+        'theNumberOFAB':theNumberOFAB,
+        'typeOFActivity':typeOFActivity,
+
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (offered == "For Sale") {
@@ -82,7 +118,7 @@ class PropertyWidget extends StatelessWidget {
     return Hero(
       tag: singleImage,
       child: GestureDetector(
-        // onTap: () => selectedProperty(context),
+        onTap: () => selectedProperty(context),
         child: Card(
           margin: const EdgeInsets.only(bottom: 24),
           clipBehavior: Clip.antiAlias,

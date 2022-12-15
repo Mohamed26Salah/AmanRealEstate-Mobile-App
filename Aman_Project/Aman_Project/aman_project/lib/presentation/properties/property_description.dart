@@ -11,31 +11,31 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final propertyFrontImage = routeArgs['frontImage'] as String;
-    final propertyLabel = routeArgs['label'] as String;
-    final propertyName = routeArgs['name'] as String;
-    final propertyLocation = routeArgs['location'] as String;
-    final propertySqm = routeArgs['sqm'] as String;
+    final propertySingleImage = routeArgs['singleImage'] as String;
+    final propertyType = routeArgs['type'] as String;
+    final propertyUnitName = routeArgs['unitName'] as String;
+    final propertyAddressUser = routeArgs['addressUser'] as String;
+    final propertyArea = routeArgs['area'] as String;
     final propertyPrice = routeArgs['price'] as String;
-    final propertyOwnerImage = routeArgs['ownerImage'] as String;
+    // final propertyOwnerImage = routeArgs['ownerImage'] as String;
     final propertyOwnerName = routeArgs['ownerName'] as String;
-    final propertyDescription = routeArgs['description'] as String;
-    final propertyImages = routeArgs['images'] as List<String>;
+    final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
+    final propertyImages = routeArgs['multiImages'] as List<dynamic>;
     final propertyFloor = routeArgs['floor'] as String;
 
-    print(propertyDescription);
+    print(propertyDescriptionAdmin);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Hero(
-              tag: propertyFrontImage,
+              tag: propertySingleImage,
               child: Container(
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(propertyFrontImage),
+                    image: AssetImage(propertySingleImage),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -103,7 +103,7 @@ class Details extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "FOR $propertyLabel",
+                          "FOR $propertyType",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -121,7 +121,7 @@ class Details extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          propertyName,
+                          propertyUnitName,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 32,
@@ -171,7 +171,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              propertyLocation,
+                              propertyAddressUser,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -189,7 +189,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              "$propertySqm sq/m",
+                              "$propertyArea sq/m",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -245,10 +245,10 @@ class Details extends StatelessWidget {
                                   height: 65,
                                   width: 65,
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(propertyOwnerImage),
-                                      fit: BoxFit.cover, //FrontImage
-                                    ),
+                                    // image: DecorationImage(
+                                    //   // image: AssetImage(propertyOwnerImage),
+                                    //   fit: BoxFit.cover, //FrontImage
+                                    // ),
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -355,7 +355,7 @@ class Details extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 24, left: 24, bottom: 24),
                         child: Text(
-                          propertyDescription,
+                          propertyDescriptionAdmin,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[500],
@@ -417,7 +417,7 @@ class Details extends StatelessWidget {
     );
   }
 
-  List<Widget> buildPhotos(List<String> images) {
+  List<Widget> buildPhotos(List<dynamic> images) {
     List<Widget> list = [];
 
     list.add(
