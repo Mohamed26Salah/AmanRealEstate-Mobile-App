@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../constants/globals.dart' as glob;
+import '../../constants/globals.dart' as glob;
 
 void buildLanguageDialog(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();

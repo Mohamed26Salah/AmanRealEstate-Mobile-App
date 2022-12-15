@@ -1,11 +1,11 @@
-import 'package:aman_project/presentation/wish_list.dart';
-import '../theme/theme_manager.dart';
-import '/presentation/edit_profile.dart';
+import 'package:aman_project/presentation/properties/wish_list.dart';
+import '../../theme/theme_manager.dart';
+import '../profile/edit_profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import '../../presentation/search.dart';
+import '../properties/main_page.dart';
 import 'package:flutter/material.dart';
-import 'dashboard/panel_left/panel_left_page.dart';
-import 'rent.dart';
+import '../dashboard/panel_left/panel_left_page.dart';
+import '../rents/rent.dart';
 
 // class navBar extends StatelessWidget {
 //   const navBar({super.key});

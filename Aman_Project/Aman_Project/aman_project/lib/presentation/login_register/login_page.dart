@@ -1,13 +1,13 @@
-import 'package:aman_project/presentation/custom_message.dart';
+import 'package:aman_project/presentation/shared_features/custom_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'custom_text_field.dart';
-import '../models/user_management.dart';
+import '../properties/custom_text_field.dart';
+import '../../models/user_management.dart';
 
-import '../constants/globals.dart' as val;
+import '../../constants/globals.dart' as val;
 
 final _formKey = GlobalKey<FormState>();
 

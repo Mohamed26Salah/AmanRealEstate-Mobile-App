@@ -1,10 +1,10 @@
-import 'package:aman_project/presentation/custom_text_field.dart';
+import 'package:aman_project/presentation/properties/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/user_management.dart';
-import '../theme/theme_manager.dart';
-import 'change_lang.dart';
+import '../../models/user_management.dart';
+import '../../theme/theme_manager.dart';
+import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 ThemeManager _themeManager = ThemeManager();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 // import 'CustomTextField.dart';
-import 'custom_message.dart';
+import '../shared_features/custom_message.dart';
 import 'dropdown.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 
@@ -12,7 +12,7 @@ import 'custom_text_field.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-import '../constants/globals.dart' as val;
+import '../../constants/globals.dart' as val;
 
 //Removed Final
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();

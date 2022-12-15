@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import './rent_Type.dart';
 
 class RentsPage extends StatelessWidget {
   const RentsPage({super.key});
