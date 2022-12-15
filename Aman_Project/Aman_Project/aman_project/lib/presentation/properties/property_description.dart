@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatelessWidget {
@@ -7,12 +8,13 @@ class Details extends StatelessWidget {
     /*@required this.property */
   });
 
+  
   @override
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final propertySingleImage = routeArgs['singleImage'] as String;
-    final propertyType = routeArgs['type'] as String;
+    final propertyOffered = routeArgs['offered'] as String;
     final propertyUnitName = routeArgs['unitName'] as String;
     final propertyAddressUser = routeArgs['addressUser'] as String;
     final propertyArea = routeArgs['area'] as String;
@@ -21,8 +23,15 @@ class Details extends StatelessWidget {
     final propertyOwnerName = routeArgs['ownerName'] as String;
     final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
     final propertyImages = routeArgs['multiImages'] as List<dynamic>;
-    final propertyFloor = routeArgs['floor'] as String;
+    final propertyFloor = routeArgs['noFloors'] as String;
+    // final propertyType = routeArgs['type'] as String;
+    // final propertyBathrooms = routeArgs['noBathrooms'] as String;
+    // final propertyRooms = routeArgs['noRooms'] as String;
+    // final propertyFurnished = routeArgs['noBathrooms'] as String;
 
+    Color offeredColor;
+    propertyOffered=='For Rent' ? offeredColor = Colors.red : offeredColor = Colors.yellow[700]!;
+    
     print(propertyDescriptionAdmin);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -35,7 +44,7 @@ class Details extends StatelessWidget {
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(propertySingleImage),
+                    image: CachedNetworkImageProvider(propertySingleImage),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -92,7 +101,7 @@ class Details extends StatelessWidget {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.yellow[700],
+                        color: offeredColor,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(5),
                         ),
@@ -103,7 +112,7 @@ class Details extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "FOR $propertyType",
+                          propertyOffered,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -113,6 +122,7 @@ class Details extends StatelessWidget {
                       ),
                     ),
                   ),
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -333,7 +343,7 @@ class Details extends StatelessWidget {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  buildFeature(Icons.stairs, "$propertyFloor"),
+                                  buildFeature(Icons.stairs, propertyFloor),
                                 ],
                               ),
                             ],
@@ -380,7 +390,7 @@ class Details extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            children: buildPhotos(propertyImages),
+                            children: buildPhotos(propertyImages) ,
                           ),
                         ),
                       ),
@@ -395,7 +405,7 @@ class Details extends StatelessWidget {
     );
   }
 
-  Widget buildFeature(IconData iconData, String text) {
+  Widget buildFeature(IconData iconData, String? text) {
     return Column(
       children: [
         Icon(
@@ -407,7 +417,7 @@ class Details extends StatelessWidget {
           height: 8,
         ),
         Text(
-          text,
+          text!,
           style: TextStyle(
             color: Colors.grey[500],
             fontSize: 14,
@@ -417,9 +427,11 @@ class Details extends StatelessWidget {
     );
   }
 
+  
+
   List<Widget> buildPhotos(List<dynamic> images) {
     List<Widget> list = [];
-
+    
     list.add(
       const SizedBox(
         width: 24,
@@ -442,7 +454,7 @@ class Details extends StatelessWidget {
             Radius.circular(10),
           ),
           image: DecorationImage(
-            image: AssetImage(url),
+            image: CachedNetworkImageProvider(url),
             fit: BoxFit.cover,
           ),
         ),
