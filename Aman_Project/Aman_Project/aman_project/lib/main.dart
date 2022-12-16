@@ -35,16 +35,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var theme;
   @override
   void dispose() {
     _themeManager.removeListener(themeListener);
     super.dispose();
   }
 
+  var theme;
   @override
   void initState() {
     _themeManager.addListener(themeListener);
+    theme = ThemeMode.light;
     getPref();
     print(_themeManager.themeMode);
     super.initState();
@@ -58,7 +59,12 @@ class _MyAppState extends State<MyApp> {
 
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var theme = preferences.getBool("theme");
+    theme = preferences.getBool("theme");
+    if (theme == true) {
+      theme = ThemeMode.dark;
+    } else {
+      theme = ThemeMode.light;
+    }
     print(theme);
   }
 
@@ -81,8 +87,7 @@ class _MyAppState extends State<MyApp> {
       },
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: _themeManager.themeMode,
-
+      themeMode: theme,
       // home: Search(),
     );
   }

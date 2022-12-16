@@ -4,13 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/globals.dart' as glob;
 
 void buildLanguageDialog(BuildContext context) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('counter', glob.x);
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  await preferences.setInt('counter', glob.x);
   // await prefs.setStringList('name', <String>['ENGLISH', 'العربيه']);
 
   final List locale = [
-    {'name': 'ENGLISH', 'locale': Locale('en', 'US')},
-    {'name': 'العربيه', 'locale': Locale('ar', 'EG')},
+    {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
+    {'name': 'العربيه', 'locale': const Locale('ar', 'EG')},
   ];
   updateLanguage(Locale locale) {
     Get.back();
@@ -21,7 +21,7 @@ void buildLanguageDialog(BuildContext context) async {
       context: context,
       builder: (builder) {
         return AlertDialog(
-          title: Text('Choose Your Language'),
+          title: const Text('Choose Your Language'),
           content: Container(
             width: double.maxFinite,
             child: ListView.separated(
@@ -32,9 +32,9 @@ void buildLanguageDialog(BuildContext context) async {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       child: Text(locale[glob.x]['name']),
-                      onTap: () async {
-                        final int? counter = prefs.getInt('counter');
-                        if (counter != 0) {
+                      onTap: () {
+                        var counter = preferences.getInt('counter');
+                        if (counter == 0) {
                           glob.x = 1;
                           updateLanguage(locale[1]['locale']);
                         } else {
@@ -46,7 +46,7 @@ void buildLanguageDialog(BuildContext context) async {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider(
+                  return const Divider(
                     color: Colors.blue,
                   );
                 },

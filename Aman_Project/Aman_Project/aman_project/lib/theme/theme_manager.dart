@@ -8,8 +8,15 @@ class ThemeManager with ChangeNotifier {
 
   toggleTheme() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var theme = preferences.getBool("theme");
-    _themeMode = theme! ? ThemeMode.dark : ThemeMode.light;
+    // var theme = preferences.getBool("theme");
+    // _themeMode = theme! ? ThemeMode.dark : ThemeMode.light;
+    if (_themeMode == ThemeMode.dark) {
+      _themeMode = ThemeMode.light;
+      preferences.setBool("theme", false);
+    } else {
+      _themeMode = ThemeMode.dark;
+      preferences.setBool("theme", true);
+    }
     notifyListeners();
   }
 }
