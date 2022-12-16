@@ -6,6 +6,7 @@ class UserData {
   final String email;
 
   final String role;
+  int compareTo(UserData other) => email.compareTo(other.email);
 }
 
 Future<List<UserData>> getData2() async {

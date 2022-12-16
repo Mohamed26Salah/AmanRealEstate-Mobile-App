@@ -4,7 +4,7 @@ class MyEditButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final double? width;
   final double height;
-  final Gradient gradient;
+
   final VoidCallback? onPressed;
   final Widget child;
 
@@ -15,7 +15,6 @@ class MyEditButton extends StatelessWidget {
     this.borderRadius,
     this.width,
     this.height = 44.0,
-    this.gradient = const LinearGradient(colors: [Colors.cyan, Colors.indigo]),
   }) : super(key: key);
 
   @override
@@ -25,7 +24,7 @@ class MyEditButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        gradient: gradient,
+        color: Theme.of(context).primaryColor,
         borderRadius: borderRadius,
       ),
       child: ElevatedButton(
