@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:aman_project/presentation/properties/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import '../../models/user_management.dart';
 import '../../theme/theme_manager.dart';
 import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeManager _themeManager = ThemeManager();
 
@@ -18,6 +21,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  var theme;
   final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
   var newPassword = " ";
   final newPasswordController = TextEditingController();
@@ -51,6 +55,17 @@ class _EditProfileState extends State<EditProfile> {
     await FirebaseAuth.instance.signOut();
 
     Navigator.of(context).pushReplacementNamed('/');
+  }
+
+  savePref(bool theme) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool("theme", theme);
+    print(preferences.getBool("theme"));
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    theme = preferences.getBool("theme")!;
   }
 
   bool isObscurePassword = true;
@@ -232,7 +247,9 @@ class _EditProfileState extends State<EditProfile> {
                           value:
                               widget.themeManager!.themeMode == ThemeMode.dark,
                           onChanged: (newValue) {
-                            widget.themeManager!.toggleTheme(newValue);
+                            savePref(newValue);
+
+                            widget.themeManager!.toggleTheme();
                           }),
                       title: Text("Dark Mode".tr),
                     ),

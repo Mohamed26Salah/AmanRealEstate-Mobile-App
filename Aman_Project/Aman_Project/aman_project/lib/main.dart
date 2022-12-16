@@ -15,6 +15,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'presentation/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var theme;
   @override
   void dispose() {
     _themeManager.removeListener(themeListener);
@@ -43,6 +45,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _themeManager.addListener(themeListener);
+    getPref();
+    print(_themeManager.themeMode);
     super.initState();
   }
 
@@ -50,6 +54,12 @@ class _MyAppState extends State<MyApp> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var theme = preferences.getBool("theme");
+    print(theme);
   }
 
   @override
