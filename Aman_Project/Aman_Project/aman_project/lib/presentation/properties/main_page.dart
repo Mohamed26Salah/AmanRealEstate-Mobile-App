@@ -1,17 +1,24 @@
 import 'package:aman_project/presentation/properties/show_card.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'filter.dart';
+import '../../data/repositories/properties_provider.dart';
 
-class Search extends StatefulWidget {
+class Search extends ConsumerStatefulWidget {
   const Search({super.key});
 
   @override
-  State<Search> createState() => _SearchState();
+  ConsumerState<Search> createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchState extends ConsumerState<Search> {
+  final _inputSearchController = TextEditingController();
+  @override
+  void dispose() {
+    _inputSearchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +32,10 @@ class _SearchState extends State<Search> {
             padding:
                 const EdgeInsets.only(top: 48, left: 24, right: 24, bottom: 16),
             child: TextField(
+              controller: _inputSearchController,
+              onChanged: (value) {
+                ref.read(searchInputProivder.notifier).state = value;
+              },
               style: const TextStyle(
                 fontSize: 28,
                 height: 1,
@@ -122,25 +133,26 @@ class _SearchState extends State<Search> {
           ),
           Padding(
             padding:
-                const EdgeInsets.only(right: 24, left: 24, top: 24, bottom: 12),
+                const EdgeInsets.only(right: 24, left: 24, top: 0, bottom: 12),
+            //war top 24
             child: Row(
               children: [
-                Text(
-                  "0",
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                const Text(
-                  "Flat/villa حاجة بايظة في ال ",
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
+                // Text(
+                //   "0",
+                //   style: const TextStyle(
+                //     fontSize: 24,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   width: 8,
+                // ),
+                // const Text(
+                //   "Resutls Found",
+                //   style: TextStyle(
+                //     fontSize: 24,
+                //   ),
+                // ),
               ],
             ),
           ),

@@ -1,9 +1,7 @@
 import 'package:aman_project/models/property_managemnt.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-// import 'CustomTextField.dart';
 import '../shared_features/custom_message.dart';
 import 'dropdown.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
@@ -990,100 +988,94 @@ class AddFormState extends State<AddForm> {
                               listAddTOFirebase.add(priority!);
                               listAddTOFirebase.add(visible!);
                               listAddTOFirebase.add(offered!);
-
                               uploadFile().then((value) {
                                 uploadMutilbeImages().then((value) {
                                   if (userChoice == "Flat") {
                                     PropertyManagement.getFlatData(
-                                            commonUnitPrpoerties:
-                                                listAddTOFirebase,
-                                            floor: _floorController.text,
-                                            doublex: doublex!,
-                                            noRooms: _noOFRoomsController.text,
-                                            noBathrooms:
-                                                _noOFBathroomsController.text,
-                                            finishing: finishing!,
-                                            furnished: furnished!,
-                                            singleImage: singleImageURl,
-                                            mutliImages: downloadUrls)
-                                        .then((value) => {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
-                                              // Navigator.of(context).pop(),
-                                              // Navigator.of(context).pop()
-                                            });
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        floor: _floorController.text,
+                                        doublex: doublex!,
+                                        noRooms: _noOFRoomsController.text,
+                                        noBathrooms:
+                                            _noOFBathroomsController.text,
+                                        finishing: finishing!,
+                                        furnished: furnished!,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                    // .then((value) => {
+                                    //       Navigator.of(context)
+                                    //           .pushReplacementNamed('/home')
+                                    //       // Navigator.of(context).pop(),
+                                    //       // Navigator.of(context).pop()
+                                    //     });
                                   } else if (userChoice == "Villa") {
                                     PropertyManagement.getVillaData(
-                                            commonUnitPrpoerties:
-                                                listAddTOFirebase,
-                                            noFloors:
-                                                _noOFFloorsController.text,
-                                            noRooms: _noOFRoomsController.text,
-                                            noBathrooms:
-                                                _noOFBathroomsController.text,
-                                            finishing: finishing!,
-                                            furnished: furnished!,
-                                            singleImage: singleImageURl,
-                                            mutliImages: downloadUrls)
-                                        .then((value) => {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
-                                              // Navigator.of(context).pop(),
-                                              // Navigator.of(context).pop()
-                                            });
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        noFloors: _noOFFloorsController.text,
+                                        noRooms: _noOFRoomsController.text,
+                                        noBathrooms:
+                                            _noOFBathroomsController.text,
+                                        finishing: finishing!,
+                                        furnished: furnished!,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                    // .then((value) => {
+                                    //       Navigator.of(context)
+                                    //           .pushReplacementNamed('/home')
+                                    //       // Navigator.of(context).pop(),
+                                    //       // Navigator.of(context).pop()
+                                    //     });
                                   } else if (userChoice == "Building") {
                                     PropertyManagement.getBuildingData(
-                                            commonUnitPrpoerties:
-                                                listAddTOFirebase,
-                                            noFlats: _noOFFlatsController.text,
-                                            noFloors:
-                                                _noOFFloorsController.text,
-                                            singleImage: singleImageURl,
-                                            mutliImages: downloadUrls)
-                                        .then((value) => {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
-                                              // Navigator.of(context).pop(),
-                                              // Navigator.of(context).pop()
-                                            });
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        noFlats: _noOFFlatsController.text,
+                                        noFloors: _noOFFloorsController.text,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                    // .then((value) => {
+                                    //       Navigator.of(context)
+                                    //           .pushReplacementNamed('/home')
+                                    //       // Navigator.of(context).pop(),
+                                    //       // Navigator.of(context).pop()
+                                    //     });
                                   } else if (userChoice == "Clinic" ||
                                       userChoice == "Store" ||
                                       userChoice == "Land" ||
                                       userChoice == "Factory" ||
                                       userChoice == "Other") {
                                     PropertyManagement
-                                            .getClinicXStoreXLandXFactoryXOtherData(
-                                                commonUnitPrpoerties:
-                                                    listAddTOFirebase,
-                                                type: userChoice,
-                                                typeOFActivity:
-                                                    _typeOFActivityController
-                                                        .text,
-                                                singleImage: singleImageURl,
-                                                mutliImages: downloadUrls)
-                                        .then((value) => {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
-                                              // Navigator.of(context).pop(),
-                                              // Navigator.of(context).pop()
-                                            });
-                                  } else if (userChoice == "Farm") {
-                                    PropertyManagement.getFarmData(
+                                        .getClinicXStoreXLandXFactoryXOtherData(
                                             commonUnitPrpoerties:
                                                 listAddTOFirebase,
+                                            type: userChoice,
                                             typeOFActivity:
                                                 _typeOFActivityController.text,
-                                            noAB: _noOFABController.text,
                                             singleImage: singleImageURl,
-                                            mutliImages: downloadUrls)
-                                        .then((value) => {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed('/home')
-                                              // Navigator.of(context).pop(),
-                                              // Navigator.of(context).pop()
-                                            });
+                                            mutliImages: downloadUrls);
+                                    // .then((value) => {
+                                    //       Navigator.of(context)
+                                    //           .pushReplacementNamed('/home')
+                                    //       // Navigator.of(context).pop(),
+                                    //       // Navigator.of(context).pop()
+                                    //     });
+                                  } else if (userChoice == "Farm") {
+                                    PropertyManagement.getFarmData(
+                                        commonUnitPrpoerties: listAddTOFirebase,
+                                        typeOFActivity:
+                                            _typeOFActivityController.text,
+                                        noAB: _noOFABController.text,
+                                        singleImage: singleImageURl,
+                                        mutliImages: downloadUrls);
+                                    // .then((value) => {
+                                    //       Navigator.of(context)
+                                    //           .pushReplacementNamed('/home')
+                                    //       // Navigator.of(context).pop(),
+                                    //       // Navigator.of(context).pop()
+                                    //     });
                                   }
                                 });
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/home', (route) => false);
                               });
                             }
                           } else {
