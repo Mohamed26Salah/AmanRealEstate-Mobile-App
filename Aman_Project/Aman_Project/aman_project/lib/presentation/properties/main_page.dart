@@ -21,157 +21,162 @@ class _SearchState extends ConsumerState<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // bottomNavigationBar: const NavBarGR(),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        // bottomNavigationBar: const NavBarGR(),
 
-      backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 48, left: 24, right: 24, bottom: 16),
-            child: TextField(
-              controller: _inputSearchController,
-              onChanged: (value) {
-                ref.read(searchInputProivder.notifier).state = value;
-              },
-              style: const TextStyle(
-                fontSize: 28,
-                height: 1,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyle(
+        backgroundColor: Colors.white,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 48, left: 24, right: 24, bottom: 16),
+              child: TextField(
+                controller: _inputSearchController,
+                autofocus: false,
+                enableInteractiveSelection: false,
+                onChanged: (value) {
+                  ref.read(searchInputProivder.notifier).state = value;
+                },
+                style: const TextStyle(
                   fontSize: 28,
-                  color: Colors.grey[400],
+                  height: 1,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: (Colors.grey[400])!,
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: (Colors.grey[400])!,
-                  ),
-                ),
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: (Colors.grey[400])!,
-                  ),
-                ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Icon(
-                    Icons.search,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(
+                    fontSize: 28,
                     color: Colors.grey[400],
-                    size: 28,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.grey[400],
+                      size: 28,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 32,
-                    child: Stack(
-                      children: [
-                        ListView(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            const SizedBox(
-                              width: 24,
-                            ),
-                            buildFilter("House"),
-                            buildFilter("Price"),
-                            buildFilter("Security"),
-                            buildFilter("Bedrooms"),
-                            buildFilter("Garage"),
-                            buildFilter("Swimming Pool"),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                            width: 28,
-                            decoration: const BoxDecoration(),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 32,
+                      child: Stack(
+                        children: [
+                          ListView(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              const SizedBox(
+                                width: 24,
+                              ),
+                              buildFilter("House"),
+                              buildFilter("Price"),
+                              buildFilter("Security"),
+                              buildFilter("Bedrooms"),
+                              buildFilter("Garage"),
+                              buildFilter("Swimming Pool"),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _showBottomSheet();
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 16, right: 24),
-                    child: Text(
-                      "Filters",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              width: 28,
+                              decoration: const BoxDecoration(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      _showBottomSheet();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 16, right: 24),
+                      child: Text(
+                        "Filters",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(right: 24, left: 24, top: 0, bottom: 12),
-            //war top 24
-            child: Row(
-              children: [
-                // Text(
-                //   "0",
-                //   style: const TextStyle(
-                //     fontSize: 24,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   width: 8,
-                // ),
-                // const Text(
-                //   "Resutls Found",
-                //   style: TextStyle(
-                //     fontSize: 24,
-                //   ),
-                // ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: 24, left: 24, top: 0, bottom: 12),
+              //war top 24
+              child: Row(
+                children: [
+                  // Text(
+                  //   "0",
+                  //   style: const TextStyle(
+                  //     fontSize: 24,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   width: 8,
+                  // ),
+                  // const Text(
+                  //   "Resutls Found",
+                  //   style: TextStyle(
+                  //     fontSize: 24,
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
-          ),
-          const Expanded(
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: ShowCard()),
-          ),
-        ],
-      ),
-      // bottomNavigationBar: NavBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/addForm');
-          // context.push('/addFormUnits');
-        },
+            const Expanded(
+              child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: ShowCard()),
+            ),
+          ],
+        ),
+        // bottomNavigationBar: NavBar(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/addForm');
+            // context.push('/addFormUnits');
+          },
+        ),
       ),
     );
   }

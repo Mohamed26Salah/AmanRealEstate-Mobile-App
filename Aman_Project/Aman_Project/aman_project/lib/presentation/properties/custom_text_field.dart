@@ -28,17 +28,18 @@ class CustomTextField extends StatelessWidget {
       inputFormatters: inputFormatters,
       validator: validator,
       cursorColor: Colors.black,
-
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
         labelStyle: const TextStyle(color: Colors.black),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
           borderRadius: BorderRadius.circular(12),
         ),
         fillColor: Colors.grey[200],

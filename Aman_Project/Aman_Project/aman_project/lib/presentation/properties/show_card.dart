@@ -1,4 +1,5 @@
 import 'package:aman_project/data/repositories/properties_provider.dart';
+import 'package:aman_project/models/property_managemnt.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,31 +13,16 @@ class ShowCard extends ConsumerStatefulWidget {
 }
 
 class _ShowCardState extends ConsumerState<ShowCard> {
-  Stream<QuerySnapshot> properties =
-      FirebaseFirestore.instance.collection('properties').snapshots();
+  // Stream<QuerySnapshot> properties =
+  //     FirebaseFirestore.instance.collection('properties').snapshots();
 
   @override
   Widget build(BuildContext context) {
     String coming = ref.watch(searchInputProivder);
-    // if (coming != "") {
-    //   print("da5l");
-    //   print(coming);
-    //   properties = FirebaseFirestore.instance
-    //       .collection('properties')
-    //       .where("unitName", arrayContains: coming)
-    //       .snapshots();
-    // } else {
-    //   print("da5l ta7t");
-    //   properties =
-    //       FirebaseFirestore.instance.collection('properties').snapshots();
-    // }
     return StreamBuilder<QuerySnapshot>(
       stream: (coming != "")
-          ? FirebaseFirestore.instance
-              .collection('properties')
-              .where("unitName", isGreaterThanOrEqualTo: coming)
-              .snapshots()
-          : FirebaseFirestore.instance.collection('properties').snapshots(),
+          ? PropertyManagement.searchedProperties(coming)
+          : PropertyManagement.allProperties(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Card(

@@ -307,7 +307,7 @@ class Details extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            right: 24, left: 24, bottom: 24),
+                              right: 24, left: 24, bottom: 24),
                           child: ListView(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
@@ -315,10 +315,12 @@ class Details extends StatelessWidget {
                             children: [
                               buildFeature(Icons.hotel, propertyRooms),
                               buildFeature(Icons.wc, propertyBathrooms),
-                              buildFeature(Icons.apartment_rounded, propertyFlats),
+                              buildFeature(
+                                  Icons.apartment_rounded, propertyFlats),
                               buildFeature(Icons.house, propertyFurnished),
                               buildFeature(Icons.stairs, propertyFloor),
-                              buildFeature(Icons.local_activity, typeOFActivity),
+                              buildFeature(
+                                  Icons.local_activity, typeOFActivity),
                               buildFeature(Icons.business_outlined, numberOFAB),
                             ],
                           ),

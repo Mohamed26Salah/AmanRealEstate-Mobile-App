@@ -1,7 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PropertyManagement {
-//Return DocID data For Each Card
+  //Read data for main Page
+  static Stream<QuerySnapshot> allProperties() {
+    return FirebaseFirestore.instance.collection('properties').snapshots();
+  }
+
+  static Stream<QuerySnapshot> searchedProperties(String coming) {
+    return FirebaseFirestore.instance
+        .collection('properties')
+        .where("unitName", isGreaterThanOrEqualTo: coming)
+        .snapshots();
+  }
 
   static Future getFlatData(
       {required List<String> commonUnitPrpoerties,
