@@ -84,6 +84,18 @@ Color? returnColor(String? s) {
       {
         return const Color(0xffff4c14);
       }
+    case "admin":
+      {
+        return Color.fromARGB(255, 228, 20, 255);
+      }
+    case "moderator":
+      {
+        return Color.fromARGB(255, 255, 20, 83);
+      }
+    case "user":
+      {
+        return Color.fromARGB(255, 255, 20, 20);
+      }
     default:
       {
         return const Color.fromARGB(255, 0, 0, 0);

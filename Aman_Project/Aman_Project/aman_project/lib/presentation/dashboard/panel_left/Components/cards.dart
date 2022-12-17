@@ -77,49 +77,49 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
     return Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                Icon(
+                    textDirection: TextDirection.ltr,
+                    IconData(widget.icon, fontFamily: 'MaterialIcons'),
+                    color: Theme.of(context).primaryColor,
+                    size: 100),
+                Column(
                   children: [
-                    Icon(
-                        textDirection: TextDirection.ltr,
-                        IconData(widget.icon, fontFamily: 'MaterialIcons'),
-                        color: Theme.of(context).primaryColor,
-                        size: 50),
-                    Column(
-                      children: [
-                        Text(
-                          count.toString(),
-                          textScaleFactor: 2.5,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: widget.expand
-                                  ? Theme.of(context).focusColor
-                                  : null),
-                        ),
-                        Text(
-                          textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
-                          widget.text,
-                          textScaleFactor: 1,
-                          style: TextStyle(
-                              color: widget.expand
-                                  ? Theme.of(context).focusColor
-                                  : null),
-                        ),
-                      ],
-                    )
+                    Text(
+                      count.toString(),
+                      textScaleFactor: 2.5,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: widget.expand
+                              ? Theme.of(context).focusColor
+                              : null),
+                    ),
+                    Text(
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
+                      widget.text,
+                      textScaleFactor: 1,
+                      style: TextStyle(
+                          color: widget.expand
+                              ? Theme.of(context).focusColor
+                              : null),
+                    ),
                   ],
-                ),
-                SizeTransition(
-                    axisAlignment: 1.0,
-                    sizeFactor: animation!,
-                    child: Visibility(
-                        visible: widget.expand,
-                        child: CategoryChart(DataChart: widget.chartData!))),
+                )
               ],
-            )));
+            ),
+            SizeTransition(
+                axisAlignment: 1.0,
+                sizeFactor: animation!,
+                child: Visibility(
+                    visible: widget.expand,
+                    child: CategoryChart(DataChart: widget.chartData!))),
+          ],
+        ));
   }
 }

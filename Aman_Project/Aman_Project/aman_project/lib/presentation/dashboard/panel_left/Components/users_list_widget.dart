@@ -48,6 +48,7 @@ class _UsersListWidgetState extends State<UsersListWidget> {
         } else if (snapshot.hasData) {
           return Column(
             children: [
+              const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () => showSearch(
                         context: context,

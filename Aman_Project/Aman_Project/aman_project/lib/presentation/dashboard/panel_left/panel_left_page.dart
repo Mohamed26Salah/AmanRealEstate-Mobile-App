@@ -35,13 +35,17 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
               Column(
                 children: [
                   const SizedBox(height: 25),
-                  Wrap(
-                    children: List.generate(1, (index) {
-                      return ChartBlock(
-                          width: MediaQuery.of(context).size.width,
-                          index: index);
-                    }),
-                  ),
+                  Wrap(children: [
+                    ChartBlock(
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ChartBlock(
+                      width: MediaQuery.of(context).size.width,
+                      text: "Users",
+                      icon: 0xeb93,
+                      dataNum: 1,
+                    )
+                  ]),
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 0, bottom: 0, top: 0, left: 0),

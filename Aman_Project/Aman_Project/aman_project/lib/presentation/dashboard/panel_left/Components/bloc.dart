@@ -4,13 +4,17 @@ import 'cards.dart';
 
 class ChartBlock extends StatefulWidget {
   final double width;
-  final int index;
+  final String text;
+  final int icon;
+  final int dataNum;
   bool isExpanded;
   ChartBlock(
       {super.key,
       required this.width,
-      required this.index,
-      this.isExpanded = false});
+      this.isExpanded = false,
+      this.text = "Units",
+      this.icon = 0xf107,
+      this.dataNum = 0});
 
   @override
   State<ChartBlock> createState() => _ChartBlockState();
@@ -21,7 +25,14 @@ class _ChartBlockState extends State<ChartBlock> {
   @override
   void initState() {
     super.initState();
-    chartData = getData();
+    if (widget.dataNum == 0) {
+      chartData = getData();
+    } else if (widget.dataNum == 1) {
+      chartData = getData2();
+    } else if (widget.dataNum == 2) {
+    } else {
+      chartData = getData();
+    }
   }
 
   @override
@@ -49,6 +60,8 @@ class _ChartBlockState extends State<ChartBlock> {
               child: cards1(
                 expand: widget.isExpanded,
                 chartData: snapshot.data,
+                text: widget.text,
+                icon: widget.icon,
               ),
             );
           } else {
