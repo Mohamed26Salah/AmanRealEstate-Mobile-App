@@ -33,6 +33,7 @@ class CustomDropdownButton2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      
       //To avoid long text overflowing.
       isExpanded: true,
       hint: Container(
@@ -75,12 +76,18 @@ class CustomDropdownButton2 extends StatelessWidget {
       dropdownColor: Colors.grey[200],
       borderRadius: BorderRadius.circular(12),
       decoration: InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color.fromARGB(255, 205, 153, 51), width: 1)),
-        focusedBorder: const OutlineInputBorder(
+        enabledBorder:  OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 205, 153, 51),
+            width: 1,
+            
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder:  OutlineInputBorder(
           borderSide:
-              BorderSide(color: Color.fromARGB(255, 205, 153, 51), width: 2),
+              const BorderSide(color: Color.fromARGB(255, 205, 153, 51), width: 2),
+              borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
         fillColor: Colors.grey[200],

@@ -57,7 +57,7 @@ extension extString on String {
 
   bool get isValidName {
     final nameRegExp =
-        new RegExp(r"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$");
+        RegExp(r"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$");
     return nameRegExp.hasMatch(this);
   }
 

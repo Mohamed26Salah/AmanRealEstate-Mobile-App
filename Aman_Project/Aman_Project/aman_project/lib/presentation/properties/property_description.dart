@@ -20,30 +20,6 @@ class _DetailsState extends State<Details> {
     PropertyWidget routeArgs =
         ModalRoute.of(context)!.settings.arguments as PropertyWidget;
 
-    // final propertySingleImage = routeArgs['singleImage'] as String;
-    // final propertyOffered = routeArgs['offered'] as String;
-    // final propertyUnitName = routeArgs['unitName'] as String;
-    // final propertyAddressUser = routeArgs['addressUser'] as String;
-    // final propertyAddressAdmin = routeArgs['addressAdmin'] as String;
-    // final propertyArea = routeArgs['area'] as String;
-    // final propertyPrice = routeArgs['price'] as String;
-    // final propertyOwnerName = routeArgs['ownerName'] as String;
-    // final propertyOwnerNumber = routeArgs['ownerNumber'] as String;
-    // final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
-    // final propertyDescriptionUser= routeArgs['descriptionUser'] as String;
-    // final propertyImages = routeArgs['multiImages'] as List<dynamic>;
-    // final propertyPaymentMethod = routeArgs['paymentMethod'] as String;
-    // // final propertyType = routeArgs['type'];
-
-    // final propertyFloor = routeArgs['noFloors'];
-    // final propertyBathrooms = routeArgs['noBathrooms'];
-    // final propertyRooms = routeArgs['noRooms'];
-    // final propertyFurnished = routeArgs['noBathrooms'];
-    // final propertyDoublex = routeArgs['doublex'];
-    // final propertyFlats = routeArgs['noFlats'];
-    // final numberOFAB = routeArgs['theNumberOFAB'];
-    // final typeOFActivity = routeArgs['typeOFActivity'];
-
     Color offeredColor;
     routeArgs.offered == 'For Rent'
         ? offeredColor = Colors.red
