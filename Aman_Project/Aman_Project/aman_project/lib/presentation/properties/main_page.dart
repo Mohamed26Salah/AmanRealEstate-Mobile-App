@@ -32,12 +32,15 @@ class _SearchState extends ConsumerState<Search> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  top: 48, left: 24, right: 24, bottom: 16),
+                  top: 48, left: 24, right: 24, bottom: 0),
               child: TextField(
                 controller: _inputSearchController,
                 autofocus: false,
                 enableInteractiveSelection: false,
-                onChanged: (value) {
+                // onChanged: (value) {
+                //   ref.read(searchInputProivder.notifier).state = value;
+                // },
+                onSubmitted: (value) {
                   ref.read(searchInputProivder.notifier).state = value;
                 },
                 style: const TextStyle(
@@ -69,80 +72,39 @@ class _SearchState extends ConsumerState<Search> {
                   ),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.only(left: 16),
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.grey[400],
-                      size: 28,
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween, // added line
+                      mainAxisSize: MainAxisSize.min, // added li
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.grey[400],
+                          size: 28,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _showBottomSheet();
+                            },
+                            icon: Icon(
+                              Icons.menu,
+                              color: Theme.of(context).primaryColor,
+                              size: 28,
+                            )),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 32,
-                      child: Stack(
-                        children: [
-                          ListView(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              const SizedBox(
-                                width: 24,
-                              ),
-                              buildFilter("House"),
-                              buildFilter("Price"),
-                              buildFilter("Security"),
-                              buildFilter("Bedrooms"),
-                              buildFilter("Garage"),
-                              buildFilter("Swimming Pool"),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                            ],
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              width: 28,
-                              decoration: const BoxDecoration(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _showBottomSheet();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 16, right: 24),
-                      child: Text(
-                        "Filters",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.only(
-                  right: 24, left: 24, top: 0, bottom: 12),
+                  right: 24, left: 24, top: 10, bottom: 12),
               //war top 24
               child: Row(
                 children: [
                   // Text(
-                  //   "0",
+                  //   ref.watch(resultsCount).toString(),
                   //   style: const TextStyle(
                   //     fontSize: 24,
                   //     fontWeight: FontWeight.bold,
@@ -225,19 +187,19 @@ class _SearchState extends ConsumerState<Search> {
   }
 }
 
-class NumberOFResults extends StatelessWidget {
-  const NumberOFResults({
-    Key? key,
-  }) : super(key: key);
+// class NumberOFResults extends StatelessWidget {
+//   const NumberOFResults({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "0",
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text(
+//       "0",
+//       style: TextStyle(
+//         fontSize: 24,
+//         fontWeight: FontWeight.bold,
+//       ),
+//     );
+//   }
+// }

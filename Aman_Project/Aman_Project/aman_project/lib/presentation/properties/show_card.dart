@@ -16,13 +16,42 @@ class _ShowCardState extends ConsumerState<ShowCard> {
   // Stream<QuerySnapshot> properties =
   //     FirebaseFirestore.instance.collection('properties').snapshots();
 
+  CollectionReference<Map<String, dynamic>> propertiesFiltered =
+      FirebaseFirestore.instance.collection('properties');
+
+  Query<Map<String, dynamic>>? returnedQueryFilter;
+
   @override
   Widget build(BuildContext context) {
+    if (ref.watch(filterTypeProivder) != "") {
+      returnedQueryFilter = PropertyManagement.typeFilter(
+          propertiesFiltered, ref.watch(filterTypeProivder));
+    }
+    if (ref.watch(filterRoomProivder) != "") {
+      returnedQueryFilter = PropertyManagement.roomFilter(
+          propertiesFiltered, ref.watch(filterRoomProivder));
+    }
+    if (ref.watch(filterBathroomProivder) != "") {
+      returnedQueryFilter = PropertyManagement.bathroomFilter(
+          propertiesFiltered, ref.watch(filterBathroomProivder));
+    }
+    if (ref.watch(filterPriceProivder).start != 15000 &&
+        ref.watch(filterPriceProivder).end != 1000000) {
+      returnedQueryFilter = PropertyManagement.priceRangeFilter(
+          propertiesFiltered, ref.watch(filterPriceProivder));
+    }
+
     String coming = ref.watch(searchInputProivder);
     return StreamBuilder<QuerySnapshot>(
       stream: (coming != "")
           ? PropertyManagement.searchedProperties(coming)
-          : PropertyManagement.allProperties(),
+          : (ref.watch(filterTypeProivder) != "" ||
+                  ref.watch(filterRoomProivder) != "" ||
+                  ref.watch(filterBathroomProivder) != "" ||
+                  ref.watch(filterPriceProivder).start != 15000 &&
+                      ref.watch(filterPriceProivder).end != 1000000)
+              ? returnedQueryFilter?.snapshots()
+              : PropertyManagement.allProperties(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Card(
@@ -53,9 +82,11 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           );
         }
         final data = snapshot.requireData;
+
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
+            // ref.read(resultsCount.notifier).state = data.size;
             return PropertyWidget(
               addressAdmin: data.docs[index]['addressForAdmin'],
               addressUser: data.docs[index]['addressForUser'],

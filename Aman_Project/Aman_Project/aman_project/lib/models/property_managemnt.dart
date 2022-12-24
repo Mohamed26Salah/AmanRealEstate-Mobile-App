@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class PropertyManagement {
   //Read data for main Page
@@ -11,6 +12,36 @@ class PropertyManagement {
         .collection('properties')
         .where("unitName", isGreaterThanOrEqualTo: coming)
         .snapshots();
+  }
+
+  static Query<Map<String, dynamic>> roomFilter(
+      CollectionReference<Map<String, dynamic>> properties, String roomFilter) {
+    if (roomFilter == "Any") {
+      return properties.where("noRooms", isNotEqualTo: "");
+    }
+    return properties.where("noRooms", isEqualTo: roomFilter);
+  }
+
+  static Query<Map<String, dynamic>> bathroomFilter(
+      CollectionReference<Map<String, dynamic>> properties,
+      String bathroomFilter) {
+    if (bathroomFilter == "Any") {
+      return properties.where("noBathrooms", isNotEqualTo: "");
+    }
+    return properties.where("noBathrooms", isEqualTo: bathroomFilter);
+  }
+
+  static Query<Map<String, dynamic>> typeFilter(
+      CollectionReference<Map<String, dynamic>> properties, String typeFilter) {
+    return properties.where("type", isEqualTo: typeFilter);
+  }
+
+  static Query<Map<String, dynamic>> priceRangeFilter(
+      CollectionReference<Map<String, dynamic>> properties,
+      RangeValues priceFilter) {
+    return properties
+        .where("price", isGreaterThanOrEqualTo: priceFilter.start)
+        .where("price", isLessThanOrEqualTo: priceFilter.end);
   }
 
   static Future getFlatData(

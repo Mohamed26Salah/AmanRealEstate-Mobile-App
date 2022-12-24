@@ -1,6 +1,7 @@
+import 'dart:ffi';
 
-
-import 'package:aman_project/presentation/shared_features/custom_text_field.dart';
+import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/presentation/properties/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -249,7 +250,7 @@ class _EditProfileState extends State<EditProfile> {
                           onChanged: (newValue) {
                             // savePref(newValue);
 
-                            widget.themeManager!.toggleTheme();
+                            // widget.themeManager!.toggleTheme();
                           }),
                       title: Text("Dark Mode".tr),
                     ),
