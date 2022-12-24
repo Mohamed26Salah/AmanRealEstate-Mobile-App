@@ -6,6 +6,7 @@ class Rents {
   double? rentPrice;
   bool? furnished;
   int? floor;
+  
   String? TOR;
   String? TOREND;
   String? Start_OF_Rent;

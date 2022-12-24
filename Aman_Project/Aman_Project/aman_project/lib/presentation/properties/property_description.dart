@@ -1,7 +1,9 @@
+import 'package:aman_project/presentation/properties/edit_property.dart';
+import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class Details extends StatelessWidget {
+class Details extends StatefulWidget {
   // final Property? property;
   const Details({
     super.key,
@@ -9,32 +11,41 @@ class Details extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final propertySingleImage = routeArgs['singleImage'] as String;
-    final propertyOffered = routeArgs['offered'] as String;
-    final propertyUnitName = routeArgs['unitName'] as String;
-    final propertyAddressUser = routeArgs['addressUser'] as String;
-    final propertyArea = routeArgs['area'] as String;
-    final propertyPrice = routeArgs['price'] as String;
-    // final propertyOwnerImage = routeArgs['ownerImage'] as String;
-    final propertyOwnerName = routeArgs['ownerName'] as String;
-    final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
-    final propertyImages = routeArgs['multiImages'] as List<dynamic>;
-    // final propertyType = routeArgs['type'];
+  State<Details> createState() => _DetailsState();
+}
 
-    final propertyFloor = routeArgs['noFloors'];
-    final propertyBathrooms = routeArgs['noBathrooms'];
-    final propertyRooms = routeArgs['noRooms'];
-    final propertyFurnished = routeArgs['noBathrooms'];
-    final propertyDoublex = routeArgs['doublex'];
-    final propertyFlats = routeArgs['noFlats'];
-    final numberOFAB = routeArgs['theNumberOFAB'];
-    final typeOFActivity = routeArgs['typeOFActivity'];
+class _DetailsState extends State<Details> {
+  @override
+  Widget build(BuildContext context) {
+    PropertyWidget routeArgs =
+        ModalRoute.of(context)!.settings.arguments as PropertyWidget;
+
+    // final propertySingleImage = routeArgs['singleImage'] as String;
+    // final propertyOffered = routeArgs['offered'] as String;
+    // final propertyUnitName = routeArgs['unitName'] as String;
+    // final propertyAddressUser = routeArgs['addressUser'] as String;
+    // final propertyAddressAdmin = routeArgs['addressAdmin'] as String;
+    // final propertyArea = routeArgs['area'] as String;
+    // final propertyPrice = routeArgs['price'] as String;
+    // final propertyOwnerName = routeArgs['ownerName'] as String;
+    // final propertyOwnerNumber = routeArgs['ownerNumber'] as String;
+    // final propertyDescriptionAdmin = routeArgs['descriptionAdmin'] as String;
+    // final propertyDescriptionUser= routeArgs['descriptionUser'] as String;
+    // final propertyImages = routeArgs['multiImages'] as List<dynamic>;
+    // final propertyPaymentMethod = routeArgs['paymentMethod'] as String;
+    // // final propertyType = routeArgs['type'];
+
+    // final propertyFloor = routeArgs['noFloors'];
+    // final propertyBathrooms = routeArgs['noBathrooms'];
+    // final propertyRooms = routeArgs['noRooms'];
+    // final propertyFurnished = routeArgs['noBathrooms'];
+    // final propertyDoublex = routeArgs['doublex'];
+    // final propertyFlats = routeArgs['noFlats'];
+    // final numberOFAB = routeArgs['theNumberOFAB'];
+    // final typeOFActivity = routeArgs['typeOFActivity'];
 
     Color offeredColor;
-    propertyOffered == 'For Rent'
+    routeArgs.offered == 'For Rent'
         ? offeredColor = Colors.red
         : offeredColor = Colors.yellow[700]!;
 
@@ -44,12 +55,12 @@ class Details extends StatelessWidget {
         body: Stack(
           children: [
             Hero(
-              tag: propertySingleImage,
+              tag: routeArgs.singleImage,
               child: Container(
                 height: size.height * 0.5,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider(propertySingleImage),
+                    image: CachedNetworkImageProvider(routeArgs.singleImage),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -117,7 +128,7 @@ class Details extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          propertyOffered,
+                          routeArgs.offered,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -135,7 +146,7 @@ class Details extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          propertyUnitName,
+                          routeArgs.unitName,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 32,
@@ -185,7 +196,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              propertyAddressUser,
+                              routeArgs.addressUser,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -203,7 +214,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              "$propertyArea sq/m",
+                              "${routeArgs.area} sq/m}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -217,7 +228,7 @@ class Details extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              r"$" + propertyPrice,
+                              r"$" + routeArgs.price,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -259,7 +270,7 @@ class Details extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      propertyOwnerName,
+                                      routeArgs.ownerName,
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -306,22 +317,23 @@ class Details extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 24, left: 24, bottom: 24),
+                          padding: const EdgeInsets.only(right: 24, left: 24),
                           child: ListView(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             children: [
-                              buildFeature(Icons.hotel, propertyRooms),
-                              buildFeature(Icons.wc, propertyBathrooms),
+                              buildFeature(Icons.hotel, routeArgs.noRooms),
+                              buildFeature(Icons.bathtub_outlined,
+                                  routeArgs.noBarthrooms),
                               buildFeature(
-                                  Icons.apartment_rounded, propertyFlats),
-                              buildFeature(Icons.house, propertyFurnished),
-                              buildFeature(Icons.stairs, propertyFloor),
-                              buildFeature(
-                                  Icons.local_activity, typeOFActivity),
-                              buildFeature(Icons.business_outlined, numberOFAB),
+                                  Icons.apartment_rounded, routeArgs.noFlats),
+                              buildFeature(Icons.house, routeArgs.furnished),
+                              buildFeature(Icons.stairs, routeArgs.floor),
+                              buildFeature(Icons.local_activity,
+                                  routeArgs.typeOFActivity),
+                              buildFeature(Icons.business_outlined,
+                                  routeArgs.theNumberOFAB),
                             ],
                           ),
                         ),
@@ -341,7 +353,7 @@ class Details extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 24, left: 24, bottom: 24),
                         child: Text(
-                          propertyDescriptionAdmin,
+                          routeArgs.addressUser,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[500],
@@ -366,7 +378,7 @@ class Details extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            children: buildPhotos(propertyImages),
+                            children: buildPhotos(routeArgs.multiImages),
                           ),
                         ),
                       ),
@@ -377,12 +389,19 @@ class Details extends StatelessWidget {
             ),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.edit),
+          onPressed: () {
+            _showEditBottomSheet(context, routeArgs);
+          },
+        ),
       ),
     );
   }
 
   Widget buildFeature(IconData iconData, String? text) {
-    print('sss $text');
     if (text != null) {
       if (text.isNotEmpty) {
         return Row(
@@ -451,5 +470,25 @@ class Details extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showEditBottomSheet(BuildContext context, PropertyWidget routeArgs) {
+    showModalBottomSheet<dynamic>(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.90,
+            child: EditProperty(
+              routeArgs: routeArgs,
+            ),
+          );
+        });
   }
 }

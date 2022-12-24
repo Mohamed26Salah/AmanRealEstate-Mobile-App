@@ -6,7 +6,7 @@ import '/models/users_list_data.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 
-import 'Components/bloc.dart';
+import 'Components/block.dart';
 import 'Components/users_list_widget.dart';
 
 class PanelLeftPage extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // final userRoleProvider = FutureProvider((ref) async {
 //   return await UserHelper().getUser();
@@ -71,37 +72,35 @@ class PropertyWidget extends StatelessWidget {
   });
 
   selectedProperty(BuildContext context) {
-    Navigator.of(context).pushNamed(
-      '/details',
-      arguments: {
-        'addressAdmin': addressAdmin,
-        'addressUser': addressUser,
-        'area': area,
-        'descriptionAdmin': descriptionAdmin,
-        'descriptionUser': descriptionUser,
-        'unitName': unitName,
-        'offered': offered,
-        'ownerName': ownerName,
-        'ownerNumber': ownerNumber,
-        'paymentMethod': paymentMethod,
-        'priority': priority,
-        'type': type,
-        'visible': visible,
-        'price': price,
-        'singleImage': singleImage,
-        'multiImages': multiImages,
-        'doublex': doublex,
-        'floor': floor,
-        'furnished': furnished,
-        'finishing': finishing,
-        'noBarthrooms': noBarthrooms,
-        'noFlats': noFlats,
-        'noFloors': noFloors,
-        'noRooms': noRooms,
-        'theNumberOFAB': theNumberOFAB,
-        'typeOFActivity': typeOFActivity,
-      },
+    PropertyWidget property = PropertyWidget(
+      addressAdmin: addressAdmin,
+      addressUser: addressUser,
+      area: area,
+      descriptionAdmin: descriptionAdmin,
+      descriptionUser: descriptionUser,
+      unitName: unitName,
+      offered: offered,
+      ownerName: ownerName,
+      ownerNumber: ownerNumber,
+      paymentMethod: paymentMethod,
+      priority: priority,
+      type: type,
+      visible: visible,
+      price: price,
+      singleImage: singleImage,
+      multiImages: multiImages,
+      doublex:doublex,
+      floor:floor,
+      furnished:furnished,
+      finishing:finishing,
+      noBarthrooms:noBarthrooms,
+      noFlats:noFlats,
+      noFloors:noFloors,
+      noRooms:noRooms,
+      theNumberOFAB:theNumberOFAB,
+      typeOFActivity:typeOFActivity,
     );
+    Navigator.of(context).pushNamed('/details', arguments: property);
   }
 
   @override
