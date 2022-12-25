@@ -26,6 +26,124 @@ class AddFormState extends State<AddForm> {
   //List For add
   List<dynamic> listAddTOFirebase = [];
   String userChoice = "";
+
+  var flatButton1 = false;
+  var villaButton2 = false;
+  var buildingButton3 = false;
+  var storeButton4 = false;
+  var clinicButton5 = false;
+  var farmButton6 = false;
+  var factoryButton7 = false;
+  var landButton8 = false;
+  var otherButton9 = false;
+  // ChoiceButtons
+  void updateButtonsUIType(id) {
+    flatButton1 = false;
+    villaButton2 = false;
+    buildingButton3 = false;
+    storeButton4 = false;
+    clinicButton5 = false;
+    farmButton6 = false;
+    factoryButton7 = false;
+    landButton8 = false;
+    otherButton9 = false;
+    if (id == 1) {
+      userChoice = "Flat";
+      setState(() {
+        flatButton1 = true;
+        visibleFloor = true;
+        visibleDoublex = true;
+        visibleNoRooms = true;
+        visibleNOBathrooms = true;
+        visibleFinishing = true;
+        visibleFurnished = true;
+        //
+        visibleNOFloors = false;
+        visibleTypeOFAcitivity = false;
+        visibleNoAB = false;
+        visibleNOFlats = false;
+      });
+    } else if (id == 2) {
+      userChoice = "Villa";
+      setState(() {
+        villaButton2 = true;
+        visibleNoRooms = true;
+        visibleNOBathrooms = true;
+        visibleFinishing = true;
+        visibleFurnished = true;
+        visibleNOFloors = true;
+        //
+        visibleTypeOFAcitivity = false;
+        visibleNoAB = false;
+        visibleNOFlats = false;
+        visibleDoublex = false;
+        visibleFloor = false;
+      });
+    } else if (id == 3) {
+      userChoice = "Building";
+      setState(() {
+        buildingButton3 = true;
+        visibleNOFloors = true;
+        visibleNOFlats = true;
+        //
+        visibleFloor = false;
+        visibleDoublex = false;
+        visibleNoRooms = false;
+        visibleNOBathrooms = false;
+        visibleFinishing = false;
+        visibleFurnished = false;
+        visibleTypeOFAcitivity = false;
+        visibleNoAB = false;
+      });
+    } else if (id == 4 || id == 5 || id == 7 || id == 8 || id == 9) {
+      if (id == 4) {
+        storeButton4 = true;
+        userChoice = "Store";
+      } else if (id == 5) {
+        clinicButton5 = true;
+        userChoice = "Clinic";
+      } else if (id == 7) {
+        factoryButton7 = true;
+        userChoice = "Factory";
+      } else if (id == 8) {
+        landButton8 = true;
+        userChoice = "Land";
+      } else if (id == 9) {
+        otherButton9 = true;
+        userChoice = "Other";
+      }
+      setState(() {
+        visibleTypeOFAcitivity = true;
+        //
+        visibleNOFloors = false;
+        visibleNOFlats = false;
+        visibleFloor = false;
+        visibleDoublex = false;
+        visibleNoRooms = false;
+        visibleNOBathrooms = false;
+        visibleFinishing = false;
+        visibleFurnished = false;
+        visibleNoAB = false;
+      });
+    } else if (id == 6) {
+      userChoice = "Farm";
+      setState(() {
+        farmButton6 = true;
+        visibleTypeOFAcitivity = true;
+        visibleNoAB = true;
+        //
+        visibleNOFloors = false;
+        visibleNOFlats = false;
+        visibleFloor = false;
+        visibleDoublex = false;
+        visibleNoRooms = false;
+        visibleNOBathrooms = false;
+        visibleFinishing = false;
+        visibleFurnished = false;
+      });
+    }
+  }
+
   //Resposbile of Visibility of widgets
   bool visibleFinishing = false;
   bool visibleDoublex = false;
@@ -66,6 +184,7 @@ class AddFormState extends State<AddForm> {
   File? myImage;
   late String singleImageURl;
   List<File> images = [];
+
   @override
   void dispose() {
     _ownerNameController.dispose();
@@ -123,127 +242,59 @@ class AddFormState extends State<AddForm> {
                       ),
                     ],
                   ),
-                  Text(
-                    "Select The type",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Select The type",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
-                  CustomRadioButton(
-                    elevation: 20,
-                    absoluteZeroSpacing: false,
-                    unSelectedColor: const Color.fromARGB(255, 0, 0, 0),
-                    buttonLables: [
-                      'Flat'.tr,
-                      'Villa'.tr,
-                      'Building'.tr,
-                      'Clinic'.tr,
-                      'Store'.tr,
-                      'Farm'.tr,
-                      'Factory'.tr,
-                      'Land'.tr,
-                      'Other'.tr,
-                    ],
-                    buttonValues: const [
-                      "Flat",
-                      "Villa",
-                      "Building",
-                      "Clinic",
-                      "Store",
-                      "Farm",
-                      "Factory",
-                      "Land",
-                      "Other",
-                    ],
-                    buttonTextStyle: const ButtonTextStyle(
-                        selectedColor: Colors.black,
-                        unSelectedColor: Color.fromARGB(255, 205, 153, 51),
-                        textStyle: TextStyle(fontSize: 16)),
-                    radioButtonValue: (value) {
-                      if (value == "Flat") {
-                        setState(() {
-                          visibleFloor = true;
-                          visibleDoublex = true;
-                          visibleNoRooms = true;
-                          visibleNOBathrooms = true;
-                          visibleFinishing = true;
-                          visibleFurnished = true;
-                          //
-                          visibleNOFloors = false;
-                          visibleTypeOFAcitivity = false;
-                          visibleNoAB = false;
-                          visibleNOFlats = false;
-                        });
-                      } else if (value == "Villa") {
-                        setState(() {
-                          visibleNoRooms = true;
-                          visibleNOBathrooms = true;
-                          visibleFinishing = true;
-                          visibleFurnished = true;
-                          visibleNOFloors = true;
-                          //
-                          visibleTypeOFAcitivity = false;
-                          visibleNoAB = false;
-                          visibleNOFlats = false;
-                          visibleDoublex = false;
-                          visibleFloor = false;
-                        });
-                      } else if (value == "Building") {
-                        setState(() {
-                          visibleNOFloors = true;
-                          visibleNOFlats = true;
-                          //
-                          visibleFloor = false;
-                          visibleDoublex = false;
-                          visibleNoRooms = false;
-                          visibleNOBathrooms = false;
-                          visibleFinishing = false;
-                          visibleFurnished = false;
-                          visibleTypeOFAcitivity = false;
-                          visibleNoAB = false;
-                        });
-                      } else if (value == "Clinic" ||
-                          value == "Store" ||
-                          value == "Land" ||
-                          value == "Farm" ||
-                          value == "Other") {
-                        setState(() {
-                          visibleTypeOFAcitivity = true;
-                          //
-                          visibleNOFloors = false;
-                          visibleNOFlats = false;
-                          visibleFloor = false;
-                          visibleDoublex = false;
-                          visibleNoRooms = false;
-                          visibleNOBathrooms = false;
-                          visibleFinishing = false;
-                          visibleFurnished = false;
-                          visibleNoAB = false;
-                        });
-                      } else if (value == "Farm") {
-                        setState(() {
-                          visibleTypeOFAcitivity = true;
-                          visibleNoAB = true;
-                          //
-                          visibleNOFloors = false;
-                          visibleNOFlats = false;
-                          visibleFloor = false;
-                          visibleDoublex = false;
-                          visibleNoRooms = false;
-                          visibleNOBathrooms = false;
-                          visibleFinishing = false;
-                          visibleFurnished = false;
-                        });
-                      }
 
-                      userChoice = value;
-                    },
-                    selectedColor: const Color.fromARGB(255, 205, 153, 51),
-                    selectedBorderColor: const Color.fromARGB(255, 0, 0, 0),
-                    unSelectedBorderColor:
-                        const Color.fromARGB(255, 205, 153, 51),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 40,
+                          child: Stack(
+                            children: [
+                              ListView(
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  buildOption("Flat", flatButton1, 1),
+                                  buildOption("Villa", villaButton2, 2),
+                                  buildOption("Building", buildingButton3, 3),
+                                  buildOption("Store", storeButton4, 4),
+                                  buildOption("Clinic", clinicButton5, 5),
+                                  buildOption("Farm", farmButton6, 6),
+                                  buildOption("Factory", factoryButton7, 7),
+                                  buildOption("Land", landButton8, 8),
+                                  buildOption("Other", otherButton9, 9),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  width: 28,
+                                  decoration: const BoxDecoration(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+
                   //Owner Name
                   //Common
-
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 20, left: 15, right: 15, bottom: 10),
@@ -982,89 +1033,23 @@ class AddFormState extends State<AddForm> {
                               listAddTOFirebase.add(offered!);
                               uploadFile().then((value) {
                                 uploadMutilbeImages().then((value) {
-                                  if (userChoice == "Flat") {
-                                    PropertyManagement.getFlatData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        floor: _floorController.text,
-                                        doublex: doublex!,
-                                        noRooms: _noOFRoomsController.text,
-                                        noBathrooms:
-                                            _noOFBathroomsController.text,
-                                        finishing: finishing!,
-                                        furnished: furnished!,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
-                                    // .then((value) => {
-                                    //       Navigator.of(context)
-                                    //           .pushReplacementNamed('/home')
-                                    //       // Navigator.of(context).pop(),
-                                    //       // Navigator.of(context).pop()
-                                    //     });
-                                  } else if (userChoice == "Villa") {
-                                    PropertyManagement.getVillaData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        noFloors: _noOFFloorsController.text,
-                                        noRooms: _noOFRoomsController.text,
-                                        noBathrooms:
-                                            _noOFBathroomsController.text,
-                                        finishing: finishing!,
-                                        furnished: furnished!,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
-                                    // .then((value) => {
-                                    //       Navigator.of(context)
-                                    //           .pushReplacementNamed('/home')
-                                    //       // Navigator.of(context).pop(),
-                                    //       // Navigator.of(context).pop()
-                                    //     });
-                                  } else if (userChoice == "Building") {
-                                    PropertyManagement.getBuildingData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        noFlats: _noOFFlatsController.text,
-                                        noFloors: _noOFFloorsController.text,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
-                                    // .then((value) => {
-                                    //       Navigator.of(context)
-                                    //           .pushReplacementNamed('/home')
-                                    //       // Navigator.of(context).pop(),
-                                    //       // Navigator.of(context).pop()
-                                    //     });
-                                  } else if (userChoice == "Clinic" ||
-                                      userChoice == "Store" ||
-                                      userChoice == "Land" ||
-                                      userChoice == "Factory" ||
-                                      userChoice == "Other") {
-                                    PropertyManagement
-                                        .getClinicXStoreXLandXFactoryXOtherData(
-                                            commonUnitPrpoerties:
-                                                listAddTOFirebase,
-                                            type: userChoice,
-                                            typeOFActivity:
-                                                _typeOFActivityController.text,
-                                            singleImage: singleImageURl,
-                                            mutliImages: downloadUrls);
-                                    // .then((value) => {
-                                    //       Navigator.of(context)
-                                    //           .pushReplacementNamed('/home')
-                                    //       // Navigator.of(context).pop(),
-                                    //       // Navigator.of(context).pop()
-                                    //     });
-                                  } else if (userChoice == "Farm") {
-                                    PropertyManagement.getFarmData(
-                                        commonUnitPrpoerties: listAddTOFirebase,
-                                        typeOFActivity:
-                                            _typeOFActivityController.text,
-                                        noAB: _noOFABController.text,
-                                        singleImage: singleImageURl,
-                                        mutliImages: downloadUrls);
-                                    // .then((value) => {
-                                    //       Navigator.of(context)
-                                    //           .pushReplacementNamed('/home')
-                                    //       // Navigator.of(context).pop(),
-                                    //       // Navigator.of(context).pop()
-                                    //     });
-                                  }
+                                  PropertyManagement.addPropertyData(
+                                    type: userChoice,
+                                    commonUnitPrpoerties: listAddTOFirebase,
+                                    singleImage: singleImageURl,
+                                    mutliImages: downloadUrls,
+                                    floor: _floorController.text,
+                                    doublex: doublex ?? "",
+                                    noRooms: _noOFRoomsController.text,
+                                    noBathrooms: _noOFBathroomsController.text,
+                                    finishing: finishing ?? "",
+                                    furnished: furnished ?? "",
+                                    noFloors: _noOFFloorsController.text,
+                                    noFlats: _noOFFlatsController.text,
+                                    typeOFActivity:
+                                        _typeOFActivityController.text,
+                                    noAB: _noOFABController.text,
+                                  );
                                 });
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     '/home', (route) => false);
@@ -1233,5 +1218,40 @@ class AddFormState extends State<AddForm> {
     final taskSnapshot = await uploadTask.whenComplete(() => null);
     String url = await taskSnapshot.ref.getDownloadURL();
     return url;
+  }
+
+  Widget buildOption(String text, bool selected, int id) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: GestureDetector(
+        onTap: () {
+          updateButtonsUIType(id);
+        },
+        child: Container(
+          height: 45,
+          width: 65,
+          decoration: BoxDecoration(
+              color: selected
+                  ? Theme.of(context).primaryColor
+                  : Colors.transparent,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+              border: Border.all(
+                width: selected ? 0 : 1,
+                color: Colors.grey,
+              )),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: selected ? Colors.white : Colors.black,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
