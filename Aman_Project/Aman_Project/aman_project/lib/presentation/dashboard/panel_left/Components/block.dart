@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../../../models/category_chart_data.dart';
 import 'cards.dart';
@@ -35,6 +37,7 @@ class _ChartBlockState extends State<ChartBlock> {
     }
   }
 
+  bool onend = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,6 +45,9 @@ class _ChartBlockState extends State<ChartBlock> {
         setState(() {
           //changing the current expandableState
           widget.isExpanded = !widget.isExpanded;
+          if (!widget.isExpanded) {
+            onend = false;
+          }
         });
       },
       child: FutureBuilder(
@@ -53,19 +59,24 @@ class _ChartBlockState extends State<ChartBlock> {
             return AnimatedContainer(
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 400),
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               width: !widget.isExpanded ? widget.width * 0.4 : widget.width * 1,
               height:
                   !widget.isExpanded ? widget.width * 0.4 : widget.width * 1.2,
+              onEnd: () {
+                setState(() {
+                  onend = widget.isExpanded;
+                });
+              },
               child: cards1(
-                expand: widget.isExpanded,
+                expand: onend,
                 chartData: snapshot.data,
                 text: widget.text,
                 icon: widget.icon,
               ),
             );
           } else {
-            return const Text("Loading");
+            return const CircularProgressIndicator();
           }
         },
       ),

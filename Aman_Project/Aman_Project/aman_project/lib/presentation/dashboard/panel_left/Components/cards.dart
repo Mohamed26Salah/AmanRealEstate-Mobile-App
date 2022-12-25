@@ -1,5 +1,7 @@
 // ignore: unused_import
 
+import 'dart:async';
+
 import 'package:aman_project/models/category_chart_data.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +42,7 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
   ///Setting up the animation
   void prepareAnimations() {
     expandController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 800));
+        vsync: this, duration: const Duration(milliseconds: 400));
     animation = CurvedAnimation(
       parent: expandController!,
       curve: Curves.easeInOut,
@@ -49,9 +51,15 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
 
   void _runExpandCheck() {
     if (widget.expand) {
-      expandController!.forward();
+      Timer(Duration(milliseconds: 8000), () {
+        // <-- Delay here
+        expandController!.forward();
+      });
     } else {
-      expandController!.reverse();
+      Timer(Duration(milliseconds: 8000), () {
+        // <-- Delay here
+        expandController!.reverse();
+      });
     }
   }
 
@@ -87,12 +95,12 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
                     textDirection: TextDirection.ltr,
                     IconData(widget.icon, fontFamily: 'MaterialIcons'),
                     color: Theme.of(context).primaryColor,
-                    size: 100),
+                    size: 80),
                 Column(
                   children: [
                     Text(
                       count.toString(),
-                      textScaleFactor: 2.5,
+                      textScaleFactor: 2.2,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
                           color: widget.expand
@@ -113,12 +121,9 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
                 )
               ],
             ),
-            SizeTransition(
-                axisAlignment: 1.0,
-                sizeFactor: animation!,
-                child: Visibility(
-                    visible: widget.expand,
-                    child: CategoryChart(DataChart: widget.chartData!))),
+            Visibility(
+                visible: widget.expand,
+                child: CategoryChart(DataChart: widget.chartData!)),
           ],
         ));
   }

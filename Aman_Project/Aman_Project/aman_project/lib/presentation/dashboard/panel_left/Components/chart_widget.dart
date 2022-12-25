@@ -14,8 +14,6 @@ class _CategoryChartState extends State<CategoryChart> {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-      padding: const EdgeInsets.all(10),
       child: SfCartesianChart(
           primaryXAxis:
               CategoryAxis(majorGridLines: const MajorGridLines(width: 0)),
@@ -37,10 +35,9 @@ class _CategoryChartState extends State<CategoryChart> {
               //   end: Alignment.topRight,
               // ),
               borderRadius: BorderRadius.circular(10),
-              animationDelay: 1300,
             )
           ]),
-    ));
+    );
   } // snapshot.data  :- get your object which is pass from your downloadData() function
 
 }
@@ -60,7 +57,7 @@ Color? returnColor(String? s) {
       {
         return const Color(0xff5bb85f);
       }
-    case "Residential Building":
+    case "Building":
       {
         return const Color(0xff8ec44e);
       }
@@ -86,15 +83,15 @@ Color? returnColor(String? s) {
       }
     case "admin":
       {
-        return Color.fromARGB(255, 228, 20, 255);
+        return const Color.fromARGB(255, 228, 20, 255);
       }
     case "moderator":
       {
-        return Color.fromARGB(255, 255, 20, 83);
+        return const Color.fromARGB(255, 255, 20, 83);
       }
     case "user":
       {
-        return Color.fromARGB(255, 255, 20, 20);
+        return const Color.fromARGB(255, 255, 20, 20);
       }
     default:
       {
