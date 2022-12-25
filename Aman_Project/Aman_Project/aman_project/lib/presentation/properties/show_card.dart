@@ -16,56 +16,54 @@ class _ShowCardState extends ConsumerState<ShowCard> {
   // Stream<QuerySnapshot> properties =
   //     FirebaseFirestore.instance.collection('properties').snapshots();
 
-  CollectionReference<Map<String, dynamic>> propertiesFiltered =
-      FirebaseFirestore.instance.collection('properties');
+  // CollectionReference<Map<String, dynamic>> propertiesFiltered =
+  //     FirebaseFirestore.instance.collection('properties');
 
-  Query<Map<String, dynamic>>? returnedQueryFilter;
+  // Query<Map<String, dynamic>>? returnedQueryFilter;
 
+  Query query = FirebaseFirestore.instance.collection('properties');
   @override
   Widget build(BuildContext context) {
     if (ref.watch(filterTypeProivder) != "") {
-      returnedQueryFilter = PropertyManagement.typeFilter(propertiesFiltered,
-          ref.watch(filterTypeProivder), returnedQueryFilter);
+      query = query.where("type", isEqualTo: ref.watch(filterTypeProivder));
     }
     if (ref.watch(filterRoomProivder) != "") {
-      returnedQueryFilter = PropertyManagement.roomFilter(propertiesFiltered,
-          ref.watch(filterRoomProivder), returnedQueryFilter);
+      if (ref.watch(filterRoomProivder) == "Any") {
+        query = query.where("noRooms", isNotEqualTo: "");
+      } else {
+        query =
+            query.where("noRooms", isEqualTo: ref.watch(filterRoomProivder));
+      }
     }
     if (ref.watch(filterBathroomProivder) != "") {
-      returnedQueryFilter = PropertyManagement.bathroomFilter(
-          propertiesFiltered,
-          ref.watch(filterBathroomProivder),
-          returnedQueryFilter);
+      if (ref.watch(filterBathroomProivder) == "Any") {
+        query = query.where("noBathrooms", isNotEqualTo: "");
+      } else {
+        query = query.where("noBathrooms",
+            isEqualTo: ref.watch(filterBathroomProivder));
+      }
     }
-    if (ref.watch(filterPriceProivder).start != 10000 &&
-        ref.watch(filterPriceProivder).end != 10000000) {
-      returnedQueryFilter = PropertyManagement.priceRangeFilter(
-          propertiesFiltered,
-          ref.watch(filterPriceProivder),
-          returnedQueryFilter);
-    }
-    if (ref.watch(filterAreaProivder).start != 10 &&
-        ref.watch(filterAreaProivder).end != 3000) {
-      returnedQueryFilter = PropertyManagement.areaRangeFilter(
-          propertiesFiltered,
-          ref.watch(filterAreaProivder),
-          returnedQueryFilter);
+    if (ref.watch(filterPriceProivder) != "") {
+      if (ref.watch(filterPriceProivder) == "LTH") {
+        query = query.orderBy("price", descending: false);
+      } else {
+        query = query.orderBy("price", descending: true);
+      }
     }
 
     String coming = ref.watch(searchInputProivder);
+    // final Stream<QuerySnapshot> snapshott = query.snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: (coming != "")
           ? PropertyManagement.searchedProperties(coming)
           : (ref.watch(filterTypeProivder) != "" ||
                   ref.watch(filterRoomProivder) != "" ||
                   ref.watch(filterBathroomProivder) != "" ||
-                  ref.watch(filterPriceProivder).start != 10000 &&
-                      ref.watch(filterPriceProivder).end != 10000000 ||
-                  ref.watch(filterAreaProivder).start != 10 &&
-                      ref.watch(filterAreaProivder).end != 3000)
-              ? returnedQueryFilter?.snapshots()
+                  ref.watch(filterPriceProivder) != "")
+              ? query.snapshots()
               : PropertyManagement.allProperties(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        query = FirebaseFirestore.instance.collection('properties');
         if (snapshot.hasError) {
           return const Card(
             color: Colors.red,
@@ -92,6 +90,29 @@ class _ShowCardState extends ConsumerState<ShowCard> {
                     Color.fromARGB(255, 205, 153, 51)),
               ),
             ),
+          );
+        }
+
+        if (snapshot.data?.size == 0) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(
+                Icons.not_interested,
+                color: Colors.grey,
+                size: 40,
+              ),
+              Text(
+                "No Data has been found! according to your filter",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "serif",
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                  fontSize: 20,
+                ),
+              )
+            ],
           );
         }
         final data = snapshot.requireData;

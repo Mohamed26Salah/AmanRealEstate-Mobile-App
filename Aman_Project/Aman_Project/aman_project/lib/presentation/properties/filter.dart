@@ -14,8 +14,7 @@ class _FilterState extends ConsumerState<Filter> {
   String typeFilter = "";
   String roomFilter = "";
   String bathroomFilter = "";
-  var priceSelectedRange = const RangeValues(10000, 10000000);
-  var areaSelectedRange = const RangeValues(10, 3000);
+  String priceFilter = "";
 ///////////////////////////////////////////////////////////
   bool roomsButton1 = false;
   bool roomsButton2 = false;
@@ -55,36 +54,36 @@ class _FilterState extends ConsumerState<Filter> {
   }
 
   //Bathrooms
-  bool bathroomButton5 = false;
   bool bathroomButton6 = false;
   bool bathroomButton7 = false;
   bool bathroomButton8 = false;
   bool bathroomButton9 = false;
+  bool bathroomButton10 = false;
   void updateButtonsUIBathroom(int id) {
-    bathroomButton5 = false;
     bathroomButton6 = false;
     bathroomButton7 = false;
     bathroomButton8 = false;
     bathroomButton9 = false;
+    bathroomButton10 = false;
     switch (id) {
-      case 5:
-        bathroomButton5 = true;
-        bathroomFilter = "1";
-        break;
       case 6:
         bathroomButton6 = true;
-        bathroomFilter = "2";
+        bathroomFilter = "1";
         break;
       case 7:
         bathroomButton7 = true;
-        bathroomFilter = "3";
+        bathroomFilter = "2";
         break;
       case 8:
         bathroomButton8 = true;
-        bathroomFilter = "4";
+        bathroomFilter = "3";
         break;
       case 9:
         bathroomButton9 = true;
+        bathroomFilter = "4";
+        break;
+      case 10:
+        bathroomButton10 = true;
         bathroomFilter = "Any";
         break;
       default:
@@ -93,62 +92,83 @@ class _FilterState extends ConsumerState<Filter> {
   }
 
 //Types
-  bool flatButton10 = false;
-  bool villaButton11 = false;
-  bool buildingButton12 = false;
-  bool storeButton13 = false;
-  bool clinicButton14 = false;
-  bool farmButton15 = false;
-  bool factoryButton16 = false;
-  bool landButton17 = false;
-  bool otherButton18 = false;
+  bool flatButton11 = false;
+  bool villaButton12 = false;
+  bool buildingButton13 = false;
+  bool storeButton14 = false;
+  bool clinicButton15 = false;
+  bool farmButton16 = false;
+  bool factoryButton17 = false;
+  bool landButton18 = false;
+  bool otherButton19 = false;
   void updateButtonsUIType(id) {
-    flatButton10 = false;
-    villaButton11 = false;
-    buildingButton12 = false;
-    storeButton13 = false;
-    clinicButton14 = false;
-    farmButton15 = false;
-    factoryButton16 = false;
-    landButton17 = false;
-    otherButton18 = false;
+    flatButton11 = false;
+    villaButton12 = false;
+    buildingButton13 = false;
+    storeButton14 = false;
+    clinicButton15 = false;
+    farmButton16 = false;
+    factoryButton17 = false;
+    landButton18 = false;
+    otherButton19 = false;
     switch (id) {
-      case 10:
-        flatButton10 = true;
+      case 11:
+        flatButton11 = true;
         typeFilter = "Flat";
         break;
-      case 11:
-        villaButton11 = true;
+      case 12:
+        villaButton12 = true;
         typeFilter = "Villa";
         break;
-      case 12:
-        buildingButton12 = true;
+      case 13:
+        buildingButton13 = true;
         typeFilter = "Building";
         break;
-      case 13:
-        storeButton13 = true;
+      case 14:
+        storeButton14 = true;
         typeFilter = "Store";
         break;
-      case 14:
-        clinicButton14 = true;
+      case 15:
+        clinicButton15 = true;
         typeFilter = "Clinic";
         break;
-      case 15:
-        farmButton15 = true;
+      case 16:
+        farmButton16 = true;
         typeFilter = "Farm";
         break;
-      case 16:
-        factoryButton16 = true;
+      case 17:
+        factoryButton17 = true;
         typeFilter = "Factory";
         break;
-      case 17:
-        landButton17 = true;
+      case 18:
+        landButton18 = true;
         typeFilter = "Land";
         break;
-      case 18:
-        otherButton18 = true;
+      case 19:
+        otherButton19 = true;
         typeFilter = "Other";
         break;
+      default:
+    }
+    setState(() {});
+  }
+
+  // Sorting Price Buttons
+  bool ascendingButton20 = false;
+  bool descendingButton21 = false;
+  void updateButtonsUIPrice(id) {
+    ascendingButton20 = false;
+    descendingButton21 = false;
+    switch (id) {
+      case 20:
+        ascendingButton20 = true;
+        priceFilter = "LTH";
+        break;
+      case 21:
+        descendingButton21 = true;
+        priceFilter = "HTL";
+        break;
+
       default:
     }
     setState(() {});
@@ -184,102 +204,18 @@ class _FilterState extends ConsumerState<Filter> {
           const SizedBox(
             height: 32,
           ),
-          Row(
-            children: const [
-              Text(
-                "Price",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "range",
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-            ],
-          ),
-          RangeSlider(
-            values: priceSelectedRange,
-            onChanged: (RangeValues newPriceRange) {
-              setState(() {
-                priceSelectedRange = newPriceRange;
-              });
-            },
-            min: 10000,
-            max: 10000000,
-            activeColor: Theme.of(context).primaryColor,
-            inactiveColor: Colors.grey[300],
+          const Text(
+            "Price",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "${priceSelectedRange.start.ceil()}LE",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                "${priceSelectedRange.end.ceil()}LE",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: const [
-              Text(
-                "Area",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "range",
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-            ],
-          ),
-          RangeSlider(
-            values: areaSelectedRange,
-            onChanged: (RangeValues newAreaRange) {
-              setState(() {
-                areaSelectedRange = newAreaRange;
-              });
-            },
-            min: 10,
-            max: 3000,
-            activeColor: Theme.of(context).primaryColor,
-            inactiveColor: Colors.grey[300],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${areaSelectedRange.start.ceil()}sq/m",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                "${areaSelectedRange.end.ceil()}sq/m",
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+              buildOption("L T H ", ascendingButton20, 20),
+              buildOption("H T L", descendingButton21, 21),
             ],
           ),
           const Text(
@@ -307,15 +243,15 @@ class _FilterState extends ConsumerState<Filter> {
                           const SizedBox(
                             width: 7,
                           ),
-                          buildOption("Flat", flatButton10, 10),
-                          buildOption("Villa", villaButton11, 11),
-                          buildOption("Building", buildingButton12, 12),
-                          buildOption("Store", storeButton13, 13),
-                          buildOption("Clinic", clinicButton14, 14),
-                          buildOption("Farm", farmButton15, 15),
-                          buildOption("Factory", factoryButton16, 16),
-                          buildOption("Land", landButton17, 17),
-                          buildOption("Other", otherButton18, 18),
+                          buildOption("Flat", flatButton11, 11),
+                          buildOption("Villa", villaButton12, 12),
+                          buildOption("Building", buildingButton13, 13),
+                          buildOption("Store", storeButton14, 14),
+                          buildOption("Clinic", clinicButton15, 15),
+                          buildOption("Farm", farmButton16, 16),
+                          buildOption("Factory", factoryButton17, 17),
+                          buildOption("Land", landButton18, 18),
+                          buildOption("Other", otherButton19, 19),
                           const SizedBox(
                             width: 7,
                           ),
@@ -413,11 +349,11 @@ class _FilterState extends ConsumerState<Filter> {
                           const SizedBox(
                             width: 7,
                           ),
-                          buildOption("1", bathroomButton5, 5),
-                          buildOption("2", bathroomButton6, 6),
-                          buildOption("3", bathroomButton7, 7),
-                          buildOption("4", bathroomButton8, 8),
-                          buildOption("Any", bathroomButton9, 9),
+                          buildOption("1", bathroomButton6, 6),
+                          buildOption("2", bathroomButton7, 7),
+                          buildOption("3", bathroomButton8, 8),
+                          buildOption("4", bathroomButton9, 9),
+                          buildOption("Any", bathroomButton10, 10),
                           const SizedBox(
                             width: 7,
                           ),
@@ -441,14 +377,13 @@ class _FilterState extends ConsumerState<Filter> {
             child: Center(
               child: ElevatedButton(
                 onPressed: () {
-                  ref.read(filterPriceProivder.notifier).state =
-                      priceSelectedRange;
+                  ref.read(filterPriceProivder.notifier).state = priceFilter;
                   ref.read(filterTypeProivder.notifier).state = typeFilter;
                   ref.read(filterRoomProivder.notifier).state = roomFilter;
                   ref.read(filterBathroomProivder.notifier).state =
                       bathroomFilter;
-                  ref.read(filterAreaProivder.notifier).state =
-                      areaSelectedRange;
+                  // ref.read(filterAreaProivder.notifier).state =
+                  //     areaSelectedRange;
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
@@ -483,8 +418,10 @@ class _FilterState extends ConsumerState<Filter> {
             updateButtonsUIRooms(id);
           } else if (id > 5 && id <= 9) {
             updateButtonsUIBathroom(id);
-          } else {
+          } else if (id > 9 && id <= 19) {
             updateButtonsUIType(id);
+          } else {
+            updateButtonsUIPrice(id);
           }
         },
         child: Container(

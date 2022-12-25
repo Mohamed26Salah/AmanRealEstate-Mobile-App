@@ -14,56 +14,6 @@ class PropertyManagement {
         .snapshots();
   }
 
-  static Query<Map<String, dynamic>> roomFilter(
-      CollectionReference<Map<String, dynamic>> properties,
-      String roomFilter,
-      Query<Map<String, dynamic>>? returnedQueryFilter) {
-    if (roomFilter == "Any") {
-      return returnedQueryFilter =
-          properties.where("noRooms", isNotEqualTo: "");
-    }
-    return returnedQueryFilter =
-        properties.where("noRooms", isEqualTo: roomFilter);
-  }
-
-  static Query<Map<String, dynamic>> bathroomFilter(
-      CollectionReference<Map<String, dynamic>> properties,
-      String bathroomFilter,
-      Query<Map<String, dynamic>>? returnedQueryFilter) {
-    if (bathroomFilter == "Any") {
-      return returnedQueryFilter =
-          properties.where("noBathrooms", isNotEqualTo: "");
-    }
-    return returnedQueryFilter =
-        properties.where("noBathrooms", isEqualTo: bathroomFilter);
-  }
-
-  static Query<Map<String, dynamic>> typeFilter(
-      CollectionReference<Map<String, dynamic>> properties,
-      String typeFilter,
-      Query<Map<String, dynamic>>? returnedQueryFilter) {
-    return returnedQueryFilter =
-        properties.where("type", isEqualTo: typeFilter);
-  }
-
-  static Query<Map<String, dynamic>> priceRangeFilter(
-      CollectionReference<Map<String, dynamic>> properties,
-      RangeValues priceFilter,
-      Query<Map<String, dynamic>>? returnedQueryFilter) {
-    return returnedQueryFilter = properties
-        .where("price", isLessThanOrEqualTo: priceFilter.end)
-        .where("price", isGreaterThanOrEqualTo: priceFilter.start);
-  }
-
-  static Query<Map<String, dynamic>> areaRangeFilter(
-      CollectionReference<Map<String, dynamic>> properties,
-      RangeValues areaFilter,
-      Query<Map<String, dynamic>>? returnedQueryFilter) {
-    return returnedQueryFilter = properties
-        .where("area", isLessThanOrEqualTo: areaFilter.end)
-        .where("area", isGreaterThanOrEqualTo: areaFilter.start);
-  }
-
   static Future getFlatData(
       {required List<dynamic> commonUnitPrpoerties,
       required String floor,
