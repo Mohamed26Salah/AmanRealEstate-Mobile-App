@@ -236,7 +236,7 @@ class AddFormState extends State<AddForm> {
 
                       userChoice = value;
                     },
-                    selectedColor: Color.fromARGB(255, 205, 153, 51),
+                    selectedColor: const Color.fromARGB(255, 205, 153, 51),
                     selectedBorderColor: const Color.fromARGB(255, 0, 0, 0),
                     unSelectedBorderColor:
                         const Color.fromARGB(255, 205, 153, 51),
@@ -944,16 +944,6 @@ class AddFormState extends State<AddForm> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
-                        child: Center(
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
                         onPressed: () async {
                           if (userChoice != "") {
                             // Validate returns true if the form is valid, or false otherwise.
@@ -1090,9 +1080,19 @@ class AddFormState extends State<AddForm> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0.0,
                           primary: Colors.red.withOpacity(0),
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),
+                            ),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
                           ),
                         ),
@@ -1111,7 +1111,7 @@ class AddFormState extends State<AddForm> {
 //Single Image
   openBottomSheet() {
     Get.bottomSheet(Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8), topRight: Radius.circular(8)),

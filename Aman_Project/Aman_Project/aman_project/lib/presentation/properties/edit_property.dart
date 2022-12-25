@@ -2,8 +2,11 @@ import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
+import '../shared_features/custom_message.dart';
 import '../shared_features/custom_text_field.dart';
 import 'dropdown.dart';
+import 'package:aman_project/models/property_managemnt.dart';
+import '../../constants/globals.dart' as val;
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -76,287 +79,371 @@ class _EditPropertyState extends State<EditProperty> {
       child: Form(
         key: _formKey,
         child: SingleChildScrollView(
-            child: Container(
-          padding: EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 15,
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 15,
+            ),
+            child: Column(
+              children: [
+                buildTextField(
+                    labelText: "Owner Name",
+                    hintText: "Owner Name",
+                    controller: _ownerNameController,
+                    type: "name"),
+                buildTextField(
+                    labelText: "Owner Number",
+                    hintText: "01144..",
+                    controller: _ownerNumberController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Address For User",
+                    hintText: "Address User",
+                    controller: _addressForUserController,
+                    type: "address"),
+                buildTextField(
+                    labelText: "Address For Admin",
+                    hintText: "Address Admin",
+                    controller: _addressForAdminController,
+                    type: "address"),
+                buildTextField(
+                    labelText: "Area",
+                    hintText: "Area",
+                    controller: _areaController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Price",
+                    hintText: "Price",
+                    controller: _priceController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Description For User",
+                    hintText: "Description For User",
+                    controller: _descriptionForUserController,
+                    type: "address"),
+                buildTextField(
+                    labelText: "Description For Admin",
+                    hintText: "Description For Admin",
+                    controller: _descriptionForAdminController,
+                    type: "address"),
+                buildTextField(
+                    labelText: "Unit Name",
+                    hintText: "Unit Name",
+                    controller: _nameController,
+                    type: "name"),
+                buildTextField(
+                    labelText: "Floor",
+                    hintText: "Floor",
+                    controller: _floorController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Number Of Rooms",
+                    hintText: "Number Of Rooms",
+                    controller: _noOFRoomsController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Number Of Bathrooms",
+                    hintText: "Number Of Bathrooms",
+                    controller: _noOFBathroomsController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Number Of Floors",
+                    hintText: "Number Of Floors",
+                    controller: _noOFFloorsController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Number Of Flats",
+                    hintText: "Number Of Flats",
+                    controller: _noOFFlatsController,
+                    type: "number"),
+                buildTextField(
+                    labelText: "Type OF Activity",
+                    hintText: "Type OF Activity",
+                    controller: _typeOFActivityController,
+                    type: "address"),
+                buildTextField(
+                    labelText: "Number Of administrative buildings",
+                    hintText: "Number Of administrative buildings",
+                    controller: _noOFABController,
+                    type: "number"),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Payment Method'),
+                      CustomDropdownButton2(
+                        dropdownItems: const ["Cash", "installment"],
+                        hint: "Select Payment Method",
+                        value: widget.routeArgs.paymentMethod,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.routeArgs.paymentMethod = value!;
+                            print(widget.routeArgs.paymentMethod);
+                          });
+                        },
+                        validatior: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Select priority'),
+                      CustomDropdownButton2(
+                        dropdownItems: const ["High", "medium", "Low"],
+                        hint: "Select priority",
+                        value: widget.routeArgs.priority,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.routeArgs.priority = value!;
+                          });
+                        },
+                        validatior: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Select visibility'),
+                      CustomDropdownButton2(
+                        dropdownItems: const ["Yes", "No"],
+                        hint: "Select visibility",
+                        value: widget.routeArgs.visible,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.routeArgs.visible = value!;
+                          });
+                        },
+                        validatior: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Select offering'),
+                      CustomDropdownButton2(
+                        dropdownItems: const ["For Sale", "For Rent"],
+                        hint: "Select offering",
+                        value: widget.routeArgs.offered,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.routeArgs.offered = value!;
+                          });
+                        },
+                        validatior: (value) {
+                          if (value == null) {
+                            return 'Please Select';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: widget.routeArgs.finishing!.isEmpty
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Finishing'),
+                            CustomDropdownButton2(
+                              dropdownItems: const ["Yes", "Half", "No"],
+                              hint: "Select Finishing",
+                              value: widget.routeArgs.finishing,
+                              onChanged: (value) {
+                                setState(() {
+                                  widget.routeArgs.finishing = value;
+                                });
+                              },
+                              validatior: (value) {
+                                if (value == null) {
+                                  return 'Please Select';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: widget.routeArgs.doublex!.isEmpty
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Select yes if Doublex'),
+                            CustomDropdownButton2(
+                              dropdownItems: const ["Yes", "No"],
+                              hint: "Select yes if Doublex",
+                              value: widget.routeArgs.doublex,
+                              onChanged: (value) {
+                                setState(() {
+                                  widget.routeArgs.doublex = value;
+                                });
+                              },
+                              validatior: (value) {
+                                if (value == null) {
+                                  return 'Please Select';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 0, left: 15, right: 15, bottom: 10),
+                  child: widget.routeArgs.furnished!.isEmpty
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Select yes if Furnished'),
+                            CustomDropdownButton2(
+                              dropdownItems: const ["Yes", "No"],
+                              hint: "Select yes if Furnished",
+                              value: widget.routeArgs.furnished,
+                              onChanged: (value) {
+                                setState(() {
+                                  widget.routeArgs.furnished = value;
+                                });
+                              },
+                              validatior: (value) {
+                                if (value == null) {
+                                  return 'Please Select';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        top: 5, left: 15, right: 15, bottom: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return const Center(
+                                    child: CircularProgressIndicator(
+                                  backgroundColor: Colors.black26,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Color.fromARGB(255, 205, 153, 51)),
+                                ));
+                              });
+                          PropertyManagement.updateProperty(
+                              docId: widget.routeArgs.docId,
+                              ownerName: _ownerNameController.text,
+                              ownerNumber: _ownerNumberController.text,
+                              addressForUser: _addressForUserController.text,
+                              addressForAdmin: _addressForAdminController.text,
+                              area: int.parse(_areaController.text),
+                              price: int.parse(_priceController.text),
+                              descriptionForUser:
+                                  _descriptionForUserController.text,
+                              descriptionForAdmin:
+                                  _descriptionForAdminController.text,
+                              unitName: _nameController.text,
+                              paymentMethod: widget.routeArgs.paymentMethod,
+                              priority: widget.routeArgs.priority,
+                              visible: widget.routeArgs.visible,
+                              offered: widget.routeArgs.offered,
+                              singleImage: widget.routeArgs.singleImage,
+                              mutliImages: widget.routeArgs.multiImages,
+                              type: widget.routeArgs.type,
+                              floor: _floorController.text,
+                              noRooms: _noOFRoomsController.text,
+                              noBathrooms: _noOFBathroomsController.text,
+                              noFloors: _noOFFloorsController.text,
+                              noAB: _noOFABController.text,
+                              noFlats: _noOFFlatsController.text,
+                              typeOFActivity: _typeOFActivityController.text);
+
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/home', (route) => false);
+                        }
+                        else {
+                            errormessage("Error!", "Please Choose a type!");
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(val.snackBar);
+                          }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0.0,
+                        primary: Colors.red.withOpacity(0),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(2),
+                          ),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              buildTextField(
-                  labelText: "Owner Name",
-                  hintText: "Owner Name",
-                  controller: _ownerNameController,
-                  type: "name"),
-              buildTextField(
-                  labelText: "Owner Number",
-                  hintText: "01144..",
-                  controller: _ownerNumberController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Address For User",
-                  hintText: "Address User",
-                  controller: _addressForUserController,
-                  type: "address"),
-              buildTextField(
-                  labelText: "Address For Admin",
-                  hintText: "Address Admin",
-                  controller: _addressForAdminController,
-                  type: "address"),
-              buildTextField(
-                  labelText: "Area",
-                  hintText: "Area",
-                  controller: _areaController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Price",
-                  hintText: "Price",
-                  controller: _priceController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Description For User",
-                  hintText: "Description For User",
-                  controller: _descriptionForUserController,
-                  type: "address"),
-              buildTextField(
-                  labelText: "Description For Admin",
-                  hintText: "Description For Admin",
-                  controller: _descriptionForAdminController,
-                  type: "address"),
-              buildTextField(
-                  labelText: "Unit Name",
-                  hintText: "Unit Name",
-                  controller: _nameController,
-                  type: "name"),
-              buildTextField(
-                  labelText: "Floor",
-                  hintText: "Floor",
-                  controller: _floorController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Number Of Rooms",
-                  hintText: "Number Of Rooms",
-                  controller: _noOFRoomsController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Number Of Bathrooms",
-                  hintText: "Number Of Bathrooms",
-                  controller: _noOFBathroomsController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Number Of Floors",
-                  hintText: "Number Of Floors",
-                  controller: _noOFFloorsController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Number Of Flats",
-                  hintText: "Number Of Flats",
-                  controller: _noOFFlatsController,
-                  type: "number"),
-              buildTextField(
-                  labelText: "Type OF Activity",
-                  hintText: "Type OF Activity",
-                  controller: _typeOFActivityController,
-                  type: "address"),
-              buildTextField(
-                  labelText: "Number Of administrative buildings",
-                  hintText: "Number Of administrative buildings",
-                  controller: _noOFABController,
-                  type: "number"),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Payment Method'),
-                    CustomDropdownButton2(
-                      dropdownItems: const ["Cash", "installment"],
-                      hint: "Select Payment Method",
-                      value: widget.routeArgs.paymentMethod,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.routeArgs.paymentMethod = value!;
-                          print(widget.routeArgs.paymentMethod);
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Select priority'),
-                    CustomDropdownButton2(
-                      dropdownItems: const ["High", "medium", "Low"],
-                      hint: "Select priority",
-                      value: widget.routeArgs.priority,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.routeArgs.priority = value!;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Select visibility'),
-                    CustomDropdownButton2(
-                      dropdownItems: const ["Yes", "No"],
-                      hint: "Select visibility",
-                      value: widget.routeArgs.visible,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.routeArgs.visible = value!;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Select offering'),
-                    CustomDropdownButton2(
-                      dropdownItems: const ["For Sale", "For Rent"],
-                      hint: "Select offering",
-                      value: widget.routeArgs.offered,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.routeArgs.offered = value!;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: widget.routeArgs.finishing!.isEmpty
-                    ? const SizedBox()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Finishing'),
-                          CustomDropdownButton2(
-                            dropdownItems: const ["Yes", "Half", "No"],
-                            hint: "Select Finishing",
-                            value: widget.routeArgs.finishing,
-                            onChanged: (value) {
-                              setState(() {
-                                widget.routeArgs.finishing = value;
-                              });
-                            },
-                            validatior: (value) {
-                              if (value == null) {
-                                return 'Please Select';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
-                      ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: widget.routeArgs.doublex!.isEmpty
-                    ? const SizedBox()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Select yes if Doublex'),
-                          CustomDropdownButton2(
-                            dropdownItems: const ["Yes", "No"],
-                            hint: "Select yes if Doublex",
-                            value: widget.routeArgs.doublex,
-                            onChanged: (value) {
-                              setState(() {
-                                widget.routeArgs.doublex = value;
-                              });
-                            },
-                            validatior: (value) {
-                              if (value == null) {
-                                return 'Please Select';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
-                      ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 15, right: 15, bottom: 10),
-                child: widget.routeArgs.furnished!.isEmpty
-                    ? const SizedBox()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Select yes if Furnished'),
-                          CustomDropdownButton2(
-                            dropdownItems: const ["Yes", "No"],
-                            hint: "Select yes if Furnished",
-                            value: widget.routeArgs.furnished,
-                            onChanged: (value) {
-                              setState(() {
-                                widget.routeArgs.furnished = value;
-                              });
-                            },
-                            validatior: (value) {
-                              if (value == null) {
-                                return 'Please Select';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
-                      ),
-              ),
-            ],
-          ),
-        )),
+        ),
       ),
     );
   }

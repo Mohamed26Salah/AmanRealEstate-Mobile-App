@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // });
 
 class PropertyWidget extends StatelessWidget {
+  String docId;
   String addressAdmin;
   String addressUser;
   int area;
@@ -42,6 +43,7 @@ class PropertyWidget extends StatelessWidget {
 
   PropertyWidget({
     super.key,
+    required this.docId,
     required this.addressAdmin,
     required this.addressUser,
     required this.area,
@@ -73,6 +75,7 @@ class PropertyWidget extends StatelessWidget {
 
   selectedProperty(BuildContext context) {
     PropertyWidget property = PropertyWidget(
+      docId: docId,
       addressAdmin: addressAdmin,
       addressUser: addressUser,
       area: area,

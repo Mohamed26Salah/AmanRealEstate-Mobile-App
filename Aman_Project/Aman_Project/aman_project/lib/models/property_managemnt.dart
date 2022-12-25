@@ -254,4 +254,66 @@ class PropertyManagement {
       'doublex': "",
     });
   }
+
+  static Future updateProperty({
+    required String docId,
+    required String ownerName,
+    required String ownerNumber,
+    required String addressForUser,
+    required String addressForAdmin,
+    required int area,
+    required int price,
+    required String descriptionForUser,
+    required String descriptionForAdmin,
+    required String unitName,
+    required String paymentMethod,
+    required String priority,
+    required String visible,
+    required String offered,
+    required String singleImage,
+    required List<dynamic> mutliImages,
+    required String type,
+    String? typeOFActivity,
+    String? noAB,
+    String? noFloors,
+    String? noFlats,
+    String? noRooms,
+    String? noBathrooms,
+    String? finishing,
+    String? furnished,
+    String? floor,
+    String? doublex,
+  }) async {
+    DocumentReference docRef =
+        FirebaseFirestore.instance.doc('properties/$docId');
+    docRef.update({
+      'type': type,
+      'ownerName': ownerName,
+      'ownerNumber': ownerNumber,
+      'addressForUser': addressForUser,
+      'addressForAdmin': addressForAdmin,
+      'area': area,
+      'price': price,
+      'descriptionForUser': descriptionForUser,
+      'descriptionForAdmin': descriptionForAdmin,
+      'unitName': unitName,
+      'paymentMethod': paymentMethod,
+      'priority': priority,
+      'visible': visible,
+      'offered': offered,
+      'singleImage': singleImage,
+      'multiImages': mutliImages,
+      'typeOFActivity': typeOFActivity ?? "",
+      'noAB': noAB ?? "",
+      'noFloors': noFloors ?? "",
+      'noFlats': noFlats ?? "",
+      'noRooms': noRooms ?? "",
+      'noBathrooms': noBathrooms ?? "",
+      'finishing': finishing ?? "",
+      'furnished': furnished ?? "",
+      'floor': floor ?? "",
+      'doublex': doublex ?? "",
+    });
+    
+  }
 }

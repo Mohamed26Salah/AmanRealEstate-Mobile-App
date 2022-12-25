@@ -99,8 +99,10 @@ class _ShowCardState extends ConsumerState<ShowCard> {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
+            
             // ref.read(resultsCount.notifier).state = data.size;
             return PropertyWidget(
+              docId : data.docs[index].id,
               addressAdmin: data.docs[index]['addressForAdmin'],
               addressUser: data.docs[index]['addressForUser'],
               area: data.docs[index]['area'],
