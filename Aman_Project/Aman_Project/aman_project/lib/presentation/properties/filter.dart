@@ -14,7 +14,8 @@ class _FilterState extends ConsumerState<Filter> {
   String typeFilter = "";
   String roomFilter = "";
   String bathroomFilter = "";
-  var selectedRange = const RangeValues(15000, 1000000);
+  var priceSelectedRange = const RangeValues(10000, 10000000);
+  var areaSelectedRange = const RangeValues(10, 3000);
 ///////////////////////////////////////////////////////////
   bool roomsButton1 = false;
   bool roomsButton2 = false;
@@ -204,10 +205,10 @@ class _FilterState extends ConsumerState<Filter> {
             ],
           ),
           RangeSlider(
-            values: selectedRange,
-            onChanged: (RangeValues newRange) {
+            values: priceSelectedRange,
+            onChanged: (RangeValues newPriceRange) {
               setState(() {
-                selectedRange = newRange;
+                priceSelectedRange = newPriceRange;
               });
             },
             min: 10000,
@@ -219,13 +220,62 @@ class _FilterState extends ConsumerState<Filter> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${selectedRange.start.ceil()}LE",
+                "${priceSelectedRange.start.ceil()}LE",
                 style: const TextStyle(
                   fontSize: 14,
                 ),
               ),
               Text(
-                "${selectedRange.end.ceil()}LE",
+                "${priceSelectedRange.end.ceil()}LE",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: const [
+              Text(
+                "Area",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                "range",
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+            ],
+          ),
+          RangeSlider(
+            values: areaSelectedRange,
+            onChanged: (RangeValues newAreaRange) {
+              setState(() {
+                areaSelectedRange = newAreaRange;
+              });
+            },
+            min: 10,
+            max: 3000,
+            activeColor: Theme.of(context).primaryColor,
+            inactiveColor: Colors.grey[300],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${areaSelectedRange.start.ceil()}sq/m",
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                "${areaSelectedRange.end.ceil()}sq/m",
                 style: const TextStyle(
                   fontSize: 14,
                 ),
@@ -391,11 +441,14 @@ class _FilterState extends ConsumerState<Filter> {
             child: Center(
               child: ElevatedButton(
                 onPressed: () {
-                  ref.read(filterPriceProivder.notifier).state = selectedRange;
+                  ref.read(filterPriceProivder.notifier).state =
+                      priceSelectedRange;
                   ref.read(filterTypeProivder.notifier).state = typeFilter;
                   ref.read(filterRoomProivder.notifier).state = roomFilter;
                   ref.read(filterBathroomProivder.notifier).state =
                       bathroomFilter;
+                  ref.read(filterAreaProivder.notifier).state =
+                      areaSelectedRange;
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(

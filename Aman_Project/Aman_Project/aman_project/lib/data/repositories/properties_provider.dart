@@ -5,9 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final searchInputProivder = StateProvider<String>((ref) {
   return "";
 });
+
 //Filters
 final filterPriceProivder = StateProvider<RangeValues>((ref) {
-  return const RangeValues(15000, 1000000);
+  return const RangeValues(10000, 10000000);
+});
+final filterAreaProivder = StateProvider<RangeValues>((ref) {
+  return const RangeValues(10, 3000);
 });
 final filterTypeProivder = StateProvider<String>((ref) {
   return "";

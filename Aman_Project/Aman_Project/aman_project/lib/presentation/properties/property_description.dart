@@ -204,7 +204,7 @@ class _DetailsState extends State<Details> {
                               width: 4,
                             ),
                             Text(
-                              r"$" + routeArgs.price,
+                              r"$" + routeArgs.price.toString(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

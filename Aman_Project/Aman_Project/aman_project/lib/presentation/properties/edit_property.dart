@@ -60,8 +60,8 @@ class _EditPropertyState extends State<EditProperty> {
     _ownerNumberController.text = widget.routeArgs.ownerNumber;
     _addressForUserController.text = widget.routeArgs.addressUser;
     _addressForAdminController.text = widget.routeArgs.addressAdmin;
-    _areaController.text = widget.routeArgs.area;
-    _priceController.text = widget.routeArgs.price;
+    _areaController.text = widget.routeArgs.area.toString();
+    _priceController.text = widget.routeArgs.price.toString();
     _descriptionForUserController.text = widget.routeArgs.descriptionUser;
     _descriptionForAdminController.text = widget.routeArgs.descriptionAdmin;
     _nameController.text = widget.routeArgs.unitName;
@@ -90,97 +90,81 @@ class _EditPropertyState extends State<EditProperty> {
                   hintText: "Owner Name",
                   controller: _ownerNameController,
                   type: "name"),
-            
               buildTextField(
                   labelText: "Owner Number",
                   hintText: "01144..",
                   controller: _ownerNumberController,
                   type: "number"),
-            
               buildTextField(
                   labelText: "Address For User",
                   hintText: "Address User",
                   controller: _addressForUserController,
                   type: "address"),
-            
               buildTextField(
                   labelText: "Address For Admin",
                   hintText: "Address Admin",
                   controller: _addressForAdminController,
                   type: "address"),
-             
               buildTextField(
                   labelText: "Area",
                   hintText: "Area",
                   controller: _areaController,
                   type: "number"),
-             
-               buildTextField(
+              buildTextField(
                   labelText: "Price",
                   hintText: "Price",
                   controller: _priceController,
                   type: "number"),
-          
-               buildTextField(
+              buildTextField(
                   labelText: "Description For User",
                   hintText: "Description For User",
                   controller: _descriptionForUserController,
                   type: "address"),
-              
-               buildTextField(
+              buildTextField(
                   labelText: "Description For Admin",
                   hintText: "Description For Admin",
                   controller: _descriptionForAdminController,
                   type: "address"),
-             
               buildTextField(
                   labelText: "Unit Name",
                   hintText: "Unit Name",
                   controller: _nameController,
                   type: "name"),
-                   buildTextField(
+              buildTextField(
                   labelText: "Floor",
                   hintText: "Floor",
                   controller: _floorController,
                   type: "number"),
-             
               buildTextField(
                   labelText: "Number Of Rooms",
                   hintText: "Number Of Rooms",
                   controller: _noOFRoomsController,
                   type: "number"),
-             
               buildTextField(
                   labelText: "Number Of Bathrooms",
                   hintText: "Number Of Bathrooms",
                   controller: _noOFBathroomsController,
                   type: "number"),
-             
-               buildTextField(
+              buildTextField(
                   labelText: "Number Of Floors",
                   hintText: "Number Of Floors",
                   controller: _noOFFloorsController,
                   type: "number"),
-             
-               buildTextField(
+              buildTextField(
                   labelText: "Number Of Flats",
                   hintText: "Number Of Flats",
                   controller: _noOFFlatsController,
                   type: "number"),
-              
               buildTextField(
                   labelText: "Type OF Activity",
                   hintText: "Type OF Activity",
                   controller: _typeOFActivityController,
                   type: "address"),
-
-                  buildTextField(
+              buildTextField(
                   labelText: "Number Of administrative buildings",
                   hintText: "Number Of administrative buildings",
                   controller: _noOFABController,
                   type: "number"),
-            
-              
               Padding(
                 padding: const EdgeInsets.only(
                     top: 0, left: 15, right: 15, bottom: 10),
@@ -370,8 +354,6 @@ class _EditPropertyState extends State<EditProperty> {
                         ],
                       ),
               ),
-              
-             
             ],
           ),
         )),
@@ -387,50 +369,54 @@ class _EditPropertyState extends State<EditProperty> {
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
       child: type == 'number'
-          ? controller.text.isEmpty ? const SizedBox() : CustomTextField(
-              controller: controller,
-              obscureText: false,
-              labelText: labelText,
-              hintText: hintText,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(11),
-                FilteringTextInputFormatter.allow(
-                  RegExp(r"^[0-9]*$"),
+          ? controller.text.isEmpty
+              ? const SizedBox()
+              : CustomTextField(
+                  controller: controller,
+                  obscureText: false,
+                  labelText: labelText,
+                  hintText: hintText,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(11),
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"^[0-9]*$"),
+                    )
+                  ],
+                  validator: (value) {
+                    if (!value!.isValidNumber) {
+                      return 'Please enter a valid $labelText';
+                    }
+                    return null;
+                  },
                 )
-              ],
-              validator: (value) {
-                if (!value!.isValidNumber) {
-                  return 'Please enter a valid $labelText';
-                }
-                return null;
-              },
-            )
-          : controller.text.isEmpty ? const SizedBox() : CustomTextField(
-              controller: controller,
-              obscureText: false,
-              labelText: labelText,
-              hintText: hintText,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp(r"[a-zA-Z]+|\s"),
-                )
-              ],
-              validator: (value) {
-                if (type == 'name') {
-                  if (!value!.isValidName) {
-                    return 'Please enter a valid $labelText';
-                  }
-                  return null;
-                }
-                if (type == 'address') {
-                  if (!value!.isValidAddress) {
-                    return 'Please enter a valid $labelText';
-                  }
-                  return null;
-                }
-                return null;
-              },
-            ),
+          : controller.text.isEmpty
+              ? const SizedBox()
+              : CustomTextField(
+                  controller: controller,
+                  obscureText: false,
+                  labelText: labelText,
+                  hintText: hintText,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"[a-zA-Z]+|\s"),
+                    )
+                  ],
+                  validator: (value) {
+                    if (type == 'name') {
+                      if (!value!.isValidName) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
+                    }
+                    if (type == 'address') {
+                      if (!value!.isValidAddress) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
+                    }
+                    return null;
+                  },
+                ),
     );
   }
 }

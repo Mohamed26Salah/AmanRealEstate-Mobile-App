@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import '../../models/user_management.dart';
-import '../../data/repositories/user_providers.dart';
+// import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
 import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

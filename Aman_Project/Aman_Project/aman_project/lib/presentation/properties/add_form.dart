@@ -24,7 +24,7 @@ class AddForm extends StatefulWidget {
 
 class AddFormState extends State<AddForm> {
   //List For add
-  List<String> listAddTOFirebase = [];
+  List<dynamic> listAddTOFirebase = [];
   String userChoice = "";
   //Resposbile of Visibility of widgets
   bool visibleFinishing = false;
@@ -977,8 +977,10 @@ class AddFormState extends State<AddForm> {
                                   .add(_addressForUserController.text);
                               listAddTOFirebase
                                   .add(_addressForAdminController.text);
-                              listAddTOFirebase.add(_areaController.text);
-                              listAddTOFirebase.add(_priceController.text);
+                              listAddTOFirebase
+                                  .add(int.parse(_areaController.text));
+                              listAddTOFirebase
+                                  .add(int.parse(_priceController.text));
                               listAddTOFirebase
                                   .add(_descriptionForUserController.text);
                               listAddTOFirebase

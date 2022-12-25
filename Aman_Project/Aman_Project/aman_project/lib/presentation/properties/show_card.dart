@@ -24,21 +24,32 @@ class _ShowCardState extends ConsumerState<ShowCard> {
   @override
   Widget build(BuildContext context) {
     if (ref.watch(filterTypeProivder) != "") {
-      returnedQueryFilter = PropertyManagement.typeFilter(
-          propertiesFiltered, ref.watch(filterTypeProivder));
+      returnedQueryFilter = PropertyManagement.typeFilter(propertiesFiltered,
+          ref.watch(filterTypeProivder), returnedQueryFilter);
     }
     if (ref.watch(filterRoomProivder) != "") {
-      returnedQueryFilter = PropertyManagement.roomFilter(
-          propertiesFiltered, ref.watch(filterRoomProivder));
+      returnedQueryFilter = PropertyManagement.roomFilter(propertiesFiltered,
+          ref.watch(filterRoomProivder), returnedQueryFilter);
     }
     if (ref.watch(filterBathroomProivder) != "") {
       returnedQueryFilter = PropertyManagement.bathroomFilter(
-          propertiesFiltered, ref.watch(filterBathroomProivder));
+          propertiesFiltered,
+          ref.watch(filterBathroomProivder),
+          returnedQueryFilter);
     }
-    if (ref.watch(filterPriceProivder).start != 15000 &&
-        ref.watch(filterPriceProivder).end != 1000000) {
+    if (ref.watch(filterPriceProivder).start != 10000 &&
+        ref.watch(filterPriceProivder).end != 10000000) {
       returnedQueryFilter = PropertyManagement.priceRangeFilter(
-          propertiesFiltered, ref.watch(filterPriceProivder));
+          propertiesFiltered,
+          ref.watch(filterPriceProivder),
+          returnedQueryFilter);
+    }
+    if (ref.watch(filterAreaProivder).start != 10 &&
+        ref.watch(filterAreaProivder).end != 3000) {
+      returnedQueryFilter = PropertyManagement.areaRangeFilter(
+          propertiesFiltered,
+          ref.watch(filterAreaProivder),
+          returnedQueryFilter);
     }
 
     String coming = ref.watch(searchInputProivder);
@@ -48,8 +59,10 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           : (ref.watch(filterTypeProivder) != "" ||
                   ref.watch(filterRoomProivder) != "" ||
                   ref.watch(filterBathroomProivder) != "" ||
-                  ref.watch(filterPriceProivder).start != 15000 &&
-                      ref.watch(filterPriceProivder).end != 1000000)
+                  ref.watch(filterPriceProivder).start != 10000 &&
+                      ref.watch(filterPriceProivder).end != 10000000 ||
+                  ref.watch(filterAreaProivder).start != 10 &&
+                      ref.watch(filterAreaProivder).end != 3000)
               ? returnedQueryFilter?.snapshots()
               : PropertyManagement.allProperties(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

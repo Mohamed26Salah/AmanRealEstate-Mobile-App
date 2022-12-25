@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PropertyWidget extends StatelessWidget {
   String addressAdmin;
   String addressUser;
-  String area;
+  int area;
   // String code;
   String descriptionAdmin;
   String descriptionUser;
@@ -22,7 +22,7 @@ class PropertyWidget extends StatelessWidget {
   String priority;
   String type;
   String visible;
-  String price;
+  int price;
   List<dynamic> multiImages;
   String singleImage;
   //UnCommon
@@ -89,16 +89,16 @@ class PropertyWidget extends StatelessWidget {
       price: price,
       singleImage: singleImage,
       multiImages: multiImages,
-      doublex:doublex,
-      floor:floor,
-      furnished:furnished,
-      finishing:finishing,
-      noBarthrooms:noBarthrooms,
-      noFlats:noFlats,
-      noFloors:noFloors,
-      noRooms:noRooms,
-      theNumberOFAB:theNumberOFAB,
-      typeOFActivity:typeOFActivity,
+      doublex: doublex,
+      floor: floor,
+      furnished: furnished,
+      finishing: finishing,
+      noBarthrooms: noBarthrooms,
+      noFlats: noFlats,
+      noFloors: noFloors,
+      noRooms: noRooms,
+      theNumberOFAB: theNumberOFAB,
+      typeOFActivity: typeOFActivity,
     );
     Navigator.of(context).pushNamed('/details', arguments: property);
   }
@@ -210,7 +210,7 @@ class PropertyWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            r"$" + price,
+                            r"$" + price.toString(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,

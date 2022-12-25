@@ -15,37 +15,57 @@ class PropertyManagement {
   }
 
   static Query<Map<String, dynamic>> roomFilter(
-      CollectionReference<Map<String, dynamic>> properties, String roomFilter) {
+      CollectionReference<Map<String, dynamic>> properties,
+      String roomFilter,
+      Query<Map<String, dynamic>>? returnedQueryFilter) {
     if (roomFilter == "Any") {
-      return properties.where("noRooms", isNotEqualTo: "");
+      return returnedQueryFilter =
+          properties.where("noRooms", isNotEqualTo: "");
     }
-    return properties.where("noRooms", isEqualTo: roomFilter);
+    return returnedQueryFilter =
+        properties.where("noRooms", isEqualTo: roomFilter);
   }
 
   static Query<Map<String, dynamic>> bathroomFilter(
       CollectionReference<Map<String, dynamic>> properties,
-      String bathroomFilter) {
+      String bathroomFilter,
+      Query<Map<String, dynamic>>? returnedQueryFilter) {
     if (bathroomFilter == "Any") {
-      return properties.where("noBathrooms", isNotEqualTo: "");
+      return returnedQueryFilter =
+          properties.where("noBathrooms", isNotEqualTo: "");
     }
-    return properties.where("noBathrooms", isEqualTo: bathroomFilter);
+    return returnedQueryFilter =
+        properties.where("noBathrooms", isEqualTo: bathroomFilter);
   }
 
   static Query<Map<String, dynamic>> typeFilter(
-      CollectionReference<Map<String, dynamic>> properties, String typeFilter) {
-    return properties.where("type", isEqualTo: typeFilter);
+      CollectionReference<Map<String, dynamic>> properties,
+      String typeFilter,
+      Query<Map<String, dynamic>>? returnedQueryFilter) {
+    return returnedQueryFilter =
+        properties.where("type", isEqualTo: typeFilter);
   }
 
   static Query<Map<String, dynamic>> priceRangeFilter(
       CollectionReference<Map<String, dynamic>> properties,
-      RangeValues priceFilter) {
-    return properties
-        .where("price", isGreaterThanOrEqualTo: priceFilter.start)
-        .where("price", isLessThanOrEqualTo: priceFilter.end);
+      RangeValues priceFilter,
+      Query<Map<String, dynamic>>? returnedQueryFilter) {
+    return returnedQueryFilter = properties
+        .where("price", isLessThanOrEqualTo: priceFilter.end)
+        .where("price", isGreaterThanOrEqualTo: priceFilter.start);
+  }
+
+  static Query<Map<String, dynamic>> areaRangeFilter(
+      CollectionReference<Map<String, dynamic>> properties,
+      RangeValues areaFilter,
+      Query<Map<String, dynamic>>? returnedQueryFilter) {
+    return returnedQueryFilter = properties
+        .where("area", isLessThanOrEqualTo: areaFilter.end)
+        .where("area", isGreaterThanOrEqualTo: areaFilter.start);
   }
 
   static Future getFlatData(
-      {required List<String> commonUnitPrpoerties,
+      {required List<dynamic> commonUnitPrpoerties,
       required String floor,
       required String doublex,
       required String noRooms,
@@ -53,7 +73,7 @@ class PropertyManagement {
       required String finishing,
       required String furnished,
       required String singleImage,
-      required List<String> mutliImages,
+      required List<dynamic> mutliImages,
       String type = "Flat"}) async {
     await FirebaseFirestore.instance.collection('properties').add({
       'type': type,
@@ -86,7 +106,7 @@ class PropertyManagement {
   }
 
   static Future getVillaData(
-      {required List<String> commonUnitPrpoerties,
+      {required List<dynamic> commonUnitPrpoerties,
       required String noFloors,
       required String noRooms,
       required String noBathrooms,
@@ -126,7 +146,7 @@ class PropertyManagement {
   }
 
   static Future getBuildingData(
-      {required List<String> commonUnitPrpoerties,
+      {required List<dynamic> commonUnitPrpoerties,
       required String noFloors,
       required String noFlats,
       required String singleImage,
@@ -163,7 +183,7 @@ class PropertyManagement {
   }
 
   static Future getClinicXStoreXLandXFactoryXOtherData(
-      {required List<String> commonUnitPrpoerties,
+      {required List<dynamic> commonUnitPrpoerties,
       required String typeOFActivity,
       required String singleImage,
       required List<String> mutliImages,
@@ -199,7 +219,7 @@ class PropertyManagement {
   }
 
   static Future getFarmData(
-      {required List<String> commonUnitPrpoerties,
+      {required List<dynamic> commonUnitPrpoerties,
       required String typeOFActivity,
       required String noAB,
       required String singleImage,
