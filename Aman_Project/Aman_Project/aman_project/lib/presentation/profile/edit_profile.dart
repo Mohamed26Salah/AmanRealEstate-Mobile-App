@@ -58,6 +58,9 @@ class _EditProfileState extends State<EditProfile> {
   signOut() async {
     await FirebaseAuth.instance.signOut();
 
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool("remember", false);
+
     Navigator.of(context).pushReplacementNamed('/');
   }
 
@@ -250,9 +253,9 @@ class _EditProfileState extends State<EditProfile> {
                           value:
                               widget.themeManager!.themeMode == ThemeMode.dark,
                           onChanged: (newValue) {
-                            // savePref(newValue);
+                            savePref(newValue);
 
-                            // widget.themeManager!.toggleTheme();
+                            widget.themeManager!.toggleTheme();
                           }),
                       title: Text("Dark Mode".tr),
                     ),

@@ -1,4 +1,5 @@
 import 'package:aman_project/presentation/rents/rent_Type.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'presentation/shared_features/local_strings.dart';
 import 'package:aman_project/firebase_options/firebase_options.dart';
@@ -41,13 +42,13 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  var theme;
+  bool? theme = false;
   @override
   void initState() {
     _themeManager.addListener(themeListener);
-    theme = ThemeMode.light;
+
     getPref();
-    print(_themeManager.themeMode);
+
     super.initState();
   }
 
@@ -60,12 +61,11 @@ class _MyAppState extends State<MyApp> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     theme = preferences.getBool("theme");
-    if (theme == true) {
-      theme = ThemeMode.dark;
+    if (theme!) {
+      await _themeManager.toggleTheme();
     } else {
-      theme = ThemeMode.light;
+      _themeManager.themeMode = ThemeMode.light;
     }
-    print(theme);
   }
 
   @override
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
       },
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: theme,
+      themeMode: _themeManager.themeMode,
       // home: Search(),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../shared_features/custom_text_field.dart';
 import '../../models/user_management.dart';
 
@@ -24,6 +25,31 @@ class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    getPref().then((value) {
+      if (value!) {
+        FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+          if (user != null) {
+            Navigator.of(context).pushReplacementNamed('/home');
+          }
+        });
+      }
+    });
+
+    super.initState();
+  }
+
+  savePref(bool boool) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool("remember", boool);
+  }
+
+  Future<bool?> getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getBool("remember");
+  }
 
 // bool result = await InternetConnectionChecker().hasConnection;
   Future signIn() async {
@@ -50,8 +76,7 @@ class _LoginPageState extends State<LoginPage> {
         if (FirebaseAuth.instance.currentUser!.emailVerified) {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
-          Navigator.of(context)
-              .pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacementNamed('/home');
           // Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushNamed('/verify');
@@ -86,10 +111,10 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  bool remember = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -174,6 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
+                            savePref(remember);
                             signIn();
 
                             // ScaffoldMessenger.of(context).showSnackBar(
@@ -255,6 +281,28 @@ class _LoginPageState extends State<LoginPage> {
                   //     // );
                   //   },
                   // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: remember,
+                        onChanged: (_) {
+                          setState(() {
+                            remember = !remember;
+                          });
+                        },
+                        fillColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              remember = !remember;
+                            });
+                          },
+                          child: const Text("Remember Me?"))
+                    ],
+                  ),
 
                   const SizedBox(height: 15),
                   GestureDetector(
