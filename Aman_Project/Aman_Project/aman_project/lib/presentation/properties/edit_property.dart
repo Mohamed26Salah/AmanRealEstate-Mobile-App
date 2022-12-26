@@ -1,6 +1,13 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../shared_features/custom_message.dart';
 import '../shared_features/custom_text_field.dart';
@@ -35,6 +42,10 @@ class _EditPropertyState extends State<EditProperty> {
   final _noOFABController = TextEditingController();
   final _noOFFlatsController = TextEditingController();
   final _typeOFActivityController = TextEditingController();
+
+  File? myImage;
+  
+  
 
   @override
   void dispose() {
@@ -357,6 +368,51 @@ class _EditPropertyState extends State<EditProperty> {
                           ],
                         ),
                 ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 30,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      border: Border.all(color: Theme.of(context).primaryColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Text(
+                      "Upload main image",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 20),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 30,
+                  height: 180,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: myImage == null
+                      ? Center(
+                          child: Image.network(widget.routeArgs.singleImage),
+                        )
+                      : Center(
+                          child: Image.file(
+                            myImage!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                ),
+                InkWell(
+                    onTap: () {
+                      openBottomSheet();
+                    },
+                    child: const Center(
+                      child: Icon(
+                        Icons.upload_file,
+                        size: 50,
+                      ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -369,54 +425,45 @@ class _EditPropertyState extends State<EditProperty> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) {
-                                return const Center(
-                                    child: CircularProgressIndicator(
-                                  backgroundColor: Colors.black26,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Color.fromARGB(255, 205, 153, 51)),
-                                ));
-                              });
-                          PropertyManagement.updateProperty(
-                              docId: widget.routeArgs.docId,
-                              ownerName: _ownerNameController.text,
-                              ownerNumber: _ownerNumberController.text,
-                              addressForUser: _addressForUserController.text,
-                              addressForAdmin: _addressForAdminController.text,
-                              area: int.parse(_areaController.text),
-                              price: int.parse(_priceController.text),
-                              descriptionForUser:
-                                  _descriptionForUserController.text,
-                              descriptionForAdmin:
-                                  _descriptionForAdminController.text,
-                              unitName: _nameController.text,
-                              paymentMethod: widget.routeArgs.paymentMethod,
-                              priority: widget.routeArgs.priority,
-                              visible: widget.routeArgs.visible,
-                              offered: widget.routeArgs.offered,
-                              singleImage: widget.routeArgs.singleImage,
-                              mutliImages: widget.routeArgs.multiImages,
-                              type: widget.routeArgs.type,
-                              floor: _floorController.text,
-                              noRooms: _noOFRoomsController.text,
-                              noBathrooms: _noOFBathroomsController.text,
-                              noFloors: _noOFFloorsController.text,
-                              noAB: _noOFABController.text,
-                              noFlats: _noOFFlatsController.text,
-                              typeOFActivity: _typeOFActivityController.text);
-
+                          uploadFile().then((value) {
+                            PropertyManagement.updateProperty(
+                                docId: widget.routeArgs.docId,
+                                ownerName: _ownerNameController.text,
+                                ownerNumber: _ownerNumberController.text,
+                                addressForUser: _addressForUserController.text,
+                                addressForAdmin:
+                                    _addressForAdminController.text,
+                                area: int.parse(_areaController.text),
+                                price: int.parse(_priceController.text),
+                                descriptionForUser:
+                                    _descriptionForUserController.text,
+                                descriptionForAdmin:
+                                    _descriptionForAdminController.text,
+                                unitName: _nameController.text,
+                                paymentMethod: widget.routeArgs.paymentMethod,
+                                priority: widget.routeArgs.priority,
+                                visible: widget.routeArgs.visible,
+                                offered: widget.routeArgs.offered,
+                                singleImage: widget.routeArgs.singleImage,
+                                mutliImages: widget.routeArgs.multiImages,
+                                type: widget.routeArgs.type,
+                                floor: _floorController.text,
+                                noRooms: _noOFRoomsController.text,
+                                noBathrooms: _noOFBathroomsController.text,
+                                noFloors: _noOFFloorsController.text,
+                                noAB: _noOFABController.text,
+                                noFlats: _noOFFlatsController.text,
+                                typeOFActivity: _typeOFActivityController.text);
+                          });
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/home', (route) => false);
+                              '/home', (route) => false);
+                        } else {
+                          errormessage("Error!", "Please Choose a type!");
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(val.snackBar);
                         }
-                        else {
-                            errormessage("Error!", "Please Choose a type!");
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(val.snackBar);
-                          }
+                        
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,
@@ -446,6 +493,99 @@ class _EditPropertyState extends State<EditProperty> {
         ),
       ),
     );
+  }
+
+  final ImagePicker _picker = ImagePicker();
+  getImage(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
+
+    if (image != null) {
+      myImage = File(image.path);
+      setState(() {});
+      Get.back();
+    }
+  }
+
+  openBottomSheet() {
+    Get.bottomSheet(Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+      ),
+      width: double.infinity,
+      height: 150,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        buildImageWidget(
+            iconData: Icons.camera_alt,
+            onPressed: () {
+              getImage(ImageSource.camera);
+            }),
+        buildImageWidget(
+            iconData: Icons.image,
+            onPressed: () {
+              getImage(ImageSource.gallery);
+            }),
+      ]),
+    ));
+  }
+
+  buildImageWidget({required IconData iconData, required Function onPressed}) {
+    return InkWell(
+      onTap: () => onPressed(),
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Icon(
+            iconData,
+            size: 30,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future uploadFile() async {
+    if( myImage != null) {
+
+    
+    final file = myImage!;
+    final metaData = SettableMetadata(contentType: 'image/jpeg');
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference ref = storageRef
+        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+    final uploadTask = ref.putFile(file, metaData);
+
+    uploadTask.snapshotEvents.listen((event) {
+      switch (event.state) {
+        case TaskState.running:
+          print("File is uploading");
+          break;
+        case TaskState.success:
+          ref.getDownloadURL().then((value) {
+            widget.routeArgs.singleImage = value;
+
+            print("object ${widget.routeArgs.singleImage}");
+            print("value $value");
+          });
+          break;
+        case TaskState.paused:
+          // TODO: Handle this case.
+          break;
+        case TaskState.canceled:
+          // TODO: Handle this case.
+          break;
+        case TaskState.error:
+          // TODO: Handle this case.
+          break;
+      }
+    });
+    }
   }
 
   Padding buildTextField(
