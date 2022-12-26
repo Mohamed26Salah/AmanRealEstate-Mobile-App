@@ -1,10 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:aman_project/presentation/dashboard/panel_left/edit_button.dart';
 
-import '/models/users_list_data.dart';
 import 'package:flutter/material.dart';
-import 'package:search_page/search_page.dart';
 
 import 'Components/block.dart';
 import 'Components/users_list_widget.dart';
@@ -54,7 +51,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        child: UsersListWidget()),
+                        child: const UsersListWidget()),
                   ),
                 ],
               ),

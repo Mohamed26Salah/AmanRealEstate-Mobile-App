@@ -30,6 +30,5 @@ Future<List<UserData>> getData2() async {
 
   //   }
   // });
-  print(datanum2);
   return datanum2;
 }

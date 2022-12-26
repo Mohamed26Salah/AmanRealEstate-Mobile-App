@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../shared_features/custom_text_field.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -14,8 +13,6 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _LoginPageState extends State<ForgetPassword> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final _emailController = TextEditingController();
   Future forgetPassword() async {
     await FirebaseAuth.instance
@@ -34,10 +31,10 @@ class _LoginPageState extends State<ForgetPassword> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
         backgroundColor: Colors.grey[300],
         elevation: 0,
-        title: Text(""),
+        title: const Text(""),
       ),
       backgroundColor: Colors.grey[300],
       body: SafeArea(

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../models/users_list_data.dart';
 import '../../../presentation/dashboard/panel_left/edit_button.dart';
 
 class UsersListWidget extends StatefulWidget {
-  UsersListWidget({super.key});
+  const UsersListWidget({super.key});
 
   @override
   State<UsersListWidget> createState() => _UsersListWidgetState();
@@ -14,6 +12,7 @@ class UsersListWidget extends StatefulWidget {
 
 class _UsersListWidgetState extends State<UsersListWidget> {
   Future<List<UserData>>? usertData;
+  @override
   void initState() {
     super.initState();
     usertData = getData2();

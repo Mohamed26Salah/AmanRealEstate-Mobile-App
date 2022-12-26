@@ -38,10 +38,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //   return datanum2;
 // }
 void changeRole(String email, String dropdownvalue) async {
-  List data = [];
-  Map datanum = {};
   String path = '';
-  bool done = false;
 
   await FirebaseFirestore.instance
       .collection('users')

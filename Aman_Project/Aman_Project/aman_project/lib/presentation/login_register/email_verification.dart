@@ -21,7 +21,7 @@ class _EmailVerificationState extends State<EmailVerification> {
     if (!isEmailVerified) {
       sendVerificationEmail();
       timer = Timer.periodic(
-        Duration(seconds: 3),
+        const Duration(seconds: 3),
         (_) => checkEmailVerified(),
       );
     }
@@ -68,10 +68,10 @@ class _EmailVerificationState extends State<EmailVerification> {
     redirectToHome();
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
         backgroundColor: Colors.grey[300],
         elevation: 0,
-        title: Text(""),
+        title: const Text(""),
       ),
       // bottomNavigationBar: const NavBarGR(),
       body: SingleChildScrollView(
@@ -94,13 +94,13 @@ class _EmailVerificationState extends State<EmailVerification> {
                     height: 40,
                   ),
                   ElevatedButton(
-                    child: Text('Resend Verification Email'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 205, 153, 51),
+                      backgroundColor: const Color.fromARGB(255, 205, 153, 51),
                     ),
                     onPressed: () {
                       sendVerificationEmail();
                     },
+                    child: const Text('Resend Verification Email'),
                   )
                 ],
               ),

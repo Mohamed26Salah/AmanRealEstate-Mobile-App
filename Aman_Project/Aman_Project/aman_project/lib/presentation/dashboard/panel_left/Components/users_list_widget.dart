@@ -8,7 +8,7 @@ import 'dart:async';
 import 'alert_dialogue.dart';
 
 class UsersListWidget extends StatefulWidget {
-  UsersListWidget({super.key});
+  const UsersListWidget({super.key});
 
   @override
   State<UsersListWidget> createState() => _UsersListWidgetState();

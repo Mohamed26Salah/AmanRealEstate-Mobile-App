@@ -31,7 +31,7 @@ class MyEditButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
-          shadowColor: Color.fromARGB(84, 0, 0, 0),
+          shadowColor: const Color.fromARGB(84, 0, 0, 0),
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
         child: child,

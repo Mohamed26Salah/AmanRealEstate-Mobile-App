@@ -51,12 +51,12 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
 
   void _runExpandCheck() {
     if (widget.expand) {
-      Timer(Duration(milliseconds: 8000), () {
+      Timer(const Duration(milliseconds: 8000), () {
         // <-- Delay here
         expandController!.forward();
       });
     } else {
-      Timer(Duration(milliseconds: 8000), () {
+      Timer(const Duration(milliseconds: 8000), () {
         // <-- Delay here
         expandController!.reverse();
       });
@@ -123,7 +123,7 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
             ),
             Visibility(
                 visible: widget.expand,
-                child: CategoryChart(DataChart: widget.chartData!)),
+                child: CategoryChart(dataChart: widget.chartData!)),
           ],
         ));
   }

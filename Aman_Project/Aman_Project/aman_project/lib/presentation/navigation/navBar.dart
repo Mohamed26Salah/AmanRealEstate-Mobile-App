@@ -49,7 +49,7 @@ class _NavBarState extends State<NavBar> {
       body: pages[index],
       bottomNavigationBar: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: GNav(
             onTabChange: (i) {

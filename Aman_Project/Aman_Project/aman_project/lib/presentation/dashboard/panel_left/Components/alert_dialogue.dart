@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../models/set_role.dart';
 
 class AlertDailogue extends StatefulWidget {
   String email;
   final ValueChanged<int> update;
-  AlertDailogue({super.key, required this.email, required this.update});
+   AlertDailogue({super.key, required this.email, required this.update});
 
   @override
   State<AlertDailogue> createState() => _AlertDailogueState();

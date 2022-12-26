@@ -9,7 +9,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 final _formKey = GlobalKey<FormState>();
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -254,8 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          primary: Colors.red.withOpacity(0),
+                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),

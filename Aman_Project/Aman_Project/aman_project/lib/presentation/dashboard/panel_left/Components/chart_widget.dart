@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CategoryChart extends StatefulWidget {
-  List<ChartData> DataChart;
-  CategoryChart({super.key, required this.DataChart});
+  List<ChartData> dataChart;
+  CategoryChart({super.key, required this.dataChart});
 
   @override
   State<CategoryChart> createState() => _CategoryChartState();
@@ -22,7 +22,7 @@ class _CategoryChartState extends State<CategoryChart> {
           tooltipBehavior: TooltipBehavior(enable: true),
           series: <ChartSeries<ChartData, String>>[
             ColumnSeries<ChartData, String>(
-              dataSource: widget.DataChart,
+              dataSource: widget.dataChart,
               xValueMapper: (ChartData datax, _) => datax.x,
               yValueMapper: (ChartData datay, _) => datay.y,
               name: 'Number of Units',
