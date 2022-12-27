@@ -128,8 +128,8 @@ class _EditProfileState extends State<EditProfile> {
                   // Text('${user.email}'),
 
                   Consumer(builder: (_, ref, __) {
-                    return ref.watch(userEmailProvider).when(data: (value) {
-                      return Text(value);
+                    return ref.watch(userDataProvider).when(data: (value) {
+                      return Text(value.get('email'));
                     }, error: (Object error, StackTrace err) {
                       return Text("error");
                     }, loading: () {

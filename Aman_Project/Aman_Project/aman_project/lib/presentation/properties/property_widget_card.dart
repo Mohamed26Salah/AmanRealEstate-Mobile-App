@@ -1,3 +1,4 @@
+import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -8,115 +9,32 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // });
 
 class PropertyWidget extends StatelessWidget {
-  String docId;
-  String addressAdmin;
-  String addressUser;
-  int area;
-  // String code;
-  String descriptionAdmin;
-  String descriptionUser;
-  String unitName;
-  String offered;
-  String ownerName;
-  String ownerNumber;
-  String paymentMethod;
-  String priority;
-  String type;
-  String visible;
-  int price;
-  List<dynamic> multiImages;
-  String singleImage;
-  //UnCommon
-  String? doublex;
-  String? finishing;
-  String? floor;
-  String? furnished;
-  String? noBarthrooms;
-  String? noFlats;
-  String? noFloors;
-  String? noRooms;
-  String? theNumberOFAB;
-  String? typeOFActivity;
+  Property property;
+
   Color? color = Colors.yellow[700];
   final CacheManager cacheManager = CacheManager(Config('images_key',
       maxNrOfCacheObjects: 100, stalePeriod: const Duration(days: 1)));
 
   PropertyWidget({
     super.key,
-    required this.docId,
-    required this.addressAdmin,
-    required this.addressUser,
-    required this.area,
-    required this.descriptionAdmin,
-    required this.descriptionUser,
-    required this.unitName,
-    required this.offered,
-    required this.ownerName,
-    required this.ownerNumber,
-    required this.paymentMethod,
-    required this.priority,
-    required this.type,
-    required this.visible,
-    required this.price,
-    required this.singleImage,
-    required this.multiImages,
-    //UnCommon
-    this.doublex,
-    this.floor,
-    this.furnished,
-    this.finishing,
-    this.noBarthrooms,
-    this.noFlats,
-    this.noFloors,
-    this.noRooms,
-    this.theNumberOFAB,
-    this.typeOFActivity,
+    required this.property,
   });
 
   selectedProperty(BuildContext context) {
-    PropertyWidget property = PropertyWidget(
-      docId: docId,
-      addressAdmin: addressAdmin,
-      addressUser: addressUser,
-      area: area,
-      descriptionAdmin: descriptionAdmin,
-      descriptionUser: descriptionUser,
-      unitName: unitName,
-      offered: offered,
-      ownerName: ownerName,
-      ownerNumber: ownerNumber,
-      paymentMethod: paymentMethod,
-      priority: priority,
-      type: type,
-      visible: visible,
-      price: price,
-      singleImage: singleImage,
-      multiImages: multiImages,
-      doublex: doublex,
-      floor: floor,
-      furnished: furnished,
-      finishing: finishing,
-      noBarthrooms: noBarthrooms,
-      noFlats: noFlats,
-      noFloors: noFloors,
-      noRooms: noRooms,
-      theNumberOFAB: theNumberOFAB,
-      typeOFActivity: typeOFActivity,
-    );
     Navigator.of(context).pushNamed('/details', arguments: property);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (offered == "For Sale") {
-      offered = "For Sale";
+    if (property.offered == "For Sale") {
+      property.offered = "For Sale";
     } else {
-      offered = "For Rent";
+      property.offered = "For Rent";
       color = Colors.red;
     }
     // print(mainImage);
     return Hero(
-      tag: singleImage,
+      tag: property.singleImage,
       child: GestureDetector(
         onTap: () => selectedProperty(context),
         child: Card(
@@ -132,7 +50,7 @@ class PropertyWidget extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: NetworkImage(mainImage),
-                image: CachedNetworkImageProvider(singleImage,
+                image: CachedNetworkImageProvider(property.singleImage,
                     cacheManager: cacheManager),
                 fit: BoxFit.cover,
               ),
@@ -156,7 +74,7 @@ class PropertyWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        type,
+                        property.type,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -181,7 +99,7 @@ class PropertyWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        offered,
+                        property.offered,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -203,7 +121,7 @@ class PropertyWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 5),
                               child: Text(
                                 overflow: TextOverflow.ellipsis,
-                                unitName,
+                                property.unitName,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -213,7 +131,7 @@ class PropertyWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            r"$" + price.toString(),
+                            r"$" + property.price.toString(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -243,7 +161,7 @@ class PropertyWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 5),
                               child: Text(
                                 overflow: TextOverflow.ellipsis,
-                                addressUser,
+                                property.addressUser,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -263,7 +181,7 @@ class PropertyWidget extends StatelessWidget {
                           //   width: 4,
                           // ),
                           Text(
-                            "$area sq/m",
+                            "${property.area} sq/m",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,

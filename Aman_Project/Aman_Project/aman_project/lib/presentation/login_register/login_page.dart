@@ -6,10 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../shared_features/custom_text_field.dart';
-import '../../models/user_management.dart';
+import '../../data/user_management.dart';
 
 import '../../constants/globals.dart' as val;
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -67,6 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                     Color.fromARGB(255, 205, 153, 51)),
               ));
             });
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
         if (FirebaseAuth.instance.currentUser!.emailVerified) {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);

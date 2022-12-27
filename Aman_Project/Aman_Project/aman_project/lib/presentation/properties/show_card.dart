@@ -1,5 +1,6 @@
+import 'package:aman_project/models/property.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
-import 'package:aman_project/models/property_managemnt.dart';
+import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -120,10 +121,8 @@ class _ShowCardState extends ConsumerState<ShowCard> {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
-            
-            // ref.read(resultsCount.notifier).state = data.size;
-            return PropertyWidget(
-              docId : data.docs[index].id,
+            Property property = Property(
+              docId: data.docs[index].id,
               addressAdmin: data.docs[index]['addressForAdmin'],
               addressUser: data.docs[index]['addressForUser'],
               area: data.docs[index]['area'],
@@ -151,6 +150,10 @@ class _ShowCardState extends ConsumerState<ShowCard> {
               noRooms: data.docs[index]['noRooms'],
               theNumberOFAB: data.docs[index]['noAB'],
               typeOFActivity: data.docs[index]['typeOFActivity'],
+            );
+            // ref.read(resultsCount.notifier).state = data.size;
+            return PropertyWidget(
+              property: property,
             );
           },
         );

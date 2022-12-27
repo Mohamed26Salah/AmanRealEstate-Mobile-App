@@ -1,4 +1,4 @@
-import 'package:aman_project/models/property_managemnt.dart';
+import 'package:aman_project/data/property_managemnt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

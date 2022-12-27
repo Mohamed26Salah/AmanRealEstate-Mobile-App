@@ -1,3 +1,4 @@
+import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/properties/edit_property.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,8 +18,7 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
-    PropertyWidget routeArgs =
-        ModalRoute.of(context)!.settings.arguments as PropertyWidget;
+    Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
 
     Color offeredColor;
     routeArgs.offered == 'For Rent'
@@ -448,7 +448,7 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  void _showEditBottomSheet(BuildContext context, PropertyWidget routeArgs) {
+  void _showEditBottomSheet(BuildContext context, Property routeArgs) {
     showModalBottomSheet<dynamic>(
         context: context,
         isScrollControlled: true,
