@@ -1,20 +1,29 @@
-import 'package:aman_project/models/user_management.dart';
+import 'package:aman_project/data/user_management.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future userEmail = UserHelper().getUserEmail();
-final userEmailProviderRepository = StateProvider<Future>(
-  (ref) => userEmail,
+Future userData = UserHelper().getUserData();
+final userDataProviderRepository = StateProvider<Future>(
+  (ref) => userData,
 );
 //Reads the value first time 8er kda 5las msh hy5osh database again
-final userEmailProvider = FutureProvider((ref) async {
-  return ref.watch(userEmailProviderRepository);
+final userDataProvider = FutureProvider((ref) async {
+  return ref.watch(userDataProviderRepository);
 });
 
-Future userRole = UserHelper().getUserRole();
-final userRoleProviderRepository = StateProvider<Future>(
-  (ref) => userRole,
-);
+// Future userEmail = UserHelper().getUserEmail();
+// final userEmailProviderRepository = StateProvider<Future>(
+//   (ref) => userEmail,
+// );
+// //Reads the value first time 8er kda 5las msh hy5osh database again
+// final userEmailProvider = FutureProvider((ref) async {
+//   return ref.watch(userEmailProviderRepository);
+// });
 
-final userRoleProvider = FutureProvider((ref) async {
-  return ref.watch(userRoleProviderRepository);
-});
+// Future userRole = UserHelper().getUserRole();
+// final userRoleProviderRepository = StateProvider<Future>(
+//   (ref) => userRole,
+// );
+
+// final userRoleProvider = FutureProvider((ref) async {
+//   return ref.watch(userRoleProviderRepository);
+// });

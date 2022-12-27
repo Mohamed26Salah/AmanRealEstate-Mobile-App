@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -12,13 +13,13 @@ import 'package:image_picker/image_picker.dart';
 import '../shared_features/custom_message.dart';
 import '../shared_features/custom_text_field.dart';
 import 'dropdown.dart';
-import 'package:aman_project/models/property_managemnt.dart';
+import 'package:aman_project/data/property_managemnt.dart';
 import '../../constants/globals.dart' as val;
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class EditProperty extends StatefulWidget {
-  PropertyWidget routeArgs;
+  Property routeArgs;
   EditProperty({super.key, required this.routeArgs});
 
   @override
@@ -44,8 +45,6 @@ class _EditPropertyState extends State<EditProperty> {
   final _typeOFActivityController = TextEditingController();
 
   File? myImage;
-  
-  
 
   @override
   void dispose() {
@@ -463,7 +462,6 @@ class _EditPropertyState extends State<EditProperty> {
                             ..hideCurrentSnackBar()
                             ..showSnackBar(val.snackBar);
                         }
-                        
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,
@@ -551,40 +549,38 @@ class _EditPropertyState extends State<EditProperty> {
   }
 
   Future uploadFile() async {
-    if( myImage != null) {
+    if (myImage != null) {
+      final file = myImage!;
+      final metaData = SettableMetadata(contentType: 'image/jpeg');
+      final storageRef = FirebaseStorage.instance.ref();
+      Reference ref = storageRef
+          .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+      final uploadTask = ref.putFile(file, metaData);
 
-    
-    final file = myImage!;
-    final metaData = SettableMetadata(contentType: 'image/jpeg');
-    final storageRef = FirebaseStorage.instance.ref();
-    Reference ref = storageRef
-        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-    final uploadTask = ref.putFile(file, metaData);
+      uploadTask.snapshotEvents.listen((event) {
+        switch (event.state) {
+          case TaskState.running:
+            print("File is uploading");
+            break;
+          case TaskState.success:
+            ref.getDownloadURL().then((value) {
+              widget.routeArgs.singleImage = value;
 
-    uploadTask.snapshotEvents.listen((event) {
-      switch (event.state) {
-        case TaskState.running:
-          print("File is uploading");
-          break;
-        case TaskState.success:
-          ref.getDownloadURL().then((value) {
-            widget.routeArgs.singleImage = value;
-
-            print("object ${widget.routeArgs.singleImage}");
-            print("value $value");
-          });
-          break;
-        case TaskState.paused:
-          // TODO: Handle this case.
-          break;
-        case TaskState.canceled:
-          // TODO: Handle this case.
-          break;
-        case TaskState.error:
-          // TODO: Handle this case.
-          break;
-      }
-    });
+              print("object ${widget.routeArgs.singleImage}");
+              print("value $value");
+            });
+            break;
+          case TaskState.paused:
+            // TODO: Handle this case.
+            break;
+          case TaskState.canceled:
+            // TODO: Handle this case.
+            break;
+          case TaskState.error:
+            // TODO: Handle this case.
+            break;
+        }
+      });
     }
   }
 
