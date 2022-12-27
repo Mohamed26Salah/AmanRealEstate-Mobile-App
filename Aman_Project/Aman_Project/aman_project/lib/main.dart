@@ -1,3 +1,4 @@
+import 'package:aman_project/presentation/login_loading/login_loading.dart';
 import 'package:aman_project/presentation/rents/rent_Type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -18,15 +19,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+bool? theme = false;
+ThemeManager _themeManager = ThemeManager();
+getPref() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  theme = preferences.getBool("theme") ?? false;
+  if (theme!) {
+    _themeManager = ThemeManager(themeMode: ThemeMode.dark);
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await getPref();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const ProviderScope(child: MyApp()));
 }
-
-ThemeManager _themeManager = ThemeManager();
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -42,12 +52,9 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  bool? theme = false;
   @override
   void initState() {
     _themeManager.addListener(themeListener);
-
-    getPref();
 
     super.initState();
   }
@@ -58,16 +65,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    theme = preferences.getBool("theme");
-    if (theme!) {
-      await _themeManager.toggleTheme();
-    } else {
-      _themeManager.themeMode = ThemeMode.light;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -75,7 +72,8 @@ class _MyAppState extends State<MyApp> {
       translations: LocaleString(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const LoginLoading(),
+        '/login': (context) => const LoginPage(),
         '/register': (context) => RegisterPage(),
         '/home': (context) => NavBar(themeManager: _themeManager),
         '/details': (context) => const Details(),

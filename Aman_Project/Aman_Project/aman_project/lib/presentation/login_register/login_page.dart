@@ -10,7 +10,6 @@ import '../../models/user_management.dart';
 
 import '../../constants/globals.dart' as val;
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -25,29 +24,9 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    getPref().then((value) {
-      if (value!) {
-        FirebaseAuth.instance.idTokenChanges().listen((User? user) {
-          if (user != null) {
-            Navigator.of(context).pushReplacementNamed('/home');
-          }
-        });
-      }
-    });
-
-    super.initState();
-  }
-
   savePref(bool boool) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", boool);
-  }
-
-  Future<bool?> getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getBool("remember");
   }
 
 // bool result = await InternetConnectionChecker().hasConnection;
@@ -67,6 +46,11 @@ class _LoginPageState extends State<LoginPage> {
                     Color.fromARGB(255, 205, 153, 51)),
               ));
             });
+
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
         if (FirebaseAuth.instance.currentUser!.emailVerified) {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
