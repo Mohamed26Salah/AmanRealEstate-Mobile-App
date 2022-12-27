@@ -1,3 +1,4 @@
+import 'package:aman_project/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 
@@ -15,7 +16,7 @@ class UsersListWidget extends StatefulWidget {
 }
 
 class _UsersListWidgetState extends State<UsersListWidget> {
-  Future<List<UserData>>? usertData;
+  Future<List<User>>? usertData;
   @override
   void initState() {
     super.initState();

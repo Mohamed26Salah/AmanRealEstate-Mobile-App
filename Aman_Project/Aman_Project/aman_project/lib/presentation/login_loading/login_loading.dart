@@ -17,18 +17,7 @@ class _LoginLoadingState extends State<LoginLoading> {
     bool? value = preferences.getBool("remember");
     await Future.delayed(const Duration(seconds: 1));
 
-    if (value!) {
-      FirebaseAuth.instance.idTokenChanges().listen((User? user) {
-        if (user != null) {
-          Navigator.of(context).pushReplacementNamed('/home');
-        } else {
-          Navigator.of(context).pushReplacementNamed('/login');
-        }
-      });
-
-      return true;
-    }
-    return false;
+    return value;
   }
 
   @override
@@ -37,7 +26,15 @@ class _LoginLoadingState extends State<LoginLoading> {
       body: FutureBuilder(
           future: getPref(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData && snapshot.data!) {
+              FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+                if (user != null) {
+                  Navigator.of(context).pushReplacementNamed('/home');
+                } else {
+                  Navigator.of(context).pushReplacementNamed('/login');
+                }
+              });
+
               return const Center(child: CircularProgressIndicator());
             } else {
               return Center(

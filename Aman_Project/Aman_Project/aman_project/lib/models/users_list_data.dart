@@ -1,16 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserData {
-  UserData(this.email, this.role);
+import 'user.dart';
 
-  final String email;
-
-  final String role;
-  int compareTo(UserData other) => email.compareTo(other.email);
-}
-
-Future<List<UserData>> getData2() async {
-  List<UserData> datanum2 = [];
+Future<List<User>> getData2() async {
+  List<User> datanum2 = [];
 
   await FirebaseFirestore.instance
       .collection('users')
@@ -18,7 +11,7 @@ Future<List<UserData>> getData2() async {
       .get()
       .then((QuerySnapshot querySnapshot) {
     for (var doc in querySnapshot.docs) {
-      datanum2.add(UserData(doc["email"], doc["role"]));
+      datanum2.add(User(doc["email"], doc["role"]));
     }
   });
   // await FirebaseFirestore.instance

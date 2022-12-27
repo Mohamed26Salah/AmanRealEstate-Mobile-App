@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../shared_features/custom_text_field.dart';
-import '../../models/user_management.dart';
+import '../../data/user_management.dart';
 
 import '../../constants/globals.dart' as val;
 
