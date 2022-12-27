@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
-class User {
+class UserModel {
   String email;
   String role;
-  User(this.email, this.role);
-  int compareTo(User other) => email.compareTo(other.email);
+  UserModel(this.email, this.role);
+  int compareTo(UserModel other) => email.compareTo(other.email);
 }

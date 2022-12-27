@@ -1,6 +1,7 @@
-
+import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
-import '../../../../models/category_chart_data.dart';
+import '../../../../models/chart_data.dart';
 import 'cards.dart';
 
 class ChartBlock extends StatefulWidget {
@@ -27,12 +28,12 @@ class _ChartBlockState extends State<ChartBlock> {
   void initState() {
     super.initState();
     if (widget.dataNum == 0) {
-      chartData = getData();
+      chartData = PropertyManagement.getData();
     } else if (widget.dataNum == 1) {
-      chartData = getData2();
+      chartData = UserHelper.getData2();
     } else if (widget.dataNum == 2) {
     } else {
-      chartData = getData();
+      chartData = PropertyManagement.getData();
     }
   }
 

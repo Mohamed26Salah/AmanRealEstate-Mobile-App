@@ -1,8 +1,8 @@
+import 'package:aman_project/data/user_management.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 
-import '../../../../models/users_list_data.dart';
 import '../edit_button.dart';
 import 'dart:math';
 import 'dart:async';
@@ -16,17 +16,17 @@ class UsersListWidget extends StatefulWidget {
 }
 
 class _UsersListWidgetState extends State<UsersListWidget> {
-  Future<List<User>>? usertData;
+  Future<List<UserModel>>? usertData;
   @override
   void initState() {
     super.initState();
-    usertData = getData2();
+    usertData = UserHelper.getData2User();
   }
 
   void _update(dynamic int) {
     Timer(const Duration(seconds: 2), () {
       setState(() {
-        usertData = getData2();
+        usertData = UserHelper.getData2User();
       });
     });
   }

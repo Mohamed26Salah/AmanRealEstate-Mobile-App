@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:aman_project/models/category_chart_data.dart';
+import 'package:aman_project/models/chart_data.dart';
 import 'package:flutter/material.dart';
 
 import 'chart_widget.dart';
