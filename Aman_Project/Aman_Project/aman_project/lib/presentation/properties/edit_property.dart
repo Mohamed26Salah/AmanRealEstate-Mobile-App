@@ -424,36 +424,7 @@ class _EditPropertyState extends State<EditProperty> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          uploadFile().then((value) {
-                            PropertyManagement.updateProperty(
-                                docId: widget.routeArgs.docId,
-                                ownerName: _ownerNameController.text,
-                                ownerNumber: _ownerNumberController.text,
-                                addressForUser: _addressForUserController.text,
-                                addressForAdmin:
-                                    _addressForAdminController.text,
-                                area: int.parse(_areaController.text),
-                                price: int.parse(_priceController.text),
-                                descriptionForUser:
-                                    _descriptionForUserController.text,
-                                descriptionForAdmin:
-                                    _descriptionForAdminController.text,
-                                unitName: _nameController.text,
-                                paymentMethod: widget.routeArgs.paymentMethod,
-                                priority: widget.routeArgs.priority,
-                                visible: widget.routeArgs.visible,
-                                offered: widget.routeArgs.offered,
-                                singleImage: widget.routeArgs.singleImage,
-                                mutliImages: widget.routeArgs.multiImages,
-                                type: widget.routeArgs.type,
-                                floor: _floorController.text,
-                                noRooms: _noOFRoomsController.text,
-                                noBathrooms: _noOFBathroomsController.text,
-                                noFloors: _noOFFloorsController.text,
-                                noAB: _noOFABController.text,
-                                noFlats: _noOFFlatsController.text,
-                                typeOFActivity: _typeOFActivityController.text);
-                          });
+                          uploadFile();
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               '/home', (route) => false);
                         } else {
@@ -549,10 +520,12 @@ class _EditPropertyState extends State<EditProperty> {
   }
 
   Future uploadFile() async {
+    String? result = '';
     if (myImage != null) {
       final file = myImage!;
       final metaData = SettableMetadata(contentType: 'image/jpeg');
       final storageRef = FirebaseStorage.instance.ref();
+
       Reference ref = storageRef
           .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
       final uploadTask = ref.putFile(file, metaData);
@@ -568,6 +541,33 @@ class _EditPropertyState extends State<EditProperty> {
 
               print("object ${widget.routeArgs.singleImage}");
               print("value $value");
+              result = value;
+              PropertyManagement.updateProperty(
+                  docId: widget.routeArgs.docId,
+                  ownerName: _ownerNameController.text,
+                  ownerNumber: _ownerNumberController.text,
+                  addressForUser: _addressForUserController.text,
+                  addressForAdmin: _addressForAdminController.text,
+                  area: int.parse(_areaController.text),
+                  price: int.parse(_priceController.text),
+                  descriptionForUser: _descriptionForUserController.text,
+                  descriptionForAdmin: _descriptionForAdminController.text,
+                  unitName: _nameController.text,
+                  paymentMethod: widget.routeArgs.paymentMethod,
+                  priority: widget.routeArgs.priority,
+                  visible: widget.routeArgs.visible,
+                  offered: widget.routeArgs.offered,
+                  singleImage: value,
+                  mutliImages: widget.routeArgs.multiImages,
+                  type: widget.routeArgs.type,
+                  floor: _floorController.text,
+                  noRooms: _noOFRoomsController.text,
+                  noBathrooms: _noOFBathroomsController.text,
+                  noFloors: _noOFFloorsController.text,
+                  noAB: _noOFABController.text,
+                  noFlats: _noOFFlatsController.text,
+                  typeOFActivity: _typeOFActivityController.text);
+              return result;
             });
             break;
           case TaskState.paused:
@@ -581,6 +581,33 @@ class _EditPropertyState extends State<EditProperty> {
             break;
         }
       });
+    } else {
+      print("in here");
+      PropertyManagement.updateProperty(
+          docId: widget.routeArgs.docId,
+          ownerName: _ownerNameController.text,
+          ownerNumber: _ownerNumberController.text,
+          addressForUser: _addressForUserController.text,
+          addressForAdmin: _addressForAdminController.text,
+          area: int.parse(_areaController.text),
+          price: int.parse(_priceController.text),
+          descriptionForUser: _descriptionForUserController.text,
+          descriptionForAdmin: _descriptionForAdminController.text,
+          unitName: _nameController.text,
+          paymentMethod: widget.routeArgs.paymentMethod,
+          priority: widget.routeArgs.priority,
+          visible: widget.routeArgs.visible,
+          offered: widget.routeArgs.offered,
+          singleImage: widget.routeArgs.singleImage,
+          mutliImages: widget.routeArgs.multiImages,
+          type: widget.routeArgs.type,
+          floor: _floorController.text,
+          noRooms: _noOFRoomsController.text,
+          noBathrooms: _noOFBathroomsController.text,
+          noFloors: _noOFFloorsController.text,
+          noAB: _noOFABController.text,
+          noFlats: _noOFFlatsController.text,
+          typeOFActivity: _typeOFActivityController.text);
     }
   }
 
