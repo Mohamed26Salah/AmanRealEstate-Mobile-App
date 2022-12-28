@@ -1,4 +1,5 @@
 import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/data/user_management.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,47 +33,11 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     super.dispose();
   }
 
-  final user = FirebaseAuth.instance.currentUser!;
-
-  changePassword() async {
-    try {
-      await user.updatePassword(newPassword);
-
-      FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushReplacementNamed('/');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.black26,
-          content: Text('Password Changed successfully.. Login again please'),
-        ),
-      );
-      // ignore: empty_catches
-    } catch (error) {}
-  }
-
-  signOut() async {
-    await FirebaseAuth.instance.signOut();
-
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setBool("remember", false);
-    Navigator.of(context).pushReplacementNamed('/');
-  }
-
-  savePref(bool theme) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setBool("theme", theme);
-    print(preferences.getBool("theme"));
-  }
-
-  getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    theme = preferences.getBool("theme")!;
-  }
-
   bool isObscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
-    final userData = ref.watch(newUserDataProivder);
+    // final userData = ref.watch(newUserDataProivder);
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
       body: Container(
@@ -108,12 +73,20 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                             // ),
                           ),
                           child: Center(
-                              child: Text(
-                            '${user.email![0].capitalize}',
-                            style: const TextStyle(
-                              fontSize: 50,
-                            ),
-                          )),
+                            child: Consumer(builder: (_, ref, __) {
+                              return ref.watch(userDataProvider).when(
+                                  data: (value) {
+                                return Text(
+                                  '${value.get('email')}'[0].capitalize!,
+                                  style: const TextStyle(fontSize: 50),
+                                );
+                              }, error: (Object error, StackTrace err) {
+                                return Text("error");
+                              }, loading: () {
+                                return CircularProgressIndicator();
+                              });
+                            }),
+                          ),
                         ),
                       ],
                     ),
@@ -123,7 +96,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   ),
                   // Text('${user.email}'),
                   //Yasser Way
-                  Text(userData?.email ?? "Loading"),
+                  // Text(userData?.email ?? "Loading"),
                   //Salah Way
                   Consumer(builder: (_, ref, __) {
                     return ref.watch(userDataProvider).when(data: (value) {
@@ -218,7 +191,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         setState(() {
                           newPassword = newPasswordController.text;
                         });
-                        changePassword();
+                        UserHelper().changePassword(context, newPassword);
+                        // changePassword();
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -250,8 +224,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           value:
                               widget.themeManager!.themeMode == ThemeMode.dark,
                           onChanged: (newValue) {
-                            savePref(newValue);
-
+                            UserHelper().savePref(newValue);
+                            // savePref(newValue);
                             widget.themeManager!.toggleTheme();
                           }),
                       title: Text("Dark Mode".tr),
@@ -283,7 +257,9 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         ),
                       ),
                     ),
-                    onPressed: signOut,
+                    onPressed: (() {
+                      UserHelper().signOut(context);
+                    }),
                     child: const Center(
                       child: Text(
                         'Sign out',

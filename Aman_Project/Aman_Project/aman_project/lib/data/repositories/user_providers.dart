@@ -11,6 +11,6 @@ final userDataProvider = FutureProvider((ref) async {
 });
 
 //Yasser Way
-final newUserDataProivder = StateProvider<UserModel?>((ref) {
-  return null;
-});
+// final newUserDataProivder = StateProvider<UserModel?>((ref) {
+//   return null;
+// });

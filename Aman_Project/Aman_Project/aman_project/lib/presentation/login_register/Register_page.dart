@@ -1,3 +1,4 @@
+import 'package:aman_project/data/user_management.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../shared_features/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -22,61 +23,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
   //Verification
-
-  Future signUp() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (result == true) {
-      try {
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.black26,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 205, 153, 51)),
-              ));
-            });
-        final credential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
-        // StreamBuilder<User>(
-        //   stream: FirebaseAuth.instance.authStateChanges(),
-        //   builder: ((context, snapshot) {
-        //     if (snapshot.hasData && snapshot.data != null) {
-        //       UserHelper.saveUser(snapshot.data);
-        //     }
-        //   }),
-        // );
-
-        Navigator.of(context).pushNamed('/verify');
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          Navigator.of(context).pop();
-          errormessage("Error!", "The password provided is too weak.");
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(val.snackBar);
-        } else if (e.code == 'email-already-in-use') {
-          Navigator.of(context).pop();
-          errormessage("Error!", "The account already exists for that email.");
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(val.snackBar);
-        }
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      errormessage("Error!", "No Internet Connection!");
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(val.snackBar);
-    }
-  }
 
   @override
   void dispose() {
@@ -142,40 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 50),
-                  //First name
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 0, left: 15, right: 15, bottom: 10),
-                  //   child: CustomTextField(
-                  //     controller: _firstNameController,
-                  //     obscureText: false,
-                  //     labelText: "Enter your First Name",
-                  //     hintText: "First Name",
-                  //     validator: (value) {
-                  //       if (!value!.isValidName) {
-                  //         return 'Please enter a valid name';
-                  //       }
-                  //       return null;
-                  //     },
-                  //   ),
-                  // ),
-                  // //Last name
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 0, left: 15, right: 15, bottom: 10),
-                  //   child: CustomTextField(
-                  //     controller: _lastNameController,
-                  //     obscureText: false,
-                  //     labelText: "Enter your Last Name",
-                  //     hintText: "Last Name",
-                  //     validator: (value) {
-                  //       if (!value!.isValidName) {
-                  //         return 'Please enter a valid name';
-                  //       }
-                  //       return null;
-                  //     },
-                  //   ),
-                  // ),
+
                   //email
                   Padding(
                     padding: const EdgeInsets.only(
@@ -247,14 +160,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            signUp();
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(content: Text('Processing Data')),
-                            // );
+                            // signUp();
+                            UserHelper().signUp(
+                                context, _emailController, _passwordController);
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
+                          elevation: 0.0,
+                          backgroundColor: Colors.red.withOpacity(0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),

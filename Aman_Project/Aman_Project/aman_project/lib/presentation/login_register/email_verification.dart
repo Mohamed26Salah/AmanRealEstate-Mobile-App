@@ -1,17 +1,20 @@
 import 'dart:async';
+import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/user_management.dart';
 
-class EmailVerification extends StatefulWidget {
+class EmailVerification extends ConsumerStatefulWidget {
   const EmailVerification({super.key});
 
   @override
-  State<EmailVerification> createState() => _EmailVerificationState();
+  ConsumerState<EmailVerification> createState() => _EmailVerificationState();
 }
 
-class _EmailVerificationState extends State<EmailVerification> {
+class _EmailVerificationState extends ConsumerState<EmailVerification> {
   bool isEmailVerified = false;
   Timer? timer;
   @override
@@ -36,11 +39,26 @@ class _EmailVerificationState extends State<EmailVerification> {
   }
 
   void redirectToHome() {
-    if (isEmailVerified) {
-      final user = FirebaseAuth.instance.currentUser!;
-      UserHelper.saveUser(user);
-      Navigator.of(context).pushNamed('/home');
-    }
+    final user = FirebaseAuth.instance.currentUser!;
+    UserHelper.saveUser(user);
+    //Salah Way
+    Future userData = UserHelper().getUserData();
+    ref.read(userDataProviderRepository.notifier).state = userData;
+    Navigator.of(context).pushNamed('/home');
+    // if (isEmailVerified) {
+    //   final user = FirebaseAuth.instance.currentUser!;
+    //   UserHelper.saveUser(user);
+    //   //Salah Way
+    //   Future userData = UserHelper().getUserData();
+    //   ref.read(userDataProviderRepository.notifier).state = userData;
+    //   //Yasser Way
+    //   // UserHelper().getNewUserData().then((value) {
+    //   //   UserModel user = UserModel.fromSnapshot(value);
+    //   //   ref.read(newUserDataProivder.notifier).state = user;
+    //   //   Navigator.of(context).pushReplacementNamed('/home');
+    //   // });
+    //   Navigator.of(context).pushNamed('/home');
+    // }
   }
 
   @override
@@ -65,7 +83,6 @@ class _EmailVerificationState extends State<EmailVerification> {
 
   @override
   Widget build(BuildContext context) {
-    redirectToHome();
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(color: Colors.black),
@@ -74,38 +91,59 @@ class _EmailVerificationState extends State<EmailVerification> {
         title: const Text(""),
       ),
       // bottomNavigationBar: const NavBarGR(),
-      body: SingleChildScrollView(
+      body: Center(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 210),
-            child: Center(
-              child: Column(
-                children: [
-                  Image.asset("assets/images/icons8-email-open-100.png",
-                      width: 100),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Please Verify Your Email',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 205, 153, 51),
+          child: (isEmailVerified)
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/happy.png", width: 100),
+                    SizedBox(height: 15),
+                    const Text(
+                      'Welcome To Aman',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {
-                      sendVerificationEmail();
-                    },
-                    child: const Text('Resend Verification Email'),
-                  )
-                ],
-              ),
-            ),
-          ),
+                    SizedBox(height: 15),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 205, 153, 51),
+                      ),
+                      onPressed: () {
+                        redirectToHome();
+                      },
+                      child: const Text('Continue'),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Image.asset("assets/images/icons8-email-open-100.png",
+                        width: 100),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Please Verify Your Email',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 205, 153, 51),
+                      ),
+                      onPressed: () {
+                        sendVerificationEmail();
+                      },
+                      child: const Text('Resend Verification Email'),
+                    )
+                  ],
+                ),
         ),
       ),
     );

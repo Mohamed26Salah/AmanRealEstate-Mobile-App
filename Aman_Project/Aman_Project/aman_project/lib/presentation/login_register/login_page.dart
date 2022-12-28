@@ -27,72 +27,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  savePref(bool boool) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setBool("remember", boool);
-  }
-
-// bool result = await InternetConnectionChecker().hasConnection;
-  Future signIn() async {
-    // bool result = await InternetConnectionChecker().hasConnection;
-    bool result = true;
-    if (result == true) {
-      try {
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.black26,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 205, 153, 51)),
-              ));
-            });
-
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
-        if (FirebaseAuth.instance.currentUser!.emailVerified) {
-          final user = FirebaseAuth.instance.currentUser!;
-          UserHelper.saveUser(user);
-          //Salah Way
-          Future userData = UserHelper().getUserData();
-          ref.read(userDataProviderRepository.notifier).state = userData;
-          //Yasser Way
-          UserHelper().getNewUserData().then((value) {
-            UserModel user = UserModel.fromSnapshot(value);
-            ref.read(newUserDataProivder.notifier).state = user;
-            Navigator.of(context).pushReplacementNamed('/home');
-          });
-
-          // Navigator.of(context).pushReplacementNamed('/home');
-        } else {
-          Navigator.of(context).pushNamed('/verify');
-        }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          Navigator.of(context).pop();
-          errormessage("Error!", "No user found for that email.");
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(val.snackBar);
-        } else if (e.code == 'wrong-password') {
-          Navigator.of(context).pop();
-          errormessage("Error!", "Wrong password provided for that user.");
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(val.snackBar);
-        }
-      }
-    } else {
-      errormessage("Error!", "No Internet Connection!");
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(val.snackBar);
-    }
-  }
+  // savePref(bool boool) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   preferences.setBool("remember", boool);
+  // }
 
   @override
   void dispose() {
@@ -189,12 +127,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            savePref(remember);
-                            signIn();
-
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(content: Text('Processing Data')),
-                            // );
+                            // savePref(remember);
+                            UserHelper().saveUserPref(remember);
+                            UserHelper().signIn(ref, context, _emailController,
+                                _passwordController);
                           }
                         },
                         style: ElevatedButton.styleFrom(
