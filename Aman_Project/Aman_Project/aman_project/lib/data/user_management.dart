@@ -131,7 +131,7 @@ class UserHelper {
           //   Navigator.of(context).pushReplacementNamed('/home');
           // });
 
-          // Navigator.of(context).pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushNamed('/verify');
         }
