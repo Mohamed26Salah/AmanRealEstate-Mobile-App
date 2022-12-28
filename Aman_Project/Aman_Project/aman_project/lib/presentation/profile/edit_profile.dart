@@ -1,11 +1,7 @@
-
 import 'package:aman_project/data/repositories/user_providers.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import '../../models/user_management.dart';
-// import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
 import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,15 +11,15 @@ import '../shared_features/custom_text_field.dart';
 
 ThemeManager _themeManager = ThemeManager();
 
-class EditProfile extends StatefulWidget {
+class EditProfile extends ConsumerStatefulWidget {
   final ThemeManager? themeManager;
   const EditProfile({super.key, this.themeManager});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  ConsumerState<EditProfile> createState() => _EditProfileState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditProfileState extends ConsumerState<EditProfile> {
   var theme;
   final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
   var newPassword = " ";
@@ -59,7 +55,6 @@ class _EditProfileState extends State<EditProfile> {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", false);
-
     Navigator.of(context).pushReplacementNamed('/');
   }
 
@@ -77,6 +72,7 @@ class _EditProfileState extends State<EditProfile> {
   bool isObscurePassword = true;
   @override
   Widget build(BuildContext context) {
+    final userData = ref.watch(newUserDataProivder);
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
       body: Container(
@@ -126,7 +122,9 @@ class _EditProfileState extends State<EditProfile> {
                     height: 20,
                   ),
                   // Text('${user.email}'),
-
+                  //Yasser Way
+                  Text(userData?.email ?? "Loading"),
+                  //Salah Way
                   Consumer(builder: (_, ref, __) {
                     return ref.watch(userDataProvider).when(data: (value) {
                       return Text(value.get('email'));

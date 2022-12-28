@@ -2,7 +2,6 @@ import 'package:aman_project/data/user_management.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
-
 import '../edit_button.dart';
 import 'dart:math';
 import 'dart:async';
@@ -134,35 +133,5 @@ class _UsersListWidgetState extends State<UsersListWidget> {
         }
       },
     );
-
-    // getData2().then(
-    //     (value) => Column(
-    //           children: List.generate(
-    //             value.length,
-    //             (index) => ListTile(
-    //               leading: CircleAvatar(
-    //                   radius: 15,
-    //                   backgroundColor: const Color.fromARGB(255, 148, 15, 15),
-    //                   child: Text(
-    //                     value[index].email.substring(0, 1),
-    //                     style: const TextStyle(color: Colors.white),
-    //                   )),
-    //               title: Text(value[index].email),
-    //               subtitle: Text(value[index].role),
-    //               textColor: const Color.fromARGB(255, 255, 255, 255),
-    //               trailing: MyEditButton(
-    //                   onPressed: () {
-    //                     // openDialog(value[index].email);
-    //                   },
-    //                   height: 35,
-    //                   borderRadius: BorderRadius.circular(20),
-    //                   child: const Icon(
-    //                     Icons.edit_outlined,
-    //                   )),
-    //             ),
-    //           ),
-    //         )).catchError((e) {
-    //   print(e); // Oops, new error.
-    // });
   }
 }

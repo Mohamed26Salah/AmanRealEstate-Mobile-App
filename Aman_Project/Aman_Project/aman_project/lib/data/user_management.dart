@@ -5,15 +5,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/chart_data.dart';
 
 class UserHelper {
-  static final FirebaseFirestore _db = FirebaseFirestore.instance;
-  static final user = FirebaseAuth.instance.currentUser!;
-  String uid = user.uid;
   static saveUser(User user) async {
+    //Dont Put Instance common as it doesnt change when the user logs out
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+
     Map<String, dynamic> userData = {
       "email": user.email,
       "role": "user",
     };
-    final userRef = _db.collection("users").doc(user.uid);
+    final userRef = db.collection("users").doc(user.uid);
     if ((await userRef.get()).exists) {
       // To Update Anything in the User
     } else {
@@ -21,31 +22,22 @@ class UserHelper {
     }
   }
 
+//Salah Way
   Future<Object> getUserData() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    String id = user.uid;
     final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
     return userDoc;
   }
 
-  // Future<String> getUserEmail() async {
-  //   // final user = FirebaseAuth.instance.currentUser!;
-  //   // String uid = user.uid;
-  //   String userEmail;
-  //   final DocumentSnapshot userDoc =
-  //       await FirebaseFirestore.instance.collection('users').doc(uid).get();
-  //   userEmail = userDoc.get('email');
-  //   return userEmail;
-  // }
+  //Yasser Way
+  Future<DocumentSnapshot> getNewUserData() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    String id = user.uid;
+    return FirebaseFirestore.instance.collection('users').doc(id).get();
+  }
 
-  // Future<String> getUserRole() async {
-  //   // final user = FirebaseAuth.instance.currentUser!;
-  //   // String uid = user.uid;
-  //   String userRole;
-  //   final DocumentSnapshot userDoc =
-  //       await FirebaseFirestore.instance.collection('users').doc(uid).get();
-  //   userRole = userDoc.get('role');
-  //   return userRole;
-  // }
   static Future<List<UserModel>> getData2User() async {
     List<UserModel> datanum2 = [];
 

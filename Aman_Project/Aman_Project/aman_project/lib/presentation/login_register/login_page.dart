@@ -1,6 +1,9 @@
+import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/models/user.dart';
 import 'package:aman_project/presentation/shared_features/custom_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,14 +13,14 @@ import '../../data/user_management.dart';
 
 import '../../constants/globals.dart' as val;
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -54,7 +57,16 @@ class _LoginPageState extends State<LoginPage> {
         if (FirebaseAuth.instance.currentUser!.emailVerified) {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
-          Navigator.of(context).pushReplacementNamed('/home');
+          //Salah Way
+          Future userData = UserHelper().getUserData();
+          ref.read(userDataProviderRepository.notifier).state = userData;
+          //Yasser Way
+          UserHelper().getNewUserData().then((value) {
+            UserModel user = UserModel.fromSnapshot(value);
+            ref.read(newUserDataProivder.notifier).state = user;
+            Navigator.of(context).pushReplacementNamed('/home');
+          });
+
           // Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushNamed('/verify');

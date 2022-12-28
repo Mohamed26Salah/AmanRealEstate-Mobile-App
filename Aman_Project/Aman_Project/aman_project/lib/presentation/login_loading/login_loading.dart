@@ -1,17 +1,21 @@
 import 'dart:async';
 
+import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginLoading extends StatefulWidget {
+import '../../data/user_management.dart';
+
+class LoginLoading extends ConsumerStatefulWidget {
   const LoginLoading({super.key});
 
   @override
-  State<LoginLoading> createState() => _LoginLoadingState();
+  ConsumerState<LoginLoading> createState() => _LoginLoadingState();
 }
 
-class _LoginLoadingState extends State<LoginLoading> {
+class _LoginLoadingState extends ConsumerState<LoginLoading> {
   Future<bool?> getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool? value = preferences.getBool("remember");
@@ -20,6 +24,8 @@ class _LoginLoadingState extends State<LoginLoading> {
     if (value!) {
       FirebaseAuth.instance.idTokenChanges().listen((User? user) {
         if (user != null) {
+          // Future userData = UserHelper().getUserData();
+          // ref.read(userDataProviderRepository.notifier).state = userData;
           Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushReplacementNamed('/login');
