@@ -370,7 +370,7 @@ class _DetailsState extends State<Details> {
           backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(Icons.edit),
           onPressed: () {
-            _showEditBottomSheet(context, routeArgs);
+           Navigator.of(context).pushNamed('/editProperty', arguments: routeArgs);
           },
         ),
       ),
@@ -448,23 +448,23 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  void _showEditBottomSheet(BuildContext context, Property routeArgs) {
-    showModalBottomSheet<dynamic>(
-        context: context,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        builder: (BuildContext context) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.90,
-            child: EditProperty(
-              routeArgs: routeArgs,
-            ),
-          );
-        });
-  }
+  // void _showEditBottomSheet(BuildContext context, Property routeArgs) {
+  //   showModalBottomSheet<dynamic>(
+  //       context: context,
+  //       isScrollControlled: true,
+  //       shape: const RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.only(
+  //           topLeft: Radius.circular(30),
+  //           topRight: Radius.circular(30),
+  //         ),
+  //       ),
+  //       builder: (BuildContext context) {
+  //         return SizedBox(
+  //           height: MediaQuery.of(context).size.height * 0.90,
+  //           child: EditProperty(
+  //             routeArgs: routeArgs,
+  //           ),
+  //         );
+  //       });
+  // }
 }

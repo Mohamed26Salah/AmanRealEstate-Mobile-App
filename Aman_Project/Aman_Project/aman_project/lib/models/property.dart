@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../presentation/properties/dropdown.dart';
+import '../presentation/shared_features/custom_text_field.dart';
+
 class Property {
   String docId;
   String addressAdmin;
@@ -56,4 +62,94 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
+
+  static Padding buildTextField(
+      {required String labelText,
+      required String hintText,
+      required TextEditingController controller,
+      required String type}) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
+      child: type == 'number'
+          ? controller.text.isEmpty
+              ? const SizedBox()
+              : CustomTextField(
+                  controller: controller,
+                  obscureText: false,
+                  labelText: labelText,
+                  hintText: hintText,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(11),
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"^[0-9]*$"),
+                    )
+                  ],
+                  validator: (value) {
+                    if (!value!.isValidNumber) {
+                      return 'Please enter a valid $labelText';
+                    }
+                    return null;
+                  },
+                )
+          : controller.text.isEmpty
+              ? const SizedBox()
+              : CustomTextField(
+                  controller: controller,
+                  obscureText: false,
+                  labelText: labelText,
+                  hintText: hintText,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"[a-zA-Z]+|\s"),
+                    )
+                  ],
+                  validator: (value) {
+                    if (type == 'name') {
+                      if (!value!.isValidName) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
+                    }
+                    if (type == 'address') {
+                      if (!value!.isValidAddress) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
+                    }
+                    return null;
+                  },
+                ),
+    );
+  }
+
+  static Widget showDropdown({
+    required String text,
+    required List<String> dropdownItems,
+    required String hint,
+     String? value,
+    bool? show,
+    Function(String?)? onChanged,
+  }) {
+    return show == false ? const SizedBox() : Padding(
+      padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(text),
+          CustomDropdownButton2(
+            dropdownItems: dropdownItems,
+            hint: hint,
+            value: value,
+            onChanged: onChanged,
+            validatior: (value) {
+              if (value == null) {
+                return 'Please Select';
+              }
+              return null;
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }

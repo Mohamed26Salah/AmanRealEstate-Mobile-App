@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.inputFormatters,
     this.validator,
     this.cursorColor = Colors.black,
+    this.onChanged,
   }) : super(key: key);
   final String hintText;
   final String labelText;
@@ -20,6 +21,8 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Color cursorColor;
 
+  final Function(String)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -27,6 +30,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       inputFormatters: inputFormatters,
       validator: validator,
+      onChanged: onChanged,
       cursorColor: Colors.black,
       decoration: InputDecoration(
         labelText: labelText,

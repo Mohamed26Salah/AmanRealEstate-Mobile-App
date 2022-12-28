@@ -19,8 +19,11 @@ import '../../constants/globals.dart' as val;
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class EditProperty extends StatefulWidget {
-  Property routeArgs;
-  EditProperty({super.key, required this.routeArgs});
+  // Property routeArgs;
+  EditProperty({
+    super.key,
+    // required this.routeArgs
+  });
 
   @override
   State<EditProperty> createState() => _EditPropertyState();
@@ -67,396 +70,293 @@ class _EditPropertyState extends State<EditProperty> {
     super.dispose();
   }
 
+  int? counter;
+  @override
+  void initState() {
+    counter = 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    _ownerNameController.text = widget.routeArgs.ownerName;
-    _ownerNumberController.text = widget.routeArgs.ownerNumber;
-    _addressForUserController.text = widget.routeArgs.addressUser;
-    _addressForAdminController.text = widget.routeArgs.addressAdmin;
-    _areaController.text = widget.routeArgs.area.toString();
-    _priceController.text = widget.routeArgs.price.toString();
-    _descriptionForUserController.text = widget.routeArgs.descriptionUser;
-    _descriptionForAdminController.text = widget.routeArgs.descriptionAdmin;
-    _nameController.text = widget.routeArgs.unitName;
-    _floorController.text = widget.routeArgs.floor!;
-    _noOFRoomsController.text = widget.routeArgs.noFloors!;
-    _noOFBathroomsController.text = widget.routeArgs.noBarthrooms!;
-    _noOFFloorsController.text = widget.routeArgs.noFloors!;
-    _noOFABController.text = widget.routeArgs.theNumberOFAB!;
-    _noOFFlatsController.text = widget.routeArgs.noFlats!;
-    _typeOFActivityController.text = widget.routeArgs.typeOFActivity!;
-    return SafeArea(
-      child: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(
-              top: 10,
-              left: 10,
-              right: 10,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 15,
-            ),
-            child: Column(
-              children: [
-                buildTextField(
-                    labelText: "Owner Name",
-                    hintText: "Owner Name",
-                    controller: _ownerNameController,
-                    type: "name"),
-                buildTextField(
-                    labelText: "Owner Number",
-                    hintText: "01144..",
-                    controller: _ownerNumberController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Address For User",
-                    hintText: "Address User",
-                    controller: _addressForUserController,
-                    type: "address"),
-                buildTextField(
-                    labelText: "Address For Admin",
-                    hintText: "Address Admin",
-                    controller: _addressForAdminController,
-                    type: "address"),
-                buildTextField(
-                    labelText: "Area",
-                    hintText: "Area",
-                    controller: _areaController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Price",
-                    hintText: "Price",
-                    controller: _priceController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Description For User",
-                    hintText: "Description For User",
-                    controller: _descriptionForUserController,
-                    type: "address"),
-                buildTextField(
-                    labelText: "Description For Admin",
-                    hintText: "Description For Admin",
-                    controller: _descriptionForAdminController,
-                    type: "address"),
-                buildTextField(
-                    labelText: "Unit Name",
-                    hintText: "Unit Name",
-                    controller: _nameController,
-                    type: "name"),
-                buildTextField(
-                    labelText: "Floor",
-                    hintText: "Floor",
-                    controller: _floorController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Number Of Rooms",
-                    hintText: "Number Of Rooms",
-                    controller: _noOFRoomsController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Number Of Bathrooms",
-                    hintText: "Number Of Bathrooms",
-                    controller: _noOFBathroomsController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Number Of Floors",
-                    hintText: "Number Of Floors",
-                    controller: _noOFFloorsController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Number Of Flats",
-                    hintText: "Number Of Flats",
-                    controller: _noOFFlatsController,
-                    type: "number"),
-                buildTextField(
-                    labelText: "Type OF Activity",
-                    hintText: "Type OF Activity",
-                    controller: _typeOFActivityController,
-                    type: "address"),
-                buildTextField(
-                    labelText: "Number Of administrative buildings",
-                    hintText: "Number Of administrative buildings",
-                    controller: _noOFABController,
-                    type: "number"),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Payment Method'),
-                      CustomDropdownButton2(
-                        dropdownItems: const ["Cash", "installment"],
-                        hint: "Select Payment Method",
-                        value: widget.routeArgs.paymentMethod,
-                        onChanged: (value) {
-                          setState(() {
-                            widget.routeArgs.paymentMethod = value!;
-                            print(widget.routeArgs.paymentMethod);
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Select priority'),
-                      CustomDropdownButton2(
-                        dropdownItems: const ["High", "medium", "Low"],
-                        hint: "Select priority",
-                        value: widget.routeArgs.priority,
-                        onChanged: (value) {
-                          setState(() {
-                            widget.routeArgs.priority = value!;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Select visibility'),
-                      CustomDropdownButton2(
-                        dropdownItems: const ["Yes", "No"],
-                        hint: "Select visibility",
-                        value: widget.routeArgs.visible,
-                        onChanged: (value) {
-                          setState(() {
-                            widget.routeArgs.visible = value!;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Select offering'),
-                      CustomDropdownButton2(
-                        dropdownItems: const ["For Sale", "For Rent"],
-                        hint: "Select offering",
-                        value: widget.routeArgs.offered,
-                        onChanged: (value) {
-                          setState(() {
-                            widget.routeArgs.offered = value!;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: widget.routeArgs.finishing!.isEmpty
-                      ? const SizedBox()
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Finishing'),
-                            CustomDropdownButton2(
-                              dropdownItems: const ["Yes", "Half", "No"],
-                              hint: "Select Finishing",
-                              value: widget.routeArgs.finishing,
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.routeArgs.finishing = value;
-                                });
-                              },
-                              validatior: (value) {
-                                if (value == null) {
-                                  return 'Please Select';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
+    Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
+
+    if (counter == 0) {
+      _ownerNameController.text = routeArgs.ownerName;
+      _ownerNumberController.text = routeArgs.ownerNumber;
+      _addressForUserController.text = routeArgs.addressUser;
+      _addressForAdminController.text = routeArgs.addressAdmin;
+      _areaController.text = routeArgs.area.toString();
+      _priceController.text = routeArgs.price.toString();
+      _descriptionForUserController.text = routeArgs.descriptionUser;
+      _descriptionForAdminController.text = routeArgs.descriptionAdmin;
+      _nameController.text = routeArgs.unitName;
+      _floorController.text = routeArgs.floor!;
+      _noOFRoomsController.text = routeArgs.noFloors!;
+      _noOFBathroomsController.text = routeArgs.noBarthrooms!;
+      _noOFFloorsController.text = routeArgs.noFloors!;
+      _noOFABController.text = routeArgs.theNumberOFAB!;
+      _noOFFlatsController.text = routeArgs.noFlats!;
+      _typeOFActivityController.text = routeArgs.typeOFActivity!;
+      counter = counter! + 1;
+    }
+
+    return Scaffold(
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[300],
+                        elevation: 0 // Background color
                         ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: widget.routeArgs.doublex!.isEmpty
-                      ? const SizedBox()
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Select yes if Doublex'),
-                            CustomDropdownButton2(
-                              dropdownItems: const ["Yes", "No"],
-                              hint: "Select yes if Doublex",
-                              value: widget.routeArgs.doublex,
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.routeArgs.doublex = value;
-                                });
-                              },
-                              validatior: (value) {
-                                if (value == null) {
-                                  return 'Please Select';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 10),
-                  child: widget.routeArgs.furnished!.isEmpty
-                      ? const SizedBox()
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Select yes if Furnished'),
-                            CustomDropdownButton2(
-                              dropdownItems: const ["Yes", "No"],
-                              hint: "Select yes if Furnished",
-                              value: widget.routeArgs.furnished,
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.routeArgs.furnished = value;
-                                });
-                              },
-                              validatior: (value) {
-                                if (value == null) {
-                                  return 'Please Select';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: 50,
-                  decoration: BoxDecoration(
+                    child: const Icon(
+                      Icons.arrow_back_ios_new_outlined,
                       color: Colors.black,
-                      border: Border.all(color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: Text(
-                      "Upload main image",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 20),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: 180,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: myImage == null
-                      ? Center(
-                          child: Image.network(widget.routeArgs.singleImage),
-                        )
-                      : Center(
-                          child: Image.file(
-                            myImage!,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                ),
-                InkWell(
-                    onTap: () {
-                      openBottomSheet();
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
-                    child: const Center(
-                      child: Icon(
-                        Icons.upload_file,
-                        size: 50,
-                      ),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                        top: 5, left: 15, right: 15, bottom: 5),
+                  ),
+                  Property.buildTextField(
+                      labelText: "Owner Name",
+                      hintText: "Owner Name",
+                      controller: _ownerNameController,
+                      type: "name"),
+                  Property.buildTextField(
+                      labelText: "Owner Number",
+                      hintText: "01144..",
+                      controller: _ownerNumberController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Address For User",
+                      hintText: "Address User",
+                      controller: _addressForUserController,
+                      type: "address"),
+                  Property.buildTextField(
+                      labelText: "Address For Admin",
+                      hintText: "Address Admin",
+                      controller: _addressForAdminController,
+                      type: "address"),
+                  Property.buildTextField(
+                      labelText: "Area",
+                      hintText: "Area",
+                      controller: _areaController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Price",
+                      hintText: "Price",
+                      controller: _priceController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Description For User",
+                      hintText: "Description For User",
+                      controller: _descriptionForUserController,
+                      type: "address"),
+                  Property.buildTextField(
+                      labelText: "Description For Admin",
+                      hintText: "Description For Admin",
+                      controller: _descriptionForAdminController,
+                      type: "address"),
+                  Property.buildTextField(
+                      labelText: "Unit Name",
+                      hintText: "Unit Name",
+                      controller: _nameController,
+                      type: "name"),
+                  Property.buildTextField(
+                      labelText: "Floor",
+                      hintText: "Floor",
+                      controller: _floorController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Number Of Rooms",
+                      hintText: "Number Of Rooms",
+                      controller: _noOFRoomsController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Number Of Bathrooms",
+                      hintText: "Number Of Bathrooms",
+                      controller: _noOFBathroomsController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Number Of Floors",
+                      hintText: "Number Of Floors",
+                      controller: _noOFFloorsController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Number Of Flats",
+                      hintText: "Number Of Flats",
+                      controller: _noOFFlatsController,
+                      type: "number"),
+                  Property.buildTextField(
+                      labelText: "Type OF Activity",
+                      hintText: "Type OF Activity",
+                      controller: _typeOFActivityController,
+                      type: "address"),
+                  Property.buildTextField(
+                      labelText: "Number Of administrative buildings",
+                      hintText: "Number Of administrative buildings",
+                      controller: _noOFABController,
+                      type: "number"),
+                  Property.showDropdown(
+                      dropdownItems: ["High", "medium", "Low"],
+                      hint: "Select priority",
+                      text: "Select priority",
+                      value: routeArgs.priority,
+                      show: true,
+                      onChanged: (val) {
+                        setState(() {
+                          routeArgs.priority = val!;
+                        });
+                      }),
+                  Property.showDropdown(
+                      dropdownItems: ["Yes", "No"],
+                      hint: "Select visibility",
+                      text: "Select visibility",
+                      value: routeArgs.visible,
+                      show: true,
+                      onChanged: (val) {
+                        setState(() {
+                          routeArgs.visible = val!;
+                        });
+                      }),
+                  Property.showDropdown(
+                      dropdownItems: ["For Sale", "For Rent"],
+                      hint: "Select offering",
+                      text: "Select offering",
+                      value: routeArgs.offered,
+                      show: true,
+                      onChanged: (val) {
+                        setState(() {
+                          routeArgs.offered = val!;
+                        });
+                      }),
+                  Property.showDropdown(
+                      dropdownItems: ["Yes", "Half", "No"],
+                      hint: "Finishing",
+                      text: "Select Finishing",
+                      value: routeArgs.finishing,
+                      show: routeArgs.finishing!.isNotEmpty,
+                      onChanged: (val) {
+                        setState(() {
+                          routeArgs.finishing = val;
+                        });
+                      }),
+                  Property.showDropdown(
+                      dropdownItems: ["Yes", "No"],
+                      hint: "Select yes if Doublex",
+                      text: "Select yes if Doublex",
+                      value: routeArgs.doublex,
+                      show: routeArgs.doublex!.isNotEmpty,
+                      onChanged: (val) {
+                        setState(() {
+                          routeArgs.doublex = val;
+                        });
+                      }),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(12),
+                        color: Colors.black,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        "Edit main image",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
                     ),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          uploadFile();
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/home', (route) => false);
-                        } else {
-                          errormessage("Error!", "Please Choose a type!");
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(val.snackBar);
-                        }
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 180,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: myImage == null
+                        ? Center(
+                            child: Image.network(routeArgs.singleImage),
+                          )
+                        : Center(
+                            child: Image.file(
+                              myImage!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        openBottomSheet();
                       },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0.0,
-                        primary: Colors.red.withOpacity(0),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(2),
+                      child: const Center(
+                        child: Icon(
+                          Icons.upload_file,
+                          size: 50,
+                        ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          top: 5, left: 15, right: 15, bottom: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            uploadFile(routeArgs);
+
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/home', (route) => false);
+                          } else {
+                            errormessage("Error!", "Please Choose a type!");
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(val.snackBar);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          primary: Colors.red.withOpacity(0),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(2),
+                            ),
                           ),
                         ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        child: const Center(
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -519,7 +419,7 @@ class _EditPropertyState extends State<EditProperty> {
     );
   }
 
-  Future uploadFile() async {
+  Future uploadFile(Property routeArgs) async {
     String? result = '';
     if (myImage != null) {
       final file = myImage!;
@@ -537,13 +437,13 @@ class _EditPropertyState extends State<EditProperty> {
             break;
           case TaskState.success:
             ref.getDownloadURL().then((value) {
-              widget.routeArgs.singleImage = value;
+              routeArgs.singleImage = value;
 
-              print("object ${widget.routeArgs.singleImage}");
+              print("object ${routeArgs.singleImage}");
               print("value $value");
               result = value;
               PropertyManagement.updateProperty(
-                  docId: widget.routeArgs.docId,
+                  docId: routeArgs.docId,
                   ownerName: _ownerNameController.text,
                   ownerNumber: _ownerNumberController.text,
                   addressForUser: _addressForUserController.text,
@@ -553,20 +453,23 @@ class _EditPropertyState extends State<EditProperty> {
                   descriptionForUser: _descriptionForUserController.text,
                   descriptionForAdmin: _descriptionForAdminController.text,
                   unitName: _nameController.text,
-                  paymentMethod: widget.routeArgs.paymentMethod,
-                  priority: widget.routeArgs.priority,
-                  visible: widget.routeArgs.visible,
-                  offered: widget.routeArgs.offered,
+                  paymentMethod: routeArgs.paymentMethod,
+                  priority: routeArgs.priority,
+                  visible: routeArgs.visible,
+                  offered: routeArgs.offered,
                   singleImage: value,
-                  mutliImages: widget.routeArgs.multiImages,
-                  type: widget.routeArgs.type,
+                  mutliImages: routeArgs.multiImages,
+                  type: routeArgs.type,
                   floor: _floorController.text,
                   noRooms: _noOFRoomsController.text,
                   noBathrooms: _noOFBathroomsController.text,
                   noFloors: _noOFFloorsController.text,
                   noAB: _noOFABController.text,
                   noFlats: _noOFFlatsController.text,
-                  typeOFActivity: _typeOFActivityController.text);
+                  typeOFActivity: _typeOFActivityController.text,
+                  doublex: routeArgs.doublex,
+                  finishing: routeArgs.finishing,
+                  furnished: routeArgs.furnished);
               return result;
             });
             break;
@@ -584,7 +487,7 @@ class _EditPropertyState extends State<EditProperty> {
     } else {
       print("in here");
       PropertyManagement.updateProperty(
-          docId: widget.routeArgs.docId,
+          docId: routeArgs.docId,
           ownerName: _ownerNameController.text,
           ownerNumber: _ownerNumberController.text,
           addressForUser: _addressForUserController.text,
@@ -594,79 +497,23 @@ class _EditPropertyState extends State<EditProperty> {
           descriptionForUser: _descriptionForUserController.text,
           descriptionForAdmin: _descriptionForAdminController.text,
           unitName: _nameController.text,
-          paymentMethod: widget.routeArgs.paymentMethod,
-          priority: widget.routeArgs.priority,
-          visible: widget.routeArgs.visible,
-          offered: widget.routeArgs.offered,
-          singleImage: widget.routeArgs.singleImage,
-          mutliImages: widget.routeArgs.multiImages,
-          type: widget.routeArgs.type,
+          paymentMethod: routeArgs.paymentMethod,
+          priority: routeArgs.priority,
+          visible: routeArgs.visible,
+          offered: routeArgs.offered,
+          singleImage: routeArgs.singleImage,
+          mutliImages: routeArgs.multiImages,
+          type: routeArgs.type,
           floor: _floorController.text,
           noRooms: _noOFRoomsController.text,
           noBathrooms: _noOFBathroomsController.text,
           noFloors: _noOFFloorsController.text,
           noAB: _noOFABController.text,
           noFlats: _noOFFlatsController.text,
-          typeOFActivity: _typeOFActivityController.text);
+          typeOFActivity: _typeOFActivityController.text,
+          doublex: routeArgs.doublex,
+          finishing: routeArgs.finishing,
+          furnished: routeArgs.furnished);
     }
-  }
-
-  Padding buildTextField(
-      {required String labelText,
-      required String hintText,
-      required TextEditingController controller,
-      required String type}) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
-      child: type == 'number'
-          ? controller.text.isEmpty
-              ? const SizedBox()
-              : CustomTextField(
-                  controller: controller,
-                  obscureText: false,
-                  labelText: labelText,
-                  hintText: hintText,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(11),
-                    FilteringTextInputFormatter.allow(
-                      RegExp(r"^[0-9]*$"),
-                    )
-                  ],
-                  validator: (value) {
-                    if (!value!.isValidNumber) {
-                      return 'Please enter a valid $labelText';
-                    }
-                    return null;
-                  },
-                )
-          : controller.text.isEmpty
-              ? const SizedBox()
-              : CustomTextField(
-                  controller: controller,
-                  obscureText: false,
-                  labelText: labelText,
-                  hintText: hintText,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                      RegExp(r"[a-zA-Z]+|\s"),
-                    )
-                  ],
-                  validator: (value) {
-                    if (type == 'name') {
-                      if (!value!.isValidName) {
-                        return 'Please enter a valid $labelText';
-                      }
-                      return null;
-                    }
-                    if (type == 'address') {
-                      if (!value!.isValidAddress) {
-                        return 'Please enter a valid $labelText';
-                      }
-                      return null;
-                    }
-                    return null;
-                  },
-                ),
-    );
   }
 }

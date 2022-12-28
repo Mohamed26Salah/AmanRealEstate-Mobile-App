@@ -1063,8 +1063,7 @@ class AddFormState extends State<AddForm> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          primary: Colors.red.withOpacity(0),
+                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),

@@ -1,4 +1,5 @@
 import 'package:aman_project/presentation/login_loading/login_loading.dart';
+import 'package:aman_project/presentation/properties/edit_property.dart';
 import 'package:aman_project/presentation/rents/rent_Type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => NavBar(themeManager: _themeManager),
         '/details': (context) => const Details(),
         '/addForm': (context) => AddForm(),
+        '/editProperty': (context) => EditProperty(),
         '/rents': (context) => RentType(),
         '/search': (context) => const Search(),
         '/forget': (context) => const ForgetPassword(),
