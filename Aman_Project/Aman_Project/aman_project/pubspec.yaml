@@ -39,6 +39,7 @@ dependencies:
   custom_radio_grouped_button: ^2.1.2+2
   image_picker: 
   firebase_storage: 
+  rounded_loading_button: ^2.0.8
   flutter:
     sdk: flutter
   firebase_core: ^2.2.0  

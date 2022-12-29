@@ -235,7 +235,7 @@ class UserHelper {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", false);
-    Navigator.of(context).pushReplacementNamed('/');
+    Navigator.of(context).pushReplacementNamed('/login');
   }
 
   savePref(bool theme) async {
