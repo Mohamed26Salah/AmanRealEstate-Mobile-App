@@ -38,7 +38,62 @@ class AddFormState extends State<AddForm> {
   var landButton8 = false;
   var otherButton9 = false;
   // ChoiceButtons
+
+  //Resposbile of Visibility of widgets
+  bool visibleFinishing = false;
+  bool visibleDoublex = false;
+  bool visibleFurnished = false;
+  bool visibleFloor = false;
+  bool visibleNoRooms = false;
+  bool visibleNOBathrooms = false;
+  bool visibleNOFloors = false;
+  bool visibleNoAB = false;
+  bool visibleNOFlats = false;
+  bool visibleTypeOFAcitivity = false;
+  //Controller and value holders
+  String? paymentMethod;
+  String? priority;
+  String? visible;
+  String? offered;
+  String? type;
+  String? finishing;
+  String? doublex;
+  String? furnished;
+  final _ownerNameController = TextEditingController();
+  final _ownerNumberController = TextEditingController();
+  final _addressForUserController = TextEditingController();
+  final _addressForAdminController = TextEditingController();
+  final _areaController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _descriptionForUserController = TextEditingController();
+  final _descriptionForAdminController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _floorController = TextEditingController();
+  final _noOFRoomsController = TextEditingController();
+  final _noOFBathroomsController = TextEditingController();
+  final _noOFFloorsController = TextEditingController();
+  final _noOFABController = TextEditingController();
+  final _noOFFlatsController = TextEditingController();
+  final _typeOFActivityController = TextEditingController();
+  //Upload Image and Multi Images
+  File? myImage;
+  late String singleImageURl;
+  List<File> images = [];
+
   void updateButtonsUIType(id) {
+    _floorController.text = ''; //
+    _noOFRoomsController.text = ''; //
+    _noOFBathroomsController.text = ''; //
+    _noOFFloorsController.text = ''; //
+    _noOFABController.text = ''; // ngrb de bs el awl
+    _noOFFlatsController.text = ''; //
+    _typeOFActivityController.text = ''; //7
+
+    doublex = null; 
+    finishing = null;
+    furnished = null;
+
+
     flatButton1 = false;
     villaButton2 = false;
     buildingButton3 = false;
@@ -144,47 +199,6 @@ class AddFormState extends State<AddForm> {
       });
     }
   }
-
-  //Resposbile of Visibility of widgets
-  bool visibleFinishing = false;
-  bool visibleDoublex = false;
-  bool visibleFurnished = false;
-  bool visibleFloor = false;
-  bool visibleNoRooms = false;
-  bool visibleNOBathrooms = false;
-  bool visibleNOFloors = false;
-  bool visibleNoAB = false;
-  bool visibleNOFlats = false;
-  bool visibleTypeOFAcitivity = false;
-  //Controller and value holders
-  String? paymentMethod;
-  String? priority;
-  String? visible;
-  String? offered;
-  String? type;
-  String? finishing;
-  String? doublex;
-  String? furnished;
-  final _ownerNameController = TextEditingController();
-  final _ownerNumberController = TextEditingController();
-  final _addressForUserController = TextEditingController();
-  final _addressForAdminController = TextEditingController();
-  final _areaController = TextEditingController();
-  final _priceController = TextEditingController();
-  final _descriptionForUserController = TextEditingController();
-  final _descriptionForAdminController = TextEditingController();
-  final _nameController = TextEditingController();
-  final _floorController = TextEditingController();
-  final _noOFRoomsController = TextEditingController();
-  final _noOFBathroomsController = TextEditingController();
-  final _noOFFloorsController = TextEditingController();
-  final _noOFABController = TextEditingController();
-  final _noOFFlatsController = TextEditingController();
-  final _typeOFActivityController = TextEditingController();
-  //Upload Image and Multi Images
-  File? myImage;
-  late String singleImageURl;
-  List<File> images = [];
 
   @override
   void dispose() {
@@ -364,377 +378,191 @@ class AddFormState extends State<AddForm> {
 
                   //Payment Method
                   //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomDropdownButton2(
-                      dropdownItems: const ["Cash", "installment"],
-                      hint: "Select Payment Method",
-                      value: paymentMethod,
-                      onChanged: (value) {
-                        setState(() {
-                          paymentMethod = value;
-                          print(paymentMethod);
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                      // validator: (value) {
-                      //   if (value == null) {
-                      //     return 'Please Select';
-                      //   }
-                      //   return null;
-                      // },
-                    ),
+                  Property.showDropdown(
+                    dropdownItems: ["Cash", "installment"],
+                    hint: "Select Payment Method",
+                    text: "Select Payment Method",
+                    show: true,
+                    value: paymentMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        paymentMethod = value;
+                      });
+                    },
                   ),
-                  //priority
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomDropdownButton2(
-                      dropdownItems: const ["High", "medium", "Low"],
-                      hint: "Select priority",
-                      value: priority,
-                      onChanged: (value) {
-                        setState(() {
-                          priority = value;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                      // validator: (value) {
-                      //   if (value == null) {
-                      //     return 'Please Select';
-                      //   }
-                      //   return null;
-                      // },
-                    ),
+
+                  Property.showDropdown(
+                    dropdownItems: ["High", "medium", "Low"],
+                    hint: "Select priority",
+                    text: "Select priority",
+                    show: true,
+                    value: priority,
+                    onChanged: (value) {
+                      setState(() {
+                        priority = value;
+                      });
+                    },
                   ),
-                  //visible
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomDropdownButton2(
-                      dropdownItems: const ["Yes", "No"],
-                      hint: "Select visibility",
-                      value: visible,
-                      onChanged: (value) {
-                        setState(() {
-                          visible = value;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
+
+                  Property.showDropdown(
+                    dropdownItems: ["Yes", "No"],
+                    hint: "Select visibility",
+                    text: "Select visibility",
+                    show: true,
+                    value: visible,
+                    onChanged: (value) {
+                      setState(() {
+                        visible = value;
+                      });
+                    },
                   ),
-                  //offered
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomDropdownButton2(
-                      dropdownItems: const ["For Sale", "For Rent"],
-                      hint: "Select offering",
-                      value: offered,
-                      onChanged: (value) {
-                        setState(() {
-                          offered = value;
-                        });
-                      },
-                      validatior: (value) {
-                        if (value == null) {
-                          return 'Please Select';
-                        }
-                        return null;
-                      },
-                    ),
+
+                  Property.showDropdown(
+                    dropdownItems: ["For Sale", "For Rent"],
+                    hint: "Select offering",
+                    text: "Select offering",
+                    show: true,
+                    value: offered,
+                    onChanged: (value) {
+                      setState(() {
+                        offered = value;
+                      });
+                    },
                   ),
-                  //Finishing
-                  //Uncommon
+
                   Visibility(
                     visible: visibleFinishing,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomDropdownButton2(
-                        dropdownItems: const ["Yes", "Half", "No"],
-                        hint: "Select Finishing",
-                        value: finishing,
-                        onChanged: (value) {
-                          setState(() {
-                            finishing = value;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
+                    child: Property.showDropdown(
+                      dropdownItems: ["Yes", "Half", "No"],
+                      hint: "Select Finishing",
+                      text: "Select Finishing",
+                      show: true,
+                      value: finishing,
+                      onChanged: (value) {
+                        setState(() {
+                          finishing = value;
+                        });
+                      },
                     ),
                   ),
                   //Doublex
                   //Uncommon
+
                   Visibility(
                     visible: visibleDoublex,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomDropdownButton2(
-                        dropdownItems: const ["Yes", "No"],
-                        hint: "Select yes if Doublex",
-                        value: doublex,
-                        onChanged: (value) {
-                          setState(() {
-                            doublex = value;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
+                    child: Property.showDropdown(
+                      dropdownItems: ["Yes", "No"],
+                      hint: "Select yes if Doublex",
+                      text: "Select yes if Doublex",
+                      show: true,
+                      value: doublex,
+                      onChanged: (value) {
+                        setState(() {
+                          doublex = value;
+                        });
+                      },
                     ),
                   ),
+
                   //Furnished
                   //Uncommon
                   Visibility(
                     visible: visibleFurnished,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomDropdownButton2(
-                        dropdownItems: const ["Yes", "No"],
-                        hint: "Select yes if Furnished",
-                        value: furnished,
-                        onChanged: (value) {
-                          setState(() {
-                            furnished = value;
-                          });
-                        },
-                        validatior: (value) {
-                          if (value == null) {
-                            return 'Please Select';
-                          }
-                          return null;
-                        },
-                      ),
+                    child: Property.showDropdown(
+                      dropdownItems: ["Yes", "No"],
+                      hint: "Select yes if Furnished",
+                      text: "Select yes if Furnished",
+                      show: true,
+                      value: furnished,
+                      onChanged: (value) {
+                        setState(() {
+                          furnished = value;
+                        });
+                      },
                     ),
                   ),
+
                   //Floor
                   //Uncommon
+
                   Visibility(
                     visible: visibleFloor,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _floorController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Floor",
                         hintText: "Floor",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (!value!.isValidNumber) {
-                            return 'Please enter a valid Number';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _floorController,
+                        type: "number",
+                        show: true),
                   ),
                   //Number Of Rooms
                   //Uncommon
+
                   Visibility(
                     visible: visibleNoRooms,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _noOFRoomsController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Number Of Rooms",
                         hintText: "Number Of Rooms",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (visibleNoRooms == true) {
-                            if (!value!.isValidNumber) {
-                              return 'Please enter a valid Number';
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _noOFRoomsController,
+                        type: "number",
+                        show: true),
                   ),
                   //Number Of Bathrooms
                   //Uncommon
+
                   Visibility(
                     visible: visibleNOBathrooms,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _noOFBathroomsController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Number Of Bathrooms",
                         hintText: "Number Of Bathrooms",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (visibleNOBathrooms) {
-                            if (!value!.isValidNumber) {
-                              return 'Please enter a valid Number';
-                            }
-                          }
-
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _noOFBathroomsController,
+                        type: "number",
+                        show: true),
                   ),
+
                   //Number Of Floors
                   //Uncommon
                   Visibility(
                     visible: visibleNOFloors,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _noOFFloorsController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Number Of Floors",
                         hintText: "Number Of Floors",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (visibleNOFloors) {
-                            if (!value!.isValidNumber) {
-                              return 'Please enter a valid Number';
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _noOFFloorsController,
+                        type: "number",
+                        show: true),
                   ),
+
                   //Number Of AB
                   //Uncommon
                   Visibility(
                     visible: visibleNoAB,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _noOFABController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Number Of administrative buildings",
                         hintText: "Number Of administrative buildings",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (visibleNoAB) {
-                            if (!value!.isValidNumber) {
-                              return 'Please enter a valid Number';
-                            }
-                          }
-
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _noOFABController,
+                        type: "number",
+                        show: true),
                   ),
                   //Number Of Flats
                   //Uncommon
+
                   Visibility(
                     visible: visibleNOFlats,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _noOFFlatsController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Number Of Flats",
                         hintText: "Number Of Flats",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(11),
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r"^[0-9]*$"),
-                          )
-                        ],
-                        validator: (value) {
-                          if (visibleNOFlats) {
-                            if (!value!.isValidNumber) {
-                              return 'Please enter a valid Number';
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _noOFFlatsController,
+                        type: "number",
+                        show: true),
                   ),
+
                   Visibility(
                     visible: visibleTypeOFAcitivity,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 15, right: 15, bottom: 10),
-                      child: CustomTextField(
-                        controller: _typeOFActivityController,
-                        obscureText: false,
+                    child: Property.buildTextField(
                         labelText: "Type OF Activity",
                         hintText: "Type OF Activity",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(25),
-                        ],
-                        validator: (value) {
-                          if (visibleTypeOFAcitivity) {
-                            if (!value!.isValidAddress) {
-                              return 'Please enter a valid Type of Activity';
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _typeOFActivityController,
+                        type: "address",
+                        show: true),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width - 30,
