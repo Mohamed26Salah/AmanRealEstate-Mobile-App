@@ -5,8 +5,8 @@ const colorSecondary = Color(0xFFe0e0e0);
 const colorError = Color.fromARGB(201, 212, 0, 0);
 const colorFocus = Color.fromARGB(255, 0, 166, 255);
 const colorSplash = Color.fromARGB(255, 51, 205, 151);
-const TextColor = Color.fromARGB(255, 255, 255, 255);
-const TextColor2 = Color.fromARGB(255, 0, 0, 0);
+const textColor = Color.fromARGB(255, 255, 255, 255);
+Color blackColor = const Color.fromARGB(255, 0, 0, 0);
 Color highlightColor = Colors.yellow.withOpacity(0.4);
 
 ThemeData lightTheme = ThemeData(
@@ -15,7 +15,8 @@ ThemeData lightTheme = ThemeData(
     splashColor: colorSplash,
     errorColor: colorError,
     focusColor: colorFocus,
-    highlightColor: highlightColor);
+    highlightColor: highlightColor,
+   );
 
 ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
