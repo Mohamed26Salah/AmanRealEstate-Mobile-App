@@ -5,7 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import '../properties/main_page.dart';
 import 'package:flutter/material.dart';
 import '../dashboard/panel_left/panel_left_page.dart';
-import '../rents/rent.dart';
+import '../rents/rents_page.dart';
 
 // class navBar extends StatelessWidget {
 //   const navBar({super.key});

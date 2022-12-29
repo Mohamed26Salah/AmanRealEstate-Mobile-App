@@ -1,7 +1,6 @@
 import 'package:aman_project/presentation/login_loading/login_loading.dart';
 import 'package:aman_project/presentation/properties/edit_property.dart';
 import 'package:aman_project/presentation/rents/rent_Type.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'presentation/shared_features/local_strings.dart';
 import 'package:aman_project/firebase_options/firebase_options.dart';

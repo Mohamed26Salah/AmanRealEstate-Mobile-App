@@ -131,6 +131,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             UserHelper().saveUserPref(remember);
                             UserHelper().signIn(ref, context, _emailController,
                                 _passwordController);
+                            // signIn();
                           }
                         },
                         style: ElevatedButton.styleFrom(
