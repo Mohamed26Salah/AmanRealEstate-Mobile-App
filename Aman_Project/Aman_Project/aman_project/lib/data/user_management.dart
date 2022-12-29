@@ -231,8 +231,7 @@ class UserHelper {
   }
 
   signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-
+    await FirebaseAuth.instance.signOut(); 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", false);
     Navigator.of(context).pushReplacementNamed('/login');

@@ -81,18 +81,6 @@ class AddFormState extends State<AddForm> {
   List<File> images = [];
 
   void updateButtonsUIType(id) {
-    _floorController.text = ''; //
-    _noOFRoomsController.text = ''; //
-    _noOFBathroomsController.text = ''; //
-    _noOFFloorsController.text = ''; //
-    _noOFABController.text = ''; // ngrb de bs el awl
-    _noOFFlatsController.text = ''; //
-    _typeOFActivityController.text = ''; //7
-
-    doublex = null;
-    finishing = null;
-    furnished = null;
-
     flatButton1 = false;
     villaButton2 = false;
     buildingButton3 = false;
@@ -559,16 +547,35 @@ class AddFormState extends State<AddForm> {
                     child: Property.buildTextField(
                         labelText: "Type OF Activity",
                         hintText: "Type OF Activity",
-                        controller: _typeOFActivityController,
-                        type: "address",
-                        show: true),
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(25),
+                        ],
+                        validator: (value) {
+                          if (visibleTypeOFAcitivity) {
+                            if (!value!.isValidAddress) {
+                              return 'Please enter a valid Type of Activity';
+                            }
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                   ),
-                  const Center(
-                    child: Text(
-                      "Upload main image",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        "Upload main image",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
                     ),
                   ),
                   const SizedBox(

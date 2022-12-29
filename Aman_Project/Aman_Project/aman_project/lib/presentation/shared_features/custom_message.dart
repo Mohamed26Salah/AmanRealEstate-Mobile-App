@@ -12,7 +12,7 @@ void errormessage(String t, String m) {
       title: t,
       message: m,
 
-      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants ah
       contentType: ContentType.failure,
     ),
   );
