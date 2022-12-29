@@ -81,6 +81,18 @@ class AddFormState extends State<AddForm> {
   List<File> images = [];
 
   void updateButtonsUIType(id) {
+    _floorController.text = ''; //
+    _noOFRoomsController.text = ''; //
+    _noOFBathroomsController.text = ''; //
+    _noOFFloorsController.text = ''; //
+    _noOFABController.text = ''; // ngrb de bs el awl
+    _noOFFlatsController.text = ''; //
+    _typeOFActivityController.text = ''; //7
+
+    doublex = null;
+    finishing = null;
+    furnished = null;
+
     flatButton1 = false;
     villaButton2 = false;
     buildingButton3 = false;
@@ -547,35 +559,14 @@ class AddFormState extends State<AddForm> {
                     child: Property.buildTextField(
                         labelText: "Type OF Activity",
                         hintText: "Type OF Activity",
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(25),
-                        ],
-                        validator: (value) {
-                          if (visibleTypeOFAcitivity) {
-                            if (!value!.isValidAddress) {
-                              return 'Please enter a valid Type of Activity';
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                        controller: _typeOFActivityController,
+                        type: "address",
+                        show: true),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 30,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                        "Upload main image",
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20),
-                      ),
+                  const Center(
+                    child: Text(
+                      "Upload main image",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
                   ),
                   const SizedBox(
@@ -613,15 +604,11 @@ class AddFormState extends State<AddForm> {
                       children: const [
                         Text(
                           "Upload MuLtiple Sub-Images",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20),
+                          style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                         Text(
                           "(Limit 20 Images Only!)",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10),
+                          style: TextStyle(color: Colors.black, fontSize: 10),
                         ),
                       ],
                     ),
@@ -742,7 +729,8 @@ class AddFormState extends State<AddForm> {
                                 });
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     '/home', (route) => false);
-                                goodMessageSnackBar("Uploading", "Uploading to database");
+                                goodMessageSnackBar(
+                                    "Uploading", "Uploading to database");
                                 ScaffoldMessenger.of(context)
                                   ..hideCurrentSnackBar()
                                   ..showSnackBar(val.snackBar);
