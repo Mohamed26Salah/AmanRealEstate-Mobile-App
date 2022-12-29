@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => const LoginLoading(),
         '/login': (context) => const LoginPage(),
-        '/register': (context) => RegisterPage(),
+        '/register': (context) => const RegisterPage(),
         '/home': (context) => NavBar(themeManager: _themeManager),
         '/details': (context) => const Details(),
         '/addForm': (context) => AddForm(),

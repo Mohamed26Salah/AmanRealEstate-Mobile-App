@@ -19,10 +19,12 @@ class LoginLoading extends ConsumerStatefulWidget {
 class _LoginLoadingState extends ConsumerState<LoginLoading> {
   Future<bool?> getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool? value = preferences.getBool("remember");
+    bool value = false;
+    value = preferences.getBool("remember") ?? false;
+
     await Future.delayed(const Duration(seconds: 1));
 
-    if (value!) {
+    if (value) {
       FirebaseAuth.instance.idTokenChanges().listen((User? user) {
         if (user != null) {
           //Salah Way
@@ -34,6 +36,7 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
           //   ref.read(newUserDataProivder.notifier).state = user;
           //   Navigator.of(context).pushReplacementNamed('/home');
           // });
+
           Navigator.of(context).pushReplacementNamed('/home');
         } else {
           Navigator.of(context).pushReplacementNamed('/login');
@@ -43,7 +46,8 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
       return value;
     } else {
       Navigator.of(context).pushReplacementNamed('/login');
-      return value;
+
+      return false;
     }
   }
 
@@ -53,7 +57,7 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
       body: FutureBuilder(
           future: getPref(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.done) {
               return const Center(child: CircularProgressIndicator());
             } else {
               return Center(
