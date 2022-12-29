@@ -1,4 +1,5 @@
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -295,199 +296,71 @@ class AddFormState extends State<AddForm> {
 
                   //Owner Name
                   //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _ownerNameController,
-                      obscureText: false,
+                  Property.buildTextField(
                       labelText: "Owner Name",
                       hintText: "Owner Name",
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(
-                      //     RegExp(r"[a-zA-Z]+|\s"),
-                      //   )
-                      // ],
-                      validator: (value) {
-                        if (!value!.isValidName) {
-                          return 'Please enter a valid name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Owner Number
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _ownerNumberController,
-                      obscureText: false,
+                      controller: _ownerNameController,
+                      type: "name",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Owner Number",
                       hintText: "01144..",
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(11),
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r"^[0-9]*$"),
-                        )
-                      ],
-                      validator: (value) {
-                        if (!value!.isValidPhone) {
-                          return 'Please enter a valid Number';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Address User
+                      controller: _ownerNumberController,
+                      type: "phone",
+                      show: true),
+
                   //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _addressForUserController,
-                      obscureText: false,
+
+                  Property.buildTextField(
                       labelText: "Address For User",
                       hintText: "Address User",
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(
-                      //     RegExp(r"[a-zA-Z]+|\s"),
-                      //   )
-                      // ],
-                      validator: (value) {
-                        if (!value!.isValidAddress) {
-                          return 'Please enter a valid Address';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Address Admin
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _addressForAdminController,
-                      obscureText: false,
+                      controller: _addressForUserController,
+                      type: "address",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Address For Admin",
                       hintText: "Address Admin",
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(
-                      //     RegExp(r"[a-zA-Z]+|\s"),
-                      //   )
-                      // ],
-                      validator: (value) {
-                        if (!value!.isValidAddress) {
-                          return 'Please enter a valid Address';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Area
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _areaController,
-                      obscureText: false,
+                      controller: _addressForAdminController,
+                      type: "address",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Area",
                       hintText: "Area",
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(11),
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r"^[0-9]*$"),
-                        )
-                      ],
-                      validator: (value) {
-                        if (!value!.isValidNumber) {
-                          return 'Please enter a valid Number';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Price
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _priceController,
-                      obscureText: false,
+                      controller: _areaController,
+                      type: "number",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Price",
                       hintText: "Price",
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(11),
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r"^[0-9]*$"),
-                        )
-                      ],
-                      validator: (value) {
-                        if (!value!.isValidNumber) {
-                          return 'Please enter a valid Number';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Description User
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _descriptionForUserController,
-                      obscureText: false,
+                      controller: _priceController,
+                      type: "number",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Description For User",
                       hintText: "Description User",
-                      validator: (value) {
-                        if (!value!.isValidAddress) {
-                          return 'Please enter a valid Description';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  //Description Admin
-                  //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _descriptionForAdminController,
-                      obscureText: false,
+                      controller: _descriptionForUserController,
+                      type: "address",
+                      show: true),
+
+                  Property.buildTextField(
                       labelText: "Description For Admin",
                       hintText: "Description Admin",
-                      validator: (value) {
-                        if (!value!.isValidAddress) {
-                          return 'Please enter a valid Description';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+                      controller: _descriptionForAdminController,
+                      type: "address",
+                      show: true),
+
                   //Title
                   //Common
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
-                      controller: _nameController,
-                      obscureText: false,
+                  Property.buildTextField(
                       labelText: "Unit Name",
                       hintText: "Unit Name",
-                      validator: (value) {
-                        if (!value!.isValidAddress) {
-                          return 'Please enter a valid Unit Name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+                      controller: _nameController,
+                      type: "name"),
 
                   //Payment Method
                   //Common
@@ -922,7 +795,7 @@ class AddFormState extends State<AddForm> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Upload MuLtiple Sup-Images",
+                            "Upload MuLtiple Sub-Images",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 20),
@@ -1063,7 +936,8 @@ class AddFormState extends State<AddForm> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          elevation: 0.0, backgroundColor: Colors.red.withOpacity(0),
+                          elevation: 0.0,
+                          backgroundColor: Colors.red.withOpacity(0),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),

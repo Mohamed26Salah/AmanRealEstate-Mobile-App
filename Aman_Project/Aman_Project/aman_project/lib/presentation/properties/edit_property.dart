@@ -70,6 +70,7 @@ class _EditPropertyState extends State<EditProperty> {
     super.dispose();
   }
 
+  List<File> images = [];
   int? counter;
   @override
   void initState() {
@@ -132,82 +133,98 @@ class _EditPropertyState extends State<EditProperty> {
                       labelText: "Owner Name",
                       hintText: "Owner Name",
                       controller: _ownerNameController,
-                      type: "name"),
+                      type: "name",
+                      show: _ownerNameController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Owner Number",
                       hintText: "01144..",
                       controller: _ownerNumberController,
-                      type: "number"),
+                      type: "phone",
+                      show: _ownerNumberController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Address For User",
                       hintText: "Address User",
                       controller: _addressForUserController,
-                      type: "address"),
+                      type: "address",
+                      show: _addressForUserController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Address For Admin",
                       hintText: "Address Admin",
                       controller: _addressForAdminController,
-                      type: "address"),
+                      type: "address",
+                      show: _addressForAdminController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Area",
                       hintText: "Area",
                       controller: _areaController,
-                      type: "number"),
+                      type: "number",
+                      show: _areaController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Price",
                       hintText: "Price",
                       controller: _priceController,
-                      type: "number"),
+                      type: "number",
+                      show: _priceController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Description For User",
                       hintText: "Description For User",
                       controller: _descriptionForUserController,
-                      type: "address"),
+                      type: "address",
+                      show: _descriptionForUserController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Description For Admin",
                       hintText: "Description For Admin",
                       controller: _descriptionForAdminController,
-                      type: "address"),
+                      type: "address",
+                      show: _descriptionForAdminController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Unit Name",
                       hintText: "Unit Name",
                       controller: _nameController,
-                      type: "name"),
+                      type: "name",
+                      show: _nameController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Floor",
                       hintText: "Floor",
                       controller: _floorController,
-                      type: "number"),
+                      type: "number",
+                      show: _floorController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Number Of Rooms",
                       hintText: "Number Of Rooms",
                       controller: _noOFRoomsController,
-                      type: "number"),
+                      type: "number",
+                      show: _noOFRoomsController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Number Of Bathrooms",
                       hintText: "Number Of Bathrooms",
                       controller: _noOFBathroomsController,
-                      type: "number"),
+                      type: "number",
+                      show: _noOFBathroomsController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Number Of Floors",
                       hintText: "Number Of Floors",
                       controller: _noOFFloorsController,
-                      type: "number"),
+                      type: "number",
+                      show: _noOFFloorsController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Number Of Flats",
                       hintText: "Number Of Flats",
                       controller: _noOFFlatsController,
-                      type: "number"),
+                      type: "number",
+                      show: _noOFFlatsController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Type OF Activity",
                       hintText: "Type OF Activity",
                       controller: _typeOFActivityController,
-                      type: "address"),
+                      type: "address",
+                      show: _typeOFActivityController.text.isNotEmpty),
                   Property.buildTextField(
                       labelText: "Number Of administrative buildings",
                       hintText: "Number Of administrative buildings",
                       controller: _noOFABController,
-                      type: "number"),
+                      type: "number",
+                      show: _noOFABController.text.isNotEmpty),
                   Property.showDropdown(
                       dropdownItems: ["High", "medium", "Low"],
                       hint: "Select priority",
@@ -310,6 +327,76 @@ class _EditPropertyState extends State<EditProperty> {
                           size: 50,
                         ),
                       )),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: Text(
+                        "Edit multiple sub-images",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 180,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: images.isEmpty
+                        ? GridView.builder(
+                            physics: const ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemCount: routeArgs.multiImages.length,
+                            itemBuilder: (_, index) {
+                              return Image.network(
+                                routeArgs.multiImages[index],
+                                fit: BoxFit.cover,
+                              );
+                            })
+                        : GridView.builder(
+                            physics: const ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemCount: images.length,
+                            itemBuilder: (_, index) {
+                              return Image.file(
+                                images[index],
+                                fit: BoxFit.cover,
+                              );
+                            }),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        getMultipImage();
+                      },
+                      child: const Center(
+                        child: Icon(
+                          Icons.upload_file,
+                          size: 50,
+                        ),
+                      )),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -323,6 +410,7 @@ class _EditPropertyState extends State<EditProperty> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             uploadFile(routeArgs);
+                            uploadMutilbeImages(routeArgs);
 
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/home', (route) => false);
@@ -442,6 +530,7 @@ class _EditPropertyState extends State<EditProperty> {
               print("object ${routeArgs.singleImage}");
               print("value $value");
               result = value;
+
               PropertyManagement.updateProperty(
                   docId: routeArgs.docId,
                   ownerName: _ownerNameController.text,
@@ -515,5 +604,73 @@ class _EditPropertyState extends State<EditProperty> {
           finishing: routeArgs.finishing,
           furnished: routeArgs.furnished);
     }
+  }
+
+//Mutiple Images
+  List<String> downloadUrls = [];
+  final ImagePicker _pickerMutli = ImagePicker();
+  getMultipImage() async {
+    final List<XFile>? pickedImages = await _pickerMutli.pickMultiImage();
+    images = [];
+    int counter = 0;
+    if (pickedImages != null) {
+      // for (int i = 0; i < 20; i++) {
+      //   images.add(File(pickedImages[i].path));
+      // }
+      pickedImages.forEach((e) {
+        if (counter++ < 20) {
+          images.add(File(e.path));
+        }
+      });
+
+      setState(() {});
+    }
+  }
+
+  Future uploadMutilbeImages(Property routeArgs) async {
+    for (int i = 0; i < images.length; i++) {
+      String url = await uploadMutibleFiles(images[i]);
+      downloadUrls.add(url);
+    }
+    PropertyManagement.updateProperty(
+        docId: routeArgs.docId,
+        ownerName: _ownerNameController.text,
+        ownerNumber: _ownerNumberController.text,
+        addressForUser: _addressForUserController.text,
+        addressForAdmin: _addressForAdminController.text,
+        area: int.parse(_areaController.text),
+        price: int.parse(_priceController.text),
+        descriptionForUser: _descriptionForUserController.text,
+        descriptionForAdmin: _descriptionForAdminController.text,
+        unitName: _nameController.text,
+        paymentMethod: routeArgs.paymentMethod,
+        priority: routeArgs.priority,
+        visible: routeArgs.visible,
+        offered: routeArgs.offered,
+        singleImage: routeArgs.singleImage,
+        mutliImages: downloadUrls,
+        type: routeArgs.type,
+        floor: _floorController.text,
+        noRooms: _noOFRoomsController.text,
+        noBathrooms: _noOFBathroomsController.text,
+        noFloors: _noOFFloorsController.text,
+        noAB: _noOFABController.text,
+        noFlats: _noOFFlatsController.text,
+        typeOFActivity: _typeOFActivityController.text,
+        doublex: routeArgs.doublex,
+        finishing: routeArgs.finishing,
+        furnished: routeArgs.furnished);
+  }
+
+  Future<String> uploadMutibleFiles(File file) async {
+    final metaData = SettableMetadata(contentType: 'image/jpeg');
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference ref = storageRef
+        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+    final uploadTask = ref.putFile(file, metaData);
+
+    final taskSnapshot = await uploadTask.whenComplete(() => null);
+    String url = await taskSnapshot.ref.getDownloadURL();
+    return url;
   }
 }

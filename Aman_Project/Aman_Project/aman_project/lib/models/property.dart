@@ -67,11 +67,12 @@ class Property {
       {required String labelText,
       required String hintText,
       required TextEditingController controller,
-      required String type}) {
+      required String type,
+      bool? show}) {
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
-      child: type == 'number'
-          ? controller.text.isEmpty
+      child: type == 'number' || type == 'phone'
+          ? show == false
               ? const SizedBox()
               : CustomTextField(
                   controller: controller,
@@ -85,13 +86,22 @@ class Property {
                     )
                   ],
                   validator: (value) {
-                    if (!value!.isValidNumber) {
-                      return 'Please enter a valid $labelText';
+                    if (type == 'number') {
+                      if (!value!.isValidNumber) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
+                    }
+                    if (type == 'phone') {
+                      if (!value!.isValidPhone) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      return null;
                     }
                     return null;
                   },
                 )
-          : controller.text.isEmpty
+          : show == false
               ? const SizedBox()
               : CustomTextField(
                   controller: controller,
@@ -126,30 +136,33 @@ class Property {
     required String text,
     required List<String> dropdownItems,
     required String hint,
-     String? value,
+    String? value,
     bool? show,
     Function(String?)? onChanged,
   }) {
-    return show == false ? const SizedBox() : Padding(
-      padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(text),
-          CustomDropdownButton2(
-            dropdownItems: dropdownItems,
-            hint: hint,
-            value: value,
-            onChanged: onChanged,
-            validatior: (value) {
-              if (value == null) {
-                return 'Please Select';
-              }
-              return null;
-            },
-          ),
-        ],
-      ),
-    );
+    return show == false
+        ? const SizedBox()
+        : Padding(
+            padding:
+                const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text),
+                CustomDropdownButton2(
+                  dropdownItems: dropdownItems,
+                  hint: hint,
+                  value: value,
+                  onChanged: onChanged,
+                  validatior: (value) {
+                    if (value == null) {
+                      return 'Please Select';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+          );
   }
 }
