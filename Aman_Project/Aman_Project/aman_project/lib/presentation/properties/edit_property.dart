@@ -409,8 +409,41 @@ class _EditPropertyState extends State<EditProperty> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            uploadFile(routeArgs);
-                            uploadMutilbeImages(routeArgs);
+                            uploadFile(routeArgs).then((value) async {
+                              uploadMutilbeImages(routeArgs)
+                                  .then((value2) async {
+                                await PropertyManagement.updateProperty(
+                                    docId: routeArgs.docId,
+                                    ownerName: _ownerNameController.text,
+                                    ownerNumber: _ownerNumberController.text,
+                                    addressForUser:
+                                        _addressForUserController.text,
+                                    addressForAdmin:
+                                        _addressForAdminController.text,
+                                    area: int.parse(_areaController.text),
+                                    price: int.parse(_priceController.text),
+                                    descriptionForUser:
+                                        _descriptionForUserController.text,
+                                    descriptionForAdmin:
+                                        _descriptionForAdminController.text,
+                                    unitName: _nameController.text,
+                                    paymentMethod: routeArgs.paymentMethod,
+                                    priority: routeArgs.priority,
+                                    visible: routeArgs.visible,
+                                    offered: routeArgs.offered,
+                                    singleImage: value,
+                                    mutliImages: value2,
+                                    type: routeArgs.type,
+                                    floor: _floorController.text,
+                                    noRooms: _noOFRoomsController.text,
+                                    noBathrooms: _noOFBathroomsController.text,
+                                    noFloors: _noOFFloorsController.text,
+                                    noAB: _noOFABController.text,
+                                    noFlats: _noOFFlatsController.text,
+                                    typeOFActivity:
+                                        _typeOFActivityController.text);
+                              });
+                            });
 
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/home', (route) => false);
@@ -507,8 +540,8 @@ class _EditPropertyState extends State<EditProperty> {
     );
   }
 
-  Future uploadFile(Property routeArgs) async {
-    String? result = '';
+  Future<String> uploadFile(Property routeArgs) async {
+    String result = routeArgs.singleImage;
     if (myImage != null) {
       final file = myImage!;
       final metaData = SettableMetadata(contentType: 'image/jpeg');
@@ -516,50 +549,15 @@ class _EditPropertyState extends State<EditProperty> {
 
       Reference ref = storageRef
           .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-      final uploadTask = ref.putFile(file, metaData);
-
-      uploadTask.snapshotEvents.listen((event) {
-        switch (event.state) {
+      await ref.putFile(file, metaData).then((p0) async {
+        switch (p0.state) {
           case TaskState.running:
             print("File is uploading");
             break;
           case TaskState.success:
-            ref.getDownloadURL().then((value) {
-              routeArgs.singleImage = value;
-
-              print("object ${routeArgs.singleImage}");
+            await ref.getDownloadURL().then((value) {
               print("value $value");
               result = value;
-
-              PropertyManagement.updateProperty(
-                  docId: routeArgs.docId,
-                  ownerName: _ownerNameController.text,
-                  ownerNumber: _ownerNumberController.text,
-                  addressForUser: _addressForUserController.text,
-                  addressForAdmin: _addressForAdminController.text,
-                  area: int.parse(_areaController.text),
-                  price: int.parse(_priceController.text),
-                  descriptionForUser: _descriptionForUserController.text,
-                  descriptionForAdmin: _descriptionForAdminController.text,
-                  unitName: _nameController.text,
-                  paymentMethod: routeArgs.paymentMethod,
-                  priority: routeArgs.priority,
-                  visible: routeArgs.visible,
-                  offered: routeArgs.offered,
-                  singleImage: value,
-                  mutliImages: routeArgs.multiImages,
-                  type: routeArgs.type,
-                  floor: _floorController.text,
-                  noRooms: _noOFRoomsController.text,
-                  noBathrooms: _noOFBathroomsController.text,
-                  noFloors: _noOFFloorsController.text,
-                  noAB: _noOFABController.text,
-                  noFlats: _noOFFlatsController.text,
-                  typeOFActivity: _typeOFActivityController.text,
-                  doublex: routeArgs.doublex,
-                  finishing: routeArgs.finishing,
-                  furnished: routeArgs.furnished);
-              return result;
             });
             break;
           case TaskState.paused:
@@ -573,36 +571,10 @@ class _EditPropertyState extends State<EditProperty> {
             break;
         }
       });
+
+      return result;
     } else {
-      print("in here");
-      PropertyManagement.updateProperty(
-          docId: routeArgs.docId,
-          ownerName: _ownerNameController.text,
-          ownerNumber: _ownerNumberController.text,
-          addressForUser: _addressForUserController.text,
-          addressForAdmin: _addressForAdminController.text,
-          area: int.parse(_areaController.text),
-          price: int.parse(_priceController.text),
-          descriptionForUser: _descriptionForUserController.text,
-          descriptionForAdmin: _descriptionForAdminController.text,
-          unitName: _nameController.text,
-          paymentMethod: routeArgs.paymentMethod,
-          priority: routeArgs.priority,
-          visible: routeArgs.visible,
-          offered: routeArgs.offered,
-          singleImage: routeArgs.singleImage,
-          mutliImages: routeArgs.multiImages,
-          type: routeArgs.type,
-          floor: _floorController.text,
-          noRooms: _noOFRoomsController.text,
-          noBathrooms: _noOFBathroomsController.text,
-          noFloors: _noOFFloorsController.text,
-          noAB: _noOFABController.text,
-          noFlats: _noOFFlatsController.text,
-          typeOFActivity: _typeOFActivityController.text,
-          doublex: routeArgs.doublex,
-          finishing: routeArgs.finishing,
-          furnished: routeArgs.furnished);
+      return routeArgs.singleImage;
     }
   }
 
@@ -627,39 +599,17 @@ class _EditPropertyState extends State<EditProperty> {
     }
   }
 
-  Future uploadMutilbeImages(Property routeArgs) async {
+  Future<List<dynamic>> uploadMutilbeImages(Property routeArgs) async {
     for (int i = 0; i < images.length; i++) {
-      String url = await uploadMutibleFiles(images[i]);
-      downloadUrls.add(url);
+      await uploadMutibleFiles(images[i]).then((value) async {
+        downloadUrls.add(value);
+      });
     }
-    PropertyManagement.updateProperty(
-        docId: routeArgs.docId,
-        ownerName: _ownerNameController.text,
-        ownerNumber: _ownerNumberController.text,
-        addressForUser: _addressForUserController.text,
-        addressForAdmin: _addressForAdminController.text,
-        area: int.parse(_areaController.text),
-        price: int.parse(_priceController.text),
-        descriptionForUser: _descriptionForUserController.text,
-        descriptionForAdmin: _descriptionForAdminController.text,
-        unitName: _nameController.text,
-        paymentMethod: routeArgs.paymentMethod,
-        priority: routeArgs.priority,
-        visible: routeArgs.visible,
-        offered: routeArgs.offered,
-        singleImage: routeArgs.singleImage,
-        mutliImages: downloadUrls,
-        type: routeArgs.type,
-        floor: _floorController.text,
-        noRooms: _noOFRoomsController.text,
-        noBathrooms: _noOFBathroomsController.text,
-        noFloors: _noOFFloorsController.text,
-        noAB: _noOFABController.text,
-        noFlats: _noOFFlatsController.text,
-        typeOFActivity: _typeOFActivityController.text,
-        doublex: routeArgs.doublex,
-        finishing: routeArgs.finishing,
-        furnished: routeArgs.furnished);
+    if (images.isEmpty) {
+      return routeArgs.multiImages;
+    } else {
+      return downloadUrls;
+    }
   }
 
   Future<String> uploadMutibleFiles(File file) async {
