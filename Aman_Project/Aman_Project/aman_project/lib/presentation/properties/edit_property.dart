@@ -1,18 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:aman_project/models/property.dart';
-import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../shared_features/custom_message.dart';
-import '../shared_features/custom_text_field.dart';
-import 'dropdown.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import '../../constants/globals.dart' as val;
 

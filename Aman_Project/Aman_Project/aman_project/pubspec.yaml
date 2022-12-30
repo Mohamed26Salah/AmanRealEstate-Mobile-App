@@ -41,6 +41,7 @@ dependencies:
   image_picker: 
   firebase_storage: 
   rounded_loading_button: ^2.0.8
+  flutter_image_compress: ^1.0.0-nullsafety
   flutter:
     sdk: flutter
   firebase_core: ^2.2.0  

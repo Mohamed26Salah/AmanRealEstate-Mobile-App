@@ -110,12 +110,13 @@ class Property {
                   hintText: hintText,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
-                      RegExp(r"[a-zA-Z]+|\s"),
+                      RegExp(r"[a-zA-Z0-9]+|\s"),
                     )
                   ],
                   validator: (value) {
                     if (type == 'name') {
-                      if (!value!.isValidName) {
+                      //I hcange from valid name to valid ADDRESS
+                      if (!value!.isValidAddress) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;

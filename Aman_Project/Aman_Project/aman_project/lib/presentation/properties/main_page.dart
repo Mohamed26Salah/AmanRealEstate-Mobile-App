@@ -1,3 +1,4 @@
+import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/presentation/properties/show_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -135,7 +136,9 @@ class _SearchState extends ConsumerState<Search> {
           backgroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
           onPressed: () {
-            Navigator.of(context).pushNamed('/addForm');
+            Navigator.of(context).pushNamed('/addForm').then((value) {
+              ImageManagement().clearImageProivders(ref);
+            });
             // context.push('/addFormUnits');
           },
         ),

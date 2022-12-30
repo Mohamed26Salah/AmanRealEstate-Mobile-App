@@ -1,33 +1,24 @@
+import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../shared_features/custom_message.dart';
-import 'dropdown.dart';
-import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
-
-import '../shared_features/custom_text_field.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:io';
 import '../../constants/globals.dart' as val;
 
 //Removed Final
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-class AddForm extends StatefulWidget {
+class AddForm extends ConsumerStatefulWidget {
   AddForm({Key? key}) : super(key: key);
 
   @override
-  State<AddForm> createState() => AddFormState();
+  ConsumerState<AddForm> createState() => AddFormState();
 }
 
-class AddFormState extends State<AddForm> {
-  //List For add
-  List<dynamic> listAddTOFirebase = [];
+class AddFormState extends ConsumerState<AddForm> {
   String userChoice = "";
-
   var flatButton1 = false;
   var villaButton2 = false;
   var buildingButton3 = false;
@@ -38,7 +29,6 @@ class AddFormState extends State<AddForm> {
   var landButton8 = false;
   var otherButton9 = false;
   // ChoiceButtons
-
   //Resposbile of Visibility of widgets
   bool visibleFinishing = false;
   bool visibleDoublex = false;
@@ -75,24 +65,19 @@ class AddFormState extends State<AddForm> {
   final _noOFABController = TextEditingController();
   final _noOFFlatsController = TextEditingController();
   final _typeOFActivityController = TextEditingController();
-  //Upload Image and Multi Images
-  File? myImage;
-  late String singleImageURl;
-  List<File> images = [];
-
+  ImageManagement imageManagement = ImageManagement();
   void updateButtonsUIType(id) {
     _floorController.text = ''; //
     _noOFRoomsController.text = ''; //
     _noOFBathroomsController.text = ''; //
     _noOFFloorsController.text = ''; //
-    _noOFABController.text = ''; // ngrb de bs el awl
+    _noOFABController.text = ''; //
     _noOFFlatsController.text = ''; //
     _typeOFActivityController.text = ''; //7
 
     doublex = null;
     finishing = null;
     furnished = null;
-
     flatButton1 = false;
     villaButton2 = false;
     buildingButton3 = false;
@@ -217,6 +202,7 @@ class AddFormState extends State<AddForm> {
     _noOFABController.dispose();
     _noOFFlatsController.dispose();
     _typeOFActivityController.dispose();
+
     super.dispose();
   }
 
@@ -244,6 +230,7 @@ class AddFormState extends State<AddForm> {
                           color: Colors.black,
                         ),
                         onPressed: () {
+                          imageManagement.clearImageProivders(ref);
                           Navigator.pop(context);
                         },
                       ),
@@ -263,7 +250,6 @@ class AddFormState extends State<AddForm> {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
-
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -306,77 +292,62 @@ class AddFormState extends State<AddForm> {
                       ),
                     ],
                   ),
-
-                  //Owner Name
-                  //Common
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Property.buildTextField(
                       labelText: "Owner Name",
                       hintText: "Owner Name",
                       controller: _ownerNameController,
                       type: "name",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Owner Number",
                       hintText: "01144..",
                       controller: _ownerNumberController,
                       type: "phone",
                       show: true),
-
-                  //Common
-
                   Property.buildTextField(
                       labelText: "Address For User",
                       hintText: "Address User",
                       controller: _addressForUserController,
                       type: "address",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Address For Admin",
                       hintText: "Address Admin",
                       controller: _addressForAdminController,
                       type: "address",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Area",
                       hintText: "Area",
                       controller: _areaController,
                       type: "number",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Price",
                       hintText: "Price",
                       controller: _priceController,
                       type: "number",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Description For User",
                       hintText: "Description User",
                       controller: _descriptionForUserController,
                       type: "address",
                       show: true),
-
                   Property.buildTextField(
                       labelText: "Description For Admin",
                       hintText: "Description Admin",
                       controller: _descriptionForAdminController,
                       type: "address",
                       show: true),
-
-                  //Title
-                  //Common
                   Property.buildTextField(
                       labelText: "Unit Name",
                       hintText: "Unit Name",
                       controller: _nameController,
                       type: "name"),
-
-                  //Payment Method
-                  //Common
                   Property.showDropdown(
                     dropdownItems: ["Cash", "installment"],
                     hint: "Select Payment Method",
@@ -389,7 +360,6 @@ class AddFormState extends State<AddForm> {
                       });
                     },
                   ),
-
                   Property.showDropdown(
                     dropdownItems: ["High", "medium", "Low"],
                     hint: "Select priority",
@@ -402,7 +372,6 @@ class AddFormState extends State<AddForm> {
                       });
                     },
                   ),
-
                   Property.showDropdown(
                     dropdownItems: ["Yes", "No"],
                     hint: "Select visibility",
@@ -415,7 +384,6 @@ class AddFormState extends State<AddForm> {
                       });
                     },
                   ),
-
                   Property.showDropdown(
                     dropdownItems: ["For Sale", "For Rent"],
                     hint: "Select offering",
@@ -428,7 +396,6 @@ class AddFormState extends State<AddForm> {
                       });
                     },
                   ),
-
                   Visibility(
                     visible: visibleFinishing,
                     child: Property.showDropdown(
@@ -444,9 +411,6 @@ class AddFormState extends State<AddForm> {
                       },
                     ),
                   ),
-                  //Doublex
-                  //Uncommon
-
                   Visibility(
                     visible: visibleDoublex,
                     child: Property.showDropdown(
@@ -462,9 +426,6 @@ class AddFormState extends State<AddForm> {
                       },
                     ),
                   ),
-
-                  //Furnished
-                  //Uncommon
                   Visibility(
                     visible: visibleFurnished,
                     child: Property.showDropdown(
@@ -480,10 +441,6 @@ class AddFormState extends State<AddForm> {
                       },
                     ),
                   ),
-
-                  //Floor
-                  //Uncommon
-
                   Visibility(
                     visible: visibleFloor,
                     child: Property.buildTextField(
@@ -493,9 +450,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-                  //Number Of Rooms
-                  //Uncommon
-
                   Visibility(
                     visible: visibleNoRooms,
                     child: Property.buildTextField(
@@ -505,9 +459,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-                  //Number Of Bathrooms
-                  //Uncommon
-
                   Visibility(
                     visible: visibleNOBathrooms,
                     child: Property.buildTextField(
@@ -517,9 +468,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-
-                  //Number Of Floors
-                  //Uncommon
                   Visibility(
                     visible: visibleNOFloors,
                     child: Property.buildTextField(
@@ -529,9 +477,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-
-                  //Number Of AB
-                  //Uncommon
                   Visibility(
                     visible: visibleNoAB,
                     child: Property.buildTextField(
@@ -541,9 +486,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-                  //Number Of Flats
-                  //Uncommon
-
                   Visibility(
                     visible: visibleNOFlats,
                     child: Property.buildTextField(
@@ -553,7 +495,6 @@ class AddFormState extends State<AddForm> {
                         type: "number",
                         show: true),
                   ),
-
                   Visibility(
                     visible: visibleTypeOFAcitivity,
                     child: Property.buildTextField(
@@ -574,7 +515,8 @@ class AddFormState extends State<AddForm> {
                   ),
                   InkWell(
                     onTap: () {
-                      openBottomSheet();
+                      ImageManagementWidget()
+                          .openBottomSheet(ref, imageManagement);
                     },
                     child: Container(
                         width: MediaQuery.of(context).size.width - 30,
@@ -582,7 +524,7 @@ class AddFormState extends State<AddForm> {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
                             borderRadius: BorderRadius.circular(8)),
-                        child: myImage == null
+                        child: ref.watch(imageFileProivder) == null
                             ? const Center(
                                 child: Icon(
                                   Icons.upload_file,
@@ -591,7 +533,7 @@ class AddFormState extends State<AddForm> {
                               )
                             : Center(
                                 child: Image.file(
-                                myImage!,
+                                ref.watch(imageFileProivder)!,
                                 fit: BoxFit.cover,
                               ))),
                   ),
@@ -603,7 +545,7 @@ class AddFormState extends State<AddForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Text(
-                          "Upload MuLtiple Sub-Images",
+                          "Upload Multiple Sub-Images",
                           style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                         Text(
@@ -617,8 +559,9 @@ class AddFormState extends State<AddForm> {
                     height: 10,
                   ),
                   InkWell(
-                    onTap: () {
-                      getMultipImage();
+                    onTap: () async {
+                      // getMultipImage();
+                      await imageManagement.getMultipImage(ref);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width - 30,
@@ -626,7 +569,7 @@ class AddFormState extends State<AddForm> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(8)),
-                      child: images.isEmpty
+                      child: (ref.watch(imagesListFileProivder).isEmpty)
                           ? const Center(
                               child: Icon(
                                 Icons.drive_folder_upload,
@@ -642,19 +585,14 @@ class AddFormState extends State<AddForm> {
                                 crossAxisSpacing: 8,
                                 mainAxisSpacing: 10,
                               ),
-                              itemCount: images.length,
+                              itemCount:
+                                  ref.watch(imagesListFileProivder).length,
                               itemBuilder: (_, index) {
                                 return Image.file(
-                                  images[index],
+                                  ref.watch(imagesListFileProivder)[index]!,
                                   fit: BoxFit.cover,
                                 );
                               }),
-                      // child: const Center(
-                      //   child: Icon(
-                      //     Icons.drive_folder_upload,
-                      //     size: 50,
-                      //   ),
-                      // )
                     ),
                   ),
                   const SizedBox(
@@ -686,34 +624,32 @@ class AddFormState extends State<AddForm> {
                                           Color.fromARGB(255, 205, 153, 51)),
                                     ));
                                   });
-                              //UploadSingleImage
-                              listAddTOFirebase.add(_ownerNameController.text);
-                              listAddTOFirebase
-                                  .add(_ownerNumberController.text);
-                              listAddTOFirebase
-                                  .add(_addressForUserController.text);
-                              listAddTOFirebase
-                                  .add(_addressForAdminController.text);
-                              listAddTOFirebase
-                                  .add(int.parse(_areaController.text));
-                              listAddTOFirebase
-                                  .add(int.parse(_priceController.text));
-                              listAddTOFirebase
-                                  .add(_descriptionForUserController.text);
-                              listAddTOFirebase
-                                  .add(_descriptionForAdminController.text);
-                              listAddTOFirebase.add(_nameController.text);
-                              listAddTOFirebase.add(paymentMethod!);
-                              listAddTOFirebase.add(priority!);
-                              listAddTOFirebase.add(visible!);
-                              listAddTOFirebase.add(offered!);
-                              uploadFile().then((value) {
-                                uploadMutilbeImages().then((value) {
+                              imageManagement.uploadFile().then((value) async {
+                                await imageManagement
+                                    .uploadMultipleImages()
+                                    .then((value) {
                                   PropertyManagement.addPropertyData(
                                     type: userChoice,
-                                    commonUnitPrpoerties: listAddTOFirebase,
-                                    singleImage: singleImageURl,
-                                    mutliImages: downloadUrls,
+                                    ownerName: _ownerNameController.text,
+                                    ownerNumber: _ownerNumberController.text,
+                                    addressForUser:
+                                        _addressForUserController.text,
+                                    addressForAdmin:
+                                        _addressForAdminController.text,
+                                    area: int.parse(_areaController.text),
+                                    price: int.parse(_priceController.text),
+                                    descriptionForUser:
+                                        _descriptionForUserController.text,
+                                    descriptionForAdmin:
+                                        _descriptionForAdminController.text,
+                                    unitName: _nameController.text,
+                                    paymentMethod: paymentMethod!,
+                                    priority: priority!,
+                                    visible: visible!,
+                                    offered: offered!,
+                                    // commonUnitPrpoerties: listAddTOFirebase,
+                                    singleImage: imageManagement.singleImageURl,
+                                    mutliImages: imageManagement.downloadUrls,
                                     floor: _floorController.text,
                                     doublex: doublex ?? "",
                                     noRooms: _noOFRoomsController.text,
@@ -726,7 +662,9 @@ class AddFormState extends State<AddForm> {
                                         _typeOFActivityController.text,
                                     noAB: _noOFABController.text,
                                   );
+                                  imageManagement.clearImageProivders(ref);
                                 });
+
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     '/home', (route) => false);
                                 goodMessageSnackBar(
@@ -772,133 +710,6 @@ class AddFormState extends State<AddForm> {
         ),
       ),
     );
-  }
-
-//Single Image
-  openBottomSheet() {
-    Get.bottomSheet(Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-      ),
-      width: double.infinity,
-      height: 150,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        buildImageWidget(
-            iconData: Icons.camera_alt,
-            onPressed: () {
-              getImage(ImageSource.camera);
-            }),
-        buildImageWidget(
-            iconData: Icons.image,
-            onPressed: () {
-              getImage(ImageSource.gallery);
-            }),
-      ]),
-    ));
-  }
-
-  buildImageWidget({required IconData iconData, required Function onPressed}) {
-    return InkWell(
-      onTap: () => onPressed(),
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Icon(
-            iconData,
-            size: 30,
-          ),
-        ),
-      ),
-    );
-  }
-
-  final ImagePicker _picker = ImagePicker();
-  getImage(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-
-    if (image != null) {
-      myImage = File(image.path);
-      setState(() {});
-      Get.back();
-    }
-  }
-
-  Future uploadFile() async {
-    final file = myImage!;
-    final metaData = SettableMetadata(contentType: 'image/jpeg');
-    final storageRef = FirebaseStorage.instance.ref();
-    Reference ref = storageRef
-        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-    final uploadTask = ref.putFile(file, metaData);
-
-    uploadTask.snapshotEvents.listen((event) {
-      switch (event.state) {
-        case TaskState.running:
-          print("File is uploading");
-          break;
-        case TaskState.success:
-          ref.getDownloadURL().then((value) {
-            singleImageURl = value;
-          });
-          break;
-        case TaskState.paused:
-          // TODO: Handle this case.
-          break;
-        case TaskState.canceled:
-          // TODO: Handle this case.
-          break;
-        case TaskState.error:
-          // TODO: Handle this case.
-          break;
-      }
-    });
-  }
-
-//Mutiple Images
-  List<String> downloadUrls = [];
-  final ImagePicker _pickerMutli = ImagePicker();
-  getMultipImage() async {
-    final List<XFile>? pickedImages = await _pickerMutli.pickMultiImage();
-    images = [];
-    int counter = 0;
-    if (pickedImages != null) {
-      // for (int i = 0; i < 20; i++) {
-      //   images.add(File(pickedImages[i].path));
-      // }
-      pickedImages.forEach((e) {
-        if (counter++ < 20) {
-          images.add(File(e.path));
-        }
-      });
-
-      setState(() {});
-    }
-  }
-
-  Future uploadMutilbeImages() async {
-    for (int i = 0; i < images.length; i++) {
-      String url = await uploadMutibleFiles(images[i]);
-      downloadUrls.add(url);
-    }
-  }
-
-  Future<String> uploadMutibleFiles(File file) async {
-    final metaData = SettableMetadata(contentType: 'image/jpeg');
-    final storageRef = FirebaseStorage.instance.ref();
-    Reference ref = storageRef
-        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-    final uploadTask = ref.putFile(file, metaData);
-
-    final taskSnapshot = await uploadTask.whenComplete(() => null);
-    String url = await taskSnapshot.ref.getDownloadURL();
-    return url;
   }
 
   Widget buildOption(String text, bool selected, int id) {
