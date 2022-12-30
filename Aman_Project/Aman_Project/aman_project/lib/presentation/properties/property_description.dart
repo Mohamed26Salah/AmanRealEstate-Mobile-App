@@ -24,6 +24,11 @@ class _DetailsState extends State<Details> {
         ? offeredColor = Colors.red
         : offeredColor = Colors.yellow[700]!;
 
+    Color visible;
+    routeArgs.visible == 'Yes'
+        ? visible = Colors.green
+        : visible = Colors.red;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -91,6 +96,13 @@ class _DetailsState extends State<Details> {
                                   color: Colors.white,
                                   size: 24,
                                 ),
+                              ),
+                              Container(
+                                height: 10.0,
+                                width: 10.0,
+                                // color: Colors.red,
+                                decoration:  BoxDecoration(
+                                    shape: BoxShape.circle, color: visible),
                               ),
                             ],
                           ),
@@ -332,22 +344,28 @@ class _DetailsState extends State<Details> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           children: [
-                            buildFeature(Icons.hotel, routeArgs.noRooms , "Rooms"),
                             buildFeature(
-                                Icons.bathtub_outlined, routeArgs.noBarthrooms ,"Barthrooms"),
+                                Icons.hotel, routeArgs.noRooms, "Rooms"),
+                            buildFeature(Icons.bathtub_outlined,
+                                routeArgs.noBarthrooms, "Barthrooms"),
+                            buildFeature(Icons.apartment_rounded,
+                                routeArgs.noFlats, "Flats"),
                             buildFeature(
-                                Icons.apartment_rounded, routeArgs.noFlats , "Flats"),
-                            buildFeature(Icons.house, routeArgs.furnished , "Furnished"),
-                            buildFeature(Icons.stairs, routeArgs.floor , "Floor"),
+                                Icons.house, routeArgs.furnished, "Furnished"),
                             buildFeature(
-                                Icons.local_activity, routeArgs.typeOFActivity , "Type Of Activity"),
-                            buildFeature(Icons.business_outlined,
-                                routeArgs.theNumberOFAB , "Adminstrative Building"),
+                                Icons.stairs, routeArgs.floor, "Floor"),
+                            buildFeature(Icons.local_activity,
+                                routeArgs.typeOFActivity, "Type Of Activity"),
                             buildFeature(
-                                Icons.domain_outlined, routeArgs.finishing , "Finishing"),
-                            buildFeature(Icons.stairs, routeArgs.doublex , "Doublex"),
-                            buildFeature(Icons.priority_high, routeArgs.priority , "Priority"),
-                           
+                                Icons.business_outlined,
+                                routeArgs.theNumberOFAB,
+                                "Adminstrative Building"),
+                            buildFeature(Icons.domain_outlined,
+                                routeArgs.finishing, "Finishing"),
+                            buildFeature(
+                                Icons.stairs, routeArgs.doublex, "Doublex"),
+                            buildFeature(Icons.priority_high,
+                                routeArgs.priority, "Priority"),
                           ],
                         ),
                       ),
@@ -434,7 +452,7 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  Widget buildFeature(IconData iconData, String? text , String aboveText) {
+  Widget buildFeature(IconData iconData, String? text, String aboveText) {
     if (text != null) {
       if (text.isNotEmpty) {
         return Row(
@@ -445,12 +463,13 @@ class _DetailsState extends State<Details> {
                 Text(
                   aboveText,
                   style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold
-                  ),
+                      color: Colors.grey[500],
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Icon(
                   iconData,
                   color: Colors.yellow[700],
