@@ -1,9 +1,11 @@
+import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 
-class Details extends StatefulWidget {
+class Details extends ConsumerStatefulWidget {
   // final Property? property;
   const Details({
     super.key,
@@ -11,10 +13,10 @@ class Details extends StatefulWidget {
   });
 
   @override
-  State<Details> createState() => _DetailsState();
+  ConsumerState<Details> createState() => _DetailsState();
 }
 
-class _DetailsState extends State<Details> {
+class _DetailsState extends ConsumerState<Details> {
   @override
   Widget build(BuildContext context) {
     Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
@@ -25,9 +27,7 @@ class _DetailsState extends State<Details> {
         : offeredColor = Colors.yellow[700]!;
 
     Color visible;
-    routeArgs.visible == 'Yes'
-        ? visible = Colors.green
-        : visible = Colors.red;
+    routeArgs.visible == 'Yes' ? visible = Colors.green : visible = Colors.red;
 
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -98,10 +98,10 @@ class _DetailsState extends State<Details> {
                                 ),
                               ),
                               Container(
-                                height: 10.0,
-                                width: 10.0,
+                                height: 25,
+                                width: 25,
                                 // color: Colors.red,
-                                decoration:  BoxDecoration(
+                                decoration: BoxDecoration(
                                     shape: BoxShape.circle, color: visible),
                               ),
                             ],
@@ -445,7 +445,10 @@ class _DetailsState extends State<Details> {
           child: const Icon(Icons.edit),
           onPressed: () {
             Navigator.of(context)
-                .pushNamed('/editProperty', arguments: routeArgs);
+                .pushNamed('/editProperty', arguments: routeArgs)
+                .then((value) {
+              ImageManagement().clearImageProivders(ref);
+            });
           },
         ),
       ),

@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:aman_project/data/image_management.dart';
+import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../shared_features/custom_message.dart';
@@ -11,7 +14,7 @@ import '../../constants/globals.dart' as val;
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-class EditProperty extends StatefulWidget {
+class EditProperty extends ConsumerStatefulWidget {
   // Property routeArgs;
   EditProperty({
     super.key,
@@ -19,10 +22,10 @@ class EditProperty extends StatefulWidget {
   });
 
   @override
-  State<EditProperty> createState() => _EditPropertyState();
+  ConsumerState<EditProperty> createState() => _EditPropertyState();
 }
 
-class _EditPropertyState extends State<EditProperty> {
+class _EditPropertyState extends ConsumerState<EditProperty> {
   final _ownerNameController = TextEditingController();
   final _ownerNumberController = TextEditingController();
   final _addressForUserController = TextEditingController();
@@ -40,8 +43,8 @@ class _EditPropertyState extends State<EditProperty> {
   final _noOFFlatsController = TextEditingController();
   final _typeOFActivityController = TextEditingController();
 
-  File? myImage;
-
+  // File? myImage;
+  ImageManagement imageManagement = ImageManagement();
   @override
   void dispose() {
     _ownerNameController.dispose();
@@ -63,7 +66,7 @@ class _EditPropertyState extends State<EditProperty> {
     super.dispose();
   }
 
-  List<File> images = [];
+  // List<File> images = [];
   int? counter;
   @override
   void initState() {
@@ -96,6 +99,7 @@ class _EditPropertyState extends State<EditProperty> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -109,18 +113,34 @@ class _EditPropertyState extends State<EditProperty> {
               ),
               child: Column(
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        elevation: 0 // Background color
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey[300],
+                            elevation: 0 // Background color
+                            ),
+                        child: const Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          color: Colors.black,
                         ),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                        onPressed: () {
+                          imageManagement.clearImageProivders(ref);
+                          Navigator.pop(context);
+                        },
+                      ),
+                      const Text(
+                        "Edit",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   Property.buildTextField(
                       labelText: "Owner Name",
@@ -273,22 +293,14 @@ class _EditPropertyState extends State<EditProperty> {
                           routeArgs.doublex = val;
                         });
                       }),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 30,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                        "Edit main image",
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20),
-                      ),
+                  const Center(
+                    child: Text(
+                      "Edit main image",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   const SizedBox(
                     height: 10,
@@ -299,20 +311,22 @@ class _EditPropertyState extends State<EditProperty> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(8)),
-                    child: myImage == null
+                    child: ref.watch(imageFileProivder) == null
                         ? Center(
                             child: Image.network(routeArgs.singleImage),
                           )
                         : Center(
                             child: Image.file(
-                              myImage!,
+                              ref.watch(imageFileProivder)!,
                               fit: BoxFit.cover,
                             ),
                           ),
                   ),
                   InkWell(
                       onTap: () {
-                        openBottomSheet();
+                        // openBottomSheet();
+                        ImageManagementWidget()
+                            .openBottomSheet(ref, imageManagement);
                       },
                       child: const Center(
                         child: Icon(
@@ -320,21 +334,19 @@ class _EditPropertyState extends State<EditProperty> {
                           size: 50,
                         ),
                       )),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 30,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                        "Edit multiple sub-images",
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20),
-                      ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Edit Multiple Sub-Images",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                        Text(
+                          "(Limit 20 Images Only!)",
+                          style: TextStyle(color: Colors.black, fontSize: 10),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
@@ -346,7 +358,7 @@ class _EditPropertyState extends State<EditProperty> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(8)),
-                    child: images.isEmpty
+                    child: (ref.watch(imagesListFileProivder).isEmpty)
                         ? GridView.builder(
                             physics: const ScrollPhysics(),
                             shrinkWrap: true,
@@ -372,17 +384,17 @@ class _EditPropertyState extends State<EditProperty> {
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 10,
                             ),
-                            itemCount: images.length,
+                            itemCount: ref.watch(imagesListFileProivder).length,
                             itemBuilder: (_, index) {
                               return Image.file(
-                                images[index],
+                                ref.watch(imagesListFileProivder)[index]!,
                                 fit: BoxFit.cover,
                               );
                             }),
                   ),
                   InkWell(
                       onTap: () {
-                        getMultipImage();
+                        imageManagement.getMultipImage(ref);
                       },
                       child: const Center(
                         child: Icon(
@@ -402,8 +414,11 @@ class _EditPropertyState extends State<EditProperty> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            uploadFile(routeArgs).then((value) async {
-                              uploadMutilbeImages(routeArgs)
+                            imageManagement
+                                .editUploadFile(routeArgs)
+                                .then((value) async {
+                              imageManagement
+                                  .editUploadMutilbeImages(routeArgs)
                                   .then((value2) async {
                                 await PropertyManagement.updateProperty(
                                     docId: routeArgs.docId,
@@ -436,6 +451,7 @@ class _EditPropertyState extends State<EditProperty> {
                                     typeOFActivity:
                                         _typeOFActivityController.text);
                               });
+                              // imageManagement.clearImageProivders(ref);
                             });
 
                             Navigator.of(context).pushNamedAndRemoveUntil(
@@ -476,144 +492,5 @@ class _EditPropertyState extends State<EditProperty> {
         ),
       ),
     );
-  }
-
-  final ImagePicker _picker = ImagePicker();
-  getImage(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-
-    if (image != null) {
-      myImage = File(image.path);
-      setState(() {});
-      Get.back();
-    }
-  }
-
-  openBottomSheet() {
-    Get.bottomSheet(Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-      ),
-      width: double.infinity,
-      height: 150,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        buildImageWidget(
-            iconData: Icons.camera_alt,
-            onPressed: () {
-              getImage(ImageSource.camera);
-            }),
-        buildImageWidget(
-            iconData: Icons.image,
-            onPressed: () {
-              getImage(ImageSource.gallery);
-            }),
-      ]),
-    ));
-  }
-
-  buildImageWidget({required IconData iconData, required Function onPressed}) {
-    return InkWell(
-      onTap: () => onPressed(),
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Icon(
-            iconData,
-            size: 30,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<String> uploadFile(Property routeArgs) async {
-    String result = routeArgs.singleImage;
-    if (myImage != null) {
-      final file = myImage!;
-      final metaData = SettableMetadata(contentType: 'image/jpeg');
-      final storageRef = FirebaseStorage.instance.ref();
-
-      Reference ref = storageRef
-          .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-      await ref.putFile(file, metaData).then((p0) async {
-        switch (p0.state) {
-          case TaskState.running:
-            print("File is uploading");
-            break;
-          case TaskState.success:
-            await ref.getDownloadURL().then((value) {
-              print("value $value");
-              result = value;
-            });
-            break;
-          case TaskState.paused:
-            // TODO: Handle this case.
-            break;
-          case TaskState.canceled:
-            // TODO: Handle this case.
-            break;
-          case TaskState.error:
-            // TODO: Handle this case.
-            break;
-        }
-      });
-
-      return result;
-    } else {
-      return routeArgs.singleImage;
-    }
-  }
-
-//Mutiple Images
-  List<String> downloadUrls = [];
-  final ImagePicker _pickerMutli = ImagePicker();
-  getMultipImage() async {
-    final List<XFile>? pickedImages = await _pickerMutli.pickMultiImage();
-    images = [];
-    int counter = 0;
-    if (pickedImages != null) {
-      // for (int i = 0; i < 20; i++) {
-      //   images.add(File(pickedImages[i].path));
-      // }
-      pickedImages.forEach((e) {
-        if (counter++ < 20) {
-          images.add(File(e.path));
-        }
-      });
-
-      setState(() {});
-    }
-  }
-
-  Future<List<dynamic>> uploadMutilbeImages(Property routeArgs) async {
-    for (int i = 0; i < images.length; i++) {
-      await uploadMutibleFiles(images[i]).then((value) async {
-        downloadUrls.add(value);
-      });
-    }
-    if (images.isEmpty) {
-      return routeArgs.multiImages;
-    } else {
-      return downloadUrls;
-    }
-  }
-
-  Future<String> uploadMutibleFiles(File file) async {
-    final metaData = SettableMetadata(contentType: 'image/jpeg');
-    final storageRef = FirebaseStorage.instance.ref();
-    Reference ref = storageRef
-        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
-    final uploadTask = ref.putFile(file, metaData);
-
-    final taskSnapshot = await uploadTask.whenComplete(() => null);
-    String url = await taskSnapshot.ref.getDownloadURL();
-    return url;
   }
 }

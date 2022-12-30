@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:aman_project/data/repositories/image_provider.dart';
+import 'package:aman_project/models/property.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -107,6 +108,70 @@ class ImageManagement {
   }
 
   Future<String> uploadMultipleFiles(File file) async {
+    final metaData = SettableMetadata(contentType: 'image/jpeg');
+    final storageRef = FirebaseStorage.instance.ref();
+    Reference ref = storageRef
+        .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+    final uploadTask = ref.putFile(file, metaData);
+
+    final taskSnapshot = await uploadTask.whenComplete(() => null);
+    String url = await taskSnapshot.ref.getDownloadURL();
+    return url;
+  }
+
+  ////////////EditImages/////////////////
+  Future<String> editUploadFile(Property routeArgs) async {
+    String result = routeArgs.singleImage;
+    if (compressedImage != null) {
+      final file = compressedImage!;
+      final metaData = SettableMetadata(contentType: 'image/jpeg');
+      final storageRef = FirebaseStorage.instance.ref();
+
+      Reference ref = storageRef
+          .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
+      await ref.putFile(file, metaData).then((p0) async {
+        switch (p0.state) {
+          case TaskState.running:
+            print("File is uploading");
+            break;
+          case TaskState.success:
+            await ref.getDownloadURL().then((value) {
+              print("value $value");
+              result = value;
+            });
+            break;
+          case TaskState.paused:
+            // TODO: Handle this case.
+            break;
+          case TaskState.canceled:
+            // TODO: Handle this case.
+            break;
+          case TaskState.error:
+            // TODO: Handle this case.
+            break;
+        }
+      });
+
+      return result;
+    } else {
+      return routeArgs.singleImage;
+    }
+  }
+
+  Future<List<dynamic>> editUploadMutilbeImages(Property routeArgs) async {
+    for (int i = 0; i < compressedImages.length; i++) {
+      await editUploadMutibleFiles(compressedImages[i]!).then((value) async {
+        downloadUrls.add(value);
+      });
+    }
+    if (compressedImages.isEmpty) {
+      return routeArgs.multiImages;
+    } else {
+      return downloadUrls;
+    }
+  }
+
+  Future<String> editUploadMutibleFiles(File file) async {
     final metaData = SettableMetadata(contentType: 'image/jpeg');
     final storageRef = FirebaseStorage.instance.ref();
     Reference ref = storageRef
