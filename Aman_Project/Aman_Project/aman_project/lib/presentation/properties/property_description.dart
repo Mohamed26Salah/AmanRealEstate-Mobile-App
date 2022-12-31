@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -82,7 +84,6 @@ class _DetailsState extends ConsumerState<Details> {
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 24,
-                            vertical: 48,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -443,11 +444,18 @@ class _DetailsState extends ConsumerState<Details> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(Icons.edit),
-          onPressed: () {
-            Navigator.of(context)
+          onPressed: () async {
+            print("sat");
+
+            await Navigator.of(context)
                 .pushNamed('/editProperty', arguments: routeArgs)
                 .then((value) {
               ImageManagement().clearImageProivders(ref);
+              routeArgs = value as Property;
+
+              setState(() {
+                print("satted");
+              });
             });
           },
         ),
