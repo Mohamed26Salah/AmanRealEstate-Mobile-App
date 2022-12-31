@@ -398,7 +398,6 @@ class _FilterState extends ConsumerState<Filter> {
                   style: TextStyle(
                     fontSize: 15,
                     letterSpacing: 2,
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -442,7 +441,6 @@ class _FilterState extends ConsumerState<Filter> {
             child: Text(
               text,
               style: TextStyle(
-                color: selected ? Colors.white : Colors.black,
                 fontSize: 14,
               ),
             ),

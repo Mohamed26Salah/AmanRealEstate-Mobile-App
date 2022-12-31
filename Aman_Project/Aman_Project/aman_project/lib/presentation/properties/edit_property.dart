@@ -1,13 +1,8 @@
-import 'dart:async';
-import 'dart:io';
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../shared_features/custom_message.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import '../../constants/globals.dart' as val;

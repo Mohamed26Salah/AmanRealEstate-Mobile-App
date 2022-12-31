@@ -27,7 +27,6 @@ class _SearchState extends ConsumerState<Search> {
       child: Scaffold(
         // bottomNavigationBar: const NavBarGR(),
 
-        backgroundColor: Colors.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

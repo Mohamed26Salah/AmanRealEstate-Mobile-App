@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,8 +23,8 @@ class _DetailsState extends ConsumerState<Details> {
 
     Color offeredColor;
     routeArgs.offered == 'For Rent'
-        ? offeredColor = Colors.red
-        : offeredColor = Colors.yellow[700]!;
+        ? offeredColor = Theme.of(context).errorColor
+        : offeredColor = Theme.of(context).primaryColor;
 
     Color visible;
     routeArgs.visible == 'Yes' ? visible = Colors.green : visible = Colors.red;
@@ -131,7 +129,6 @@ class _DetailsState extends ConsumerState<Details> {
                               child: Text(
                                 routeArgs.offered,
                                 style: const TextStyle(
-                                  color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -168,8 +165,9 @@ class _DetailsState extends ConsumerState<Details> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 24,
+                            vertical: MediaQuery.of(context).size.height * 0.01,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,7 +198,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 child: Center(
                                   child: Icon(
                                     Icons.favorite,
-                                    color: Colors.yellow[700],
+                                    color: Theme.of(context).primaryColor,
                                     size: 20,
                                   ),
                                 ),
@@ -317,13 +315,15 @@ class _DetailsState extends ConsumerState<Details> {
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow[700]?.withOpacity(0.1),
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.3),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
                                   child: Icon(
                                     Icons.phone,
-                                    color: Colors.yellow[700],
+                                    color: Theme.of(context).primaryColor,
                                     size: 20,
                                   ),
                                 ),
@@ -445,17 +445,13 @@ class _DetailsState extends ConsumerState<Details> {
           backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(Icons.edit),
           onPressed: () async {
-            print("sat");
-
             await Navigator.of(context)
                 .pushNamed('/editProperty', arguments: routeArgs)
                 .then((value) {
               ImageManagement().clearImageProivders(ref);
               routeArgs = value as Property;
 
-              setState(() {
-                print("satted");
-              });
+              setState(() {});
             });
           },
         ),
@@ -483,7 +479,7 @@ class _DetailsState extends ConsumerState<Details> {
                 ),
                 Icon(
                   iconData,
-                  color: Colors.yellow[700],
+                  color: Theme.of(context).primaryColor,
                   size: 28,
                 ),
                 const SizedBox(
