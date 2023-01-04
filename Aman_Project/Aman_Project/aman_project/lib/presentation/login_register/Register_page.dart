@@ -1,8 +1,9 @@
 import 'package:aman_project/data/user_management.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../shared_features/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../shared_features/custom_decoration.dart';
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -93,11 +94,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 0),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _emailController,
                       obscureText: false,
-                      labelText: "Enter your Email",
-                      hintText: "Email",
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: ("Enter your Email".tr),
+                          hintText: ("Email".tr)),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';
@@ -111,11 +113,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 10, left: 15, right: 15, bottom: 0),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _passwordController,
                       obscureText: true,
-                      labelText: "Enter your Password",
-                      hintText: "Password",
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: ("Enter your Password".tr),
+                          hintText: ("Password".tr)),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
@@ -129,11 +132,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 10),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _passwordConfirmController,
                       obscureText: true,
-                      labelText: "Confirm your Password",
-                      hintText: "Password",
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: ("Confirm your Password".tr),
+                          hintText: ("Password".tr)),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
