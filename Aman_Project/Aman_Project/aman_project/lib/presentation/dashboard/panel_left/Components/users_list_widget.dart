@@ -48,7 +48,56 @@ class _UsersListWidgetState extends State<UsersListWidget> {
         } else if (snapshot.hasData) {
           return Column(
             children: [
-              const SizedBox(height: 10),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        shape:
+                            RoundedRectangleBorder(borderRadius: borderRadius),
+                        // tileColor: Theme.of(context).splashColor,
+                        leading: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Color.fromARGB(
+                                255,
+                                rng.nextInt(255),
+                                rng.nextInt(255),
+                                rng.nextInt(255)),
+                            child: Text(
+                              snapshot.data![index].email.substring(0, 1),
+                            )),
+                        title: Text(snapshot.data![index].email),
+                        subtitle: Text(snapshot.data![index].role),
+                        trailing: MyEditButton(
+                            onPressed: () {
+                              openDialog(
+                                  name: snapshot.data![index].email,
+                                  update: _update);
+                            },
+                            height: 35,
+                            borderRadius: BorderRadius.circular(20),
+                            child: const Icon(
+                              Icons.edit_outlined,
+                            )),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Text("Loading");
+        }
+      },
+    );
+  }
+}
+
+/*   
+const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () => showSearch(
                         context: context,
@@ -97,41 +146,4 @@ class _UsersListWidgetState extends State<UsersListWidget> {
                         ),
                       ),
                   child: const Icon(Icons.search)),
-              Column(
-                children: List.generate(
-                  snapshot.data!.length,
-                  (index) => ListTile(
-                    shape: RoundedRectangleBorder(borderRadius: borderRadius),
-                    // tileColor: Theme.of(context).splashColor,
-                    leading: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Color.fromARGB(255, rng.nextInt(255),
-                            rng.nextInt(255), rng.nextInt(255)),
-                        child: Text(
-                          snapshot.data![index].email.substring(0, 1),
-                        )),
-                    title: Text(snapshot.data![index].email),
-                    subtitle: Text(snapshot.data![index].role),
-                    trailing: MyEditButton(
-                        onPressed: () {
-                          openDialog(
-                              name: snapshot.data![index].email,
-                              update: _update);
-                        },
-                        height: 35,
-                        borderRadius: BorderRadius.circular(20),
-                        child: const Icon(
-                          Icons.edit_outlined,
-                        )),
-                  ),
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Text("Loading");
-        }
-      },
-    );
-  }
-}
+                   */
