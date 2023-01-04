@@ -47,6 +47,8 @@ class RentsManagement {
     var currentDate = DateTime.now();
     if (currentDate.isBefore(startOFRent) || currentDate.isBefore(tor)) {
       return "DidntStart";
+    } else if (currentDate.isAfter(endOFRent)) {
+      return "Finished";
     } else if (currentDate.isAfter(tor) ||
         currentDate.isBefore(torEnd) ||
         currentDate.isAtSameMomentAs(tor) ||
@@ -56,8 +58,6 @@ class RentsManagement {
         currentDate.isBefore(endOFRent) ||
         currentDate.isAtSameMomentAs(endOFRent)) {
       return "DidntPay";
-    } else if (currentDate.isAfter(endOFRent)) {
-      return "Finished";
     }
     return "Error";
   }
