@@ -1,5 +1,9 @@
+import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import '../../constants/globals.dart' as val;
+import '../shared_features/custom_message.dart';
 
 class AddFormRent extends StatefulWidget {
   const AddFormRent({super.key});
@@ -22,10 +26,15 @@ class _AddFormRentState extends State<AddFormRent> {
   String? finishing;
   String? furnished;
   String? type;
-  DateTime tor = DateTime(2022, 12, 30);
-  DateTime torEnd = DateTime(2022, 12, 30);
-  DateTime startOFRent = DateTime(2022, 12, 30);
-  DateTime endOFRent = DateTime(2022, 12, 30);
+  DateTime startOFRent = DateTime(2000, 01, 01);
+  DateTime endOFRent = DateTime(2000, 01, 01);
+  DateTime tor = DateTime(2000, 01, 01);
+  DateTime torEnd = DateTime(2000, 01, 01);
+  bool startOFRentVisilbe = true;
+  bool endOFRentVisible = false;
+  bool torVisibile = false;
+  bool torEndVisibile = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,27 +171,181 @@ class _AddFormRentState extends State<AddFormRent> {
                   });
                 },
               ),
-              Text(
-                '${tor.year}/${tor.month}/${tor.day}',
-                style: const TextStyle(fontSize: 32),
+              buildDatePicker(startOFRent, 'StartOFRent', startOFRentVisilbe),
+              buildDatePicker(endOFRent, 'EndOFRent', endOFRentVisible),
+              buildDatePicker(tor, 'TOR', torVisibile),
+              buildDatePicker(torEnd, 'TOR-END', torEndVisibile),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 0, left: 15, right: 15, bottom: 20),
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      top: 5, left: 15, right: 15, bottom: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (_formKey.currentState!.validate()) {
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return const Center(
+                                  child: CircularProgressIndicator(
+                                backgroundColor: Colors.black26,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Color.fromARGB(255, 205, 153, 51)),
+                              ));
+                            });
+                        await RentsManagement().createRent(
+                            rentPrice: int.parse(_rentPriceController.text),
+                            type: type!,
+                            area: int.parse(_areaController.text),
+                            floor: _floorController.text,
+                            lessorName: _lessorNameController.text,
+                            tenantName: _tenantNameController.text,
+                            lessorNum: _lessorNumController.text,
+                            tenantNum: _tenantNumController.text,
+                            description: _descriptionController.text,
+                            furnished: furnished!,
+                            finishing: finishing!,
+                            tor: tor,
+                            torEnd: torEnd,
+                            startOFRent: startOFRent,
+                            endOFRent: endOFRent);
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0.0,
+                      backgroundColor: Colors.red.withOpacity(0),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(2),
+                        ),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              ElevatedButton(
-                  onPressed: () async {
-                    DateTime? newDate = await showDatePicker(
-                        context: context,
-                        initialDate: tor,
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100));
-                    if (newDate == null) return;
-                    setState(() {
-                      tor = newDate;
-                    });
-                  },
-                  child: const Text('Select Date'))
             ],
           ))),
         ),
       ),
     );
+  }
+
+  Widget buildDatePicker(DateTime date, String name, bool visible) {
+    var initialDate;
+    var dateConstrainLeast;
+    var dateConstrainMost;
+    return Visibility(
+      visible: visible,
+      child: Column(
+        children: [
+          Text(
+            name,
+            style: TextStyle(fontSize: 25),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 70,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                    color: Color.fromARGB(255, 205, 153, 51), spreadRadius: 2),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  '${date.year}/${date.month}/${date.day}',
+                  style: const TextStyle(fontSize: 25),
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (name == "StartOFRent") {
+                        initialDate = DateTime.now();
+                        dateConstrainLeast = DateTime(DateTime.now().year - 10);
+                        dateConstrainMost = DateTime(DateTime.now().year + 25);
+                      }
+                      if (name == "EndOFRent") {
+                        initialDate = startOFRent;
+                        dateConstrainLeast = startOFRent;
+                        dateConstrainMost = DateTime(DateTime.now().year + 25);
+                      }
+                      if (name == "TOR") {
+                        initialDate = startOFRent;
+                        dateConstrainLeast = startOFRent;
+                        dateConstrainMost = endOFRent;
+                      }
+                      if (name == "TOR-END") {
+                        initialDate = tor;
+                        dateConstrainLeast = tor;
+                        dateConstrainMost = endOFRent;
+                      }
+                      DateTime? newDateTime = await showRoundedDatePicker(
+                        context: context,
+                        initialDate: initialDate,
+                        firstDate: dateConstrainLeast,
+                        lastDate: dateConstrainMost,
+                        borderRadius: 16,
+                        theme: ThemeData.dark(),
+                      );
+                      if (newDateTime == null) return;
+                      setState(() {
+                        date = newDateTime;
+                        if (name == "StartOFRent") {
+                          startOFRent = newDateTime;
+                        }
+                        if (name == "EndOFRent") {
+                          endOFRent = newDateTime;
+                        }
+                        if (name == "TOR") {
+                          tor = newDateTime;
+                        }
+                        if (name == "TOR-END") {
+                          torEnd = newDateTime;
+                        }
+                        updateVisibility();
+                      });
+                    },
+                    child: const Text('Select Date')),
+              ],
+            ),
+          ),
+          const SizedBox(height: 15),
+        ],
+      ),
+    );
+  }
+
+  updateVisibility() {
+    if (!startOFRent.isAtSameMomentAs(DateTime(2000, 01, 01))) {
+      endOFRentVisible = true;
+      if (!endOFRent.isAtSameMomentAs(DateTime(2000, 01, 01))) {
+        torVisibile = true;
+        if (!tor.isAtSameMomentAs(DateTime(2000, 01, 01))) {
+          torEndVisibile = true;
+        }
+      }
+    }
   }
 }
