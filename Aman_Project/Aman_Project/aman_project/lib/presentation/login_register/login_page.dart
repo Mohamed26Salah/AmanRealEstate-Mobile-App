@@ -8,10 +8,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../shared_features/custom_text_field.dart';
+
 import '../../data/user_management.dart';
 
 import '../../constants/globals.dart' as val;
+import '../shared_features/custom_decoration.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -80,11 +81,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 0),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _emailController,
                       obscureText: false,
-                      labelText: ("Enter your Email".tr),
-                      hintText: ("Email".tr),
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: ("Enter your Email".tr),
+                          hintText: ("Email".tr)),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return ('Enter valid email'.tr);
@@ -98,11 +100,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 10, left: 15, right: 15, bottom: 0),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _passwordController,
                       obscureText: true,
-                      labelText: ("Enter your Password".tr),
-                      hintText: ("Password".tr),
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: ("Enter your Password".tr),
+                          hintText: ("Password".tr)),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';

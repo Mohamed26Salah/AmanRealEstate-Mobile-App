@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../shared_features/custom_text_field.dart';
+import '../shared_features/custom_decoration.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -74,11 +74,11 @@ class _LoginPageState extends State<ForgetPassword> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 0, left: 15, right: 15, bottom: 0),
-                    child: CustomTextField(
+                    child: TextFormField(
                       controller: _emailController,
                       obscureText: false,
-                      labelText: "Enter your Email",
-                      hintText: "Email",
+                      decoration: CommonStyle.textFieldStyle(
+                          labelText: "Enter your Email", hintText: "Email"),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';

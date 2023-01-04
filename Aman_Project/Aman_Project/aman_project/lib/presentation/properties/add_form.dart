@@ -87,6 +87,17 @@ class AddFormState extends ConsumerState<AddForm> {
     factoryButton7 = false;
     landButton8 = false;
     otherButton9 = false;
+    //
+    visibleFloor = false;
+    visibleDoublex = false;
+    visibleNoRooms = false;
+    visibleNOBathrooms = false;
+    visibleFinishing = false;
+    visibleFurnished = false;
+    visibleNOFloors = false;
+    visibleTypeOFAcitivity = false;
+    visibleNoAB = false;
+    visibleNOFlats = false;
     if (id == 1) {
       userChoice = "Flat";
       setState(() {
@@ -97,11 +108,6 @@ class AddFormState extends ConsumerState<AddForm> {
         visibleNOBathrooms = true;
         visibleFinishing = true;
         visibleFurnished = true;
-        //
-        visibleNOFloors = false;
-        visibleTypeOFAcitivity = false;
-        visibleNoAB = false;
-        visibleNOFlats = false;
       });
     } else if (id == 2) {
       userChoice = "Villa";
@@ -112,12 +118,6 @@ class AddFormState extends ConsumerState<AddForm> {
         visibleFinishing = true;
         visibleFurnished = true;
         visibleNOFloors = true;
-        //
-        visibleTypeOFAcitivity = false;
-        visibleNoAB = false;
-        visibleNOFlats = false;
-        visibleDoublex = false;
-        visibleFloor = false;
       });
     } else if (id == 3) {
       userChoice = "Building";
@@ -125,15 +125,6 @@ class AddFormState extends ConsumerState<AddForm> {
         buildingButton3 = true;
         visibleNOFloors = true;
         visibleNOFlats = true;
-        //
-        visibleFloor = false;
-        visibleDoublex = false;
-        visibleNoRooms = false;
-        visibleNOBathrooms = false;
-        visibleFinishing = false;
-        visibleFurnished = false;
-        visibleTypeOFAcitivity = false;
-        visibleNoAB = false;
       });
     } else if (id == 4 || id == 5 || id == 7 || id == 8 || id == 9) {
       if (id == 4) {
@@ -155,15 +146,6 @@ class AddFormState extends ConsumerState<AddForm> {
       setState(() {
         visibleTypeOFAcitivity = true;
         //
-        visibleNOFloors = false;
-        visibleNOFlats = false;
-        visibleFloor = false;
-        visibleDoublex = false;
-        visibleNoRooms = false;
-        visibleNOBathrooms = false;
-        visibleFinishing = false;
-        visibleFurnished = false;
-        visibleNoAB = false;
       });
     } else if (id == 6) {
       userChoice = "Farm";
@@ -171,15 +153,6 @@ class AddFormState extends ConsumerState<AddForm> {
         farmButton6 = true;
         visibleTypeOFAcitivity = true;
         visibleNoAB = true;
-        //
-        visibleNOFloors = false;
-        visibleNOFlats = false;
-        visibleFloor = false;
-        visibleDoublex = false;
-        visibleNoRooms = false;
-        visibleNOBathrooms = false;
-        visibleFinishing = false;
-        visibleFurnished = false;
       });
     }
   }

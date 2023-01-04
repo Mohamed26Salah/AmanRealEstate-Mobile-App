@@ -1,9 +1,9 @@
 class Rents {
-  int docId;
+  // int docId;
   int rentPrice;
   String type;
   int area;
-  int floor;
+  String floor;
   String lessorName;
   String lessorNum;
   String tenantName;
@@ -11,12 +11,12 @@ class Rents {
   String description;
   String furnished;
   String finishing;
-  String tor;
-  String torEnd;
-  String startOFRent;
-  String endOFRent;
+  DateTime tor;
+  DateTime torEnd;
+  DateTime startOFRent;
+  DateTime endOFRent;
   Rents({
-    required this.docId,
+    // required this.docId,
     required this.rentPrice,
     required this.type,
     required this.area,
@@ -33,4 +33,21 @@ class Rents {
     required this.startOFRent,
     required this.endOFRent,
   });
+  Map<String, dynamic> toJson() => {
+        "rentPrice": rentPrice,
+        "type": type,
+        "area": area,
+        "floor": floor,
+        "lessorName": lessorName,
+        "tenantName": tenantName,
+        "lessorNum": lessorNum,
+        "tenantNum": tenantNum,
+        "description": description,
+        "furnished": furnished,
+        "finishing": finishing,
+        "tor": tor,
+        "torEnd": torEnd,
+        "startOFRent": startOFRent,
+        "endOFRent": endOFRent,
+      };
 }

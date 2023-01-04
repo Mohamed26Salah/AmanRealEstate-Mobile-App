@@ -8,7 +8,7 @@ import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../shared_features/custom_text_field.dart';
+import '../shared_features/custom_decoration.dart';
 
 ThemeManager _themeManager = ThemeManager();
 
@@ -118,11 +118,12 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 30),
-                      child: CustomTextField(
+                      child: TextFormField(
                         controller: newPasswordController,
                         obscureText: true,
-                        labelText: ("New Password".tr),
-                        hintText: ("Type your new password".tr),
+                        decoration: CommonStyle.textFieldStyle(
+                            labelText: ("New Password".tr),
+                            hintText: ("Type your new password".tr)),
                         validator: (value) {
                           if (!value!.isValidPassword) {
                             return 'enter At Least 8 characters one letter and one number'
@@ -138,11 +139,12 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 30),
-                      child: CustomTextField(
+                      child: TextFormField(
                         controller: confirmPasswordController,
                         obscureText: true,
-                        labelText: ("Confirm Password".tr),
-                        hintText: ("Type your new password".tr),
+                        decoration: CommonStyle.textFieldStyle(
+                            labelText: ("Confirm Password".tr),
+                            hintText: ("Type your new password".tr)),
                         validator: (value) {
                           if (value != newPasswordController.value.text) {
                             return 'Passwords do not match!'.tr;

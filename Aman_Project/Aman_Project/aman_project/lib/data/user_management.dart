@@ -124,12 +124,6 @@ class UserHelper {
           //Salah Way
           Future userData = UserHelper().getUserData();
           ref.read(userDataProviderRepository.notifier).state = userData;
-          //Yasser Way
-          // UserHelper().getNewUserData().then((value) {
-          //   UserModel user = UserModel.fromSnapshot(value);
-          //   ref.read(newUserDataProivder.notifier).state = user;
-          //   Navigator.of(context).pushReplacementNamed('/home');
-          // });
 
           Navigator.of(context).pushReplacementNamed('/home');
         } else {
@@ -231,7 +225,7 @@ class UserHelper {
   }
 
   signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut(); 
+    await FirebaseAuth.instance.signOut();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", false);
     Navigator.of(context).pushReplacementNamed('/login');
