@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,9 +26,15 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
       FirebaseAuth.instance.idTokenChanges().listen((User? user) {
         if (user != null) {
           //Salah Way
-          Future userData = UserHelper().getUserData();
-          ref.read(userDataProviderRepository.notifier).state = userData;
-          Navigator.of(context).pushReplacementNamed('/home');
+          // Future userData = UserHelper().getUserData();
+          // ref.read(userDataProviderRepository.notifier).state = userData;
+          // Navigator.of(context).pushReplacementNamed('/home');
+
+          UserHelper().getNewUserData().then((value) {
+            UserModel user = UserModel.fromSnapshot(value);
+            ref.read(newUserDataProivder.notifier).state = user;
+            Navigator.of(context).pushReplacementNamed('/home');
+          });
         } else {
           Navigator.of(context).pushReplacementNamed('/login');
         }

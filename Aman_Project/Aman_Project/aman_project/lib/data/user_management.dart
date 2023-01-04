@@ -38,12 +38,12 @@ class UserHelper {
     return userDoc;
   }
 
-  //Yasser Way
-  // Future<DocumentSnapshot> getNewUserData() async {
-  //   final user = FirebaseAuth.instance.currentUser!;
-  //   String id = user.uid;
-  //   return FirebaseFirestore.instance.collection('users').doc(id).get();
-  // }
+  // Yasser Way
+  Future<DocumentSnapshot> getNewUserData() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    String id = user.uid;
+    return FirebaseFirestore.instance.collection('users').doc(id).get();
+  }
 
   static Future<List<UserModel>> getData2User() async {
     List<UserModel> datanum2 = [];
@@ -123,10 +123,14 @@ class UserHelper {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
           //Salah Way
-          Future userData = UserHelper().getUserData();
-          ref.read(userDataProviderRepository.notifier).state = userData;
-
-          Navigator.of(context).pushReplacementNamed('/home');
+          // Future userData = UserHelper().getUserData();
+          // ref.read(userDataProviderRepository.notifier).state = userData;
+          //Yasser Way
+          UserHelper().getNewUserData().then((value) {
+            UserModel user = UserModel.fromSnapshot(value);
+            ref.read(newUserDataProivder.notifier).state = user;
+            Navigator.of(context).pushReplacementNamed('/home');
+          });
         } else {
           Navigator.of(context).pushNamed('/verify');
         }

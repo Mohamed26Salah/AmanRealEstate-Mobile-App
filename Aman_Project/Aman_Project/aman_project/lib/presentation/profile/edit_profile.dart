@@ -37,7 +37,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    // final userData = ref.watch(newUserDataProivder);
+    final userData = ref.watch(newUserDataProivder);
+
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
       body: Container(
@@ -73,19 +74,26 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                             // ),
                           ),
                           child: Center(
-                            child: Consumer(builder: (_, ref, __) {
-                              return ref.watch(userDataProvider).when(
-                                  data: (value) {
-                                return Text(
-                                  '${value.get('email')}'[0].capitalize!,
-                                  style: const TextStyle(fontSize: 50),
-                                );
-                              }, error: (Object error, StackTrace err) {
-                                return Text("error");
-                              }, loading: () {
-                                return CircularProgressIndicator();
-                              });
-                            }),
+                            // child: Text(userData?.email ?? "Loading"),
+                            child: Text(
+                              (userData?.email ?? "Loading")[0].capitalize!,
+                              style: const TextStyle(fontSize: 50),
+                            ),
+                            // Consumer(builder: (_, ref, __) {
+                            //   return ref.watch(userDataProvider).when(
+                            //       data: (value) {
+                            //     return Text(
+                            //       '${value.get('email')}'[0].capitalize!,
+                            //       style: const TextStyle(fontSize: 50),
+                            //     );
+                            //   }, error: (Object error, StackTrace err) {
+                            //     return Text("error");
+                            //   }, loading: () {
+                            //     return CircularProgressIndicator();
+                            //   });
+                            // }
+
+                            // ),
                           ),
                         ),
                       ],
@@ -98,15 +106,17 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   //Yasser Way
                   // Text(userData?.email ?? "Loading"),
                   //Salah Way
-                  Consumer(builder: (_, ref, __) {
-                    return ref.watch(userDataProvider).when(data: (value) {
-                      return Text(value.get('email'));
-                    }, error: (Object error, StackTrace err) {
-                      return Text("error");
-                    }, loading: () {
-                      return CircularProgressIndicator();
-                    });
-                  }),
+                  // Text(userEmail)
+                  Text(userData?.email ?? "Loading"),
+                  // Consumer(builder: (_, ref, __) {
+                  //   return ref.watch(userDataProvider).when(data: (value) {
+                  //     return Text(value.get('email'));
+                  //   }, error: (Object error, StackTrace err) {
+                  //     return Text("error");
+                  //   }, loading: () {
+                  //     return CircularProgressIndicator();
+                  //   });
+                  // }),
                 ],
               ),
               const SizedBox(

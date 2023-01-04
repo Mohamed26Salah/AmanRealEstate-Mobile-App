@@ -10,7 +10,7 @@ final userDataProvider = FutureProvider((ref) async {
   return ref.watch(userDataProviderRepository);
 });
 
-//Yasser Way
-// final newUserDataProivder = StateProvider<UserModel?>((ref) {
-//   return null;
-// });
+// Yasser Way
+final newUserDataProivder = StateProvider<UserModel?>((ref) {
+  return null;
+});
