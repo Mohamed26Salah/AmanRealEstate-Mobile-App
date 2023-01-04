@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonStyle {
   static InputDecoration textFieldStyle(
-      {String labelText = "", String hintText = ""}) {
+      {String labelText = "", String hintText = "", String? value}) {
     return InputDecoration(
       contentPadding: EdgeInsets.all(12),
       labelText: labelText,

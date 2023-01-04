@@ -608,7 +608,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                 await imageManagement
                                     .uploadMultipleImages()
                                     .then((value) {
-                                  PropertyManagement.addPropertyData(
+                                  PropertyManagement().addPropertyData(
                                     type: userChoice,
                                     ownerName: _ownerNameController.text,
                                     ownerNumber: _ownerNumberController.text,
@@ -627,7 +627,6 @@ class AddFormState extends ConsumerState<AddForm> {
                                     priority: priority!,
                                     visible: visible!,
                                     offered: offered!,
-                                    // commonUnitPrpoerties: listAddTOFirebase,
                                     singleImage: imageManagement.singleImageURl,
                                     mutliImages: imageManagement.downloadUrls,
                                     floor: _floorController.text,

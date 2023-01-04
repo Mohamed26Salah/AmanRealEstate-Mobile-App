@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/chart_data.dart';
+import '../models/property.dart';
 
 class PropertyManagement {
   //Read data for main Page
@@ -15,7 +16,7 @@ class PropertyManagement {
         .snapshots();
   }
 
-  static Future addPropertyData({
+  addPropertyData({
     required String type,
     required String ownerName,
     required String ownerNumber,
@@ -44,34 +45,67 @@ class PropertyManagement {
     String? floor,
     String? doublex,
   }) async {
-    await FirebaseFirestore.instance.collection('properties').add({
-      'type': type,
-      'ownerName': ownerName,
-      'ownerNumber': ownerNumber,
-      'addressForUser': addressForUser,
-      'addressForAdmin': addressForAdmin,
-      'area': area,
-      'price': price,
-      'descriptionForUser': descriptionForUser,
-      'descriptionForAdmin': descriptionForAdmin,
-      'unitName': unitName,
-      'paymentMethod': paymentMethod,
-      'priority': priority,
-      'visible': visible,
-      'offered': offered,
-      'singleImage': singleImage,
-      'multiImages': mutliImages,
-      'typeOFActivity': typeOFActivity ?? "",
-      'noAB': noAB ?? "",
-      'noFloors': noFloors ?? "",
-      'noFlats': noFlats ?? "",
-      'noRooms': noRooms ?? "",
-      'noBathrooms': noBathrooms ?? "",
-      'finishing': finishing ?? "",
-      'furnished': furnished ?? "",
-      'floor': floor ?? "",
-      'doublex': doublex ?? "",
-    });
+    final docProperty =
+        FirebaseFirestore.instance.collection('properties').doc();
+    final property = Property(
+      type: type,
+      ownerName: ownerName,
+      ownerNumber: ownerNumber,
+      addressUser: addressForUser,
+      addressAdmin: addressForAdmin,
+      area: area,
+      price: price,
+      descriptionUser: descriptionForUser,
+      descriptionAdmin: descriptionForAdmin,
+      unitName: unitName,
+      paymentMethod: paymentMethod,
+      priority: priority,
+      visible: visible,
+      offered: offered,
+      // required List<dynamic> commonUnitPrpoerties,
+      singleImage: singleImage,
+      multiImages: mutliImages,
+      typeOFActivity: typeOFActivity,
+      theNumberOFAB: noAB,
+      noFloors: noFloors,
+      noFlats: noFlats,
+      noRooms: noRooms,
+      noBarthrooms: noBathrooms,
+      finishing: finishing,
+      furnished: furnished,
+      floor: floor,
+      doublex: doublex,
+    );
+    final json = property.toJson();
+    await docProperty.set(json);
+    // await FirebaseFirestore.instance.collection('properties').add({
+    //   'type': type,
+    //   'ownerName': ownerName,
+    //   'ownerNumber': ownerNumber,
+    //   'addressForUser': addressForUser,
+    //   'addressForAdmin': addressForAdmin,
+    //   'area': area,
+    //   'price': price,
+    //   'descriptionForUser': descriptionForUser,
+    //   'descriptionForAdmin': descriptionForAdmin,
+    //   'unitName': unitName,
+    //   'paymentMethod': paymentMethod,
+    //   'priority': priority,
+    //   'visible': visible,
+    //   'offered': offered,
+    //   'singleImage': singleImage,
+    //   'multiImages': mutliImages,
+    //   'typeOFActivity': typeOFActivity ?? "",
+    //   'noAB': noAB ?? "",
+    //   'noFloors': noFloors ?? "",
+    //   'noFlats': noFlats ?? "",
+    //   'noRooms': noRooms ?? "",
+    //   'noBathrooms': noBathrooms ?? "",
+    //   'finishing': finishing ?? "",
+    //   'furnished': furnished ?? "",
+    //   'floor': floor ?? "",
+    //   'doublex': doublex ?? "",
+    // });
   }
 
   static Future updateProperty({

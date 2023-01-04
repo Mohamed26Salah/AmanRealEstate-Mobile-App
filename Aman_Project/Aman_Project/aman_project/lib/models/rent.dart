@@ -15,24 +15,26 @@ class Rents {
   DateTime torEnd;
   DateTime startOFRent;
   DateTime endOFRent;
-  Rents({
-    // required this.docId,
-    required this.rentPrice,
-    required this.type,
-    required this.area,
-    required this.floor,
-    required this.lessorName,
-    required this.tenantName,
-    required this.lessorNum,
-    required this.tenantNum,
-    required this.description,
-    required this.furnished,
-    required this.finishing,
-    required this.tor,
-    required this.torEnd,
-    required this.startOFRent,
-    required this.endOFRent,
-  });
+  String rentType;
+  Rents(
+      {
+      // required this.docId,
+      required this.rentPrice,
+      required this.type,
+      required this.area,
+      required this.floor,
+      required this.lessorName,
+      required this.tenantName,
+      required this.lessorNum,
+      required this.tenantNum,
+      required this.description,
+      required this.furnished,
+      required this.finishing,
+      required this.tor,
+      required this.torEnd,
+      required this.startOFRent,
+      required this.endOFRent,
+      required this.rentType});
   Map<String, dynamic> toJson() => {
         "rentPrice": rentPrice,
         "type": type,
@@ -49,5 +51,6 @@ class Rents {
         "torEnd": torEnd,
         "startOFRent": startOFRent,
         "endOFRent": endOFRent,
+        "rentType": rentType,
       };
 }

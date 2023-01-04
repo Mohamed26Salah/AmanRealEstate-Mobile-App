@@ -34,7 +34,7 @@ class _AddFormRentState extends State<AddFormRent> {
   bool endOFRentVisible = false;
   bool torVisibile = false;
   bool torEndVisibile = false;
-
+  String rentType = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,6 +203,8 @@ class _AddFormRentState extends State<AddFormRent> {
                                     Color.fromARGB(255, 205, 153, 51)),
                               ));
                             });
+                        rentType = RentsManagement.figureRentType(
+                            startOFRent, endOFRent, tor, torEnd);
                         await RentsManagement.createRent(
                             rentPrice: int.parse(_rentPriceController.text),
                             type: type!,
@@ -218,7 +220,8 @@ class _AddFormRentState extends State<AddFormRent> {
                             tor: tor,
                             torEnd: torEnd,
                             startOFRent: startOFRent,
-                            endOFRent: endOFRent);
+                            endOFRent: endOFRent,
+                            rentType: rentType);
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       }
@@ -262,7 +265,7 @@ class _AddFormRentState extends State<AddFormRent> {
         children: [
           Text(
             name,
-            style: TextStyle(fontSize: 25),
+            style: const TextStyle(fontSize: 25),
           ),
           Container(
             width: MediaQuery.of(context).size.width - 40,

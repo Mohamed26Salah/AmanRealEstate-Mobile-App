@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import '../presentation/shared_features/custom_decoration.dart';
 
 class Property {
-  String docId;
+  String? docId;
   String addressAdmin;
   String addressUser;
   int area;
@@ -33,7 +33,7 @@ class Property {
   String? theNumberOFAB;
   String? typeOFActivity;
   Property(
-      {required this.docId,
+      {this.docId,
       required this.addressAdmin,
       required this.addressUser,
       required this.area,
@@ -60,6 +60,34 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
+  Map<String, dynamic> toJson() => {
+        "addressForAdmin": addressAdmin,
+        "addressForUser": addressUser,
+        "area": area,
+        "descriptionForAdmin": descriptionAdmin,
+        "descriptionForUser": descriptionUser,
+        "unitName": unitName,
+        "offered": offered,
+        "ownerName": ownerName,
+        "ownerNumber": ownerNumber,
+        "paymentMethod": paymentMethod,
+        "priority": priority,
+        "type": type,
+        "visible": visible,
+        "price": price,
+        "multiImages": multiImages,
+        "singleImage": singleImage,
+        "doublex": doublex,
+        "finishing": finishing,
+        "floor": floor,
+        "furnished": furnished,
+        "noBarthrooms": noBarthrooms,
+        "noFlats": noFlats,
+        "noFloors": noFloors,
+        "noRooms": noRooms,
+        "noAB": theNumberOFAB,
+        "typeOFActivity": typeOFActivity
+      };
 
   static Padding buildTextField(
       {required String labelText,
