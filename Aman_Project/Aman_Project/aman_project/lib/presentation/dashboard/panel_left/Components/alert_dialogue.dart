@@ -5,7 +5,7 @@ import '../../../../models/set_role.dart';
 class AlertDailogue extends StatefulWidget {
   String email;
   final ValueChanged<int> update;
-   AlertDailogue({super.key, required this.email, required this.update});
+  AlertDailogue({super.key, required this.email, required this.update});
 
   @override
   State<AlertDailogue> createState() => _AlertDailogueState();
@@ -14,7 +14,6 @@ class AlertDailogue extends StatefulWidget {
 class _AlertDailogueState extends State<AlertDailogue> {
   var items = [
     'user',
-    'admin',
     'moderator',
   ];
   var dropdownvalue = 'user';
