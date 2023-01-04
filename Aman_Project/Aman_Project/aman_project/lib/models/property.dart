@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../presentation/properties/dropdown.dart';
 import '../presentation/shared_features/custom_decoration.dart';
 
 class Property {
@@ -167,6 +165,7 @@ class Property {
     required String hint,
     String? value,
     bool? show,
+    required BuildContext context,
     Function(String?)? onChanged,
   }) {
     return show == false
@@ -178,20 +177,74 @@ class Property {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(text),
-                CustomDropdownButton2(
-                  dropdownItems: dropdownItems,
-                  hint: hint,
+                DropdownButtonFormField(
+                  //To avoid long text overflowing.
+
+                  isExpanded: true,
+                  hint: Text(
+                    hint,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ),
                   value: value,
+                  items: dropdownItems
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ))
+                      .toList(),
                   onChanged: onChanged,
-                  validatior: (value) {
+                  //French accent
+                  validator: (value) {
                     if (value == null) {
                       return 'Please Select';
                     }
                     return null;
                   },
+                  dropdownColor: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(12),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 205, 153, 51),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 205, 153, 51), width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                  ),
                 ),
               ],
             ),
           );
   }
 }
+ // CustomDropdownButton2(
+                //   dropdownItems: dropdownItems,
+                //   hint: hint,
+                //   value: value,
+                //   onChanged: onChanged,
+                //   validatior: (value) {
+                //     if (value == null) {
+                //       return 'Please Select';
+                //     }
+                //     return null;
+                //   },
+                // ),
