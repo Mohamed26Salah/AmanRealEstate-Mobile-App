@@ -37,7 +37,10 @@ class _DetailsState extends ConsumerState<Details> {
 
     Size size = MediaQuery.of(context).size;
     var defaultShadow = Shadow(
-        color: Colors.black, offset: Offset.fromDirection(1.5 , 3), blurRadius: 2 ,);
+      color: Colors.black,
+      offset: Offset.fromDirection(1.5, 3),
+      blurRadius: 2,
+    );
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -105,19 +108,15 @@ class _DetailsState extends ConsumerState<Details> {
                                   size: 24,
                                 ),
                               ),
-                          
                               Icon(
                                 Icons.remove_red_eye_rounded,
                                 color: visible,
                                 size: 30,
-                                shadows: [
-                                 defaultShadow
-                                ],
+                                shadows: [defaultShadow],
                               )
                             ],
                           ),
                         ),
-                       
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 24,
@@ -221,7 +220,7 @@ class _DetailsState extends ConsumerState<Details> {
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                   Icon(
+                                  Icon(
                                     Icons.zoom_out_map,
                                     shadows: [defaultShadow],
                                     color: Colors.white,
@@ -238,8 +237,8 @@ class _DetailsState extends ConsumerState<Details> {
                                   const SizedBox(
                                     width: 4,
                                   ),
-                                  strokeWidget(r"$" + routeArgs.price.toString(), 16),
-                                 
+                                  strokeWidget(
+                                      r"$" + routeArgs.price.toString(), 16),
                                 ],
                               ),
                             ],
@@ -445,7 +444,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 TextButton(
                                   onPressed: () {
                                     PropertyManagement.deleteProduct(
-                                        routeArgs.docId);
+                                        routeArgs.docId!);
                                     Navigator.pushReplacementNamed(
                                         context, '/home');
                                     goodMessageSnackBar("Success",
