@@ -24,7 +24,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  top: 48, left: 24, right: 24, bottom: 0),
+                  top: 24, left: 24, right: 24, bottom: 0),
               child: TextField(
                 autofocus: false,
                 enableInteractiveSelection: false,
@@ -91,7 +91,8 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                   )
                 ]),
                 SizedBox(
-                  height: MediaQuery.of(context).size.shortestSide / 1.1,
+                  height: MediaQuery.of(context).size.shortestSide / 1.3,
+                  width: MediaQuery.of(context).size.width,
                   child: Card(
                       // color: ,
                       elevation: 5,

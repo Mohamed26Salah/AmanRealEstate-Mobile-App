@@ -76,7 +76,15 @@ class _ChartBlockState extends State<ChartBlock> {
               ),
             );
           } else {
-            return const CircularProgressIndicator();
+            return Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Column(
+                children: const [
+                  CircularProgressIndicator(),
+                  Text("Loading Block")
+                ],
+              ),
+            );
           }
         },
       ),
