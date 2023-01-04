@@ -441,42 +441,40 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                         .then((value2) async {
                                       await PropertyManagement.updateProperty(
                                           docId: routeArgs.docId,
-                                          ownerName: _ownerNameController.text,
-                                          ownerNumber:
+                                          ownerName: routeArgs.ownerName =
+                                              _ownerNameController.text,
+                                          ownerNumber: routeArgs.ownerNumber =
                                               _ownerNumberController.text,
-                                          addressForUser:
+                                          addressForUser: routeArgs.addressUser =
                                               _addressForUserController.text,
-                                          addressForAdmin:
+                                          addressForAdmin: routeArgs.addressAdmin =
                                               _addressForAdminController.text,
-                                          area: int.parse(_areaController.text),
-                                          price:
+                                          area: routeArgs.area =
+                                              int.parse(_areaController.text),
+                                          price: routeArgs.price =
                                               int.parse(_priceController.text),
                                           descriptionForUser:
-                                              _descriptionForUserController
-                                                  .text,
-                                          descriptionForAdmin:
-                                              _descriptionForAdminController
-                                                  .text,
-                                          unitName: _nameController.text,
-                                          paymentMethod:
-                                              routeArgs.paymentMethod,
-                                          priority: routeArgs.priority,
-                                          visible: routeArgs.visible,
-                                          offered: routeArgs.offered,
-                                          singleImage: value,
-                                          mutliImages: value2,
-                                          type: routeArgs.type,
-                                          floor: _floorController.text,
-                                          noRooms: _noOFRoomsController.text,
-                                          noBathrooms:
-                                              _noOFBathroomsController.text,
-                                          noFloors: _noOFFloorsController.text,
-                                          noAB: _noOFABController.text,
-                                          noFlats: _noOFFlatsController.text,
-                                          typeOFActivity:
-                                              _typeOFActivityController.text);
-                                      routeArgs.singleImage = value;
-                                      routeArgs.multiImages = value2;
+                                              routeArgs.descriptionUser =
+                                                  _descriptionForUserController
+                                                      .text,
+                                          descriptionForAdmin: routeArgs.descriptionAdmin =
+                                              _descriptionForAdminController.text,
+                                          unitName: routeArgs.unitName = _nameController.text,
+                                          paymentMethod: routeArgs.paymentMethod = routeArgs.paymentMethod,
+                                          priority: routeArgs.priority = routeArgs.priority,
+                                          visible: routeArgs.visible = routeArgs.visible,
+                                          offered: routeArgs.offered = routeArgs.offered,
+                                          singleImage: routeArgs.singleImage = value,
+                                          mutliImages: routeArgs.multiImages = value2,
+                                          type: routeArgs.type = routeArgs.type,
+                                          floor: routeArgs.floor = _floorController.text,
+                                          noRooms: routeArgs.noRooms = _noOFRoomsController.text,
+                                          noBathrooms: routeArgs.noBarthrooms = _noOFBathroomsController.text,
+                                          noFloors: routeArgs.noFloors = _noOFFloorsController.text,
+                                          noAB: routeArgs.theNumberOFAB = _noOFABController.text,
+                                          noFlats: routeArgs.noFlats = _noOFFlatsController.text,
+                                          typeOFActivity: routeArgs.typeOFActivity = _typeOFActivityController.text);
+
                                       Navigator.pop(context, routeArgs);
                                     });
                                     // imageManagement.clearImageProivders(ref);
