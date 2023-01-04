@@ -327,6 +327,7 @@ class AddFormState extends ConsumerState<AddForm> {
                     text: "Select Payment Method",
                     show: true,
                     value: paymentMethod,
+                    context: context,
                     onChanged: (value) {
                       setState(() {
                         paymentMethod = value;
@@ -339,6 +340,7 @@ class AddFormState extends ConsumerState<AddForm> {
                     text: "Select priority",
                     show: true,
                     value: priority,
+                    context: context,
                     onChanged: (value) {
                       setState(() {
                         priority = value;
@@ -351,6 +353,7 @@ class AddFormState extends ConsumerState<AddForm> {
                     text: "Select visibility",
                     show: true,
                     value: visible,
+                    context: context,
                     onChanged: (value) {
                       setState(() {
                         visible = value;
@@ -363,6 +366,7 @@ class AddFormState extends ConsumerState<AddForm> {
                     text: "Select offering",
                     show: true,
                     value: offered,
+                    context: context,
                     onChanged: (value) {
                       setState(() {
                         offered = value;
@@ -377,6 +381,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       text: "Select Finishing",
                       show: true,
                       value: finishing,
+                      context: context,
                       onChanged: (value) {
                         setState(() {
                           finishing = value;
@@ -392,6 +397,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       text: "Select yes if Doublex",
                       show: true,
                       value: doublex,
+                      context: context,
                       onChanged: (value) {
                         setState(() {
                           doublex = value;
@@ -407,6 +413,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       text: "Select yes if Furnished",
                       show: true,
                       value: furnished,
+                      context: context,
                       onChanged: (value) {
                         setState(() {
                           furnished = value;

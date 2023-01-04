@@ -257,6 +257,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             text: "Select priority",
                             value: routeArgs.priority,
                             show: true,
+                            context: context,
                             onChanged: (val) {
                               setState(() {
                                 routeArgs.priority = val!;
@@ -268,6 +269,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             text: "Select visibility",
                             value: routeArgs.visible,
                             show: true,
+                            context: context,
                             onChanged: (val) {
                               setState(() {
                                 routeArgs.visible = val!;
@@ -279,6 +281,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             text: "Select offering",
                             value: routeArgs.offered,
                             show: true,
+                            context: context,
                             onChanged: (val) {
                               setState(() {
                                 routeArgs.offered = val!;
@@ -290,6 +293,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             text: "Select Finishing",
                             value: routeArgs.finishing,
                             show: routeArgs.finishing!.isNotEmpty,
+                            context: context,
                             onChanged: (val) {
                               setState(() {
                                 routeArgs.finishing = val;
@@ -301,6 +305,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             text: "Select yes if Doublex",
                             value: routeArgs.doublex,
                             show: routeArgs.doublex!.isNotEmpty,
+                            context: context,
                             onChanged: (val) {
                               setState(() {
                                 routeArgs.doublex = val;

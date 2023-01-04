@@ -93,6 +93,7 @@ class _AddFormRentState extends State<AddFormRent> {
                 text: "Select Type",
                 show: true,
                 value: type,
+                context: context,
                 onChanged: (value) {
                   setState(() {
                     type = value;
@@ -153,6 +154,7 @@ class _AddFormRentState extends State<AddFormRent> {
                 text: "Select yes if Furnished",
                 show: true,
                 value: furnished,
+                context: context,
                 onChanged: (value) {
                   setState(() {
                     furnished = value;
@@ -165,6 +167,7 @@ class _AddFormRentState extends State<AddFormRent> {
                 text: "Select Finishing",
                 show: true,
                 value: finishing,
+                context: context,
                 onChanged: (value) {
                   setState(() {
                     finishing = value;
@@ -200,7 +203,7 @@ class _AddFormRentState extends State<AddFormRent> {
                                     Color.fromARGB(255, 205, 153, 51)),
                               ));
                             });
-                        await RentsManagement().createRent(
+                        await RentsManagement.createRent(
                             rentPrice: int.parse(_rentPriceController.text),
                             type: type!,
                             area: int.parse(_areaController.text),
