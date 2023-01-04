@@ -86,7 +86,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
       _nameController.text = routeArgs.unitName;
       _floorController.text = routeArgs.floor!;
       _noOFRoomsController.text = routeArgs.noFloors!;
-      _noOFBathroomsController.text = routeArgs.noBarthrooms!;
+      _noOFBathroomsController.text = routeArgs.noBathrooms!;
       _noOFFloorsController.text = routeArgs.noFloors!;
       _noOFABController.text = routeArgs.theNumberOFAB!;
       _noOFFlatsController.text = routeArgs.noFlats!;
@@ -474,7 +474,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                           type: routeArgs.type = routeArgs.type,
                                           floor: routeArgs.floor = _floorController.text,
                                           noRooms: routeArgs.noRooms = _noOFRoomsController.text,
-                                          noBathrooms: routeArgs.noBarthrooms = _noOFBathroomsController.text,
+                                          noBathrooms: routeArgs.noBathrooms = _noOFBathroomsController.text,
                                           noFloors: routeArgs.noFloors = _noOFFloorsController.text,
                                           noAB: routeArgs.theNumberOFAB = _noOFABController.text,
                                           noFlats: routeArgs.noFlats = _noOFFlatsController.text,

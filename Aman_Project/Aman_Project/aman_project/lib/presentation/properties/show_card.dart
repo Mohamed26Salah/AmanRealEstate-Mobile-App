@@ -144,7 +144,7 @@ class _ShowCardState extends ConsumerState<ShowCard> {
               floor: data.docs[index]['floor'],
               furnished: data.docs[index]['furnished'],
               unitName: data.docs[index]['unitName'],
-              noBarthrooms: data.docs[index]['noBathrooms'],
+              noBathrooms: data.docs[index]['noBathrooms'],
               noFlats: data.docs[index]['noFlats'],
               noFloors: data.docs[index]['noFloors'],
               noRooms: data.docs[index]['noRooms'],

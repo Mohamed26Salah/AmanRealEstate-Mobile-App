@@ -26,7 +26,7 @@ class Property {
   String? finishing;
   String? floor;
   String? furnished;
-  String? noBarthrooms;
+  String? noBathrooms;
   String? noFlats;
   String? noFloors;
   String? noRooms;
@@ -54,7 +54,7 @@ class Property {
       this.finishing,
       this.floor,
       this.furnished,
-      this.noBarthrooms,
+      this.noBathrooms,
       this.noFlats,
       this.noFloors,
       this.noRooms,
@@ -81,7 +81,7 @@ class Property {
         "finishing": finishing,
         "floor": floor,
         "furnished": furnished,
-        "noBarthrooms": noBarthrooms,
+        "noBathrooms": noBathrooms,
         "noFlats": noFlats,
         "noFloors": noFloors,
         "noRooms": noRooms,

@@ -325,7 +325,7 @@ class _DetailsState extends ConsumerState<Details> {
                             buildFeature(
                                 Icons.hotel, routeArgs.noRooms, "Rooms"),
                             buildFeature(Icons.bathtub_outlined,
-                                routeArgs.noBarthrooms, "Barthrooms"),
+                                routeArgs.noBathrooms, "Barthrooms"),
                             buildFeature(Icons.apartment_rounded,
                                 routeArgs.noFlats, "Flats"),
                             buildFeature(
