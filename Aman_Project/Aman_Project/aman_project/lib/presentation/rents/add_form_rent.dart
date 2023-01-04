@@ -104,7 +104,7 @@ class _AddFormRentState extends State<AddFormRent> {
                   labelText: "price",
                   hintText: "price",
                   controller: _rentPriceController,
-                  type: "price",
+                  type: "number",
                   show: true),
               Property.buildTextField(
                   labelText: "Area",

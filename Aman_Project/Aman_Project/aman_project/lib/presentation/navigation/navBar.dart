@@ -1,4 +1,5 @@
 import 'package:aman_project/presentation/properties/wish_list.dart';
+import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
 import '../profile/edit_profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -6,6 +7,8 @@ import '../properties/main_page.dart';
 import 'package:flutter/material.dart';
 import '../dashboard/panel_left/panel_left_page.dart';
 import '../rents/rents_page.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // class navBar extends StatelessWidget {
 //   const navBar({super.key});
@@ -24,20 +27,22 @@ import '../rents/rents_page.dart';
 //   }
 // }
 
-class NavBar extends StatefulWidget {
+class NavBar extends ConsumerStatefulWidget {
   final ThemeManager? themeManager;
   const NavBar({super.key, required this.themeManager});
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  ConsumerState<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _NavBarState extends ConsumerState<NavBar> {
   int index = 0;
 
   // List<Property> properties = getPropertyList();
   @override
   Widget build(BuildContext context) {
+    final userData = ref.watch(newUserDataProivder);
+   
     List<Widget> pages = [
       const Search(),
       const RentsPage(),
@@ -68,24 +73,26 @@ class _NavBarState extends State<NavBar> {
             tabBackgroundColor: Theme.of(context).primaryColor,
             gap: 8,
             // onTabChange: (value) => print,
-            tabs: const [
-              GButton(
+            tabs:  [
+              const GButton(
                 icon: Icons.home,
                 text: 'Home',
               ),
-              GButton(
+               if(userData?.role == 'admin')
+              const GButton(
                 icon: Icons.apartment,
                 text: 'Rents',
               ),
-              GButton(
+              const GButton(
                 icon: Icons.favorite,
                 text: 'Likes',
               ),
-              GButton(
+              const GButton(
                 icon: Icons.person,
                 text: 'Profile',
               ),
-              GButton(
+              if(userData?.role == 'admin')
+              const GButton(
                 icon: Icons.dashboard,
                 text: 'Dashboard',
               ),
