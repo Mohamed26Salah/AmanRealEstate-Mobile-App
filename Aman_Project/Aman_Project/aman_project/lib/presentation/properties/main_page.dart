@@ -2,6 +2,7 @@ import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/presentation/properties/show_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/repositories/user_providers.dart';
 import 'filter.dart';
 import '../../data/repositories/properties_provider.dart';
 
@@ -22,6 +23,14 @@ class _SearchState extends ConsumerState<Search> {
 
   @override
   Widget build(BuildContext context) {
+    final userData = ref.watch(newUserDataProivder);
+    bool isVisible = false;
+    if (userData?.role == 'admin') {
+      setState(() {
+        isVisible = true;
+      });
+    }
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -131,15 +140,18 @@ class _SearchState extends ConsumerState<Search> {
         ),
         // bottomNavigationBar: NavBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
-          child: Icon(Icons.add),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/addForm').then((value) {
-              ImageManagement().clearImageProivders(ref);
-            });
-            // context.push('/addFormUnits');
-          },
+        floatingActionButton: Visibility(
+          visible: isVisible,
+          child: FloatingActionButton(
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/addForm').then((value) {
+                ImageManagement().clearImageProivders(ref);
+              });
+              // context.push('/addFormUnits');
+            },
+          ),
         ),
       ),
     );
