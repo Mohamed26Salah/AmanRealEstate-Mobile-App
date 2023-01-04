@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../presentation/properties/dropdown.dart';
-import '../presentation/shared_features/custom_text_field.dart';
+import '../presentation/shared_features/custom_decoration.dart';
 
 class Property {
   String docId;
@@ -74,11 +74,11 @@ class Property {
       child: type == 'number' || type == 'phone'
           ? show == false
               ? const SizedBox()
-              : CustomTextField(
+              : TextFormField(
                   controller: controller,
                   obscureText: false,
-                  labelText: labelText,
-                  hintText: hintText,
+                  decoration: CommonStyle.textFieldStyle(
+                      labelText: labelText, hintText: hintText),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(11),
                     FilteringTextInputFormatter.allow(
@@ -103,11 +103,11 @@ class Property {
                 )
           : show == false
               ? const SizedBox()
-              : CustomTextField(
+              : TextFormField(
                   controller: controller,
                   obscureText: false,
-                  labelText: labelText,
-                  hintText: hintText,
+                  decoration: CommonStyle.textFieldStyle(
+                      labelText: labelText, hintText: hintText),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
                       RegExp(r"[a-zA-Z0-9]+|\s"),
