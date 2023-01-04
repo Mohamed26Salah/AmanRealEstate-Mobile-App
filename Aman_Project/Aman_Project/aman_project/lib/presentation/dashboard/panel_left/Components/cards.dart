@@ -36,7 +36,6 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     prepareAnimations();
-    _runExpandCheck();
   }
 
   ///Setting up the animation
@@ -49,30 +48,15 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
     );
   }
 
-  void _runExpandCheck() {
-    if (widget.expand) {
-      Timer(const Duration(milliseconds: 8000), () {
-        // <-- Delay here
-        expandController!.forward();
-      });
-    } else {
-      Timer(const Duration(milliseconds: 8000), () {
-        // <-- Delay here
-        expandController!.reverse();
-      });
-    }
-  }
-
   @override
   void didUpdateWidget(cards1 oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _runExpandCheck();
   }
 
   @override
   void dispose() {
-    expandController!.dispose();
     super.dispose();
+    expandController!.dispose();
   }
 
   @override
