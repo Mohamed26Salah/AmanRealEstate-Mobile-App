@@ -42,14 +42,20 @@ class _NavBarState extends ConsumerState<NavBar> {
   @override
   Widget build(BuildContext context) {
     final userData = ref.watch(newUserDataProivder);
-   
+
     List<Widget> pages = [
       const Search(),
-      const RentsPage(),
       wish_list(),
       EditProfile(themeManager: widget.themeManager),
-      PanelLeftPage()
     ];
+
+    if (userData?.role == 'admin') {
+      pages.add(const RentsPage());
+      pages.add(PanelLeftPage());
+    }
+    if (userData?.role == 'moderator') {
+      pages.add(const RentsPage());
+    }
     return Scaffold(
       body: pages[index],
       bottomNavigationBar: SingleChildScrollView(
@@ -73,15 +79,10 @@ class _NavBarState extends ConsumerState<NavBar> {
             tabBackgroundColor: Theme.of(context).primaryColor,
             gap: 8,
             // onTabChange: (value) => print,
-            tabs:  [
+            tabs: [
               const GButton(
                 icon: Icons.home,
                 text: 'Home',
-              ),
-               if(userData?.role == 'admin')
-              const GButton(
-                icon: Icons.apartment,
-                text: 'Rents',
               ),
               const GButton(
                 icon: Icons.favorite,
@@ -91,11 +92,16 @@ class _NavBarState extends ConsumerState<NavBar> {
                 icon: Icons.person,
                 text: 'Profile',
               ),
-              if(userData?.role == 'admin')
-              const GButton(
-                icon: Icons.dashboard,
-                text: 'Dashboard',
-              ),
+              if (userData?.role == 'admin')
+                const GButton(
+                  icon: Icons.apartment,
+                  text: 'Rents',
+                ),
+              if (userData?.role == 'admin')
+                const GButton(
+                  icon: Icons.dashboard,
+                  text: 'Dashboard',
+                ),
             ],
           ),
         ),
