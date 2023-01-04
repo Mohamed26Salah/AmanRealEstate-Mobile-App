@@ -135,6 +135,13 @@ class PropertyManagement {
     });
   }
 
+  static deleteProduct(String id) async {
+    DocumentReference docRef =
+        FirebaseFirestore.instance.collection('properties').doc(id);
+
+      docRef.delete();
+  }
+
   static Future<List<ChartData>> getData() async {
     List data = [];
     Map datanum = {};

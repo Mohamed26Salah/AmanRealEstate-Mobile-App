@@ -1,9 +1,13 @@
 import 'package:aman_project/data/image_management.dart';
+import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
+
+import '../shared_features/custom_message.dart';
+import '../../constants/globals.dart' as val;
 
 class Details extends ConsumerStatefulWidget {
   // final Property? property;
@@ -27,9 +31,13 @@ class _DetailsState extends ConsumerState<Details> {
         : offeredColor = Theme.of(context).primaryColor;
 
     Color visible;
-    routeArgs.visible == 'Yes' ? visible = Colors.green : visible = Colors.red;
+    routeArgs.visible == 'Yes'
+        ? visible = Theme.of(context).splashColor
+        : visible = Theme.of(context).errorColor;
 
     Size size = MediaQuery.of(context).size;
+    var defaultShadow = Shadow(
+        color: Colors.black, offset: Offset.fromDirection(1.5 , 3), blurRadius: 2 ,);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -81,9 +89,9 @@ class _DetailsState extends ConsumerState<Details> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical:
-                                  MediaQuery.of(context).size.height / 34),
+                            horizontal: 24,
+                            vertical: MediaQuery.of(context).size.height / 34,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -97,19 +105,19 @@ class _DetailsState extends ConsumerState<Details> {
                                   size: 24,
                                 ),
                               ),
-                              Container(
-                                height: 25,
-                                width: 25,
-                                // color: Colors.red,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle, color: visible),
-                              ),
+                          
+                              Icon(
+                                Icons.remove_red_eye_rounded,
+                                color: visible,
+                                size: 30,
+                                shadows: [
+                                 defaultShadow
+                                ],
+                              )
                             ],
                           ),
                         ),
-                        // Expanded(
-                        //   child: Container(),
-                        // ),
+                       
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 24,
@@ -173,22 +181,7 @@ class _DetailsState extends ConsumerState<Details> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                routeArgs.unitName,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              // const Text(
-                              //   "24\$",
-                              //   style: TextStyle(
-                              //     color: Colors.white,
-                              //     fontSize: 18,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
+                              strokeWidget(routeArgs.unitName, 32),
                               Container(
                                 height: 50,
                                 width: 50,
@@ -215,39 +208,29 @@ class _DetailsState extends ConsumerState<Details> {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.location_on,
                                     color: Colors.white,
+                                    shadows: [defaultShadow],
                                     size: 16,
                                   ),
                                   const SizedBox(
                                     width: 4,
                                   ),
-                                  Text(
-                                    routeArgs.addressUser,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                  strokeWidget(routeArgs.addressUser, 16),
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                  const Icon(
+                                   Icon(
                                     Icons.zoom_out_map,
+                                    shadows: [defaultShadow],
                                     color: Colors.white,
                                     size: 16,
                                   ),
                                   const SizedBox(
                                     width: 4,
                                   ),
-                                  Text(
-                                    "${routeArgs.area} sq/m}",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                  strokeWidget("${routeArgs.area} sq/m", 16),
                                 ],
                               ),
                               Row(
@@ -255,14 +238,8 @@ class _DetailsState extends ConsumerState<Details> {
                                   const SizedBox(
                                     width: 4,
                                   ),
-                                  Text(
-                                    r"$" + routeArgs.price.toString(),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                  strokeWidget(r"$" + routeArgs.price.toString(), 16),
+                                 
                                 ],
                               ),
                             ],
@@ -436,6 +413,78 @@ class _DetailsState extends ConsumerState<Details> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Delete"),
+                              content: const Text(
+                                  "Are you sure you would like to delete this property? "),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).focusColor,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'CANCEL',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    PropertyManagement.deleteProduct(
+                                        routeArgs.docId);
+                                    Navigator.pushReplacementNamed(
+                                        context, '/home');
+                                    goodMessageSnackBar("Success",
+                                        "Successfully deleted property!");
+                                    ScaffoldMessenger.of(context)
+                                      ..hideCurrentSnackBar()
+                                      ..showSnackBar(val.snackBar);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'YES',
+                                    style: TextStyle(
+                                        color: Theme.of(context).errorColor),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          backgroundColor: Theme.of(context).errorColor,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "Delete",
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -457,6 +506,33 @@ class _DetailsState extends ConsumerState<Details> {
           },
         ),
       ),
+    );
+  }
+
+  Stack strokeWidget(String text, double size) {
+    return Stack(
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            // color: Colors.white,
+            fontSize: size,
+            fontWeight: FontWeight.bold,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 3
+              ..color = const Color.fromARGB(255, 41, 39, 39),
+          ),
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: size,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 
@@ -540,24 +616,4 @@ class _DetailsState extends ConsumerState<Details> {
       ),
     );
   }
-
-  // void _showEditBottomSheet(BuildContext context, Property routeArgs) {
-  //   showModalBottomSheet<dynamic>(
-  //       context: context,
-  //       isScrollControlled: true,
-  //       shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.only(
-  //           topLeft: Radius.circular(30),
-  //           topRight: Radius.circular(30),
-  //         ),
-  //       ),
-  //       builder: (BuildContext context) {
-  //         return SizedBox(
-  //           height: MediaQuery.of(context).size.height * 0.90,
-  //           child: EditProperty(
-  //             routeArgs: routeArgs,
-  //           ),
-  //         );
-  //       });
-  // }
 }
