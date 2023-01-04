@@ -242,6 +242,23 @@ class UserHelper {
     preferences.setBool("theme", theme);
   }
 
+  static void changeRole(String email, String dropdownvalue) async {
+    String path = '';
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where("email", isEqualTo: email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        path = (doc.reference.path);
+      }
+    });
+
+    final washingtonRef = FirebaseFirestore.instance.doc(path);
+    washingtonRef.update({"role": dropdownvalue});
+  }
+
   // getPref() async {
   //   SharedPreferences preferences = await SharedPreferences.getInstance();
   //   theme = preferences.getBool("theme")!;

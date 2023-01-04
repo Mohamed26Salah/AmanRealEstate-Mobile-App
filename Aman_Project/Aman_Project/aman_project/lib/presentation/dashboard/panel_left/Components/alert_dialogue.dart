@@ -1,6 +1,5 @@
+import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../models/set_role.dart';
 
 class AlertDailogue extends StatefulWidget {
   String email;
@@ -38,7 +37,7 @@ class _AlertDailogueState extends State<AlertDailogue> {
       actions: [
         TextButton(
             onPressed: () => {
-                  changeRole(widget.email, dropdownvalue),
+                  UserHelper.changeRole(widget.email, dropdownvalue),
                   widget.update(100),
                   Navigator.of(context).pop(),
                 },

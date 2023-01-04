@@ -60,13 +60,10 @@ class _UsersListWidgetState extends State<UsersListWidget> {
                         // tileColor: Theme.of(context).splashColor,
                         leading: CircleAvatar(
                             radius: 15,
-                            backgroundColor: Color.fromARGB(
-                                255,
-                                rng.nextInt(255),
-                                rng.nextInt(255),
-                                rng.nextInt(255)),
+                            backgroundColor: Theme.of(context).primaryColor,
                             child: Text(
                               snapshot.data![index].email.substring(0, 1),
+                              style: const TextStyle(color: Colors.black),
                             )),
                         title: Text(snapshot.data![index].email),
                         subtitle: Text(snapshot.data![index].role),
