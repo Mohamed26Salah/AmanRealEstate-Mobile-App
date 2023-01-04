@@ -627,7 +627,6 @@ class AddFormState extends ConsumerState<AddForm> {
                                     priority: priority!,
                                     visible: visible!,
                                     offered: offered!,
-                                    // commonUnitPrpoerties: listAddTOFirebase,
                                     singleImage: imageManagement.singleImageURl,
                                     mutliImages: imageManagement.downloadUrls,
                                     floor: _floorController.text,
