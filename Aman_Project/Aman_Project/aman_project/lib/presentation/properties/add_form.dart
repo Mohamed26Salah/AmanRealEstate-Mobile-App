@@ -601,7 +601,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                 await imageManagement
                                     .uploadMultipleImages()
                                     .then((value) {
-                                  PropertyManagement.addPropertyData(
+                                  PropertyManagement().addPropertyData(
                                     type: userChoice,
                                     ownerName: _ownerNameController.text,
                                     ownerNumber: _ownerNumberController.text,

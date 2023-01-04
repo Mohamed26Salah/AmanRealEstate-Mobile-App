@@ -440,7 +440,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                         .editUploadMutilbeImages(routeArgs)
                                         .then((value2) async {
                                       await PropertyManagement.updateProperty(
-                                          docId: routeArgs.docId,
+                                          docId: routeArgs.docId!,
                                           ownerName: routeArgs.ownerName =
                                               _ownerNameController.text,
                                           ownerNumber: routeArgs.ownerNumber =
