@@ -80,9 +80,10 @@ class _DetailsState extends ConsumerState<Details> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical:
+                                  MediaQuery.of(context).size.height / 34),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
