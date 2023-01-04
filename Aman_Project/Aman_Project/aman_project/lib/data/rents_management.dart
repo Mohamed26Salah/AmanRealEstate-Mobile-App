@@ -2,7 +2,7 @@ import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RentsManagement {
-  createRent(
+  static createRent(
       {required int rentPrice,
       required String type,
       required int area,
@@ -38,4 +38,6 @@ class RentsManagement {
     final json = rent.toJson();
     await docRent.set(json);
   }
+
+  static figureRentType() {}
 }
