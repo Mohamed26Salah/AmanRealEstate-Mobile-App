@@ -27,7 +27,7 @@ class _CategoryChartState extends State<CategoryChart> {
               dataSource: widget.dataChart,
               xValueMapper: (ChartData datax, _) => datax.x,
               yValueMapper: (ChartData datay, _) => datay.y,
-              name: 'Number of Units',
+              name: '',
               pointColorMapper: (ChartData segment, _) {
                 return returnColor(segment.x);
               },
