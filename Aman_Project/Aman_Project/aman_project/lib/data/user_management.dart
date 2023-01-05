@@ -45,17 +45,21 @@ class UserHelper {
     return FirebaseFirestore.instance.collection('users').doc(id).get();
   }
 
-  static Future<List<UserModel>> getData2User() async {
+  static Future<List<UserModel>> getData2User({String? query}) async {
     List<UserModel> datanum2 = [];
-
     await FirebaseFirestore.instance
         .collection('users')
-        .limit(100)
         .where("role", isNotEqualTo: "admin")
         .get()
         .then((QuerySnapshot querySnapshot) {
       for (var doc in querySnapshot.docs) {
-        datanum2.add(UserModel(doc["email"], doc["role"]));
+        if (query == null) {
+          datanum2.add(UserModel(doc["email"], doc["role"]));
+        } else {
+          if (doc["email"].contains(query) || doc["role"].contains(query)) {
+            datanum2.add(UserModel(doc["email"], doc["role"]));
+          }
+        }
       }
     });
     // await FirebaseFirestore.instance

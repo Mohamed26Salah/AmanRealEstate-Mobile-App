@@ -8,7 +8,8 @@ import 'dart:async';
 import 'alert_dialogue.dart';
 
 class UsersListWidget extends StatefulWidget {
-  const UsersListWidget({super.key});
+  String? query;
+  UsersListWidget({super.key, this.query});
 
   @override
   State<UsersListWidget> createState() => _UsersListWidgetState();
@@ -19,19 +20,21 @@ class _UsersListWidgetState extends State<UsersListWidget> {
   @override
   void initState() {
     super.initState();
-    usertData = UserHelper.getData2User();
+
+    usertData = UserHelper.getData2User(query: widget.query);
   }
 
   void _update(dynamic int) {
     Timer(const Duration(seconds: 2), () {
       setState(() {
-        usertData = UserHelper.getData2User();
+        usertData = UserHelper.getData2User(query: widget.query);
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    usertData = UserHelper.getData2User(query: widget.query);
     var rng = Random();
     var borderRadius = const BorderRadius.all(Radius.circular(10));
 
@@ -152,4 +155,4 @@ const SizedBox(height: 10),
                         ),
                       ),
                   child: const Icon(Icons.search)),
-                   */
+      */             

@@ -13,7 +13,7 @@ class PanelLeftPage extends StatefulWidget {
 
 class _PanelLeftPageState extends State<PanelLeftPage> {
   bool visible = false;
-
+  String? query;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,11 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                 // onChanged: (value) {
                 //   ref.read(searchInputProivder.notifier).state = value;
                 // },
-                onSubmitted: (value) {},
+                onSubmitted: (value) {
+                  setState(() {
+                    query = value;
+                  });
+                },
                 style: const TextStyle(
                   fontSize: 28,
                   height: 1,
@@ -77,6 +81,19 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.shortestSide / 1.3,
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                  // color: ,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: UsersListWidget(query: query)),
+            ),
             Column(
               children: [
                 Wrap(children: [
@@ -90,16 +107,6 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     dataNum: 1,
                   )
                 ]),
-                SizedBox(
-                  height: MediaQuery.of(context).size.shortestSide / 1.3,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                      // color: ,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const UsersListWidget()),
-                ),
               ],
             ),
           ],
