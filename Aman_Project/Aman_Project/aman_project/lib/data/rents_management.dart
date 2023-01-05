@@ -1,6 +1,8 @@
 import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/chart_data.dart';
+
 class RentsManagement {
   static createRent(
       {required int rentPrice,
@@ -60,5 +62,27 @@ class RentsManagement {
       return "DidntPay";
     }
     return "Error";
+  }
+
+  static Future<List<ChartData>> getData3() async {
+    List data = [];
+    Map datanum = {};
+    List<ChartData> datanum2 = [];
+
+    await FirebaseFirestore.instance
+        .collection('rents')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        data.add(doc["rentType"]);
+      }
+    });
+
+    for (var e in data) {
+      datanum.containsKey(e) ? datanum[e]++ : datanum[e] = 1;
+    }
+    datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
+
+    return datanum2;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
 import '../../../../models/chart_data.dart';
@@ -32,6 +33,7 @@ class _ChartBlockState extends State<ChartBlock> {
     } else if (widget.dataNum == 1) {
       chartData = UserHelper.getData2();
     } else if (widget.dataNum == 2) {
+      chartData = RentsManagement.getData3();
     } else {
       chartData = PropertyManagement.getData();
     }

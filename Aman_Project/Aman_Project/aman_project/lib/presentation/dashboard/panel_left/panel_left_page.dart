@@ -96,7 +96,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
             ),
             Column(
               children: [
-                Wrap(children: [
+                Wrap(alignment: WrapAlignment.center, children: [
                   ChartBlock(
                     width: MediaQuery.of(context).size.width,
                   ),
@@ -105,7 +105,13 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
                     text: "Users",
                     icon: 0xeb93,
                     dataNum: 1,
-                  )
+                  ),
+                  ChartBlock(
+                    width: MediaQuery.of(context).size.width,
+                    text: "Rents",
+                    icon: 0xf0624,
+                    dataNum: 2,
+                  ),
                 ]),
               ],
             ),
