@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
@@ -22,10 +23,31 @@ class Details extends ConsumerStatefulWidget {
 }
 
 class _DetailsState extends ConsumerState<Details> {
+  late Database _database;
+  late List<Map<String, dynamic>> _favorites;
+  @override
+  void initState() {
+    _openDatabase();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
     final userData = ref.watch(newUserDataProivder);
+    void additem(Property item) async {
+      if (userData != null) {
+        Map<String, dynamic> row = {
+          "propid": item.docId,
+          "email": userData.email
+        };
+
+        await _database.insert("favs", row);
+        print("added");
+      } else {
+        print("no signed in usres");
+      }
+    }
 
     Color offeredColor;
     routeArgs.offered == 'For Rent'
@@ -44,7 +66,7 @@ class _DetailsState extends ConsumerState<Details> {
       blurRadius: 2,
     );
     bool isVisible = false;
-    if(userData?.role == 'admin') {
+    if (userData?.role == 'admin') {
       setState(() {
         isVisible = true;
       });
@@ -195,18 +217,24 @@ class _DetailsState extends ConsumerState<Details> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 strokeWidget(routeArgs.unitName, 32),
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.favorite,
-                                      color: Theme.of(context).primaryColor,
-                                      size: 20,
+                                InkWell(
+                                  onTap: () {
+                                    _openDatabase();
+                                    additem(routeArgs);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.favorite,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 20,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -634,6 +662,19 @@ class _DetailsState extends ConsumerState<Details> {
           ),
         ),
       ),
+    );
+  }
+
+  void _openDatabase() async {
+    var databasesPath = await getDatabasesPath();
+    String Path = "${databasesPath}favs.db";
+    _database = await openDatabase(
+      Path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute(
+            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT)');
+      },
     );
   }
 }
