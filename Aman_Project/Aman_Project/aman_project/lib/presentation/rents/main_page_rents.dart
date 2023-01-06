@@ -1,0 +1,179 @@
+import 'package:aman_project/presentation/rents/show_rents.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/repositories/user_providers.dart';
+import '../../data/repositories/properties_provider.dart';
+
+class MainPageRent extends ConsumerStatefulWidget {
+  const MainPageRent({super.key});
+  @override
+  ConsumerState<MainPageRent> createState() => _SearchState();
+}
+
+class _SearchState extends ConsumerState<MainPageRent> {
+  final _inputSearchController = TextEditingController();
+  @override
+  void dispose() {
+    _inputSearchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String rentType = ModalRoute.of(context)!.settings.arguments.toString();
+    final userData = ref.watch(newUserDataProivder);
+    bool isVisible = false;
+    if (userData?.role == 'admin') {
+      setState(() {
+        isVisible = true;
+      });
+    }
+
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        // bottomNavigationBar: const NavBarGR(),
+
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 48, left: 24, right: 24, bottom: 0),
+              child: TextField(
+                controller: _inputSearchController,
+                autofocus: false,
+                enableInteractiveSelection: false,
+                // onChanged: (value) {
+                //   ref.read(searchInputProivder.notifier).state = value;
+                // },
+                onSubmitted: (value) {
+                  ref.read(searchInputProivder.notifier).state = value;
+                },
+                style: const TextStyle(
+                  fontSize: 28,
+                  height: 1,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(
+                    fontSize: 28,
+                    color: Colors.grey[400],
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (Colors.grey[400])!,
+                    ),
+                  ),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween, // added line
+                      mainAxisSize: MainAxisSize.min, // added li
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.grey[400],
+                          size: 28,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _showBottomSheet();
+                            },
+                            icon: Icon(
+                              Icons.menu,
+                              color: Theme.of(context).primaryColor,
+                              size: 28,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Padding(
+              padding:
+                  EdgeInsets.only(right: 24, left: 24, top: 10, bottom: 12),
+              //war top 24
+            ),
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: ShowRent(rentType: rentType)),
+            ),
+          ],
+        ),
+        // bottomNavigationBar: NavBar(),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButton: Visibility(
+        //   visible: isVisible,
+        //   child: FloatingActionButton(
+        //     backgroundColor: Theme.of(context).primaryColor,
+        //     child: Icon(Icons.add),
+        //     onPressed: () {
+        //       // Navigator.of(context).pushNamed('/addForm').then((value) {
+        //       //   ImageManagement().clearImageProivders(ref);
+        //       // });
+        //     },
+        //   ),
+        // ),
+      ),
+    );
+  }
+
+  Widget buildFilter(String filterName) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5),
+          ),
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.1),
+            width: 1,
+          )),
+      child: Center(
+        child: Text(
+          filterName,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        builder: (BuildContext context) {
+          return Wrap(
+            children: const [
+              // Filter(),
+            ],
+          );
+        });
+  }
+}

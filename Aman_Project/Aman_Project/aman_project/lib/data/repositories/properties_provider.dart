@@ -5,13 +5,6 @@ final searchInputProivder = StateProvider<String>((ref) {
   return "";
 });
 
-//Filters
-// final filterPriceProivder = StateProvider<RangeValues>((ref) {
-//   return const RangeValues(10000, 10000000);
-// });
-// final filterAreaProivder = StateProvider<RangeValues>((ref) {
-//   return const RangeValues(10, 3000);
-// });
 final filterPriceProivder = StateProvider<String>((ref) {
   return "";
 });

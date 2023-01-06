@@ -46,24 +46,28 @@ class _RentsPageState extends ConsumerState<RentsPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         SalahCard(
                             image: "assets/images/validating-ticket.png",
-                            text: "Paid"),
+                            text: "Paid",
+                            rentType: "Payed"),
                         SalahCard(
                             image: "assets/images/paper-money.png",
-                            text: "No Paid"),
+                            text: "No Paid",
+                            rentType: "DidntPay"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         SalahCard(
                             image: "assets/images/contract.png",
-                            text: "New Contract"),
+                            text: "New Contract",
+                            rentType: "DidntStart"),
                         SalahCard(
                             image: "assets/images/no.png",
-                            text: "Expired contract"),
+                            text: "Expired contract",
+                            rentType: "Finished"),
                       ],
                     ),
                   ],
@@ -111,11 +115,13 @@ class _RentsPageState extends ConsumerState<RentsPage> {
 }
 
 class SalahCard extends StatefulWidget {
-  String image;
-  String text;
-  SalahCard({
+  final String image;
+  final String text;
+  final String rentType;
+  const SalahCard({
     required this.image,
     required this.text,
+    required this.rentType,
     Key? key,
   }) : super(key: key);
 
@@ -130,9 +136,11 @@ class _SalahCardState extends State<SalahCard> {
       elevation: 4.0,
       child: InkWell(
           onTap: () {
-            if (true) {
-              setState(() {});
-            }
+            // if (true) {
+            //   setState(() {});
+            // }
+            Navigator.of(context)
+                .pushNamed('/MainPageRent', arguments: widget.rentType);
           },
           highlightColor: Theme.of(context).highlightColor,
           splashColor: Theme.of(context).primaryColor,

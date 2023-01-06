@@ -1,6 +1,7 @@
 import 'package:aman_project/presentation/login_loading/login_loading.dart';
 import 'package:aman_project/presentation/properties/edit_property.dart';
 import 'package:aman_project/presentation/rents/add_form_rent.dart';
+import 'package:aman_project/presentation/rents/main_page_rents.dart';
 import 'package:get/get.dart';
 import 'presentation/shared_features/local_strings.dart';
 import 'package:aman_project/firebase_options/firebase_options.dart';
@@ -84,6 +85,7 @@ class _MyAppState extends State<MyApp> {
         '/forget': (context) => const ForgetPassword(),
         '/verify': (context) => const EmailVerification(),
         '/addFormRent': (context) => const AddFormRent(),
+        '/MainPageRent': (context) => const MainPageRent(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,
