@@ -41,9 +41,13 @@ class _DetailsState extends ConsumerState<Details> {
           "propid": item.docId,
           "email": userData.email
         };
-
-        await _database.insert("favs", row);
-        print("added");
+        try {
+          await _database.insert("favs", row);
+          print("added");
+        } catch (e) {
+          print(e);
+          print("already exits");
+        }
       } else {
         print("no signed in usres");
       }
@@ -621,7 +625,18 @@ class _DetailsState extends ConsumerState<Details> {
             ),
             const SizedBox(
               width: 20,
-            )
+            ),
+            ElevatedButton(
+              child: Text('Delete Database'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).errorColor,
+              ),
+              onPressed: () async {
+                var databasesPath = await getDatabasesPath();
+                String Path = "${databasesPath}favs.db";
+                return databaseFactory.deleteDatabase(Path);
+              },
+            ),
           ],
         );
       } else {
@@ -673,7 +688,7 @@ class _DetailsState extends ConsumerState<Details> {
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT)');
+            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT,CONSTRAINT propid_uniqe UNIQUE (propid))');
       },
     );
   }

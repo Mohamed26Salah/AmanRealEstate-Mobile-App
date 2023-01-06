@@ -157,6 +157,7 @@ class PropertyManagement {
           .get()
           .then((querySnapshot) {
         results.add(Property(
+            docId: id,
             addressAdmin: querySnapshot.data()!['addressForAdmin'],
             addressUser: querySnapshot.data()!['addressForUser'],
             area: querySnapshot.data()!['area'],
