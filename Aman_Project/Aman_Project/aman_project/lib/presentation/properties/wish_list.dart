@@ -1,10 +1,8 @@
 import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
-import 'package:aman_project/main.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'property_widget_card.dart';
@@ -33,7 +31,7 @@ class _wish_listState extends ConsumerState<wish_list> {
             physics: const NeverScrollableScrollPhysics(),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Text(
@@ -63,12 +61,11 @@ class _wish_listState extends ConsumerState<wish_list> {
               ],
             ),
           )
-        : SingleChildScrollView(
-            child: SafeArea(
-            child: Padding(
-                padding: const EdgeInsets.only(top: 210),
-                child: Center(
-                    child: Column(children: [
+        : SafeArea(
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                   Image.asset("assets/images/wishlist.png", width: 200),
                   const SizedBox(
                     height: 20,
@@ -88,38 +85,27 @@ class _wish_listState extends ConsumerState<wish_list> {
                     height: 40,
                   ),
                   ElevatedButton(
-                    child: Text('Start SHOPPING'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 205, 153, 51),
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
                     onPressed: () {
                       Navigator.of(context).pushReplacementNamed("/home");
                     },
+                    child: const Text('Start SHOPPING'),
                   ),
-                  ElevatedButton(
-                    child: Text('Delete Database'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).errorColor,
-                    ),
-                    onPressed: () async {
-                      var databasesPath = await getDatabasesPath();
-                      String Path = "${databasesPath}favs.db";
-                      return databaseFactory.deleteDatabase(Path);
-                    },
-                  ),
-                ]))),
-          ));
+                ])),
+          );
   }
 
   void _openDatabase() async {
     var databasesPath = await getDatabasesPath();
-    String Path = "${databasesPath}favs.db";
+    String path = "${databasesPath}favs.db";
     _database = await openDatabase(
-      Path,
+      path,
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT,CONSTRAINT propid_uniqe UNIQUE (propid))');
+            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT,CONSTRAINT propid_uniqe UNIQUE (propid,email))');
       },
     );
     _loadFavorites();
@@ -133,10 +119,9 @@ class _wish_listState extends ConsumerState<wish_list> {
     _favorites = await _database.query("favs",
         columns: ['propid'], where: whereString, whereArgs: whereArguments);
     List<String> ids = [];
-    print(_favorites);
-    _favorites.forEach((element) {
+    for (var element in _favorites) {
       ids.add(element["propid"]);
-    });
+    }
     resultWhishlist = await PropertyManagement.getWishlistData(ids);
 
     setState(() {});

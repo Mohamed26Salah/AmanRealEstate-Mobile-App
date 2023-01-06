@@ -24,6 +24,7 @@ class Details extends ConsumerStatefulWidget {
 
 class _DetailsState extends ConsumerState<Details> {
   late Database _database;
+  bool isFavorite = false;
   late List<Map<String, dynamic>> _favorites;
   @override
   void initState() {
@@ -35,6 +36,27 @@ class _DetailsState extends ConsumerState<Details> {
   Widget build(BuildContext context) {
     Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
     final userData = ref.watch(newUserDataProivder);
+    Future<bool> checkFavorite(String id) async {
+      await _openDatabase();
+      String whereString = "`propid` = ? and `email`= ?";
+
+      if (userData != null) {
+        List<dynamic> whereArguments = [id, userData.email];
+        try {
+          var check = await _database.query("favs",
+              columns: ['propid'],
+              where: whereString,
+              whereArgs: whereArguments);
+
+          return check.isNotEmpty ? true : false;
+        } catch (e) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+
     void additem(Property item) async {
       if (userData != null) {
         Map<String, dynamic> row = {
@@ -43,14 +65,23 @@ class _DetailsState extends ConsumerState<Details> {
         };
         try {
           await _database.insert("favs", row);
-          print("added");
         } catch (e) {
           print(e);
-          print("already exits");
         }
-      } else {
-        print("no signed in usres");
-      }
+      } else {}
+    }
+
+    void removeitem(Property item) async {
+      String whereString = "`propid` = ? and `email`= ?";
+      if (userData != null) {
+        List<dynamic> whereArguments = [item.docId, userData.email];
+        try {
+          await _database.delete("favs",
+              where: whereString, whereArgs: whereArguments);
+        } catch (e) {
+          print(e);
+        }
+      } else {}
     }
 
     Color offeredColor;
@@ -221,26 +252,44 @@ class _DetailsState extends ConsumerState<Details> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 strokeWidget(routeArgs.unitName, 32),
-                                InkWell(
-                                  onTap: () {
-                                    _openDatabase();
-                                    additem(routeArgs);
+                                FutureBuilder(
+                                  future: checkFavorite(routeArgs.docId!),
+                                  builder: (contextt, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else {
+                                      return InkWell(
+                                        onTap: () {
+                                          _openDatabase();
+                                          if (snapshot.data!) {
+                                            removeitem(routeArgs);
+                                          } else {
+                                            additem(routeArgs);
+                                          }
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: Icon(
+                                              snapshot.data!
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_border,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              size: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
                                 ),
                               ],
                             ),
@@ -626,17 +675,6 @@ class _DetailsState extends ConsumerState<Details> {
             const SizedBox(
               width: 20,
             ),
-            ElevatedButton(
-              child: Text('Delete Database'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).errorColor,
-              ),
-              onPressed: () async {
-                var databasesPath = await getDatabasesPath();
-                String Path = "${databasesPath}favs.db";
-                return databaseFactory.deleteDatabase(Path);
-              },
-            ),
           ],
         );
       } else {
@@ -680,15 +718,15 @@ class _DetailsState extends ConsumerState<Details> {
     );
   }
 
-  void _openDatabase() async {
+  Future _openDatabase() async {
     var databasesPath = await getDatabasesPath();
-    String Path = "${databasesPath}favs.db";
+    String path = "${databasesPath}favs.db";
     _database = await openDatabase(
-      Path,
+      path,
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT,CONSTRAINT propid_uniqe UNIQUE (propid))');
+            'CREATE TABLE favs (id INTEGER PRIMARY KEY AUTOINCREMENT, propid TEXT , email TEXT,CONSTRAINT propid_uniqe UNIQUE (propid,email))');
       },
     );
   }
