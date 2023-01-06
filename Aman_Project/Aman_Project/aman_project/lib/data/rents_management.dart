@@ -47,21 +47,21 @@ class RentsManagement {
   static String figureRentType(
       DateTime startOFRent, DateTime endOFRent, DateTime tor, DateTime torEnd) {
     var currentDate = DateTime.now();
-    if (currentDate.isBefore(startOFRent) || currentDate.isBefore(tor)) {
-      return "DidntStart";
-    } else if (currentDate.isAfter(endOFRent)) {
-      return "Finished";
-    } else if (currentDate.isAfter(tor) ||
-        currentDate.isBefore(torEnd) ||
-        currentDate.isAtSameMomentAs(tor) ||
-        currentDate.isAtSameMomentAs(torEnd)) {
-      return "Payed";
-    } else if (currentDate.isAfter(torEnd) ||
-        currentDate.isBefore(endOFRent) ||
+    var returnedType = "error";
+    if (currentDate.isBefore(startOFRent) ||
+        (currentDate.isBefore(tor) && currentDate.isAfter(startOFRent))) {
+      returnedType = "DidntStart";
+    } else if (currentDate.isAfter(endOFRent) ||
         currentDate.isAtSameMomentAs(endOFRent)) {
-      return "DidntPay";
+      returnedType = "Finished";
+    } else if ((currentDate.isAfter(tor) && currentDate.isBefore(torEnd)) ||
+        (currentDate.isAtSameMomentAs(tor) ||
+            currentDate.isAtSameMomentAs(torEnd))) {
+      returnedType = "Payed";
+    } else if (currentDate.isAfter(torEnd) && currentDate.isBefore(endOFRent)) {
+      returnedType = "DidntPay";
     }
-    return "Error";
+    return returnedType;
   }
 
   static Future<List<ChartData>> getData3() async {
@@ -84,5 +84,27 @@ class RentsManagement {
     datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
 
     return datanum2;
+  }
+
+// it should be done using Cloud Functions
+  static updateRentsType() async {
+    try {
+      FirebaseFirestore.instance.collection('rents').get().then((value) {
+        for (var element in value.docs) {
+          var rent = Rents.fromJson(element.data());
+          var rentType = figureRentType(
+              rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd);
+          if (rentType != rent.rentType) {
+            FirebaseFirestore.instance
+                .collection('rents')
+                .doc(element.id)
+                .update({"rentType": rentType});
+          }
+          // FirebaseFirestore.instance.collection('rents').doc(element.id).update;
+        }
+      });
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 }

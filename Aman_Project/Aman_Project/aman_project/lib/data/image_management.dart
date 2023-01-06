@@ -132,11 +132,11 @@ class ImageManagement {
       await ref.putFile(file, metaData).then((p0) async {
         switch (p0.state) {
           case TaskState.running:
-            print("File is uploading");
+            // print("File is uploading");
             break;
           case TaskState.success:
             await ref.getDownloadURL().then((value) {
-              print("value $value");
+              // print("value $value");
               result = value;
             });
             break;

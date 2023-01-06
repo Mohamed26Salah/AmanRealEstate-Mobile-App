@@ -61,8 +61,9 @@ extension extString on String {
     return phoneRegExp.hasMatch(this);
   }
 
+//putting* allow Null !!
   bool get isValidNumber {
-    final phoneRegExp = RegExp(r"^[0-9]*$");
+    final phoneRegExp = RegExp(r"^[0-9]$");
     return phoneRegExp.hasMatch(this);
   }
 }

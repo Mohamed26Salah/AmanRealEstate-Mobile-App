@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,10 +17,13 @@ class _RentsPageState extends ConsumerState<RentsPage> {
       RoundedLoadingButtonController();
 
   void _getRentsData(RoundedLoadingButtonController controller) async {
-    Timer(const Duration(seconds: 5), () {
-      controller.success();
-      ref.read(rentsButtonProivder.notifier).state = true;
-    });
+    await RentsManagement.updateRentsType();
+    controller.success();
+    ref.read(rentsButtonProivder.notifier).state = true;
+    // Timer(const Duration(seconds: 5), () {
+    //   controller.success();
+    //   ref.read(rentsButtonProivder.notifier).state = true;
+    // });
   }
 
   @override

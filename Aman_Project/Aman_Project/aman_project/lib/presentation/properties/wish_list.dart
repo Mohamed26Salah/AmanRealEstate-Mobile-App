@@ -123,7 +123,8 @@ class _wish_listState extends ConsumerState<wish_list> {
       ids.add(element["propid"]);
     }
     resultWhishlist = await PropertyManagement.getWishlistData(ids);
-
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
