@@ -12,7 +12,7 @@ class PropertyManagement {
   static Stream<QuerySnapshot> searchedProperties(String coming) {
     return FirebaseFirestore.instance
         .collection('properties')
-        .where("unitName", isGreaterThanOrEqualTo: coming)
+        .where("unitName", isGreaterThanOrEqualTo: coming.toLowerCase())
         .snapshots();
   }
 

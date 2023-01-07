@@ -486,7 +486,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   });
                                 } else {
                                   errormessage(
-                                      "Error!", "Please Choose a type!");
+                                      "Error!", "Some Fields are Wrong!");
                                   ScaffoldMessenger.of(context)
                                     ..hideCurrentSnackBar()
                                     ..showSnackBar(val.snackBar);
