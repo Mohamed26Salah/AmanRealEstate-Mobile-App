@@ -32,3 +32,20 @@ final didntPaySP = StreamProvider((ref) {
       .where("rentType", isEqualTo: "DidntPay")
       .snapshots();
 });
+
+final searchedRents = StreamProvider((ref) {
+  return FirebaseFirestore.instance
+      .collection('rents')
+      .where("rentType", isEqualTo: ref.watch(rentTypeUserChoice))
+      .where("lessorName",
+          isGreaterThanOrEqualTo:
+              ref.watch(searchInputProivderRent).toLowerCase())
+      .snapshots();
+});
+
+final searchInputProivderRent = StateProvider<String>((ref) {
+  return "";
+});
+final rentTypeUserChoice = StateProvider<String>((ref) {
+  return "";
+});

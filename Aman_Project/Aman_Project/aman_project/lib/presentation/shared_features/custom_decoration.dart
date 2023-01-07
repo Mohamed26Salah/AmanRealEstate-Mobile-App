@@ -53,6 +53,7 @@ extension extString on String {
 
   bool get isValidAddress {
     final phoneRegExp = RegExp(r"[A-Za-z0-9'\.\-\s\,]");
+
     return phoneRegExp.hasMatch(this);
   }
 

@@ -114,7 +114,7 @@ class _RentsPageState extends ConsumerState<RentsPage> {
   }
 }
 
-class SalahCard extends StatefulWidget {
+class SalahCard extends ConsumerStatefulWidget {
   final String image;
   final String text;
   final String rentType;
@@ -126,10 +126,10 @@ class SalahCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SalahCard> createState() => _SalahCardState();
+  ConsumerState<SalahCard> createState() => _SalahCardState();
 }
 
-class _SalahCardState extends State<SalahCard> {
+class _SalahCardState extends ConsumerState<SalahCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -139,6 +139,8 @@ class _SalahCardState extends State<SalahCard> {
             // if (true) {
             //   setState(() {});
             // }
+            ref.read(rentTypeUserChoice.notifier).state = widget.rentType;
+            print(ref.read(rentTypeUserChoice.notifier).state);
             Navigator.of(context)
                 .pushNamed('/MainPageRent', arguments: widget.rentType);
           },

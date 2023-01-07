@@ -20,13 +20,6 @@ class RentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (property.offered == "For Sale") {
-    //   property.offered = "For Sale";
-    // } else {
-    //   property.offered = "For Rent";
-    //   color = Colors.red;
-    // }
-    // print(mainImage);
     return Hero(
       tag: " property.singleImage",
       child: GestureDetector(
@@ -44,7 +37,7 @@ class RentWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 // image: NetworkImage(mainImage),
-                image: AssetImage("assets/images/house.png"),
+                image: AssetImage("assets/images/1.jpg"),
                 fit: BoxFit.cover,
               ),
             ),

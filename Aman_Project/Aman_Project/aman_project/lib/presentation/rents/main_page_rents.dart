@@ -1,8 +1,8 @@
+import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:aman_project/presentation/rents/show_rents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/user_providers.dart';
-import '../../data/repositories/properties_provider.dart';
 
 class MainPageRent extends ConsumerStatefulWidget {
   const MainPageRent({super.key});
@@ -48,7 +48,7 @@ class _SearchState extends ConsumerState<MainPageRent> {
                 //   ref.read(searchInputProivder.notifier).state = value;
                 // },
                 onSubmitted: (value) {
-                  ref.read(searchInputProivder.notifier).state = value;
+                  ref.read(searchInputProivderRent.notifier).state = value;
                 },
                 style: const TextStyle(
                   fontSize: 28,
@@ -89,15 +89,6 @@ class _SearchState extends ConsumerState<MainPageRent> {
                           color: Colors.grey[400],
                           size: 28,
                         ),
-                        IconButton(
-                            onPressed: () {
-                              _showBottomSheet();
-                            },
-                            icon: Icon(
-                              Icons.menu,
-                              color: Theme.of(context).primaryColor,
-                              size: 28,
-                            )),
                       ],
                     ),
                   ),
@@ -116,20 +107,6 @@ class _SearchState extends ConsumerState<MainPageRent> {
             ),
           ],
         ),
-        // bottomNavigationBar: NavBar(),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        // floatingActionButton: Visibility(
-        //   visible: isVisible,
-        //   child: FloatingActionButton(
-        //     backgroundColor: Theme.of(context).primaryColor,
-        //     child: Icon(Icons.add),
-        //     onPressed: () {
-        //       // Navigator.of(context).pushNamed('/addForm').then((value) {
-        //       //   ImageManagement().clearImageProivders(ref);
-        //       // });
-        //     },
-        //   ),
-        // ),
       ),
     );
   }
@@ -156,24 +133,5 @@ class _SearchState extends ConsumerState<MainPageRent> {
         ),
       ),
     );
-  }
-
-  void _showBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        builder: (BuildContext context) {
-          return Wrap(
-            children: const [
-              // Filter(),
-            ],
-          );
-        });
   }
 }
