@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/globals.dart' as val;
 import '../models/chart_data.dart';
 import '../presentation/shared_features/custom_message.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UserHelper {
   static saveUser(User user) async {
@@ -112,11 +113,10 @@ class UserHelper {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.black26,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 205, 153, 51)),
+              return Center(
+                  child: LoadingAnimationWidget.dotsTriangle(
+                color: const Color.fromARGB(255, 205, 153, 51),
+                size: 80,
               ));
             });
 
@@ -172,11 +172,10 @@ class UserHelper {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.black26,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 205, 153, 51)),
+              return Center(
+                  child: LoadingAnimationWidget.dotsTriangle(
+                color: const Color.fromARGB(255, 205, 153, 51),
+                size: 80,
               ));
             });
         final credential =

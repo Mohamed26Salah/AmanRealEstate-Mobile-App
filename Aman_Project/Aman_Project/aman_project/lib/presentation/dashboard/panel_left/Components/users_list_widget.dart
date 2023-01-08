@@ -6,6 +6,7 @@ import '../edit_button.dart';
 import 'dart:math';
 import 'dart:async';
 import 'alert_dialogue.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UsersListWidget extends StatefulWidget {
   String? query;
@@ -92,8 +93,12 @@ class _UsersListWidgetState extends State<UsersListWidget> {
           return Padding(
             padding: const EdgeInsets.all(50.0),
             child: Column(
-              children: const [
-                CircularProgressIndicator(),
+              children: [
+                Center(
+                    child: LoadingAnimationWidget.dotsTriangle(
+                  color: const Color.fromARGB(255, 205, 153, 51),
+                  size: 80,
+                )),
                 SizedBox(height: 10),
                 Text("Loading Users"),
               ],

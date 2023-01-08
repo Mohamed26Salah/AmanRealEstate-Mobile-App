@@ -43,7 +43,7 @@ dependencies:
   rounded_loading_button: ^2.0.8
   flutter_image_compress: ^1.0.0-nullsafety
   flutter_rounded_date_picker: ^3.0.2
- 
+  loading_animation_widget: ^1.2.0+4
   flutter:
     sdk: flutter
   firebase_core: ^2.2.0  

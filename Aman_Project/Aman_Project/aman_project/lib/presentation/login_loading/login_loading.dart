@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/user_management.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginLoading extends ConsumerStatefulWidget {
   const LoginLoading({super.key});
@@ -55,7 +56,11 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
           future: getPref(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                  child: LoadingAnimationWidget.dotsTriangle(
+                color: const Color.fromARGB(255, 205, 153, 51),
+                size: 80,
+              ));
             } else {
               return Center(
                   child: Column(
@@ -71,7 +76,11 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
                       ),
                     ),
                   ),
-                  const CircularProgressIndicator(),
+                  Center(
+                      child: LoadingAnimationWidget.dotsTriangle(
+                    color: const Color.fromARGB(255, 205, 153, 51),
+                    size: 80,
+                  )),
                 ],
               ));
             }
