@@ -14,16 +14,16 @@ class RentWidget extends StatelessWidget {
     required this.rent,
   });
 
-  // selectedProperty(BuildContext context) {
-  //   Navigator.of(context).pushNamed('/details', arguments: property);
-  // }
+  selectedRent(BuildContext context) {
+    Navigator.of(context).pushNamed('/rentDetails', arguments: rent);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: " property.singleImage",
+      tag: "property.singleImage",
       child: GestureDetector(
-        // onTap: () => selectedProperty(context),
+        onTap: () => selectedRent(context),
         child: Card(
           margin: const EdgeInsets.only(bottom: 24),
           clipBehavior: Clip.antiAlias,
@@ -147,7 +147,7 @@ class RentWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 5),
                               child: Text(
                                 overflow: TextOverflow.ellipsis,
-                                rent.description,
+                                rent.tenantNum,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
