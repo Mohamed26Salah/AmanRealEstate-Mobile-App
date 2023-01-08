@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,9 +42,15 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     final user = FirebaseAuth.instance.currentUser!;
     UserHelper.saveUser(user);
     //Salah Way
-    Future userData = UserHelper().getUserData();
-    ref.read(userDataProviderRepository.notifier).state = userData;
-    Navigator.of(context).pushNamed('/home');
+    // Future userData = UserHelper().getUserData();
+    // ref.read(userDataProviderRepository.notifier).state = userData;
+    // Navigator.of(context).pushNamed('/home');
+
+    UserHelper().getNewUserData().then((value) {
+      UserModel user = UserModel.fromSnapshot(value);
+      ref.read(newUserDataProivder.notifier).state = user;
+      Navigator.of(context).pushReplacementNamed('/home');
+    });
   }
 
   @override

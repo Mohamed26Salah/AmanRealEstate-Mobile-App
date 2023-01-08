@@ -8,7 +8,8 @@ import 'dart:async';
 import 'alert_dialogue.dart';
 
 class UsersListWidget extends StatefulWidget {
-  const UsersListWidget({super.key});
+  String? query;
+  UsersListWidget({super.key, this.query});
 
   @override
   State<UsersListWidget> createState() => _UsersListWidgetState();
@@ -19,19 +20,21 @@ class _UsersListWidgetState extends State<UsersListWidget> {
   @override
   void initState() {
     super.initState();
-    usertData = UserHelper.getData2User();
+
+    usertData = UserHelper.getData2User(query: widget.query);
   }
 
   void _update(dynamic int) {
     Timer(const Duration(seconds: 2), () {
       setState(() {
-        usertData = UserHelper.getData2User();
+        usertData = UserHelper.getData2User(query: widget.query);
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    usertData = UserHelper.getData2User(query: widget.query);
     var rng = Random();
     var borderRadius = const BorderRadius.all(Radius.circular(10));
 
@@ -48,7 +51,62 @@ class _UsersListWidgetState extends State<UsersListWidget> {
         } else if (snapshot.hasData) {
           return Column(
             children: [
-              const SizedBox(height: 10),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        shape:
+                            RoundedRectangleBorder(borderRadius: borderRadius),
+                        // tileColor: Theme.of(context).splashColor,
+                        leading: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            child: Text(
+                              snapshot.data![index].email.substring(0, 1),
+                              style: const TextStyle(color: Colors.black),
+                            )),
+                        title: Text(snapshot.data![index].email),
+                        subtitle: Text(snapshot.data![index].role),
+                        trailing: MyEditButton(
+                            onPressed: () {
+                              openDialog(
+                                  name: snapshot.data![index].email,
+                                  update: _update);
+                            },
+                            height: 35,
+                            borderRadius: BorderRadius.circular(20),
+                            child: const Icon(
+                              Icons.edit_outlined,
+                            )),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Column(
+              children: const [
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text("Loading Users"),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+/*   
+const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () => showSearch(
                         context: context,
@@ -97,41 +155,4 @@ class _UsersListWidgetState extends State<UsersListWidget> {
                         ),
                       ),
                   child: const Icon(Icons.search)),
-              Column(
-                children: List.generate(
-                  snapshot.data!.length,
-                  (index) => ListTile(
-                    shape: RoundedRectangleBorder(borderRadius: borderRadius),
-                    // tileColor: Theme.of(context).splashColor,
-                    leading: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Color.fromARGB(255, rng.nextInt(255),
-                            rng.nextInt(255), rng.nextInt(255)),
-                        child: Text(
-                          snapshot.data![index].email.substring(0, 1),
-                        )),
-                    title: Text(snapshot.data![index].email),
-                    subtitle: Text(snapshot.data![index].role),
-                    trailing: MyEditButton(
-                        onPressed: () {
-                          openDialog(
-                              name: snapshot.data![index].email,
-                              update: _update);
-                        },
-                        height: 35,
-                        borderRadius: BorderRadius.circular(20),
-                        child: const Icon(
-                          Icons.edit_outlined,
-                        )),
-                  ),
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Text("Loading");
-        }
-      },
-    );
-  }
-}
+      */             

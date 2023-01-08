@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,10 +17,13 @@ class _RentsPageState extends ConsumerState<RentsPage> {
       RoundedLoadingButtonController();
 
   void _getRentsData(RoundedLoadingButtonController controller) async {
-    Timer(const Duration(seconds: 5), () {
-      controller.success();
-      ref.read(rentsButtonProivder.notifier).state = true;
-    });
+    await RentsManagement.updateRentsType();
+    controller.success();
+    ref.read(rentsButtonProivder.notifier).state = true;
+    // Timer(const Duration(seconds: 5), () {
+    //   controller.success();
+    //   ref.read(rentsButtonProivder.notifier).state = true;
+    // });
   }
 
   @override
@@ -44,24 +46,28 @@ class _RentsPageState extends ConsumerState<RentsPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         SalahCard(
                             image: "assets/images/validating-ticket.png",
-                            text: "Paid"),
+                            text: "Paid",
+                            rentType: "Payed"),
                         SalahCard(
                             image: "assets/images/paper-money.png",
-                            text: "No Paid"),
+                            text: "No Paid",
+                            rentType: "DidntPay"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         SalahCard(
                             image: "assets/images/contract.png",
-                            text: "New Contract"),
+                            text: "New Contract",
+                            rentType: "DidntStart"),
                         SalahCard(
                             image: "assets/images/no.png",
-                            text: "Expired contract"),
+                            text: "Expired contract",
+                            rentType: "Finished"),
                       ],
                     ),
                   ],
@@ -108,29 +114,35 @@ class _RentsPageState extends ConsumerState<RentsPage> {
   }
 }
 
-class SalahCard extends StatefulWidget {
-  String image;
-  String text;
-  SalahCard({
+class SalahCard extends ConsumerStatefulWidget {
+  final String image;
+  final String text;
+  final String rentType;
+  const SalahCard({
     required this.image,
     required this.text,
+    required this.rentType,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SalahCard> createState() => _SalahCardState();
+  ConsumerState<SalahCard> createState() => _SalahCardState();
 }
 
-class _SalahCardState extends State<SalahCard> {
+class _SalahCardState extends ConsumerState<SalahCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4.0,
       child: InkWell(
           onTap: () {
-            if (true) {
-              setState(() {});
-            }
+            // if (true) {
+            //   setState(() {});
+            // }
+            ref.read(rentTypeUserChoice.notifier).state = widget.rentType;
+            print(ref.read(rentTypeUserChoice.notifier).state);
+            Navigator.of(context)
+                .pushNamed('/MainPageRent', arguments: widget.rentType);
           },
           highlightColor: Theme.of(context).highlightColor,
           splashColor: Theme.of(context).primaryColor,

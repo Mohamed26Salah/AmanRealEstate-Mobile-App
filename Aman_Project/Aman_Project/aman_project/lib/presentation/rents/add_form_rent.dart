@@ -2,6 +2,7 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../../constants/globals.dart' as val;
 import '../shared_features/custom_message.dart';
 
@@ -69,9 +70,9 @@ class _AddFormRentState extends State<AddFormRent> {
                     },
                   ),
                   const Text(
-                    "Still Under Construction",
+                    "Add Rent",
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -104,7 +105,7 @@ class _AddFormRentState extends State<AddFormRent> {
                   labelText: "price",
                   hintText: "price",
                   controller: _rentPriceController,
-                  type: "price",
+                  type: "number",
                   show: true),
               Property.buildTextField(
                   labelText: "Area",
@@ -191,39 +192,49 @@ class _AddFormRentState extends State<AddFormRent> {
                   child: ElevatedButton(
                     onPressed: () async {
                       // Validate returns true if the form is valid, or false otherwise.
-                      if (_formKey.currentState!.validate()) {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return const Center(
-                                  child: CircularProgressIndicator(
-                                backgroundColor: Colors.black26,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Color.fromARGB(255, 205, 153, 51)),
-                              ));
-                            });
-                        rentType = RentsManagement.figureRentType(
-                            startOFRent, endOFRent, tor, torEnd);
-                        await RentsManagement.createRent(
-                            rentPrice: int.parse(_rentPriceController.text),
-                            type: type!,
-                            area: int.parse(_areaController.text),
-                            floor: _floorController.text,
-                            lessorName: _lessorNameController.text,
-                            tenantName: _tenantNameController.text,
-                            lessorNum: _lessorNumController.text,
-                            tenantNum: _tenantNumController.text,
-                            description: _descriptionController.text,
-                            furnished: furnished!,
-                            finishing: finishing!,
-                            tor: tor,
-                            torEnd: torEnd,
-                            startOFRent: startOFRent,
-                            endOFRent: endOFRent,
-                            rentType: rentType);
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
+                      if (tor != DateTime(2000, 01, 01) ||
+                          torEnd != DateTime(2000, 01, 01) ||
+                          startOFRent != DateTime(2000, 01, 01) ||
+                          endOFRent != DateTime(2000, 01, 01)) {
+                        if (_formKey.currentState!.validate()) {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return const Center(
+                                    child: CircularProgressIndicator(
+                                  backgroundColor: Colors.black26,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Color.fromARGB(255, 205, 153, 51)),
+                                ));
+                              });
+                          rentType = RentsManagement.figureRentType(
+                              startOFRent, endOFRent, tor, torEnd);
+                          await RentsManagement.createRent(
+                              rentPrice: int.parse(_rentPriceController.text),
+                              type: type!,
+                              area: int.parse(_areaController.text),
+                              floor: _floorController.text,
+                              lessorName: _lessorNameController.text,
+                              tenantName: _tenantNameController.text,
+                              lessorNum: _lessorNumController.text,
+                              tenantNum: _tenantNumController.text,
+                              description: _descriptionController.text,
+                              furnished: furnished!,
+                              finishing: finishing!,
+                              tor: tor,
+                              torEnd: torEnd,
+                              startOFRent: startOFRent,
+                              endOFRent: endOFRent,
+                              rentType: rentType);
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        }
+                      } else {
+                        errormessage("Error!", "Please Put all Dates Right!");
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(val.snackBar);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -256,9 +267,9 @@ class _AddFormRentState extends State<AddFormRent> {
   }
 
   Widget buildDatePicker(DateTime date, String name, bool visible) {
-    var initialDate;
-    var dateConstrainLeast;
-    var dateConstrainMost;
+    DateTime? initialDate;
+    DateTime? dateConstrainLeast;
+    DateTime? dateConstrainMost;
     return Visibility(
       visible: visible,
       child: Column(
@@ -315,6 +326,7 @@ class _AddFormRentState extends State<AddFormRent> {
                         borderRadius: 16,
                         theme: ThemeData.dark(),
                       );
+
                       if (newDateTime == null) return;
                       setState(() {
                         date = newDateTime;

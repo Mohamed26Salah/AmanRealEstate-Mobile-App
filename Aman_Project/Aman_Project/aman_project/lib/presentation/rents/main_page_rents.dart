@@ -1,19 +1,16 @@
-import 'package:aman_project/data/image_management.dart';
-import 'package:aman_project/presentation/properties/show_card.dart';
+import 'package:aman_project/data/repositories/rents_provider.dart';
+import 'package:aman_project/presentation/rents/show_rents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/user_providers.dart';
-import 'filter.dart';
-import '../../data/repositories/properties_provider.dart';
 
-class Search extends ConsumerStatefulWidget {
-  const Search({super.key});
-
+class MainPageRent extends ConsumerStatefulWidget {
+  const MainPageRent({super.key});
   @override
-  ConsumerState<Search> createState() => _SearchState();
+  ConsumerState<MainPageRent> createState() => _SearchState();
 }
 
-class _SearchState extends ConsumerState<Search> {
+class _SearchState extends ConsumerState<MainPageRent> {
   final _inputSearchController = TextEditingController();
   @override
   void dispose() {
@@ -23,6 +20,7 @@ class _SearchState extends ConsumerState<Search> {
 
   @override
   Widget build(BuildContext context) {
+    String rentType = ModalRoute.of(context)!.settings.arguments.toString();
     final userData = ref.watch(newUserDataProivder);
     bool isVisible = false;
     if (userData?.role == 'admin') {
@@ -50,7 +48,7 @@ class _SearchState extends ConsumerState<Search> {
                 //   ref.read(searchInputProivder.notifier).state = value;
                 // },
                 onSubmitted: (value) {
-                  ref.read(searchInputProivder.notifier).state = value;
+                  ref.read(searchInputProivderRent.notifier).state = value;
                 },
                 style: const TextStyle(
                   fontSize: 28,
@@ -91,67 +89,44 @@ class _SearchState extends ConsumerState<Search> {
                           color: Colors.grey[400],
                           size: 28,
                         ),
+                      ],
+                    ),
+                  ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween, // added line
+                      mainAxisSize: MainAxisSize.min, // a
+                      children: [
                         IconButton(
-                            onPressed: () {
-                              _showBottomSheet();
-                            },
-                            icon: Icon(
-                              Icons.menu,
-                              color: Theme.of(context).primaryColor,
-                              size: 28,
-                            )),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon:  Icon(
+                            Icons.arrow_back_ios_new_outlined,
+                            color: Colors.grey[400],
+                            size: 28,
+                          ),
+                          
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  right: 24, left: 24, top: 10, bottom: 12),
+            const Padding(
+              padding:
+                  EdgeInsets.only(right: 24, left: 24, top: 10, bottom: 12),
               //war top 24
-              child: Row(
-                children: [
-                  // Text(
-                  //   ref.watch(resultsCount).toString(),
-                  //   style: const TextStyle(
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   width: 8,
-                  // ),
-                  // const Text(
-                  //   "Resutls Found",
-                  //   style: TextStyle(
-                  //     fontSize: 24,
-                  //   ),
-                  // ),
-                ],
-              ),
             ),
-            const Expanded(
+            Expanded(
               child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
-                  child: ShowCard()),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: ShowRent(rentType: rentType)),
             ),
           ],
-        ),
-        // bottomNavigationBar: NavBar(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Visibility(
-          visible: isVisible,
-          child: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            child: Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/addForm').then((value) {
-                ImageManagement().clearImageProivders(ref);
-              });
-              // context.push('/addFormUnits');
-            },
-          ),
         ),
       ),
     );
@@ -179,24 +154,5 @@ class _SearchState extends ConsumerState<Search> {
         ),
       ),
     );
-  }
-
-  void _showBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        builder: (BuildContext context) {
-          return Wrap(
-            children: const [
-              Filter(),
-            ],
-          );
-        });
   }
 }

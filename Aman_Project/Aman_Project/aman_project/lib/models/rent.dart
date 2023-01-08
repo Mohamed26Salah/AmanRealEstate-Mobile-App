@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Rents {
   // int docId;
   int rentPrice;
@@ -35,6 +37,23 @@ class Rents {
       required this.startOFRent,
       required this.endOFRent,
       required this.rentType});
+  factory Rents.fromJson(Map<String, dynamic> json) => Rents(
+      rentPrice: json["rentPrice"],
+      type: json["type"],
+      area: json["area"],
+      floor: json["floor"],
+      lessorName: json["lessorName"],
+      tenantName: json["tenantName"],
+      lessorNum: json["lessorNum"],
+      tenantNum: json["tenantNum"],
+      description: json["description"],
+      furnished: json["furnished"],
+      finishing: json["finishing"],
+      tor: (json["tor"] as Timestamp).toDate(),
+      torEnd: (json["torEnd"] as Timestamp).toDate(),
+      startOFRent: (json["startOFRent"] as Timestamp).toDate(),
+      endOFRent: (json["endOFRent"] as Timestamp).toDate(),
+      rentType: json["rentType"]);
   Map<String, dynamic> toJson() => {
         "rentPrice": rentPrice,
         "type": type,

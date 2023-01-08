@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../presentation/shared_features/custom_decoration.dart';
 
 class Property {
@@ -60,6 +61,35 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
+  factory Property.fromJson(Map<String, dynamic> json , String id) => Property(
+        docId: id,
+        addressAdmin: json["addressForAdmin"],
+        addressUser: json["addressForUser"],
+        area: json["area"],
+        descriptionAdmin: json["descriptionForAdmin"],
+        descriptionUser: json["descriptionForUser"],
+        unitName: json["unitName"],
+        offered: json["offered"],
+        ownerName: json["ownerName"],
+        ownerNumber: json["ownerNumber"],
+        paymentMethod: json["paymentMethod"],
+        priority: json["priority"],
+        type: json["type"],
+        visible: json["visible"],
+        price: json["price"],
+        multiImages: json["multiImages"],
+        singleImage: json["singleImage"],
+        doublex: json["doublex"],
+        finishing: json["finishing"],
+        floor: json["floor"],
+        furnished: json["furnished"],
+        noBathrooms: json["noBathrooms"],
+        noFlats: json["noFlats"],
+        noFloors: json["noFloors"],
+        noRooms: json["noRooms"],
+        theNumberOFAB: json["noAB"],
+        typeOFActivity: json["typeOFActivity"],
+      );
   Map<String, dynamic> toJson() => {
         "addressForAdmin": addressAdmin,
         "addressForUser": addressUser,
@@ -234,6 +264,14 @@ class Property {
               ],
             ),
           );
+  }
+
+  static void  makePhoneCall(String phoneNumber) async {
+    if (await canLaunchUrlString(phoneNumber)) {
+      await launchUrlString(phoneNumber);
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
   }
 }
  // CustomDropdownButton2(

@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:aman_project/models/chart_data.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'chart_widget.dart';
@@ -82,14 +83,19 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
                     size: 80),
                 Column(
                   children: [
-                    Text(
-                      count.toString(),
-                      textScaleFactor: 2.2,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          color: widget.expand
-                              ? Theme.of(context).focusColor
-                              : null),
+                    SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: AutoSizeText(
+                        minFontSize: 1,
+                        count.toString(),
+                        textScaleFactor: 2,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            color: widget.expand
+                                ? Theme.of(context).focusColor
+                                : null),
+                      ),
                     ),
                     Text(
                       textAlign: TextAlign.right,

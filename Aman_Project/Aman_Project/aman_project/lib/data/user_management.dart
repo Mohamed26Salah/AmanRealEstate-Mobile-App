@@ -38,23 +38,28 @@ class UserHelper {
     return userDoc;
   }
 
-  //Yasser Way
-  // Future<DocumentSnapshot> getNewUserData() async {
-  //   final user = FirebaseAuth.instance.currentUser!;
-  //   String id = user.uid;
-  //   return FirebaseFirestore.instance.collection('users').doc(id).get();
-  // }
+  // Yasser Way
+  Future<DocumentSnapshot> getNewUserData() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    String id = user.uid;
+    return FirebaseFirestore.instance.collection('users').doc(id).get();
+  }
 
-  static Future<List<UserModel>> getData2User() async {
+  static Future<List<UserModel>> getData2User({String? query}) async {
     List<UserModel> datanum2 = [];
-
     await FirebaseFirestore.instance
         .collection('users')
-        .limit(100)
+        .where("role", isNotEqualTo: "admin")
         .get()
         .then((QuerySnapshot querySnapshot) {
       for (var doc in querySnapshot.docs) {
-        datanum2.add(UserModel(doc["email"], doc["role"]));
+        if (query == null) {
+          datanum2.add(UserModel(doc["email"], doc["role"]));
+        } else {
+          if (doc["email"].contains(query) || doc["role"].contains(query)) {
+            datanum2.add(UserModel(doc["email"], doc["role"]));
+          }
+        }
       }
     });
     // await FirebaseFirestore.instance
@@ -76,6 +81,7 @@ class UserHelper {
 
     await FirebaseFirestore.instance
         .collection('users')
+        .where("role", isNotEqualTo: "admin")
         .get()
         .then((QuerySnapshot querySnapshot) {
       for (var doc in querySnapshot.docs) {
@@ -122,10 +128,14 @@ class UserHelper {
           final user = FirebaseAuth.instance.currentUser!;
           UserHelper.saveUser(user);
           //Salah Way
-          Future userData = UserHelper().getUserData();
-          ref.read(userDataProviderRepository.notifier).state = userData;
-
-          Navigator.of(context).pushReplacementNamed('/home');
+          // Future userData = UserHelper().getUserData();
+          // ref.read(userDataProviderRepository.notifier).state = userData;
+          //Yasser Way
+          UserHelper().getNewUserData().then((value) {
+            UserModel user = UserModel.fromSnapshot(value);
+            ref.read(newUserDataProivder.notifier).state = user;
+            Navigator.of(context).pushReplacementNamed('/home');
+          });
         } else {
           Navigator.of(context).pushNamed('/verify');
         }
@@ -234,6 +244,23 @@ class UserHelper {
   savePref(bool theme) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("theme", theme);
+  }
+
+  static void changeRole(String email, String dropdownvalue) async {
+    String path = '';
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where("email", isEqualTo: email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        path = (doc.reference.path);
+      }
+    });
+
+    final washingtonRef = FirebaseFirestore.instance.doc(path);
+    washingtonRef.update({"role": dropdownvalue});
   }
 
   // getPref() async {

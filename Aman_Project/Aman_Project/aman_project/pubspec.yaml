@@ -68,6 +68,11 @@ dependencies:
   dropdown_button2: ^1.8.9
   shared_preferences: ^2.0.15
   syncfusion_flutter_charts: ^20.3.59
+  auto_size_text: ^3.0.0
+  sqflite: ^2.2.2
+  path: ^1.8.2
+  flutter_phone_direct_caller: ^2.1.1
+  url_launcher: ^6.1.7
   
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
