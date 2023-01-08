@@ -121,8 +121,9 @@ class _ShowCardState extends ConsumerState<ShowCard> {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
+            
             var property = Property.fromJson(
-                data.docs[index].data() as Map<String, dynamic>);
+                data.docs[index].data() as Map<String, dynamic> , data.docs[index].id);
             // Property property = Property(
             //   docId: data.docs[index].id,
             //   addressAdmin: data.docs[index]['addressForAdmin'],

@@ -61,8 +61,8 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
-  factory Property.fromJson(Map<String, dynamic> json) => Property(
-        docId: "",
+  factory Property.fromJson(Map<String, dynamic> json , String id) => Property(
+        docId: id,
         addressAdmin: json["addressForAdmin"],
         addressUser: json["addressForUser"],
         area: json["area"],

@@ -396,7 +396,8 @@ class _DetailsState extends ConsumerState<Details> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: () {
-                                      Property.makePhoneCall('tel: +2 ${routeArgs.ownerNumber}');
+                                      Property.makePhoneCall(
+                                          'tel: +2 ${routeArgs.ownerNumber}');
                                     },
                                     child: Icon(
                                       Icons.phone,
@@ -445,6 +446,8 @@ class _DetailsState extends ConsumerState<Details> {
                                 Icons.stairs, routeArgs.doublex, "Doublex"),
                             buildFeature(Icons.priority_high,
                                 routeArgs.priority, "Priority"),
+                            buildFeature(Icons.attach_money,
+                                routeArgs.paymentMethod, "Payment"),
                           ],
                         ),
                       ),
@@ -473,7 +476,8 @@ class _DetailsState extends ConsumerState<Details> {
                     Visibility(
                       visible: isVisible,
                       child: const Padding(
-                        padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                        padding:
+                            EdgeInsets.only(right: 24, left: 24, bottom: 16),
                         child: Text(
                           "Description For Admin",
                           style: TextStyle(
@@ -500,7 +504,8 @@ class _DetailsState extends ConsumerState<Details> {
                     Visibility(
                       visible: isVisible,
                       child: const Padding(
-                        padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                        padding:
+                            EdgeInsets.only(right: 24, left: 24, bottom: 16),
                         child: Text(
                           "Address For Admin",
                           style: TextStyle(
