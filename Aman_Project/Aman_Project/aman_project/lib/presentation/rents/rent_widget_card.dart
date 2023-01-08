@@ -135,7 +135,7 @@ class RentWidget extends StatelessWidget {
                           // Row(
                           //   children: [
                           const Icon(
-                            Icons.location_on,
+                            Icons.phone,
                             color: Colors.white,
                             size: 14,
                           ),

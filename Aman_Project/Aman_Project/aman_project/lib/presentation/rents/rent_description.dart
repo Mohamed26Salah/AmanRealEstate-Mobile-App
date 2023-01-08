@@ -8,9 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
+
+import 'package:url_launcher/url_launcher.dart';
 
 class RentsDescription extends ConsumerStatefulWidget {
   const RentsDescription({super.key});
@@ -20,12 +23,26 @@ class RentsDescription extends ConsumerStatefulWidget {
 }
 
 class _RentsDescriptionState extends ConsumerState<RentsDescription> {
-  @override
+
+  
+
+// ...
+
+void _makePhoneCall(String phoneNumber) async {
+  
+  if (await canLaunchUrlString(phoneNumber)) {
+    await launchUrlString(phoneNumber);
+  } else {
+    throw 'Could not launch $phoneNumber';
+  }
+}
+
+  
   @override
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     final userData = ref.watch(newUserDataProivder);
-
+    final Uri phoneNumber = Uri.parse('tel: +2 ${routeArgs.tenantNum}');
     Size size = MediaQuery.of(context).size;
     var defaultShadow = Shadow(
       color: Colors.black,
@@ -188,7 +205,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 Row(
                                   children: [
                                     Icon(
-                                      Icons.location_on,
+                                      Icons.phone,
                                       color: Colors.white,
                                       shadows: [defaultShadow],
                                       size: 16,
@@ -280,10 +297,13 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
-                                  child: Icon(
-                                    Icons.phone,
+                                  child: IconButton(
+                                    icon : const Icon(Icons.phone,   size: 20,),
+                                    onPressed: () {
+                                      _makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
+                                    } ,
                                     color: Theme.of(context).primaryColor,
-                                    size: 20,
+                                  
                                   ),
                                 ),
                               ),
@@ -347,28 +367,28 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 24),
-                      child: Text(
-                        "Photos",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 26),
-                      child: Container(
-                        height: 200,
-                        child: ListView(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          // children: buildPhotos(routeArgs.),
-                        ),
-                      ),
-                    ),
+                    // const Padding(
+                    //   padding: EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                    //   child: Text(
+                    //     "Photos",
+                    //     style: TextStyle(
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 26),
+                    //   child: Container(
+                    //     height: 200,
+                    //     child: ListView(
+                    //       physics: const BouncingScrollPhysics(),
+                    //       scrollDirection: Axis.horizontal,
+                    //       shrinkWrap: true,
+                    //       // children: buildPhotos(routeArgs.),
+                    //     ),
+                    //   ),
+                    // ),
                     Visibility(
                       visible: isVisible,
                       child: Padding(
@@ -546,36 +566,5 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
     }
   }
 
-  List<Widget> buildPhotos(List<dynamic> images) {
-    List<Widget> list = [];
-
-    list.add(
-      const SizedBox(
-        width: 24,
-      ),
-    );
-
-    for (var i = 0; i < images.length; i++) {
-      list.add(buildPhoto(images[i], i));
-    }
-    return list;
-  }
-
-  Widget buildPhoto(String url, int index) {
-    return AspectRatio(
-      aspectRatio: 3 / 2,
-      child: Container(
-        margin: const EdgeInsets.only(right: 24),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(10),
-          ),
-          image: DecorationImage(
-            image: CachedNetworkImageProvider(url),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
-  }
+  
 }
