@@ -25,8 +25,6 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     final userData = ref.watch(newUserDataProivder);
-   
-    
 
     Size size = MediaQuery.of(context).size;
     var defaultShadow = Shadow(
@@ -59,11 +57,11 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30),
                           ),
-                          image:  DecorationImage(
-                // image: NetworkImage(mainImage),
-                image: AssetImage("assets/images/1.jpg"),
-                fit: BoxFit.cover,
-              ),
+                          image: DecorationImage(
+                            // image: NetworkImage(mainImage),
+                            image: AssetImage("assets/images/1.jpg"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         child: Container(
                           decoration: BoxDecoration(
@@ -109,7 +107,6 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                     size: 24,
                                   ),
                                 ),
-                               
                               ],
                             ),
                           ),
@@ -133,6 +130,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 child: Text(
                                   routeArgs.type,
                                   style: const TextStyle(
+                                    color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -146,7 +144,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                               vertical: 8,
                             ),
                             child: Container(
-                              decoration:  BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Colors.yellow[700],
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(5),
@@ -158,7 +156,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                               ),
                               child: Center(
                                 child: Text(
-                                  routeArgs.furnished,
+                                  routeArgs.rentType,
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
@@ -178,7 +176,6 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 strokeWidget(routeArgs.lessorName, 32),
-                                
                               ],
                             ),
                           ),
@@ -221,7 +218,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                       width: 4,
                                     ),
                                     strokeWidget(
-                                        routeArgs.rentPrice.toString(), 16),
+                                        r"$" + routeArgs.rentPrice.toString(),
+                                        16),
                                   ],
                                 ),
                               ],
@@ -306,14 +304,28 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           children: [
+                            buildFeature(Icons.date_range,
+                                routeArgs.endOFRent.toString(), "End Of Rent"),
                             buildFeature(
-                                Icons.hotel, routeArgs.endOFRent.toString(), "End Of Rent"),
-                            
+                                Icons.date_range,
+                                routeArgs.startOFRent.toString(),
+                                "Start Of Rent"),
+                            buildFeature(Icons.date_range,
+                                routeArgs.tor.toString(), "Time Of Rent"),
+                            buildFeature(
+                                Icons.date_range,
+                                routeArgs.torEnd.toString(),
+                                "End Time Of Rent"),
+                            buildFeature(
+                                Icons.house, routeArgs.furnished, "Furnished"),
+                            buildFeature(
+                                Icons.stairs, routeArgs.floor, "Floor"),
+                            buildFeature(Icons.domain_outlined,
+                                routeArgs.finishing, "Finishing"),
                           ],
                         ),
                       ),
                     ),
-                   
                     const Padding(
                       padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
                       child: Text(

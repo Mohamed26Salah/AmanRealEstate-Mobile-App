@@ -85,7 +85,7 @@ class RentWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        rent.furnished,
+                        rent.rentType,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -117,7 +117,7 @@ class RentWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            r"$" + rent.rentType.toString(),
+                            r"$" + rent.rentPrice.toString(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
