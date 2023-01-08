@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 //Removed Final
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -597,11 +598,12 @@ class AddFormState extends ConsumerState<AddForm> {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) {
-                                    return const Center(
-                                        child: CircularProgressIndicator(
-                                      backgroundColor: Colors.black26,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Color.fromARGB(255, 205, 153, 51)),
+                                    return Center(
+                                        child:
+                                            LoadingAnimationWidget.dotsTriangle(
+                                      color: const Color.fromARGB(
+                                          255, 205, 153, 51),
+                                      size: 80,
                                     ));
                                   });
                               imageManagement.uploadFile().then((value) async {

@@ -5,6 +5,7 @@ import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ShowCard extends ConsumerStatefulWidget {
   const ShowCard({super.key});
@@ -82,14 +83,14 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+          return Center(
             child: Padding(
               padding: EdgeInsets.all(20),
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.black26,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 205, 153, 51)),
-              ),
+              child: Center(
+                  child: LoadingAnimationWidget.dotsTriangle(
+                color: const Color.fromARGB(255, 205, 153, 51),
+                size: 80,
+              )),
             ),
           );
         }
@@ -121,9 +122,9 @@ class _ShowCardState extends ConsumerState<ShowCard> {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
-            
             var property = Property.fromJson(
-                data.docs[index].data() as Map<String, dynamic> , data.docs[index].id);
+                data.docs[index].data() as Map<String, dynamic>,
+                data.docs[index].id);
             // Property property = Property(
             //   docId: data.docs[index].id,
             //   addressAdmin: data.docs[index]['addressForAdmin'],

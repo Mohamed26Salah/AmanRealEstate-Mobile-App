@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../common_widgets/property_details.dart';
 import '../shared_features/custom_message.dart';
@@ -252,13 +253,20 @@ class _DetailsState extends ConsumerState<Details> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ExtractedWidgets().strokeWidget(routeArgs.unitName, 32),
+                                ExtractedWidgets()
+                                    .strokeWidget(routeArgs.unitName, 32),
                                 FutureBuilder(
                                   future: checkFavorite(routeArgs.docId!),
                                   builder: (contextt, snapshot) {
                                     if (snapshot.connectionState ==
                                         ConnectionState.waiting) {
-                                      return const CircularProgressIndicator();
+                                      return Center(
+                                          child: LoadingAnimationWidget
+                                              .dotsTriangle(
+                                        color: const Color.fromARGB(
+                                            255, 205, 153, 51),
+                                        size: 80,
+                                      ));
                                     } else {
                                       return InkWell(
                                         onTap: () {
@@ -312,7 +320,8 @@ class _DetailsState extends ConsumerState<Details> {
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    ExtractedWidgets().strokeWidget(routeArgs.addressUser, 16),
+                                    ExtractedWidgets().strokeWidget(
+                                        routeArgs.addressUser, 16),
                                     const SizedBox(
                                       width: 8,
                                     ),
@@ -325,7 +334,8 @@ class _DetailsState extends ConsumerState<Details> {
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    ExtractedWidgets().strokeWidget("${routeArgs.area} sq/m", 16),
+                                    ExtractedWidgets().strokeWidget(
+                                        "${routeArgs.area} sq/m", 16),
                                   ],
                                 ),
                                 Row(
@@ -582,11 +592,13 @@ class _DetailsState extends ConsumerState<Details> {
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
-                          children: ExtractedWidgets().buildPhotos(routeArgs.multiImages),
+                          children: ExtractedWidgets()
+                              .buildPhotos(routeArgs.multiImages),
                         ),
                       ),
                     ),
-                    ExtractedWidgets().deleteButton(isVisible, context, routeArgs)
+                    ExtractedWidgets()
+                        .deleteButton(isVisible, context, routeArgs)
                   ],
                 ),
               ),
