@@ -65,4 +65,10 @@ extension extString on String {
     final phoneRegExp = RegExp(r"^[0-9]*$");
     return phoneRegExp.hasMatch(this);
   }
+
+  bool get isValidNameArabic {
+    // ignore: valid_regexps
+    final nameRegExp = RegExp(r"([#][^\s#]*)");
+    return nameRegExp.hasMatch(this);
+  }
 }
