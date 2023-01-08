@@ -92,6 +92,27 @@ class _SearchState extends ConsumerState<MainPageRent> {
                       ],
                     ),
                   ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween, // added line
+                      mainAxisSize: MainAxisSize.min, // a
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon:  Icon(
+                            Icons.arrow_back_ios_new_outlined,
+                            color: Colors.grey[400],
+                            size: 28,
+                          ),
+                          
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
