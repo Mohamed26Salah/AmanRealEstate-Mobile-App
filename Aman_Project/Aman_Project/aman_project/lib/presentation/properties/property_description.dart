@@ -265,7 +265,7 @@ class _DetailsState extends ConsumerState<Details> {
                                               .dotsTriangle(
                                         color: const Color.fromARGB(
                                             255, 205, 153, 51),
-                                        size: 80,
+                                        size: 70,
                                       ));
                                     } else {
                                       return InkWell(

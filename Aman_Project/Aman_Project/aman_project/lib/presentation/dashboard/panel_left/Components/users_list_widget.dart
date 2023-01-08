@@ -97,7 +97,7 @@ class _UsersListWidgetState extends State<UsersListWidget> {
                 Center(
                     child: LoadingAnimationWidget.dotsTriangle(
                   color: const Color.fromARGB(255, 205, 153, 51),
-                  size: 80,
+                  size: 70,
                 )),
                 SizedBox(height: 10),
                 Text("Loading Users"),

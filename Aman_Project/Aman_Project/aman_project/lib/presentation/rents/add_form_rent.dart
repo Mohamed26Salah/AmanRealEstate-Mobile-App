@@ -206,7 +206,7 @@ class _AddFormRentState extends State<AddFormRent> {
                                     child: LoadingAnimationWidget.dotsTriangle(
                                   color:
                                       const Color.fromARGB(255, 205, 153, 51),
-                                  size: 80,
+                                  size: 70,
                                 ));
                               });
                           rentType = RentsManagement.figureRentType(

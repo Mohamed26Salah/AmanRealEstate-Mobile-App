@@ -59,7 +59,7 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
               return Center(
                   child: LoadingAnimationWidget.dotsTriangle(
                 color: const Color.fromARGB(255, 205, 153, 51),
-                size: 80,
+                size: 70,
               ));
             } else {
               return Center(
@@ -79,7 +79,7 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
                   Center(
                       child: LoadingAnimationWidget.dotsTriangle(
                     color: const Color.fromARGB(255, 205, 153, 51),
-                    size: 80,
+                    size: 70,
                   )),
                 ],
               ));

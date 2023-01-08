@@ -603,7 +603,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                             LoadingAnimationWidget.dotsTriangle(
                                       color: const Color.fromARGB(
                                           255, 205, 153, 51),
-                                      size: 80,
+                                      size: 70,
                                     ));
                                   });
                               imageManagement.uploadFile().then((value) async {

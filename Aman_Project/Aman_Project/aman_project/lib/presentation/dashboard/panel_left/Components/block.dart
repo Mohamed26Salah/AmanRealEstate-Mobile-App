@@ -86,7 +86,7 @@ class _ChartBlockState extends State<ChartBlock> {
                   Center(
                       child: LoadingAnimationWidget.dotsTriangle(
                     color: const Color.fromARGB(255, 205, 153, 51),
-                    size: 80,
+                    size: 70,
                   )),
                   Text("Loading Block")
                 ],

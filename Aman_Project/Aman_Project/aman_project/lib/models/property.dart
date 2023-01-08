@@ -61,7 +61,7 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
-  factory Property.fromJson(Map<String, dynamic> json , String id) => Property(
+  factory Property.fromJson(Map<String, dynamic> json, String id) => Property(
         docId: id,
         addressAdmin: json["addressForAdmin"],
         addressUser: json["addressForUser"],
@@ -266,7 +266,7 @@ class Property {
           );
   }
 
-  static void  makePhoneCall(String phoneNumber) async {
+  static void makePhoneCall(String phoneNumber) async {
     if (await canLaunchUrlString(phoneNumber)) {
       await launchUrlString(phoneNumber);
     } else {
