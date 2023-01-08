@@ -88,6 +88,7 @@ class _MyAppState extends State<MyApp> {
         '/addFormRent': (context) => const AddFormRent(),
         '/MainPageRent': (context) => const MainPageRent(),
         '/rentDetails': (context) => const RentsDescription(),
+         '/editRents': (context) => const RentsDescription(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,

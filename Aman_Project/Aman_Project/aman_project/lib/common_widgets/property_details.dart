@@ -108,6 +108,82 @@ class ExtractedWidgets {
     );
   }
 
+  
+  Stack strokeWidget(String text, double size) {
+    return Stack(
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            // color: Colors.white,
+            fontSize: size,
+            fontWeight: FontWeight.bold,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 3
+              ..color = const Color.fromARGB(255, 41, 39, 39),
+          ),
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: size,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildFeature(IconData iconData, String? text, String aboveText , BuildContext context) {
+    if (text != null) {
+      if (text.isNotEmpty) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Text(
+                  aboveText,
+                  style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Icon(
+                  iconData,
+                  color: Theme.of(context).primaryColor,
+                  size: 28,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+          ],
+        );
+      } else {
+        return const SizedBox();
+      }
+    } else {
+      return const SizedBox();
+    }
+  }
+
   List<Widget> buildPhotos(List<dynamic> images) {
     List<Widget> list = [];
 

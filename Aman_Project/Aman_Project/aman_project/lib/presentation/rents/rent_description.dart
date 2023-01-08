@@ -448,22 +448,19 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
             ),
           ],
         ),
-        floatingActionButton: Visibility(
-          visible: isVisible,
-          child: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            child: const Icon(Icons.edit),
-            onPressed: () async {
-              await Navigator.of(context)
-                  .pushNamed('/editProperty', arguments: routeArgs)
-                  .then((value) {
-                ImageManagement().clearImageProivders(ref);
-                routeArgs = value as Rents;
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.edit),
+          onPressed: () async {
+            await Navigator.of(context)
+                .pushNamed('/editRents', arguments: routeArgs)
+                .then((value) {
+              ImageManagement().clearImageProivders(ref);
+              routeArgs = value as Rents;
 
-                setState(() {});
-              });
-            },
-          ),
+              setState(() {});
+            });
+          },
         ),
       ),
     );
