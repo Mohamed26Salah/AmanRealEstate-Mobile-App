@@ -394,10 +394,15 @@ class _DetailsState extends ConsumerState<Details> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
-                                  child: Icon(
-                                    Icons.phone,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 20,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Property.makePhoneCall('tel: +2 ${routeArgs.ownerNumber}');
+                                    },
+                                    child: Icon(
+                                      Icons.phone,
+                                      color: Theme.of(context).primaryColor,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -458,17 +463,71 @@ class _DetailsState extends ConsumerState<Details> {
                       padding: const EdgeInsets.only(
                           right: 24, left: 24, bottom: 24),
                       child: Text(
-                        routeArgs.addressUser,
+                        routeArgs.descriptionUser,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey[500],
                         ),
                       ),
                     ),
+                    Visibility(
+                      visible: isVisible,
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                        child: Text(
+                          "Description For Admin",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: isVisible,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 24, left: 24, bottom: 24),
+                        child: Text(
+                          routeArgs.descriptionAdmin,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: isVisible,
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                        child: Text(
+                          "Address For Admin",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: isVisible,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 24, left: 24, bottom: 24),
+                        child: Text(
+                          routeArgs.addressAdmin,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Description For Admin",
+                        "Address For User",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -479,7 +538,7 @@ class _DetailsState extends ConsumerState<Details> {
                       padding: const EdgeInsets.only(
                           right: 24, left: 24, bottom: 24),
                       child: Text(
-                        routeArgs.addressAdmin,
+                        routeArgs.addressUser,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey[500],

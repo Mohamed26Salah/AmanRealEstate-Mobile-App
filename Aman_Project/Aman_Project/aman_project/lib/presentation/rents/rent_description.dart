@@ -1,19 +1,10 @@
 import 'package:aman_project/data/image_management.dart';
-import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/models/rent.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-
-import '../shared_features/custom_message.dart';
-import '../../constants/globals.dart' as val;
-
-import 'package:url_launcher/url_launcher.dart';
 
 class RentsDescription extends ConsumerStatefulWidget {
   const RentsDescription({super.key});
@@ -25,24 +16,11 @@ class RentsDescription extends ConsumerStatefulWidget {
 class _RentsDescriptionState extends ConsumerState<RentsDescription> {
 
   
-
-// ...
-
-void _makePhoneCall(String phoneNumber) async {
-  
-  if (await canLaunchUrlString(phoneNumber)) {
-    await launchUrlString(phoneNumber);
-  } else {
-    throw 'Could not launch $phoneNumber';
-  }
-}
-
-  
   @override
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     final userData = ref.watch(newUserDataProivder);
-    final Uri phoneNumber = Uri.parse('tel: +2 ${routeArgs.tenantNum}');
+   
     Size size = MediaQuery.of(context).size;
     var defaultShadow = Shadow(
       color: Colors.black,
@@ -300,7 +278,7 @@ void _makePhoneCall(String phoneNumber) async {
                                   child: IconButton(
                                     icon : const Icon(Icons.phone,   size: 20,),
                                     onPressed: () {
-                                      _makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
+                                      Property.makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
                                     } ,
                                     color: Theme.of(context).primaryColor,
                                   
