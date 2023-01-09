@@ -29,7 +29,7 @@ class _LocationState extends State<Location> {
                         position: LatLng(30.039918, 31.456704),
                         infoWindow: InfoWindow(
                           title: 'Aman Real Estate',
-                          snippet: 'First Settelment',
+                          snippet: 'First Settelment 30.039918, 31.456704',
                         )),
                   );
                 });
