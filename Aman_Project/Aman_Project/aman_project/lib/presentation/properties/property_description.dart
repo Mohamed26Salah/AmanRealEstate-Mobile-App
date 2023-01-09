@@ -476,6 +476,64 @@ class _DetailsState extends ConsumerState<Details> {
                     const Padding(
                       padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
                       child: Text(
+                        "Owner Name",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 24),
+                      child: Text(
+                        routeArgs.ownerName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                      child: Text(
+                        "Unit Name",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 24),
+                      child: Text(
+                        routeArgs.unitName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                      child: Text(
+                        "Price",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 24),
+                      child: ExtractedWidgets()
+                          .strokeWidget(r"$" + routeArgs.price.toString(), 16),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                      child: Text(
                         "Description For User",
                         style: TextStyle(
                           fontSize: 20,
