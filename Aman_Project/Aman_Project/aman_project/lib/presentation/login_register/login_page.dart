@@ -91,6 +91,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         if (!value!.isValidEmail) {
                           return ('Enter valid email'.tr);
                         }
+                        if (value[value.length - 1] == '.') {
+                          return 'Enter valid email';
+                        }
                         return null;
                       },
                     ),
