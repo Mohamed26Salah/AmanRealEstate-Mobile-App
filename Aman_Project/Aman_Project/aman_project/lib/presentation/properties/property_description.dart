@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../shared_features/custom_loading_screen.dart';
 
 import '../../common_widgets/property_details.dart';
 import '../shared_features/custom_message.dart';
@@ -260,13 +260,9 @@ class _DetailsState extends ConsumerState<Details> {
                                   builder: (contextt, snapshot) {
                                     if (snapshot.connectionState ==
                                         ConnectionState.waiting) {
-                                      return Center(
-                                          child: LoadingAnimationWidget
-                                              .dotsTriangle(
-                                        color: const Color.fromARGB(
-                                            255, 205, 153, 51),
-                                        size: 70,
-                                      ));
+                                      return const Center(
+                                        child: LoadingScreen(),
+                                      );
                                     } else {
                                       return InkWell(
                                         onTap: () {

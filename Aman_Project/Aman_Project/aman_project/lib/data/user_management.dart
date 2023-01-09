@@ -1,6 +1,7 @@
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/main.dart';
 import 'package:aman_project/models/user.dart';
+import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/globals.dart' as val;
 import '../models/chart_data.dart';
 import '../presentation/shared_features/custom_message.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UserHelper {
   static saveUser(User user) async {
@@ -114,10 +114,8 @@ class UserHelper {
             context: context,
             builder: (context) {
               return Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                color: const Color.fromARGB(255, 205, 153, 51),
-                size: 70,
-              ));
+                child: LoadingScreen(),
+              );
             });
 
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -173,10 +171,8 @@ class UserHelper {
             context: context,
             builder: (context) {
               return Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                color: const Color.fromARGB(255, 205, 153, 51),
-                size: 70,
-              ));
+                child: LoadingScreen(),
+              );
             });
         final credential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(

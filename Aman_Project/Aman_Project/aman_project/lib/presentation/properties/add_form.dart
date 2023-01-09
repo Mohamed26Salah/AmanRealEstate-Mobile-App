@@ -4,9 +4,9 @@ import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../shared_features/custom_loading_screen.dart';
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 //Removed Final
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -598,13 +598,9 @@ class AddFormState extends ConsumerState<AddForm> {
                                   barrierDismissible: false,
                                   context: context,
                                   builder: (context) {
-                                    return Center(
-                                        child:
-                                            LoadingAnimationWidget.dotsTriangle(
-                                      color: const Color.fromARGB(
-                                          255, 205, 153, 51),
-                                      size: 70,
-                                    ));
+                                    return const Center(
+                                      child: LoadingScreen(),
+                                    );
                                   });
                               imageManagement.uploadFile().then((value) async {
                                 await imageManagement

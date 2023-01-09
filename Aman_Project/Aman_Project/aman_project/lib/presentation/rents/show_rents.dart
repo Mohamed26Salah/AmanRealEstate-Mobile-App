@@ -5,7 +5,7 @@ import 'package:aman_project/presentation/rents/rent_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../shared_features/custom_loading_screen.dart';
 import '../../constants/globals.dart' as val;
 import '../shared_features/custom_message.dart';
 
@@ -57,11 +57,8 @@ class _ShowCardState extends ConsumerState<ShowRent> {
           },
         );
       }, loading: () {
-        return Center(
-          child: LoadingAnimationWidget.dotsTriangle(
-            color: const Color.fromARGB(255, 205, 153, 51),
-            size: 70,
-          ),
+        return const Center(
+          child: LoadingScreen(),
         );
       }, error: (error, stack) {
         return Center(

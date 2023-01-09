@@ -1,12 +1,12 @@
 import 'package:aman_project/data/user_management.dart';
 import 'package:aman_project/models/user.dart';
+import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import '../edit_button.dart';
 import 'dart:math';
 import 'dart:async';
 import 'alert_dialogue.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UsersListWidget extends StatefulWidget {
   String? query;
@@ -95,10 +95,8 @@ class _UsersListWidgetState extends State<UsersListWidget> {
             child: Column(
               children: [
                 Center(
-                    child: LoadingAnimationWidget.dotsTriangle(
-                  color: const Color.fromARGB(255, 205, 153, 51),
-                  size: 70,
-                )),
+                  child: LoadingScreen(),
+                ),
                 SizedBox(height: 10),
                 Text("Loading Users"),
               ],

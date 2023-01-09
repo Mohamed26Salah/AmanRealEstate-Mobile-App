@@ -3,8 +3,8 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
 import '../../../../models/chart_data.dart';
+import '../../../shared_features/custom_loading_screen.dart';
 import 'cards.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ChartBlock extends StatefulWidget {
   final double width;
@@ -84,10 +84,8 @@ class _ChartBlockState extends State<ChartBlock> {
               child: Column(
                 children: [
                   Center(
-                      child: LoadingAnimationWidget.dotsTriangle(
-                    color: const Color.fromARGB(255, 205, 153, 51),
-                    size: 70,
-                  )),
+                    child: LoadingScreen(),
+                  ),
                   Text("Loading Block")
                 ],
               ),

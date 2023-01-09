@@ -5,7 +5,7 @@ import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../shared_features/custom_loading_screen.dart';
 
 class ShowCard extends ConsumerStatefulWidget {
   const ShowCard({super.key});
@@ -15,14 +15,6 @@ class ShowCard extends ConsumerStatefulWidget {
 }
 
 class _ShowCardState extends ConsumerState<ShowCard> {
-  // Stream<QuerySnapshot> properties =
-  //     FirebaseFirestore.instance.collection('properties').snapshots();
-
-  // CollectionReference<Map<String, dynamic>> propertiesFiltered =
-  //     FirebaseFirestore.instance.collection('properties');
-
-  // Query<Map<String, dynamic>>? returnedQueryFilter;
-
   Query query = FirebaseFirestore.instance.collection('properties');
   @override
   Widget build(BuildContext context) {
@@ -83,14 +75,12 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Center(
-                  child: LoadingAnimationWidget.dotsTriangle(
-                color: const Color.fromARGB(255, 205, 153, 51),
-                size: 70,
-              )),
+                child: LoadingScreen(),
+              ),
             ),
           );
         }

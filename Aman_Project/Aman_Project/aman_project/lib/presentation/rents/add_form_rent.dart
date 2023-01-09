@@ -3,7 +3,7 @@ import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../shared_features/custom_loading_screen.dart';
 import '../../constants/globals.dart' as val;
 import '../shared_features/custom_message.dart';
 
@@ -202,12 +202,9 @@ class _AddFormRentState extends State<AddFormRent> {
                               barrierDismissible: false,
                               context: context,
                               builder: (context) {
-                                return Center(
-                                    child: LoadingAnimationWidget.dotsTriangle(
-                                  color:
-                                      const Color.fromARGB(255, 205, 153, 51),
-                                  size: 70,
-                                ));
+                                return const Center(
+                                  child: LoadingScreen(),
+                                );
                               });
                           rentType = RentsManagement.figureRentType(
                               startOFRent, endOFRent, tor, torEnd);

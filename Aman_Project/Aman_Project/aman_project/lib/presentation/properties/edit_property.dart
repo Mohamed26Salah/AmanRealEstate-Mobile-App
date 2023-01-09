@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../shared_features/custom_message.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import '../../constants/globals.dart' as val;
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../shared_features/custom_loading_screen.dart';
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -104,10 +104,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
-                        child: LoadingAnimationWidget.dotsTriangle(
-                      color: const Color.fromARGB(255, 205, 153, 51),
-                      size: 70,
-                    )),
+                      child: LoadingScreen(),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
