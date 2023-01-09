@@ -1,7 +1,6 @@
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 
 class Filter extends ConsumerStatefulWidget {
   const Filter({super.key});

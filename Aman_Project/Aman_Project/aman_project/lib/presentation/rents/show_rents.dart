@@ -1,4 +1,3 @@
-import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:aman_project/presentation/rents/rent_widget_card.dart';
@@ -6,8 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../shared_features/custom_loading_screen.dart';
-import '../../constants/globals.dart' as val;
-import '../shared_features/custom_message.dart';
 
 class ShowRent extends ConsumerStatefulWidget {
   const ShowRent({super.key, required this.rentType});
