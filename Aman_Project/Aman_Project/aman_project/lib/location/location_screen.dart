@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,12 +13,45 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  var myMarker = HashSet<Marker>();
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: LatLng(30.039918, 31.456704),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: (GoogleMapController controller) {
+                setState(() {
+                  myMarker.add(
+                    const Marker(
+                        markerId: MarkerId('1'),
+                        position: LatLng(30.039918, 31.456704),
+                        infoWindow: InfoWindow(
+                          title: 'Aman Real Estate',
+                          snippet: 'First Settelment',
+                        )),
+                  );
+                });
+              },
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(30.039918, 31.456704),
+                zoom: 17,
+              ),
+              markers: myMarker,
+            ),
+            Container(
+              padding: const EdgeInsets.all(20),
+              alignment: Alignment.topCenter,
+              child: Text(
+                'Company Location',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
