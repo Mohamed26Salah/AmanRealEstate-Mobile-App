@@ -174,13 +174,19 @@ class Property {
                   validator: (value) {
                     if (type == 'name') {
                       //I hcange from valid name to valid ADDRESS
-                      if (!value!.isValidAddress || !value.isValidNameArabic) {
+                      if (!value!.isValidAddress) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      if (!value.isValidNameArabic) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;
                     }
                     if (type == 'address') {
-                      if (!value!.isValidAddress || !value.isValidNameArabic) {
+                      if (!value!.isValidAddress) {
+                        return 'Please enter a valid $labelText';
+                      }
+                      if (!value.isValidNameArabic) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;
@@ -189,14 +195,14 @@ class Property {
                   },
                 ),
     );
-    
   }
 
   static Padding buildEditTextField(
       {required String labelText,
       required String hintText,
       required TextEditingController controller,
-      required String type , required BuildContext context}) {
+      required String type,
+      required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
       child: type == 'number'
@@ -219,7 +225,6 @@ class Property {
                     }
                     return null;
                   },
-                  
                 )
           : controller.text.isEmpty
               ? const SizedBox()
@@ -250,7 +255,6 @@ class Property {
                   },
                 ),
     );
-
   }
 
   static Widget showDropdown({
