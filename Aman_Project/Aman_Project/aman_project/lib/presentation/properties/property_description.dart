@@ -370,6 +370,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 children: [
                                   Text(
                                     routeArgs.ownerName,
+                                    overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,

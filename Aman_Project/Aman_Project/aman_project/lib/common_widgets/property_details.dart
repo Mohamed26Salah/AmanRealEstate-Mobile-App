@@ -108,7 +108,6 @@ class ExtractedWidgets {
     );
   }
 
-  
   Stack strokeWidget(String text, double size) {
     return Stack(
       children: [
@@ -136,7 +135,8 @@ class ExtractedWidgets {
     );
   }
 
-  Widget buildFeature(IconData iconData, String? text, String aboveText , BuildContext context) {
+  Widget buildFeature(
+      IconData iconData, String? text, String aboveText, BuildContext context) {
     if (text != null) {
       if (text.isNotEmpty) {
         return Row(
