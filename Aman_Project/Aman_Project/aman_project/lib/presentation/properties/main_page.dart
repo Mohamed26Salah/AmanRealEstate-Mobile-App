@@ -30,6 +30,12 @@ class _SearchState extends ConsumerState<Search> {
         isVisible = true;
       });
     }
+    // if (ref.watch(filterTypeProivder) != "" ||
+    //     ref.watch(filterRoomProivder) != "" ||
+    //     ref.watch(filterBathroomProivder) != "" ||
+    //     ref.watch(filterPriceProivder) != "") {
+    //   _inputSearchController.text = "";
+    // }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
