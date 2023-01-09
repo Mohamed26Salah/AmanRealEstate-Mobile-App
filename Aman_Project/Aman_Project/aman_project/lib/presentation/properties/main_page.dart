@@ -30,12 +30,12 @@ class _SearchState extends ConsumerState<Search> {
         isVisible = true;
       });
     }
-    // if (ref.watch(filterTypeProivder) != "" ||
-    //     ref.watch(filterRoomProivder) != "" ||
-    //     ref.watch(filterBathroomProivder) != "" ||
-    //     ref.watch(filterPriceProivder) != "") {
-    //   _inputSearchController.text = "";
-    // }
+    if (ref.watch(filterTypeProivder) != "" ||
+        ref.watch(filterRoomProivder) != "" ||
+        ref.watch(filterBathroomProivder) != "" ||
+        ref.watch(filterPriceProivder) != "") {
+      _inputSearchController.text = "";
+    }
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -100,6 +100,7 @@ class _SearchState extends ConsumerState<Search> {
                         IconButton(
                             onPressed: () {
                               _showBottomSheet();
+                              ref.read(searchInputProivder.notifier).state = "";
                             },
                             icon: Icon(
                               Icons.menu,
