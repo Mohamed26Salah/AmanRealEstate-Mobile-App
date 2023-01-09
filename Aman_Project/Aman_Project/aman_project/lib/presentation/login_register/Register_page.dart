@@ -104,6 +104,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';
                         }
+                         if (value[value.length - 1] == '.') {
+                          return 'Enter valid email';
+                        }
                         return null;
                       },
                     ),

@@ -85,7 +85,7 @@ class _LoginPageState extends State<ForgetPassword> {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';
                         }
-                        if (value.substring(0, (value.length - 1)) == '.') {
+                         if (value[value.length - 1] == '.') {
                           return 'Enter valid email';
                         }
                         return null;
