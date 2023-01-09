@@ -166,19 +166,21 @@ class Property {
                       labelText: labelText, hintText: hintText),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
-                      RegExp(r"[a-zA-Z0-9]+|\s"),
+                      // RegExp(r"[a-zA-Z0-9]+|\s"),
+                      RegExp(
+                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$"),
                     )
                   ],
                   validator: (value) {
                     if (type == 'name') {
                       //I hcange from valid name to valid ADDRESS
-                      if (!value!.isValidAddress) {
+                      if (!value!.isValidAddress || !value.isValidNameArabic) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;
                     }
                     if (type == 'address') {
-                      if (!value!.isValidAddress) {
+                      if (!value!.isValidAddress || !value.isValidNameArabic) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;
