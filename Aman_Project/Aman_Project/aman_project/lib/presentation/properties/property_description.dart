@@ -253,8 +253,9 @@ class _DetailsState extends ConsumerState<Details> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                if(routeArgs.unitName.length > 15)
                                 ExtractedWidgets()
-                                    .strokeWidget(routeArgs.unitName, 32),
+                                    .strokeWidget('${routeArgs.unitName.substring(1 , 15)}...', 32),
                                 FutureBuilder(
                                   future: checkFavorite(routeArgs.docId!),
                                   builder: (contextt, snapshot) {
@@ -316,8 +317,9 @@ class _DetailsState extends ConsumerState<Details> {
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    ExtractedWidgets().strokeWidget(
-                                        routeArgs.addressUser, 16),
+                                    if(routeArgs.unitName.length > 13)
+                                ExtractedWidgets()
+                                    .strokeWidget('${routeArgs.unitName.substring(1 , 13)}...', 16),
                                     const SizedBox(
                                       width: 8,
                                     ),

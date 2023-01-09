@@ -197,66 +197,7 @@ class Property {
     );
   }
 
-  static Padding buildEditTextField(
-      {required String labelText,
-      required String hintText,
-      required TextEditingController controller,
-      required String type,
-      required BuildContext context}) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
-      child: type == 'number'
-          ? controller.text.isEmpty
-              ? const SizedBox()
-              : TextFormField(
-                  controller: controller,
-                  obscureText: false,
-                  decoration: CommonStyle.textFieldStyle(
-                      labelText: labelText, hintText: hintText),
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(11),
-                    FilteringTextInputFormatter.allow(
-                      RegExp(r"^[0-9]*$"),
-                    )
-                  ],
-                  validator: (value) {
-                    if (!value!.isValidNumber) {
-                      return 'Please enter a valid $labelText';
-                    }
-                    return null;
-                  },
-                )
-          : controller.text.isEmpty
-              ? const SizedBox()
-              : TextFormField(
-                  controller: controller,
-                  obscureText: false,
-                  decoration: CommonStyle.textFieldStyle(
-                      labelText: labelText, hintText: hintText),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                      RegExp(r"[a-zA-Z]+|\s"),
-                    )
-                  ],
-                  validator: (value) {
-                    if (type == 'name') {
-                      if (!value!.isValidName) {
-                        return 'Please enter a valid $labelText';
-                      }
-                      return null;
-                    }
-                    if (type == 'address') {
-                      if (!value!.isValidAddress) {
-                        return 'Please enter a valid $labelText';
-                      }
-                      return null;
-                    }
-                    return null;
-                  },
-                ),
-    );
-  }
-
+ 
   static Widget showDropdown({
     required String text,
     required List<String> dropdownItems,

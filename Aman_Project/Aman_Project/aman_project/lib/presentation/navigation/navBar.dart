@@ -1,3 +1,4 @@
+import 'package:aman_project/location/location_screen.dart';
 import 'package:aman_project/presentation/properties/wish_list.dart';
 import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
@@ -47,6 +48,7 @@ class _NavBarState extends ConsumerState<NavBar> {
       const Search(),
       wish_list(),
       EditProfile(themeManager: widget.themeManager),
+      const Location(),
     ];
 
     if (userData?.role == 'admin') {
@@ -61,7 +63,6 @@ class _NavBarState extends ConsumerState<NavBar> {
       bottomNavigationBar: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: SizedBox(
-          width: MediaQuery.of(context).size.width,
           child: GNav(
             onTabChange: (i) {
               setState(() {
@@ -91,6 +92,10 @@ class _NavBarState extends ConsumerState<NavBar> {
               const GButton(
                 icon: Icons.person,
                 text: 'Profile',
+              ),
+               const GButton(
+                icon: Icons.location_pin,
+                text: 'Location',
               ),
               if (userData?.role == 'admin')
                 const GButton(

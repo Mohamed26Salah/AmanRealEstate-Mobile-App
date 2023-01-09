@@ -4,6 +4,7 @@ import 'package:aman_project/presentation/rents/add_form_rent.dart';
 import 'package:aman_project/presentation/rents/main_page_rents.dart';
 import 'package:aman_project/presentation/rents/rent_description.dart';
 import 'package:get/get.dart';
+import 'location/location_screen.dart';
 import 'presentation/shared_features/local_strings.dart';
 import 'package:aman_project/firebase_options/firebase_options.dart';
 import 'package:aman_project/presentation/properties/add_form.dart';
@@ -88,7 +89,8 @@ class _MyAppState extends State<MyApp> {
         '/addFormRent': (context) => const AddFormRent(),
         '/MainPageRent': (context) => const MainPageRent(),
         '/rentDetails': (context) => const RentsDescription(),
-        '/editRents': (context) => const RentsDescription(),
+        // '/editRents': (context) => const RentsDescription(),
+        '/location': (context) => const Location(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,
