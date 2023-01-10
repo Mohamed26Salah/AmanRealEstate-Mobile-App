@@ -17,10 +17,18 @@ class _CategoryChartState extends State<CategoryChart> {
   Widget build(BuildContext context) {
     return Center(
       child: SfCartesianChart(
-          primaryXAxis:
-              CategoryAxis(majorGridLines: const MajorGridLines(width: 0)),
+          plotAreaBorderWidth: 1,
+          primaryXAxis: CategoryAxis(
+            labelStyle: TextStyle(
+                fontSize: MediaQuery.of(context).size.width > 390
+                    ? MediaQuery.of(context).size.width > 600
+                        ? 16
+                        : 14
+                    : 10),
+            majorGridLines: const MajorGridLines(width: 1),
+          ),
           primaryYAxis:
-              NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
+              NumericAxis(majorGridLines: const MajorGridLines(width: 1)),
           tooltipBehavior: TooltipBehavior(enable: true),
           series: <ChartSeries<ChartData, String>>[
             ColumnSeries<ChartData, String>(

@@ -93,7 +93,7 @@ class _UsersListWidgetState extends State<UsersListWidget> {
           return Padding(
             padding: const EdgeInsets.all(50.0),
             child: Column(
-              children: [
+              children: const [
                 Center(
                   child: LoadingScreen(),
                 ),

@@ -17,7 +17,7 @@ class ChartBlock extends StatefulWidget {
       required this.width,
       this.isExpanded = false,
       this.text = "Units",
-      this.icon = 0xf107,
+      this.icon = 0xf7f5,
       this.dataNum = 0});
 
   @override
@@ -63,7 +63,7 @@ class _ChartBlockState extends State<ChartBlock> {
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 400),
               margin: const EdgeInsets.symmetric(vertical: 10.0),
-              width: !widget.isExpanded ? widget.width * 0.4 : widget.width * 1,
+              width: widget.width,
               height:
                   !widget.isExpanded ? widget.width * 0.4 : widget.width * 1.2,
               onEnd: () {
