@@ -48,7 +48,7 @@ class _NavBarState extends ConsumerState<NavBar> {
       const Search(),
       wish_list(),
       EditProfile(themeManager: widget.themeManager),
-      const Location(),
+      // const Location(),
     ];
 
     if (userData?.role == 'admin') {
@@ -65,12 +65,13 @@ class _NavBarState extends ConsumerState<NavBar> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: GNav(
+            
             onTabChange: (i) {
               setState(() {
                 index = i;
               });
             },
-
+          
             selectedIndex: index,
             tabBorderRadius: 100,
             iconSize: 25,
@@ -94,10 +95,10 @@ class _NavBarState extends ConsumerState<NavBar> {
                 icon: Icons.person,
                 text: 'Profile',
               ),
-              const GButton(
-                icon: Icons.location_pin,
-                text: 'Location',
-              ),
+              // const GButton(
+              //   icon: Icons.location_pin,
+              //   text: 'Location',
+              // ),
               if (userData?.role == 'admin')
                 const GButton(
                   icon: Icons.apartment,

@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:aman_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -40,15 +41,31 @@ class _LocationState extends State<Location> {
               ),
               markers: myMarker,
             ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              alignment: Alignment.topCenter,
-              child: Text(
-                'Company Location',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor,
-                ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () async{
+                      await Future.delayed(const Duration(milliseconds: 500));
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                  ),
+                  Text(
+                    'Company Location',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  
+                ],
               ),
             ),
           ],
