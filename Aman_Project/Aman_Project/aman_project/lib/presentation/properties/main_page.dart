@@ -34,10 +34,6 @@ class _SearchState extends ConsumerState<Search> {
         ref.watch(filterRoomProivder) != "" ||
         ref.watch(filterBathroomProivder) != "" ||
         ref.watch(filterPriceProivder) != "") {
-      // print(ref.watch(filterTypeProivder));
-      // print(ref.watch(filterRoomProivder));
-      // print(ref.watch(filterBathroomProivder));
-      // print(ref.watch(filterPriceProivder));
       _inputSearchController.text = "";
     }
 
@@ -103,8 +99,8 @@ class _SearchState extends ConsumerState<Search> {
                         ),
                         IconButton(
                             onPressed: () {
-                              clearProivders(ref);
                               _showBottomSheet();
+                              clearProivders(ref);
                               ref.read(searchInputProivder.notifier).state = "";
                             },
                             icon: Icon(
@@ -125,16 +121,16 @@ class _SearchState extends ConsumerState<Search> {
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Text(
-                  //   ref.watch(resultsCount).toString(),
-                  //   style: const TextStyle(
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   width: 8,
-                  // ),
+                  Text(
+                    ref.watch(resultsCount).toString(),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   textType(),
                 ],
               ),

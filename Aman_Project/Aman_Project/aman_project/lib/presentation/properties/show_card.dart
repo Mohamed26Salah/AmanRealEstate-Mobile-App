@@ -38,19 +38,15 @@ class _ShowCardState extends ConsumerState<ShowCard> {
     // if (coming != "") {
     //   choosedPropertyTypeToGetData = ref.watch(searchedProperty);
     // }
-
-    // if ((ref.watch(filterTypeProivder) != "" ||
-    //         ref.watch(filterRoomProivder) != "" ||
-    //         ref.watch(filterBathroomProivder) != "" ||
-    //         ref.watch(filterPriceProivder) != "") &&
-    //     coming != "") {
-    //   choosedPropertyTypeToGetData = ref.watch(filteredProperty);
-    // }
     try {
       return choosedPropertyTypeToGetData.when(data: (data) {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
+            // if (mounted) {}
+            Future.delayed(Duration(milliseconds: 100), () {
+              ref.read(resultsCount.notifier).state = data.size;
+            });
             var property =
                 Property.fromJson(data.docs[index].data(), data.docs[index].id);
             return PropertyWidget(
