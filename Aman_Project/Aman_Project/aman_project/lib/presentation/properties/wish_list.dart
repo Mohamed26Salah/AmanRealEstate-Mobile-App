@@ -1,5 +1,6 @@
 import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/main.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,13 +35,29 @@ class _wish_listState extends ConsumerState<wish_list> {
                 const SizedBox(
                   height: 30,
                 ),
-                Text(
-                  "Your Whishlist",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 38,
-                    height: 0.9, //line height 90% of actual height
-                    color: Theme.of(context).primaryColor,
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  alignment: Alignment.topCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Your WishList',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Icon(
+                        Icons.favorite,
+                        color: Theme.of(context).primaryColor,
+                        size: 35,
+                      )
+                    ],
                   ),
                 ),
                 SizedBox(

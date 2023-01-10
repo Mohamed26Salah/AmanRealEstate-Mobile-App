@@ -168,7 +168,7 @@ class Property {
                     FilteringTextInputFormatter.allow(
                       // RegExp(r"[a-zA-Z0-9]+|\s"),
                       RegExp(
-                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$"),
+                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$"),
                     )
                   ],
                   validator: (value) {
@@ -197,7 +197,6 @@ class Property {
     );
   }
 
- 
   static Widget showDropdown({
     required String text,
     required List<String> dropdownItems,

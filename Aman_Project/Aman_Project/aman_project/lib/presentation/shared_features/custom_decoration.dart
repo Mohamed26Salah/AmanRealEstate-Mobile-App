@@ -72,7 +72,7 @@ extension extString on String {
   bool get isValidNameArabic {
     // ignore: valid_regexps
     final nameRegExp = RegExp(
-        r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]*$");
+        r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$");
     return nameRegExp.hasMatch(this);
   }
 }

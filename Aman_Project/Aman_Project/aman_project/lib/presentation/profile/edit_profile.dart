@@ -255,18 +255,18 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                       },
                     ),
                   ),
-                  Card(
-                    elevation: 3,
-                    child: ListTile(
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right,
-                      ),
-                      title: Text("Company Location".tr),
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/location');
-                      },
-                    ),
-                  ),
+                  // Card(
+                  //   elevation: 3,
+                  //   child: ListTile(
+                  //     trailing: const Icon(
+                  //       Icons.keyboard_arrow_right,
+                  //     ),
+                  //     title: Text("Company Location".tr),
+                  //     onTap: () {
+                  //       Navigator.of(context).pushNamed('/location');
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 30,
                   ),
