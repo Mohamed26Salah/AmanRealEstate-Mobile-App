@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
 import '../models/chart_data.dart';
 import '../models/property.dart';
+import '../presentation/shared_features/custom_message.dart';
+
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 class PropertyManagement {
   //Read data for main Page
@@ -249,17 +253,19 @@ class PropertyManagement {
         title: const Text("Call "),
         content: SizedBox(
           height: 100,
-          child: Property.showDropdown(
-              context: context,
-              hint: 'Select Number',
-              dropdownItems:
-                  isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
-              text: "Phone Numbers",
-              show: true,
-              value: chosenValue,
-              onChanged: (value) {
-                chosenValue = value;
-              }),
+          child: Form(
+            key: formKey,
+            child: Property.showDropdown(
+                context: context,
+                hint: 'Select Number',
+                dropdownItems: isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
+                text: "Phone Numbers",
+                show: true,
+                value: chosenValue,
+                onChanged: (value) {
+                  chosenValue = value;
+                }),
+          ),
         ),
         actions: [
           TextButton(
@@ -281,11 +287,13 @@ class PropertyManagement {
           ),
           TextButton(
             onPressed: () async {
-              if (await canLaunchUrlString('tel: +2${chosenValue!}')) {
-                await launchUrlString('tel: +2${chosenValue!}');
-              } else {
-                throw 'Could not launch $chosenValue';
-              }
+              if (formKey.currentState!.validate()) {
+                if (await canLaunchUrlString('tel: +2${chosenValue!}')) {
+                  await launchUrlString('tel: +2${chosenValue!}');
+                } else {
+                  throw 'Could not launch $chosenValue';
+                }
+              } 
             },
             style: TextButton.styleFrom(
               shape: const RoundedRectangleBorder(
