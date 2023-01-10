@@ -46,7 +46,7 @@ class _NavBarState extends ConsumerState<NavBar> {
 
     List<Widget> pages = [
       const Search(),
-      wish_list(),
+      const Wishlist(),
       EditProfile(themeManager: widget.themeManager),
       // const Location(),
     ];

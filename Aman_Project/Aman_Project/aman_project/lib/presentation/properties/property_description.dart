@@ -1,5 +1,6 @@
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -67,6 +68,9 @@ class _DetailsState extends ConsumerState<Details> {
         };
         try {
           await _database.insert("favs", row);
+          var temp = ref.watch(whishlistProvider);
+          temp.add(item);
+          ref.read(whishlistProvider.notifier).state = temp.toList();
         } catch (e) {
           print(e);
         }
@@ -80,6 +84,9 @@ class _DetailsState extends ConsumerState<Details> {
         try {
           await _database.delete("favs",
               where: whereString, whereArgs: whereArguments);
+          var temp = ref.watch(whishlistProvider);
+          temp.remove(item);
+          ref.read(whishlistProvider.notifier).state = temp.toList();
         } catch (e) {
           print(e);
         }

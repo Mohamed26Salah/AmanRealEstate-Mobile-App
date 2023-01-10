@@ -1,4 +1,5 @@
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/main.dart';
 import 'package:aman_project/models/property.dart';
@@ -8,14 +9,14 @@ import 'package:sqflite/sqflite.dart';
 
 import 'property_widget_card.dart';
 
-class wish_list extends ConsumerStatefulWidget {
-  wish_list({Key? key}) : super(key: key);
+class Wishlist extends ConsumerStatefulWidget {
+  const Wishlist({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<wish_list> createState() => _wish_listState();
+  ConsumerState<Wishlist> createState() => WishlistState();
 }
 
-class _wish_listState extends ConsumerState<wish_list> {
+class WishlistState extends ConsumerState<Wishlist> {
   late Database _database;
   late List<Map<String, dynamic>> _favorites;
   List<Property> resultWhishlist = [];
@@ -27,7 +28,7 @@ class _wish_listState extends ConsumerState<wish_list> {
 
   @override
   Widget build(BuildContext context) {
-    return resultWhishlist.isNotEmpty
+    return ref.watch(whishlistProvider).isNotEmpty
         ? SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: Column(
@@ -65,11 +66,11 @@ class _wish_listState extends ConsumerState<wish_list> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: ListView.builder(
-                      itemCount: resultWhishlist.length,
+                      itemCount: ref.watch(whishlistProvider).length,
                       itemBuilder: (context, index) {
                         // ref.read(resultsCount.notifier).state = data.size;
                         return PropertyWidget(
-                          property: resultWhishlist[index],
+                          property: ref.watch(whishlistProvider)[index],
                         );
                       },
                     ),
@@ -141,7 +142,9 @@ class _wish_listState extends ConsumerState<wish_list> {
     }
     resultWhishlist = await PropertyManagement.getWishlistData(ids);
     if (mounted) {
-      setState(() {});
+      setState(() {
+        ref.read(whishlistProvider.notifier).update((state) => resultWhishlist);
+      });
     }
   }
 }

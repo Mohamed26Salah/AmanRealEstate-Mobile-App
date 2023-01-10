@@ -1,9 +1,14 @@
+import 'package:aman_project/models/property.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Search
 final searchInputProivder = StateProvider<String>((ref) {
   return "";
+});
+
+final whishlistProvider = StateProvider<List<Property>>((ref) {
+  return [];
 });
 
 final filterPriceProivder = StateProvider<String>((ref) {
