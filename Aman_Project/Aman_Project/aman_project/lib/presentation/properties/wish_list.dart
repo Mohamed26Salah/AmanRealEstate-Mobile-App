@@ -143,11 +143,30 @@ class WishlistState extends ConsumerState<Wishlist> {
     for (var element in _favorites) {
       ids.add(element["propid"]);
     }
-    resultWhishlist = await PropertyManagement.getWishlistData(ids);
+    var twolists = await PropertyManagement.getWishlistData(ids);
+    deleteRemoveditems(twolists[1]);
+    resultWhishlist = twolists[0];
     if (mounted) {
       setState(() {
         ref.read(whishlistProvider.notifier).update((state) => resultWhishlist);
       });
     }
+  }
+
+  void deleteRemoveditems(List<String> removedIDs) async {
+    String whereString = "`propid` IN (?) and `email`= ?";
+    final userData = ref.watch(newUserDataProivder);
+    var removedIdsString =
+        "${removedIDs.toString().substring(1, removedIDs.toString().length - 1)}";
+    print(removedIDs);
+    if (userData != null) {
+      List<dynamic> whereArguments = [removedIdsString, userData.email];
+      try {
+        await _database.delete("favs",
+            where: whereString, whereArgs: whereArguments);
+      } catch (e) {
+        print(e);
+      }
+    } else {}
   }
 }
