@@ -3,6 +3,7 @@ import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/main.dart';
 import 'package:aman_project/models/property.dart';
+import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
@@ -19,7 +20,7 @@ class Wishlist extends ConsumerStatefulWidget {
 class WishlistState extends ConsumerState<Wishlist> {
   late Database _database;
   late List<Map<String, dynamic>> _favorites;
-  List<Property> resultWhishlist = [];
+  List<Property> resultWhishlist = [Property.alternate()];
   @override
   void initState() {
     _openDatabase();
@@ -28,58 +29,8 @@ class WishlistState extends ConsumerState<Wishlist> {
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(whishlistProvider).isNotEmpty
-        ? SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  alignment: Alignment.topCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Your WishList',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Icon(
-                        Icons.favorite,
-                        color: Theme.of(context).primaryColor,
-                        size: 35,
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height - 100,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: ListView.builder(
-                      itemCount: ref.watch(whishlistProvider).length,
-                      itemBuilder: (context, index) {
-                        // ref.read(resultsCount.notifier).state = data.size;
-                        return PropertyWidget(
-                          property: ref.watch(whishlistProvider)[index],
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        : SafeArea(
+    return resultWhishlist.isEmpty
+        ? SafeArea(
             child: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +63,59 @@ class WishlistState extends ConsumerState<Wishlist> {
                     child: const Text('Start SHOPPING'),
                   ),
                 ])),
-          );
+          )
+        : resultWhishlist[0].docId == '-1'
+            ? const Center(child: LoadingScreen())
+            : SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      alignment: Alignment.topCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Your WishList',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Icon(
+                            Icons.favorite,
+                            color: Theme.of(context).primaryColor,
+                            size: 35,
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height - 100,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: ListView.builder(
+                          itemCount: ref.watch(whishlistProvider).length,
+                          itemBuilder: (context, index) {
+                            // ref.read(resultsCount.notifier).state = data.size;
+                            return PropertyWidget(
+                              property: ref.watch(whishlistProvider)[index],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
   }
 
   void _openDatabase() async {
