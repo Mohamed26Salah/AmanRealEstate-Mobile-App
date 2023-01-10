@@ -63,6 +63,7 @@ class _NavBarState extends ConsumerState<NavBar> {
       bottomNavigationBar: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: SizedBox(
+          width: MediaQuery.of(context).size.width,
           child: GNav(
             onTabChange: (i) {
               setState(() {
@@ -72,7 +73,7 @@ class _NavBarState extends ConsumerState<NavBar> {
 
             selectedIndex: index,
             tabBorderRadius: 100,
-            iconSize: 20,
+            iconSize: 25,
             padding: const EdgeInsets.all(15),
             backgroundColor: (Colors.grey[300])!,
             color: Colors.black,
@@ -93,7 +94,7 @@ class _NavBarState extends ConsumerState<NavBar> {
                 icon: Icons.person,
                 text: 'Profile',
               ),
-               const GButton(
+              const GButton(
                 icon: Icons.location_pin,
                 text: 'Location',
               ),

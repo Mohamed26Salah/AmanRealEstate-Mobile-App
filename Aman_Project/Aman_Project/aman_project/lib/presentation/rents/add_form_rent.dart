@@ -2,7 +2,6 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../shared_features/custom_loading_screen.dart';
 import '../../constants/globals.dart' as val;
 import '../shared_features/custom_message.dart';

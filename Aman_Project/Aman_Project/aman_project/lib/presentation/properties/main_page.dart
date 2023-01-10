@@ -118,7 +118,7 @@ class _SearchState extends ConsumerState<Search> {
                   right: 24, left: 24, top: 10, bottom: 12),
               //war top 24
               child: Row(
-                children: [
+                children: const [
                   // Text(
                   //   ref.watch(resultsCount).toString(),
                   //   style: const TextStyle(
