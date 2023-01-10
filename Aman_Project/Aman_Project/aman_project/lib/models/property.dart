@@ -61,6 +61,25 @@ class Property {
       this.noRooms,
       this.theNumberOFAB,
       this.typeOFActivity});
+  Property.alternate({
+    this.docId = '-1',
+    this.addressAdmin = '',
+    this.addressUser = '',
+    this.area = 0,
+    this.descriptionAdmin = '',
+    this.descriptionUser = '',
+    this.unitName = '',
+    this.offered = '',
+    this.ownerName = '',
+    this.ownerNumber = '',
+    this.paymentMethod = '',
+    this.priority = '',
+    this.type = '',
+    this.visible = '',
+    this.price = 0,
+    this.multiImages = const [],
+    this.singleImage = '',
+  });
   factory Property.fromJson(Map<String, dynamic> json, String id) => Property(
         docId: id,
         addressAdmin: json["addressForAdmin"],
