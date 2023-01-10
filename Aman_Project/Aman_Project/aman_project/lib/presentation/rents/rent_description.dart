@@ -1,4 +1,5 @@
 import 'package:aman_project/data/image_management.dart';
+import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/models/rent.dart';
@@ -278,7 +279,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                   child: IconButton(
                                     icon : const Icon(Icons.phone,   size: 20,),
                                     onPressed: () {
-                                      Property.makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
+                                      // PropertyManagement.makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
                                     } ,
                                     color: Theme.of(context).primaryColor,
                                   

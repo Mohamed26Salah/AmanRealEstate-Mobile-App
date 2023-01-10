@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../models/chart_data.dart';
 import '../models/property.dart';
@@ -187,5 +189,72 @@ class PropertyManagement {
     datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
 
     return datanum2;
+  }
+
+  static void makePhoneCall({List<String>? phoneNumbers , required BuildContext context}) async {
+    phoneNumbers = [];
+    phoneNumbers.add('01152327193');
+    phoneNumbers.add('01152327191');
+    phoneNumbers.add('01152327192');
+
+    String? chosenValue;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Call "),
+        content: SizedBox(
+          height: 100,
+          child: Property.showDropdown(
+              context: context,
+              hint: 'Select Number',
+              dropdownItems: phoneNumbers!,
+              text: "Phone Numbers",
+              show: true,
+              value: chosenValue,
+              onChanged: (value) {
+                chosenValue = value;
+              }),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).focusColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+            child: const Text(
+              'CANCEL',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (await canLaunchUrlString('tel: +2${chosenValue!}')) {
+                await launchUrlString('tel: +2${chosenValue!}');
+              } else {
+                throw 'Could not launch $chosenValue';
+              }
+            },
+            style: TextButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+            child: Text(
+              'Call',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

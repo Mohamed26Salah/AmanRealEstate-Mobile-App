@@ -292,12 +292,4 @@ class Property {
             ),
           );
   }
-
-  static void makePhoneCall(String phoneNumber) async {
-    if (await canLaunchUrlString(phoneNumber)) {
-      await launchUrlString(phoneNumber);
-    } else {
-      throw 'Could not launch $phoneNumber';
-    }
-  }
 }
