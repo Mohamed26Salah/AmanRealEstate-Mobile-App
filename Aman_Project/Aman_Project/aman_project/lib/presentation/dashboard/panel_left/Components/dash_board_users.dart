@@ -84,12 +84,15 @@ class _DashBoardUsersState extends State<DashBoardUsers> {
         SizedBox(
           height: MediaQuery.of(context).size.shortestSide / 1.3,
           width: MediaQuery.of(context).size.width,
-          child: Card(
-              // color: ,
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: UsersListWidget(query: query)),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Card(
+                // color: ,
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: UsersListWidget(query: query)),
+          ),
         ),
       ],
     );
