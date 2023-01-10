@@ -126,16 +126,16 @@ class Property {
         "price": price,
         "multiImages": multiImages,
         "singleImage": singleImage,
-        "doublex": doublex,
-        "finishing": finishing,
-        "floor": floor,
-        "furnished": furnished,
-        "noBathrooms": noBathrooms,
-        "noFlats": noFlats,
-        "noFloors": noFloors,
-        "noRooms": noRooms,
-        "noAB": theNumberOFAB,
-        "typeOFActivity": typeOFActivity
+        "doublex": doublex ?? "",
+        "finishing": finishing ?? "",
+        "floor": floor ?? "",
+        "furnished": furnished ?? "",
+        "noBathrooms": noBathrooms ?? "",
+        "noFlats": noFlats ?? "",
+        "noFloors": noFloors ?? "",
+        "noRooms": noRooms ?? "",
+        "noAB": theNumberOFAB ?? "",
+        "typeOFActivity": typeOFActivity ?? ""
       };
 
   static Padding buildTextField(
@@ -196,16 +196,10 @@ class Property {
                       if (!value!.isValidAddress) {
                         return 'Please enter a valid $labelText';
                       }
-                      if (!value.isValidNameArabic) {
-                        return 'Please enter a valid $labelText';
-                      }
                       return null;
                     }
                     if (type == 'address') {
                       if (!value!.isValidAddress) {
-                        return 'Please enter a valid $labelText';
-                      }
-                      if (!value.isValidNameArabic) {
                         return 'Please enter a valid $labelText';
                       }
                       return null;
@@ -291,13 +285,5 @@ class Property {
               ],
             ),
           );
-  }
-
-  static void makePhoneCall(String phoneNumber) async {
-    if (await canLaunchUrlString(phoneNumber)) {
-      await launchUrlString(phoneNumber);
-    } else {
-      throw 'Could not launch $phoneNumber';
-    }
   }
 }

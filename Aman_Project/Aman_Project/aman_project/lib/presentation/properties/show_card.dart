@@ -5,7 +5,6 @@ import 'package:aman_project/presentation/shared_features/custom_loading_screen.
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ShowCard extends ConsumerStatefulWidget {
   const ShowCard({super.key});
@@ -29,15 +28,6 @@ class _ShowCardState extends ConsumerState<ShowCard> {
             ? choosedPropertyTypeToGetData = ref.watch(filteredProperty)
             : choosedPropertyTypeToGetData = ref.watch(getPropertyData);
 
-    // if (ref.watch(filterTypeProivder) != "" ||
-    //     ref.watch(filterRoomProivder) != "" ||
-    //     ref.watch(filterBathroomProivder) != "" ||
-    //     ref.watch(filterPriceProivder) != "") {
-    //   choosedPropertyTypeToGetData = ref.watch(filteredProperty);
-    // }
-    // if (coming != "") {
-    //   choosedPropertyTypeToGetData = ref.watch(searchedProperty);
-    // }
     try {
       return choosedPropertyTypeToGetData.when(data: (data) {
         return ListView.builder(

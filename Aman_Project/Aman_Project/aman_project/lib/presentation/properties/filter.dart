@@ -381,8 +381,7 @@ class _FilterState extends ConsumerState<Filter> {
                   ref.read(filterRoomProivder.notifier).state = roomFilter;
                   ref.read(filterBathroomProivder.notifier).state =
                       bathroomFilter;
-                  // ref.read(filterAreaProivder.notifier).state =
-                  //     areaSelectedRange;
+                  ref.read(searchInputProivder.notifier).state = "";
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(

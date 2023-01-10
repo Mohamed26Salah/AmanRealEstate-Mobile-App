@@ -104,7 +104,7 @@ class _RentsPageState extends ConsumerState<RentsPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).pushNamed('/addFormRent');
           // context.push('/addFormUnits');
@@ -136,11 +136,7 @@ class _SalahCardState extends ConsumerState<SalahCard> {
       elevation: 4.0,
       child: InkWell(
           onTap: () {
-            // if (true) {
-            //   setState(() {});
-            // }
             ref.read(rentTypeUserChoice.notifier).state = widget.rentType;
-            print(ref.read(rentTypeUserChoice.notifier).state);
             Navigator.of(context)
                 .pushNamed('/MainPageRent', arguments: widget.rentType);
           },

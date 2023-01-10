@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../models/chart_data.dart';
 import '../models/property.dart';
 
@@ -76,7 +77,11 @@ class PropertyManagement {
       doublex: doublex,
     );
     final json = property.toJson();
-    await docProperty.set(json);
+    try {
+      await docProperty.set(json);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
   static Future updateProperty({
@@ -108,43 +113,80 @@ class PropertyManagement {
     String? floor,
     String? doublex,
   }) async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.doc('properties/$docId');
-    docRef.update({
-      'type': type,
-      'ownerName': ownerName,
-      'ownerNumber': ownerNumber,
-      'addressForUser': addressForUser,
-      'addressForAdmin': addressForAdmin,
-      'area': area,
-      'price': price,
-      'descriptionForUser': descriptionForUser,
-      'descriptionForAdmin': descriptionForAdmin,
-      'unitName': unitName,
-      'paymentMethod': paymentMethod,
-      'priority': priority,
-      'visible': visible,
-      'offered': offered,
-      'singleImage': singleImage,
-      'multiImages': mutliImages,
-      'typeOFActivity': typeOFActivity ?? "",
-      'noAB': noAB ?? "",
-      'noFloors': noFloors ?? "",
-      'noFlats': noFlats ?? "",
-      'noRooms': noRooms ?? "",
-      'noBathrooms': noBathrooms ?? "",
-      'finishing': finishing ?? "",
-      'furnished': furnished ?? "",
-      'floor': floor ?? "",
-      'doublex': doublex ?? "",
-    });
+    try {
+      DocumentReference docRef =
+          FirebaseFirestore.instance.doc('properties/$docId');
+      // docRef.update({
+      //   'type': type,
+      //   'ownerName': ownerName,
+      //   'ownerNumber': ownerNumber,
+      //   'addressForUser': addressForUser,
+      //   'addressForAdmin': addressForAdmin,
+      //   'area': area,
+      //   'price': price,
+      //   'descriptionForUser': descriptionForUser,
+      //   'descriptionForAdmin': descriptionForAdmin,
+      //   'unitName': unitName,
+      //   'paymentMethod': paymentMethod,
+      //   'priority': priority,
+      //   'visible': visible,
+      //   'offered': offered,
+      //   'singleImage': singleImage,
+      //   'multiImages': mutliImages,
+      //   'typeOFActivity': typeOFActivity ?? "",
+      //   'noAB': noAB ?? "",
+      //   'noFloors': noFloors ?? "",
+      //   'noFlats': noFlats ?? "",
+      //   'noRooms': noRooms ?? "",
+      //   'noBathrooms': noBathrooms ?? "",
+      //   'finishing': finishing ?? "",
+      //   'furnished': furnished ?? "",
+      //   'floor': floor ?? "",
+      //   'doublex': doublex ?? "",
+      // });
+      final property = Property(
+        type: type,
+        ownerName: ownerName,
+        ownerNumber: ownerNumber,
+        addressUser: addressForUser,
+        addressAdmin: addressForAdmin,
+        area: area,
+        price: price,
+        descriptionUser: descriptionForUser,
+        descriptionAdmin: descriptionForAdmin,
+        unitName: unitName,
+        paymentMethod: paymentMethod,
+        priority: priority,
+        visible: visible,
+        offered: offered,
+        singleImage: singleImage,
+        multiImages: mutliImages,
+        typeOFActivity: typeOFActivity,
+        theNumberOFAB: noAB,
+        noFloors: noFloors,
+        noFlats: noFlats,
+        noRooms: noRooms,
+        noBathrooms: noBathrooms,
+        finishing: finishing,
+        furnished: furnished,
+        floor: floor,
+        doublex: doublex,
+      );
+      final json = property.toJson();
+      docRef.update(json);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
   static deleteProduct(String id) async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('properties').doc(id);
-
-    docRef.delete();
+    try {
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('properties').doc(id);
+      docRef.delete();
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
   static Future<List<dynamic>> getWishlistData(List<String> ids) async {
@@ -188,5 +230,78 @@ class PropertyManagement {
     datanum.forEach((k, v) => datanum2.add(ChartData(k, v)));
 
     return datanum2;
+  }
+
+  static void makePhoneCall(
+      {required BuildContext context,
+      Property? routeArgs,
+      bool isVisible = false}) async {
+    List<String>? phoneNumbersUsers = [];
+    phoneNumbersUsers.add('01152327193');
+    phoneNumbersUsers.add('01152327191');
+    phoneNumbersUsers.add('01152327192');
+
+    List<String>? phoneNumbersAdmin = [];
+    phoneNumbersAdmin.add(routeArgs!.ownerNumber);
+    String? chosenValue;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Call "),
+        content: SizedBox(
+          height: 100,
+          child: Property.showDropdown(
+              context: context,
+              hint: 'Select Number',
+              dropdownItems:
+                  isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
+              text: "Phone Numbers",
+              show: true,
+              value: chosenValue,
+              onChanged: (value) {
+                chosenValue = value;
+              }),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).focusColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+            child: const Text(
+              'CANCEL',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (await canLaunchUrlString('tel: +2${chosenValue!}')) {
+                await launchUrlString('tel: +2${chosenValue!}');
+              } else {
+                throw 'Could not launch $chosenValue';
+              }
+            },
+            style: TextButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+            child: Text(
+              'Call',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

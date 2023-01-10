@@ -11,8 +11,6 @@ import 'package:sqflite/sqflite.dart';
 import '../shared_features/custom_loading_screen.dart';
 
 import '../../common_widgets/property_details.dart';
-import '../shared_features/custom_message.dart';
-import '../../constants/globals.dart' as val;
 
 class Details extends ConsumerStatefulWidget {
   // final Property? property;
@@ -96,10 +94,9 @@ class _DetailsState extends ConsumerState<Details> {
     Orientation screenLandscape = MediaQuery.of(context).orientation;
     var sizeLandscape = MediaQuery.of(context).size.height;
 
-    if(screenLandscape == Orientation.landscape) {
-        sizeLandscape *= 0.8;
-    }
-    else {
+    if (screenLandscape == Orientation.landscape) {
+      sizeLandscape *= 0.8;
+    } else {
       sizeLandscape *= 0.4;
     }
 
@@ -132,210 +129,216 @@ class _DetailsState extends ConsumerState<Details> {
           children: [
             Expanded(
               flex: 3,
-              child: SingleChildScrollView(
-                child: Hero(
-                  tag: routeArgs.singleImage,
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 24),
-                    clipBehavior: Clip.antiAlias,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),
-                    ),
-                    child: Container(
-                      height: sizeLandscape,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          // image: NetworkImage(mainImage),
-                          image: CachedNetworkImageProvider(
-                            routeArgs.singleImage,
-                          ),
-                          fit: BoxFit.cover,
+              child: NoGlowScroll(
+                child: SingleChildScrollView(
+                  child: Hero(
+                    tag: routeArgs.singleImage,
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 24),
+                      clipBehavior: Clip.antiAlias,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
                         ),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: const BoxDecoration(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.white,
-                                    size: 24,
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: isVisible,
-                                  child: Icon(
-                                    Icons.remove_red_eye_rounded,
-                                    color: visible,
-                                    size: 30,
-                                    shadows: [defaultShadow],
-                                  ),
-                                )
-                              ],
+                        height: sizeLandscape,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            // image: NetworkImage(mainImage),
+                            image: CachedNetworkImageProvider(
+                              routeArgs.singleImage,
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              width: 80,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  routeArgs.type,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: offeredColor,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              width: 80,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  routeArgs.offered,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(),
-                            ),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      child: ExtractedWidgets()
-                                          .strokeWidget(routeArgs.unitName, 25),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: const BoxDecoration(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.white,
+                                      size: 24,
                                     ),
-                                    FutureBuilder(
-                                      future: checkFavorite(routeArgs.docId!),
-                                      builder: (contextt, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return const Center(
-                                            child: LoadingScreen(),
-                                          );
-                                        } else {
-                                          return InkWell(
-                                            onTap: () {
-                                              _openDatabase();
-                                              if (snapshot.data!) {
-                                                removeitem(routeArgs);
-                                              } else {
-                                                additem(routeArgs);
-                                              }
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                              height: 50,
-                                              width: 50,
-                                              decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Center(
-                                                child: Icon(
-                                                  snapshot.data!
-                                                      ? Icons.favorite
-                                                      : Icons.favorite_border,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  size: 20,
+                                  ),
+                                  Visibility(
+                                    visible: isVisible,
+                                    child: Icon(
+                                      Icons.remove_red_eye_rounded,
+                                      color: visible,
+                                      size: 30,
+                                      shadows: [defaultShadow],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                                width: 80,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    routeArgs.type,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: offeredColor,
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                                width: 80,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    routeArgs.offered,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: ExtractedWidgets().strokeWidget(
+                                            routeArgs.unitName, 25),
+                                      ),
+                                      FutureBuilder(
+                                        future: checkFavorite(routeArgs.docId!),
+                                        builder: (contextt, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            return const Center(
+                                              child: LoadingScreen(),
+                                            );
+                                          } else {
+                                            return InkWell(
+                                              onTap: () {
+                                                _openDatabase();
+                                                if (snapshot.data!) {
+                                                  removeitem(routeArgs);
+                                                } else {
+                                                  additem(routeArgs);
+                                                }
+                                                setState(() {});
+                                              },
+                                              child: Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Center(
+                                                  child: Icon(
+                                                    snapshot.data!
+                                                        ? Icons.favorite
+                                                        : Icons.favorite_border,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    size: 20,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    // Row(
-                                    //   children: [
-                                     Icon(
-                                      Icons.location_on,
-                                       shadows: [defaultShadow],
-                                      color: Colors.white,
-                                      size: 14,
-                                    ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Flexible(
-                                        child: ExtractedWidgets().strokeWidget(
-                                            routeArgs.addressUser, 16)),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                     Icon(
-                                      Icons.zoom_out_map,
-                                      shadows: [defaultShadow],
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    ExtractedWidgets().strokeWidget('${routeArgs.area} sq/m', 14),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    ExtractedWidgets().strokeWidget(r"$" + routeArgs.price.toString(), 14),
-                                    //   ],
-                                    // ),
-                                  ],
-                                ),
-                                
-                              ],
-                            ),
-                          ],
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      // Row(
+                                      //   children: [
+                                      Icon(
+                                        Icons.location_on,
+                                        shadows: [defaultShadow],
+                                        color: Colors.white,
+                                        size: 14,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Flexible(
+                                          child: ExtractedWidgets()
+                                              .strokeWidget(
+                                                  routeArgs.addressUser, 16)),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      Icon(
+                                        Icons.zoom_out_map,
+                                        shadows: [defaultShadow],
+                                        color: Colors.white,
+                                        size: 16,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      ExtractedWidgets().strokeWidget(
+                                          '${routeArgs.area} sq/m', 14),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      ExtractedWidgets().strokeWidget(
+                                          r"$" + routeArgs.price.toString(),
+                                          14),
+                                      //   ],
+                                      // ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -376,6 +379,16 @@ class _DetailsState extends ConsumerState<Details> {
                                       color: Colors.grey[500],
                                     ),
                                   ),
+                                  Visibility(
+                                    visible: isVisible,
+                                    child: Text(
+                                      routeArgs.ownerNumber,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.grey[500],
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -394,8 +407,10 @@ class _DetailsState extends ConsumerState<Details> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: () {
-                                      Property.makePhoneCall(
-                                          'tel: +2 ${routeArgs.ownerNumber}');
+                                      PropertyManagement.makePhoneCall(
+                                          context: context,
+                                          isVisible: isVisible,
+                                          routeArgs: routeArgs);
                                     },
                                     child: Icon(
                                       Icons.phone,
