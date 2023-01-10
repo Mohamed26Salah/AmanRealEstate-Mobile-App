@@ -1,7 +1,5 @@
 import 'package:aman_project/data/image_management.dart';
-import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
-import 'package:aman_project/models/property.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,13 +13,11 @@ class RentsDescription extends ConsumerStatefulWidget {
 }
 
 class _RentsDescriptionState extends ConsumerState<RentsDescription> {
-
-  
   @override
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     final userData = ref.watch(newUserDataProivder);
-   
+
     Size size = MediaQuery.of(context).size;
     var defaultShadow = Shadow(
       color: Colors.black,
@@ -277,12 +273,14 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 ),
                                 child: Center(
                                   child: IconButton(
-                                    icon : const Icon(Icons.phone,   size: 20,),
+                                    icon: const Icon(
+                                      Icons.phone,
+                                      size: 20,
+                                    ),
                                     onPressed: () {
                                       // PropertyManagement.makePhoneCall('tel: +2 ${routeArgs.tenantNum}');
-                                    } ,
+                                    },
                                     color: Theme.of(context).primaryColor,
-                                  
                                   ),
                                 ),
                               ),
@@ -541,6 +539,4 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
       return const SizedBox();
     }
   }
-
-  
 }

@@ -11,8 +11,6 @@ import 'package:sqflite/sqflite.dart';
 import '../shared_features/custom_loading_screen.dart';
 
 import '../../common_widgets/property_details.dart';
-import '../shared_features/custom_message.dart';
-import '../../constants/globals.dart' as val;
 
 class Details extends ConsumerStatefulWidget {
   // final Property? property;

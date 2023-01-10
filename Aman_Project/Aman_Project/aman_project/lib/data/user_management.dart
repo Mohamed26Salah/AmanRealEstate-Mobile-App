@@ -113,7 +113,7 @@ class UserHelper {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return Center(
+              return const Center(
                 child: LoadingScreen(),
               );
             });

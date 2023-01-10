@@ -1,6 +1,5 @@
 import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/chart_data.dart';
 
@@ -41,12 +40,16 @@ class RentsManagement {
         endOFRent: endOFRent,
         rentType: rentType);
     final json = rent.toJson();
-    await docRent.set(json);
+    try {
+      await docRent.set(json);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
   static editRent(
       {required String docId,
-        required int rentPrice,
+      required int rentPrice,
       required String type,
       required int area,
       required String floor,
@@ -64,7 +67,6 @@ class RentsManagement {
       required String rentType}) async {
     final docRent = FirebaseFirestore.instance.collection('rents').doc();
     final rent = Rents(
-        
         rentPrice: rentPrice,
         type: type,
         area: area,
@@ -82,7 +84,11 @@ class RentsManagement {
         endOFRent: endOFRent,
         rentType: rentType);
     final json = rent.toJson();
-    await docRent.set(json);
+    try {
+      await docRent.set(json);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
 // if equal!!
@@ -110,15 +116,18 @@ class RentsManagement {
     List data = [];
     Map datanum = {};
     List<ChartData> datanum2 = [];
-
-    await FirebaseFirestore.instance
-        .collection('rents')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        data.add(doc["rentType"]);
-      }
-    });
+    try {
+      await FirebaseFirestore.instance
+          .collection('rents')
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        for (var doc in querySnapshot.docs) {
+          data.add(doc["rentType"]);
+        }
+      });
+    } on FirebaseException catch (e) {
+      print(e);
+    }
 
     for (var e in data) {
       datanum.containsKey(e) ? datanum[e]++ : datanum[e] = 1;
