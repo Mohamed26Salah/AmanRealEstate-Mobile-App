@@ -1,6 +1,7 @@
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
+import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,18 +59,16 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           },
         );
       }, loading: () {
-        return Center(
-            child: LoadingAnimationWidget.dotsTriangle(
-          color: const Color.fromARGB(255, 205, 153, 51),
-          size: 80,
-        ));
+        return const Center(
+          child: LoadingScreen(),
+        );
       }, error: (error, stack) {
         return Center(
           child: Text(error.toString()),
         );
       });
     } on Error catch (e) {
-      print(e);
+      // print(e);
       return Scaffold(
           body: Center(
         child: Column(

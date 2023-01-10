@@ -157,34 +157,8 @@ class PropertyManagement {
             .doc(id)
             .get()
             .then((querySnapshot) {
-          results.add(Property(
-              docId: id,
-              addressAdmin: querySnapshot.data()!['addressForAdmin'],
-              addressUser: querySnapshot.data()!['addressForUser'],
-              area: querySnapshot.data()!['area'],
-              descriptionAdmin: querySnapshot.data()!['descriptionForAdmin'],
-              descriptionUser: querySnapshot.data()!['descriptionForUser'],
-              unitName: querySnapshot.data()!['unitName'],
-              offered: querySnapshot.data()!['offered'],
-              ownerName: querySnapshot.data()!['ownerName'],
-              ownerNumber: querySnapshot.data()!['ownerNumber'],
-              paymentMethod: querySnapshot.data()!['paymentMethod'],
-              priority: querySnapshot.data()!['priority'],
-              type: querySnapshot.data()!['type'],
-              visible: querySnapshot.data()!['visible'],
-              price: querySnapshot.data()!['price'],
-              multiImages: querySnapshot.data()!['multiImages'],
-              singleImage: querySnapshot.data()!['singleImage'],
-              doublex: querySnapshot.data()!['doublex'],
-              finishing: querySnapshot.data()!['finishing'],
-              floor: querySnapshot.data()!['floor'],
-              furnished: querySnapshot.data()!['furnished'],
-              noBathrooms: querySnapshot.data()!['noBathrooms'],
-              noFlats: querySnapshot.data()!['noFlats'],
-              noFloors: querySnapshot.data()!['noFloors'],
-              noRooms: querySnapshot.data()!['noRooms'],
-              theNumberOFAB: querySnapshot.data()!['theNumberOFAB'],
-              typeOFActivity: querySnapshot.data()!['typeOFActivity']));
+          var property = Property.fromJson(querySnapshot.data()!, id);
+          results.add(property);
         });
       } catch (e) {
         print("property removed");

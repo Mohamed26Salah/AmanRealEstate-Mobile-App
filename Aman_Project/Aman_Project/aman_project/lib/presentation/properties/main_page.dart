@@ -34,6 +34,10 @@ class _SearchState extends ConsumerState<Search> {
         ref.watch(filterRoomProivder) != "" ||
         ref.watch(filterBathroomProivder) != "" ||
         ref.watch(filterPriceProivder) != "") {
+      // print(ref.watch(filterTypeProivder));
+      // print(ref.watch(filterRoomProivder));
+      // print(ref.watch(filterBathroomProivder));
+      // print(ref.watch(filterPriceProivder));
       _inputSearchController.text = "";
     }
 
@@ -99,6 +103,7 @@ class _SearchState extends ConsumerState<Search> {
                         ),
                         IconButton(
                             onPressed: () {
+                              clearProivders(ref);
                               _showBottomSheet();
                               ref.read(searchInputProivder.notifier).state = "";
                             },
@@ -115,10 +120,11 @@ class _SearchState extends ConsumerState<Search> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  right: 24, left: 24, top: 10, bottom: 12),
+                  right: 24, left: 24, top: 10, bottom: 0),
               //war top 24
               child: Row(
-                children: const [
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   // Text(
                   //   ref.watch(resultsCount).toString(),
                   //   style: const TextStyle(
@@ -129,12 +135,7 @@ class _SearchState extends ConsumerState<Search> {
                   // const SizedBox(
                   //   width: 8,
                   // ),
-                  // const Text(
-                  //   "Resutls Found",
-                  //   style: TextStyle(
-                  //     fontSize: 24,
-                  //   ),
-                  // ),
+                  textType(),
                 ],
               ),
             ),
@@ -205,5 +206,24 @@ class _SearchState extends ConsumerState<Search> {
             ],
           );
         });
+  }
+
+  Widget textType() {
+    var type = "Properties";
+    if (ref.watch(filterTypeProivder) != "" ||
+        ref.watch(filterRoomProivder) != "" ||
+        ref.watch(filterBathroomProivder) != "" ||
+        ref.watch(filterPriceProivder) != "") {
+      type = "Filtered Properties";
+    }
+    if (ref.watch(searchInputProivder) != "") {
+      type = "Searched Properties";
+    }
+    return Text(
+      type,
+      style: const TextStyle(
+        fontSize: 24,
+      ),
+    );
   }
 }

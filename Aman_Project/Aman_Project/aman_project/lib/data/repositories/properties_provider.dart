@@ -74,7 +74,7 @@ final filteredProperty = StreamProvider((ref) {
   return query.snapshots() as Stream<QuerySnapshot<Map<String, dynamic>>>;
 });
 clearProivders(WidgetRef ref) {
-  ref.read(searchInputProivder.notifier).state = "";
+  // ref.read(searchInputProivder.notifier).state = "";
   ref.read(filterTypeProivder.notifier).state = "";
   ref.read(filterRoomProivder.notifier).state = "";
   ref.read(filterBathroomProivder.notifier).state = "";
