@@ -113,6 +113,7 @@ class ExtractedWidgets {
       children: [
         Text(
           text,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             // color: Colors.white,
             fontSize: size,
@@ -124,6 +125,7 @@ class ExtractedWidgets {
           ),
         ),
         Text(
+          overflow: TextOverflow.ellipsis,
           text,
           style: TextStyle(
             color: Colors.white,

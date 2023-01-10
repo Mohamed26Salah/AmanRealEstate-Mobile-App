@@ -93,6 +93,16 @@ class _DetailsState extends ConsumerState<Details> {
       } else {}
     }
 
+    Orientation screenLandscape = MediaQuery.of(context).orientation;
+    var sizeLandscape = MediaQuery.of(context).size.height;
+
+    if(screenLandscape == Orientation.landscape) {
+        sizeLandscape *= 0.8;
+    }
+    else {
+      sizeLandscape *= 0.4;
+    }
+
     Color offeredColor;
     routeArgs.offered == 'For Rent'
         ? offeredColor = Theme.of(context).errorColor
@@ -123,55 +133,35 @@ class _DetailsState extends ConsumerState<Details> {
             Expanded(
               flex: 3,
               child: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Hero(
-                      tag: routeArgs.singleImage,
-                      child: Container(
-                        height: size.height * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                          image: DecorationImage(
-                            image: CachedNetworkImageProvider(
-                                routeArgs.singleImage),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                stops: const [
-                                  0.5,
-                                  1.0,
-                                ],
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.black.withOpacity(0.7),
-                                ]),
-                          ),
-                        ),
+                child: Hero(
+                  tag: routeArgs.singleImage,
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 24),
+                    clipBehavior: Clip.antiAlias,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
                       ),
                     ),
-                    SizedBox(
-                      // height: size.height * 0.2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: MediaQuery.of(context).size.height / 34,
-                            ),
-                            child: Row(
+                    child: Container(
+                      height: sizeLandscape,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          // image: NetworkImage(mainImage),
+                          image: CachedNetworkImageProvider(
+                            routeArgs.singleImage,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
@@ -195,42 +185,12 @@ class _DetailsState extends ConsumerState<Details> {
                                 )
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 8,
+                            const SizedBox(
+                              height: 20,
                             ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: offeredColor,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              width: 80,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  routeArgs.offered,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 8,
-                            ),
-                            child: Container(
+                            Container(
                               decoration: const BoxDecoration(
-                                color: Colors.black,
+                                color: Color.fromARGB(255, 0, 0, 0),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(5),
                                 ),
@@ -250,92 +210,111 @@ class _DetailsState extends ConsumerState<Details> {
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical:
-                                  MediaQuery.of(context).size.height * 0.01,
+                            const SizedBox(
+                              height: 10,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                if (routeArgs.unitName.length > 15)
-                                  ExtractedWidgets().strokeWidget(
-                                      '${routeArgs.unitName.substring(1, 15)}...',
-                                      32),
-                                FutureBuilder(
-                                  future: checkFavorite(routeArgs.docId!),
-                                  builder: (contextt, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const Center(
-                                        child: LoadingScreen(),
-                                      );
-                                    } else {
-                                      return InkWell(
-                                        onTap: () {
-                                          _openDatabase();
-                                          if (snapshot.data!) {
-                                            removeitem(routeArgs);
-                                          } else {
-                                            additem(routeArgs);
-                                          }
-                                          setState(() {});
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: Icon(
-                                              snapshot.data!
-                                                  ? Icons.favorite
-                                                  : Icons.favorite_border,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              size: 20,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  },
+                            Container(
+                              decoration: BoxDecoration(
+                                color: offeredColor,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(5),
                                 ),
-                              ],
+                              ),
+                              width: 80,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  routeArgs.offered,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 24, right: 24, top: 8, bottom: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(
+                                    Flexible(
+                                      child: ExtractedWidgets()
+                                          .strokeWidget(routeArgs.unitName, 25),
+                                    ),
+                                    FutureBuilder(
+                                      future: checkFavorite(routeArgs.docId!),
+                                      builder: (contextt, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Center(
+                                            child: LoadingScreen(),
+                                          );
+                                        } else {
+                                          return InkWell(
+                                            onTap: () {
+                                              _openDatabase();
+                                              if (snapshot.data!) {
+                                                removeitem(routeArgs);
+                                              } else {
+                                                additem(routeArgs);
+                                              }
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              height: 50,
+                                              width: 50,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: Icon(
+                                                  snapshot.data!
+                                                      ? Icons.favorite
+                                                      : Icons.favorite_border,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 25,
+                                ),
+                                Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    // Row(
+                                    //   children: [
+                                     Icon(
                                       Icons.location_on,
+                                       shadows: [defaultShadow],
                                       color: Colors.white,
-                                      shadows: [defaultShadow],
-                                      size: 16,
+                                      size: 14,
                                     ),
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    if (routeArgs.unitName.length > 13)
-                                      ExtractedWidgets().strokeWidget(
-                                          '${routeArgs.unitName.substring(1, 13)}...',
-                                          16)
-                                    else
-                                      ExtractedWidgets()
-                                          .strokeWidget(routeArgs.unitName, 16),
+                                    Flexible(
+                                        child: ExtractedWidgets().strokeWidget(
+                                            routeArgs.addressUser, 16)),
                                     const SizedBox(
-                                      width: 8,
+                                      width: 15,
                                     ),
-                                    Icon(
+                                     Icon(
                                       Icons.zoom_out_map,
                                       shadows: [defaultShadow],
                                       color: Colors.white,
@@ -344,26 +323,23 @@ class _DetailsState extends ConsumerState<Details> {
                                     const SizedBox(
                                       width: 4,
                                     ),
-                                    ExtractedWidgets().strokeWidget(
-                                        "${routeArgs.area} sq/m", 16),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
+                                    ExtractedWidgets().strokeWidget('${routeArgs.area} sq/m', 14),
                                     const SizedBox(
-                                      width: 4,
+                                      width: 20,
                                     ),
-                                    ExtractedWidgets().strokeWidget(
-                                        r"$" + routeArgs.price.toString(), 16),
+                                    ExtractedWidgets().strokeWidget(r"$" + routeArgs.price.toString(), 14),
+                                    //   ],
+                                    // ),
                                   ],
                                 ),
+                                
                               ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
