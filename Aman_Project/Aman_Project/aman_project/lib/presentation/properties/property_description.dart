@@ -96,10 +96,9 @@ class _DetailsState extends ConsumerState<Details> {
     Orientation screenLandscape = MediaQuery.of(context).orientation;
     var sizeLandscape = MediaQuery.of(context).size.height;
 
-    if(screenLandscape == Orientation.landscape) {
-        sizeLandscape *= 0.8;
-    }
-    else {
+    if (screenLandscape == Orientation.landscape) {
+      sizeLandscape *= 0.8;
+    } else {
       sizeLandscape *= 0.4;
     }
 
@@ -163,7 +162,8 @@ class _DetailsState extends ConsumerState<Details> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
@@ -246,8 +246,8 @@ class _DetailsState extends ConsumerState<Details> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Flexible(
-                                        child: ExtractedWidgets()
-                                            .strokeWidget(routeArgs.unitName, 25),
+                                        child: ExtractedWidgets().strokeWidget(
+                                            routeArgs.unitName, 25),
                                       ),
                                       FutureBuilder(
                                         future: checkFavorite(routeArgs.docId!),
@@ -300,9 +300,9 @@ class _DetailsState extends ConsumerState<Details> {
                                     children: [
                                       // Row(
                                       //   children: [
-                                       Icon(
+                                      Icon(
                                         Icons.location_on,
-                                         shadows: [defaultShadow],
+                                        shadows: [defaultShadow],
                                         color: Colors.white,
                                         size: 14,
                                       ),
@@ -310,12 +310,13 @@ class _DetailsState extends ConsumerState<Details> {
                                         width: 4,
                                       ),
                                       Flexible(
-                                          child: ExtractedWidgets().strokeWidget(
-                                              routeArgs.addressUser, 16)),
+                                          child: ExtractedWidgets()
+                                              .strokeWidget(
+                                                  routeArgs.addressUser, 16)),
                                       const SizedBox(
                                         width: 15,
                                       ),
-                                       Icon(
+                                      Icon(
                                         Icons.zoom_out_map,
                                         shadows: [defaultShadow],
                                         color: Colors.white,
@@ -324,16 +325,18 @@ class _DetailsState extends ConsumerState<Details> {
                                       const SizedBox(
                                         width: 4,
                                       ),
-                                      ExtractedWidgets().strokeWidget('${routeArgs.area} sq/m', 14),
+                                      ExtractedWidgets().strokeWidget(
+                                          '${routeArgs.area} sq/m', 14),
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      ExtractedWidgets().strokeWidget(r"$" + routeArgs.price.toString(), 14),
+                                      ExtractedWidgets().strokeWidget(
+                                          r"$" + routeArgs.price.toString(),
+                                          14),
                                       //   ],
                                       // ),
                                     ],
                                   ),
-                                  
                                 ],
                               ),
                             ],
@@ -406,8 +409,10 @@ class _DetailsState extends ConsumerState<Details> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: () {
-                                      PropertyManagement.makePhoneCall(context: context);
-                                          
+                                      PropertyManagement.makePhoneCall(
+                                          context: context,
+                                          isVisible: isVisible,
+                                          routeArgs: routeArgs);
                                     },
                                     child: Icon(
                                       Icons.phone,

@@ -191,12 +191,17 @@ class PropertyManagement {
     return datanum2;
   }
 
-  static void makePhoneCall({List<String>? phoneNumbers , required BuildContext context}) async {
-    phoneNumbers = [];
-    phoneNumbers.add('01152327193');
-    phoneNumbers.add('01152327191');
-    phoneNumbers.add('01152327192');
+  static void makePhoneCall(
+      {required BuildContext context,
+      Property? routeArgs,
+      bool isVisible = false}) async {
+    List<String>? phoneNumbersUsers = [];
+    phoneNumbersUsers.add('01152327193');
+    phoneNumbersUsers.add('01152327191');
+    phoneNumbersUsers.add('01152327192');
 
+    List<String>? phoneNumbersAdmin = [];
+    phoneNumbersAdmin.add(routeArgs!.ownerNumber);
     String? chosenValue;
     showDialog(
       context: context,
@@ -207,7 +212,8 @@ class PropertyManagement {
           child: Property.showDropdown(
               context: context,
               hint: 'Select Number',
-              dropdownItems: phoneNumbers!,
+              dropdownItems:
+                  isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
               text: "Phone Numbers",
               show: true,
               value: chosenValue,
