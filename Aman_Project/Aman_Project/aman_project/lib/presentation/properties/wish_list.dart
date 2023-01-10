@@ -99,7 +99,7 @@ class WishlistState extends ConsumerState<Wishlist> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 100,
+                      height: MediaQuery.of(context).size.height / 1.33,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18),
                         child: ListView.builder(
