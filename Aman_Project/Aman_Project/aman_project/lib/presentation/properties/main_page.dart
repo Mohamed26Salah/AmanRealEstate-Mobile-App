@@ -100,8 +100,8 @@ class _SearchState extends ConsumerState<Search> {
                         IconButton(
                             onPressed: () {
                               _showBottomSheet();
-                              clearProivders(ref);
-                              ref.read(searchInputProivder.notifier).state = "";
+                              // clearProivders(ref);
+                              // ref.read(searchInputProivder.notifier).state = "";
                             },
                             icon: Icon(
                               Icons.menu,
