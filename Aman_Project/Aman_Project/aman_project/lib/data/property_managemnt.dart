@@ -193,9 +193,9 @@ class PropertyManagement {
     }
   }
 
-  static Future<List<Property>> getWishlistData(List<String> ids) async {
+  static Future<List<dynamic>> getWishlistData(List<String> ids) async {
     List<Property> results = [];
-
+    List<String> removedIDs = [];
     for (var id in ids) {
       try {
         await FirebaseFirestore.instance
@@ -208,9 +208,10 @@ class PropertyManagement {
         });
       } catch (e) {
         print("property removed");
+        removedIDs.add(id);
       }
     }
-    return results;
+    return [results, removedIDs];
   }
 
   static Future<List<ChartData>> getData() async {
