@@ -1,3 +1,4 @@
+import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
@@ -17,6 +18,7 @@ class _ShowCardState extends ConsumerState<ShowCard> {
   Query query = FirebaseFirestore.instance.collection('properties');
   @override
   Widget build(BuildContext context) {
+    final userData = ref.watch(newUserDataProivder);
     String coming = ref.watch(searchInputProivder);
     var choosedPropertyTypeToGetData = ref.watch(getPropertyData);
     (coming != "")
@@ -34,14 +36,24 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           itemCount: data.size,
           itemBuilder: (context, index) {
             // if (mounted) {}
-            Future.delayed(Duration(milliseconds: 100), () {
+            Future.delayed(const Duration(milliseconds: 100), () {
               ref.read(resultsCount.notifier).state = data.size;
             });
             var property =
                 Property.fromJson(data.docs[index].data(), data.docs[index].id);
-            return PropertyWidget(
-              property: property,
-            );
+            if (userData!.role == "user") {
+              if (property.visible == "No") {
+                return const SizedBox.shrink();
+              } else {
+                return PropertyWidget(
+                  property: property,
+                );
+              }
+            } else {
+              return PropertyWidget(
+                property: property,
+              );
+            }
           },
         );
       }, loading: () {

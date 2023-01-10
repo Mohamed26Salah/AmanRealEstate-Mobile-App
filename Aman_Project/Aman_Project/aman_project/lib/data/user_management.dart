@@ -1,5 +1,4 @@
 import 'package:aman_project/data/repositories/user_providers.dart';
-import 'package:aman_project/main.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -170,7 +169,7 @@ class UserHelper {
             barrierDismissible: false,
             context: context,
             builder: (context) {
-              return Center(
+              return const Center(
                 child: LoadingScreen(),
               );
             });

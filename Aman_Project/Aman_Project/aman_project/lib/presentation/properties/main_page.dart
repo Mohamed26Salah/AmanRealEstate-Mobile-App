@@ -148,7 +148,7 @@ class _SearchState extends ConsumerState<Search> {
           visible: isVisible,
           child: FloatingActionButton(
             backgroundColor: Theme.of(context).primaryColor,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushNamed('/addForm').then((value) {
                 ImageManagement().clearImageProivders(ref);

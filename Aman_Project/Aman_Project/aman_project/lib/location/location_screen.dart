@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-
-import 'package:aman_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -20,7 +18,7 @@ class _LocationState extends State<Location> {
       onWillPop: () async {
         // await Future.delayed(const Duration(milliseconds: 3000));
 
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           return Navigator.pop(context);
         });
         return false;
@@ -59,7 +57,7 @@ class _LocationState extends State<Location> {
                         // await Future.delayed(
                         //     const Duration(milliseconds: 3000));
                         // Navigator.pop(context);
-                        Timer(Duration(seconds: 2), () {
+                        Timer(const Duration(seconds: 2), () {
                           Navigator.pop(context);
                         });
                       },

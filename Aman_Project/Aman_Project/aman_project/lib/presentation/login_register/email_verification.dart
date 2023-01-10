@@ -90,13 +90,13 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset("assets/images/happy.png", width: 100),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     const Text(
                       'Welcome To Aman',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor:

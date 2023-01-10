@@ -1,14 +1,11 @@
 // ignore: unused_import
-
-import 'dart:async';
-
 import 'package:aman_project/models/chart_data.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'chart_widget.dart';
 
-class cards1 extends StatefulWidget {
+class Cards1 extends StatefulWidget {
   final String text;
   final String num;
   final int icon;
@@ -16,7 +13,7 @@ class cards1 extends StatefulWidget {
 
   final bool expand;
 
-  cards1({
+  Cards1({
     super.key,
     this.text = "Units",
     this.num = "0",
@@ -26,10 +23,10 @@ class cards1 extends StatefulWidget {
   });
 
   @override
-  State<cards1> createState() => _cards1State();
+  State<Cards1> createState() => _Cards1State();
 }
 
-class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
+class _Cards1State extends State<Cards1> with SingleTickerProviderStateMixin {
   AnimationController? expandController;
   Animation<double>? animation;
 
@@ -50,7 +47,7 @@ class _cards1State extends State<cards1> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(cards1 oldWidget) {
+  void didUpdateWidget(Cards1 oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

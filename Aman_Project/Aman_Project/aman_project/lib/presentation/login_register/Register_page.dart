@@ -1,12 +1,8 @@
 import 'package:aman_project/data/user_management.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../shared_features/custom_decoration.dart';
-import '../shared_features/custom_message.dart';
-import '../../constants/globals.dart' as val;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -104,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';
                         }
-                         if (value[value.length - 1] == '.') {
+                        if (value[value.length - 1] == '.') {
                           return 'Enter valid email';
                         }
                         return null;

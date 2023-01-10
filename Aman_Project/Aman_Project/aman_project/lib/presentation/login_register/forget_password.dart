@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import '../shared_features/custom_decoration.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -85,7 +83,7 @@ class _LoginPageState extends State<ForgetPassword> {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email';
                         }
-                         if (value[value.length - 1] == '.') {
+                        if (value[value.length - 1] == '.') {
                           return 'Enter valid email';
                         }
                         return null;

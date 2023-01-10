@@ -1,7 +1,6 @@
 import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
-import 'package:aman_project/main.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,3 @@
-import 'package:aman_project/location/location_screen.dart';
 import 'package:aman_project/presentation/properties/wish_list.dart';
 import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
@@ -65,13 +64,12 @@ class _NavBarState extends ConsumerState<NavBar> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: GNav(
-            
             onTabChange: (i) {
               setState(() {
                 index = i;
               });
             },
-          
+
             selectedIndex: index,
             tabBorderRadius: 100,
             iconSize: 25,

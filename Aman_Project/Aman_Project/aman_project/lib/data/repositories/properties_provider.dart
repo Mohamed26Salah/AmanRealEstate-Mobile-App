@@ -31,6 +31,12 @@ final resultsCount = StateProvider<int>((ref) {
 final getPropertyData = StreamProvider((ref) {
   return FirebaseFirestore.instance.collection('properties').snapshots();
 });
+final getUserPropertyData = StreamProvider((ref) {
+  return FirebaseFirestore.instance
+      .collection('properties')
+      .where("visible", isEqualTo: "Yes")
+      .snapshots();
+});
 final searchedProperty = StreamProvider((ref) {
   return FirebaseFirestore.instance
       .collection('properties')

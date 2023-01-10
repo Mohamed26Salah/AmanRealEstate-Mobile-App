@@ -269,7 +269,7 @@ class _FilterState extends ConsumerState<Filter> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           const Text(
@@ -438,7 +438,7 @@ class _FilterState extends ConsumerState<Filter> {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),

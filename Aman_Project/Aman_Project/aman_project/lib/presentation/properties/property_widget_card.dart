@@ -2,7 +2,6 @@ import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // final userRoleProvider = FutureProvider((ref) async {
 //   return await UserHelper().getUser();

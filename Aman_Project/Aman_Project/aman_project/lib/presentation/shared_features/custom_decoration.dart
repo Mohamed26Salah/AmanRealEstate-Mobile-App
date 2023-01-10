@@ -4,7 +4,7 @@ class CommonStyle {
   static InputDecoration textFieldStyle(
       {String labelText = "", String hintText = "", String? value}) {
     return InputDecoration(
-      contentPadding: EdgeInsets.all(12),
+      contentPadding: const EdgeInsets.all(12),
       labelText: labelText,
       hintText: hintText,
       labelStyle: const TextStyle(color: Colors.black),

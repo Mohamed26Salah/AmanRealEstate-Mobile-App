@@ -1,12 +1,10 @@
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/data/user_management.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../theme/theme_manager.dart';
 import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../shared_features/custom_decoration.dart';
 

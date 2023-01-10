@@ -78,7 +78,7 @@ class _DashBoardUsersState extends State<DashBoardUsers> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         SizedBox(

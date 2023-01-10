@@ -1,17 +1,10 @@
-import 'package:aman_project/data/repositories/user_providers.dart';
-import 'package:aman_project/models/user.dart';
-import 'package:aman_project/presentation/shared_features/custom_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../data/user_management.dart';
-
-import '../../constants/globals.dart' as val;
 import '../shared_features/custom_decoration.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -266,42 +259,42 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  final googleSignIn = GoogleSignIn();
-  GoogleSignInAccount? _user;
+  // final googleSignIn = GoogleSignIn();
+  // GoogleSignInAccount? _user;
 
-  GoogleSignInAccount get user => _user!;
+  // GoogleSignInAccount get user => _user!;
 
-  Future<void> signInWithGoogle() async {
-    //-------------------------------------1st method--------------------------------------------------
-    GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+  // Future<void> signInWithGoogle() async {
+  //   //-------------------------------------1st method--------------------------------------------------
+  //   GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
 
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
+  //   GoogleSignInAuthentication googleSignInAuthentication =
+  //       await googleSignInAccount!.authentication;
 
-    AuthCredential authCredential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
+  //   AuthCredential authCredential = GoogleAuthProvider.credential(
+  //       idToken: googleSignInAuthentication.idToken,
+  //       accessToken: googleSignInAuthentication.accessToken);
 
-    //_auth.signInWithCredential(authCredential);
+  //   //_auth.signInWithCredential(authCredential);
 
-    UserCredential authResult =
-        await _auth.signInWithCredential(authCredential);
+  //   UserCredential authResult =
+  //       await _auth.signInWithCredential(authCredential);
 
-    User? user = authResult.user;
-    print('hi');
-    print('user email = ${user!.email}');
-    //----------------------------------------------------------------------------------------------------------------------------------------------------
+  //   User? user = authResult.user;
+  //   print('hi');
+  //   print('user email = ${user!.email}');
+  //----------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // final googleUser = await googleSignIn.signIn();
+  // final googleUser = await googleSignIn.signIn();
 
-    // if(googleUser == null) return;
+  // if(googleUser == null) return;
 
-    // _user = googleUser;
+  // _user = googleUser;
 
-    // final googleAuth = await googleUser.authentication;
+  // final googleAuth = await googleUser.authentication;
 
-    // final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+  // final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
 
-    // await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  // await FirebaseAuth.instance.signInWithCredential(credential);
+  // }
 }

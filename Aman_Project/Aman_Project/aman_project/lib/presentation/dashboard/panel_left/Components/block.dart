@@ -71,7 +71,7 @@ class _ChartBlockState extends State<ChartBlock> {
                   onend = widget.isExpanded;
                 });
               },
-              child: cards1(
+              child: Cards1(
                 expand: onend,
                 chartData: snapshot.data,
                 text: widget.text,
@@ -82,7 +82,7 @@ class _ChartBlockState extends State<ChartBlock> {
             return Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
-                children: [
+                children: const [
                   Center(
                     child: LoadingScreen(),
                   ),

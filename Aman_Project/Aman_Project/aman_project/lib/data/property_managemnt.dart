@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../models/chart_data.dart';
 import '../models/property.dart';
-import '../presentation/shared_features/custom_message.dart';
 
 GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -259,7 +257,8 @@ class PropertyManagement {
             child: Property.showDropdown(
                 context: context,
                 hint: 'Select Number',
-                dropdownItems: isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
+                dropdownItems:
+                    isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
                 text: "Phone Numbers",
                 show: true,
                 value: chosenValue,
@@ -294,7 +293,7 @@ class PropertyManagement {
                 } else {
                   throw 'Could not launch $chosenValue';
                 }
-              } 
+              }
             },
             style: TextButton.styleFrom(
               shape: const RoundedRectangleBorder(
