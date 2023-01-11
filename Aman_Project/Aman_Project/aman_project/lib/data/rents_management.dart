@@ -1,5 +1,6 @@
 import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../models/chart_data.dart';
 
@@ -157,5 +158,24 @@ class RentsManagement {
     } on FirebaseException catch (e) {
       print(e);
     }
+  }
+
+  static rentTypeColor(Rents rents) {
+    Color color;
+
+    if(rents.type == 'Payed') {
+      color = Colors.green;
+    }
+    if(rents.type == 'DidntPay') {
+      color = Colors.red;
+    }
+    if(rents.type == 'Finished') {
+      color = Colors.black;
+    }
+    if(rents.type == 'DidntStart') {
+      color = Colors.black;
+    }
+
+
   }
 }

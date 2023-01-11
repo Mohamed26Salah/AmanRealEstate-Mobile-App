@@ -20,6 +20,7 @@ class RentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Hero(
       tag: "property.singleImage",
       child: GestureDetector(
@@ -34,12 +35,16 @@ class RentWidget extends StatelessWidget {
           ),
           child: Container(
             height: 210,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                // image: NetworkImage(mainImage),
-                image: AssetImage("assets/images/1.jpg"),
-                fit: BoxFit.cover,
-              ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  color: Colors.black.withOpacity(0.1),
+                ),
+              ],
+              shape: BoxShape.rectangle,
             ),
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -94,6 +99,14 @@ class RentWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Flexible(
+                    flex: 3,
+                      child:Center(
+                          child: Text(
+                            overflow: TextOverflow.ellipsis,
+                    '233 Days',
+                    style: TextStyle(fontSize: 45),
+                  ))),
                   Expanded(
                     child: Container(),
                   ),
