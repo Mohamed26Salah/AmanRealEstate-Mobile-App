@@ -356,42 +356,13 @@ class _DetailsState extends ConsumerState<Details> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    routeArgs.ownerName,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    "Property Owner",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[500],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: isVisible,
-                                    child: Text(
-                                      routeArgs.ownerNumber,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.grey[500],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          const Text(
+                            "Owner Number",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontSize: 19,
+                              color: Colors.black,
+                            ),
                           ),
                           Row(
                             children: [
