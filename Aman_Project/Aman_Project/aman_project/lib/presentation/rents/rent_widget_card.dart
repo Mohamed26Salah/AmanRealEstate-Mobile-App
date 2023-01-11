@@ -1,3 +1,4 @@
+import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -20,180 +21,190 @@ class RentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Hero(
-      tag: "property.singleImage",
-      child: GestureDetector(
-        onTap: () => selectedRent(context),
-        child: Card(
-          margin: const EdgeInsets.only(bottom: 24),
-          clipBehavior: Clip.antiAlias,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
+    Color? rentTypeColor;
+    if (rent.rentType == "Payed") {
+      rentTypeColor = Colors.green;
+    }
+    if (rent.rentType == 'DidntPay') {
+      rentTypeColor = Colors.red;
+    }
+    if (rent.rentType == 'Finished') {
+      rentTypeColor = Colors.black;
+    }
+    if (rent.rentType == 'DidntStart') {
+      rentTypeColor = Colors.yellow[700];
+    }
+
+    return GestureDetector(
+      onTap: () => selectedRent(context),
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 24),
+        clipBehavior: Clip.antiAlias,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+        child: Container(
+          height: 210,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                spreadRadius: 2,
+                blurRadius: 10,
+                color: Colors.black.withOpacity(0.1),
+              ),
+            ],
+            shape: BoxShape.rectangle,
           ),
           child: Container(
-            height: 210,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                  color: Colors.black.withOpacity(0.1),
+            padding: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  width: 80,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                  ),
+                  child: Center(
+                    child: Text(
+                      rent.type,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: rentTypeColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  width: 80,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                  ),
+                  child: Center(
+                    child: Text(
+                      rent.rentType,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const Flexible(
+                    flex: 3,
+                    child: Center(
+                        child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      '233 Days',
+                      style: TextStyle(fontSize: 45),
+                    ))),
+                Expanded(
+                  child: Container(),
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              rent.lessorName,
+                              style:  TextStyle(
+                                color: Theme.of(context).backgroundColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          r"$" + rent.rentPrice.toString(),
+                          style:  TextStyle(
+                            color: Theme.of(context).backgroundColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Row(
+                        //   children: [
+                         Icon(
+                          Icons.phone,
+                          color: Theme.of(context).backgroundColor,
+                          size: 14,
+                        ),
+                        // const SizedBox(
+                        //   width: 4,
+                        // ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              rent.tenantNum,
+                              style:  TextStyle(
+                                color: Theme.of(context).backgroundColor,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                         Icon(
+                          Icons.zoom_out_map,
+                          color: Theme.of(context).backgroundColor,
+                          size: 16,
+                        ),
+                        // const SizedBox(
+                        //   width: 4,
+                        // ),
+                        Text(
+                          "${rent.area} sq/m",
+                          style:  TextStyle(
+                            color: Theme.of(context).backgroundColor,
+                            fontSize: 14,
+                          ),
+                        ),
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
-              shape: BoxShape.rectangle,
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5),
-                      ),
-                    ),
-                    width: 80,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    child: Center(
-                      child: Text(
-                        rent.type,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(5),
-                      ),
-                    ),
-                    width: 80,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
-                    ),
-                    child: Center(
-                      child: Text(
-                        rent.rentType,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Flexible(
-                    flex: 3,
-                      child:Center(
-                          child: Text(
-                            overflow: TextOverflow.ellipsis,
-                    '233 Days',
-                    style: TextStyle(fontSize: 45),
-                  ))),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                rent.lessorName,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            r"$" + rent.rentPrice.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Row(
-                          //   children: [
-                          const Icon(
-                            Icons.phone,
-                            color: Colors.white,
-                            size: 14,
-                          ),
-                          // const SizedBox(
-                          //   width: 4,
-                          // ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                rent.tenantNum,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          const Icon(
-                            Icons.zoom_out_map,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                          // const SizedBox(
-                          //   width: 4,
-                          // ),
-                          Text(
-                            "${rent.area} sq/m",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                          //   ],
-                          // ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
         ),

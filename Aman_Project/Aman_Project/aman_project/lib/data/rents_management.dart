@@ -160,22 +160,5 @@ class RentsManagement {
     }
   }
 
-  static rentTypeColor(Rents rents) {
-    Color color;
-
-    if(rents.type == 'Payed') {
-      color = Colors.green;
-    }
-    if(rents.type == 'DidntPay') {
-      color = Colors.red;
-    }
-    if(rents.type == 'Finished') {
-      color = Colors.black;
-    }
-    if(rents.type == 'DidntStart') {
-      color = Colors.black;
-    }
-
-
-  }
+  
 }
