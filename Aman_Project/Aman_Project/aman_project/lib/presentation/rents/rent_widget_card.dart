@@ -38,6 +38,7 @@ class RentWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => selectedRent(context),
       child: Card(
+        elevation: 7,
         margin: const EdgeInsets.only(bottom: 24),
         clipBehavior: Clip.antiAlias,
         shape: const RoundedRectangleBorder(
@@ -47,16 +48,21 @@ class RentWidget extends StatelessWidget {
         ),
         child: Container(
           height: 210,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                spreadRadius: 2,
-                blurRadius: 10,
-                color: Colors.black.withOpacity(0.1),
+          decoration: const BoxDecoration(
+            // borderRadius: BorderRadius.circular(15),
+            // boxShadow: [
+            //   BoxShadow(
+            //     spreadRadius: 2,
+            //     blurRadius: 10,
+            //     color: Colors.black.withOpacity(0.1),
+            //   ),
+            // ],
+            // shape: BoxShape.rectangle,
+            image: DecorationImage(
+                // image: NetworkImage(mainImage),
+                image: AssetImage('assets/images/rent.jpg'),
+                fit: BoxFit.cover,
               ),
-            ],
-            shape: BoxShape.rectangle,
           ),
           child: Container(
             padding: const EdgeInsets.all(20),
@@ -111,13 +117,13 @@ class RentWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Flexible(
+                 Flexible(
                     flex: 3,
                     child: Center(
                         child: Text(
                       overflow: TextOverflow.ellipsis,
                       '233 Days',
-                      style: TextStyle(fontSize: 45),
+                      style: TextStyle(fontSize: 45, color: Theme.of(context).primaryColorLight),
                     ))),
                 Expanded(
                   child: Container(),
@@ -133,20 +139,23 @@ class RentWidget extends StatelessWidget {
                             child: Text(
                               overflow: TextOverflow.ellipsis,
                               rent.lessorName,
-                              style:  TextStyle(
-                                color: Theme.of(context).backgroundColor,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                        Text(
-                          r"$" + rent.rentPrice.toString(),
-                          style:  TextStyle(
-                            color: Theme.of(context).backgroundColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        Flexible(
+                          child: Text(
+                            overflow: TextOverflow.ellipsis,
+                            rent.tenantName,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -154,53 +163,65 @@ class RentWidget extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Row(
-                        //   children: [
-                         Icon(
-                          Icons.phone,
-                          color: Theme.of(context).backgroundColor,
-                          size: 14,
+                    // Row(
+                    //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     // Row(
+                    //     //   children: [
+                    //      Icon(
+                    //       Icons.phone,
+                    //       color: Theme.of(context).primaryColorLight,
+                    //       size: 14,
+                    //     ),
+                    //     // const SizedBox(
+                    //     //   width: 4,
+                    //     // ),
+                    //     Flexible(
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.only(right: 5),
+                    //         child: Text(
+                    //           overflow: TextOverflow.ellipsis,
+                    //           rent.tenantNum,
+                    //           style:  TextStyle(
+                    //             color: Theme.of(context).primaryColorLight,
+                    //             fontSize: 14,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 15,
+                    //     ),
+                    //      Icon(
+                    //       Icons.zoom_out_map,
+                    //       color: Theme.of(context).primaryColorLight,
+                    //       size: 16,
+                    //     ),
+                    //     // const SizedBox(
+                    //     //   width: 4,
+                    //     // ),
+                    //     Text(
+                    //       "${rent.area} sq/m",
+                    //       style:  TextStyle(
+                    //         color: Theme.of(context).primaryColorLight,
+                    //         fontSize: 14,
+                    //       ),
+                    //     ),
+                    //     //   ],
+                    //     // ),
+                    //   ],
+                    // ),
+
+                    Center(
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        r"$" + rent.rentPrice.toString(),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 18,
+                          
                         ),
-                        // const SizedBox(
-                        //   width: 4,
-                        // ),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: Text(
-                              overflow: TextOverflow.ellipsis,
-                              rent.tenantNum,
-                              style:  TextStyle(
-                                color: Theme.of(context).backgroundColor,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                         Icon(
-                          Icons.zoom_out_map,
-                          color: Theme.of(context).backgroundColor,
-                          size: 16,
-                        ),
-                        // const SizedBox(
-                        //   width: 4,
-                        // ),
-                        Text(
-                          "${rent.area} sq/m",
-                          style:  TextStyle(
-                            color: Theme.of(context).backgroundColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        //   ],
-                        // ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
