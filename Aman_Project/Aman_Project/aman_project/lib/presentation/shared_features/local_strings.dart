@@ -58,7 +58,14 @@ class LocaleString extends Translations {
           'Description For Admin': 'Description For Admin',
           'Address For Admin': 'Address For Admin',
           'Address For User': 'Address For User',
-          'Photos': 'Photos'
+          'Photos': 'Photos',
+          'Cash': 'Cash',
+          'installment': 'installment',
+          'High': 'High',
+          'medium': 'medium',
+          'Low': 'Low',
+          'Yes': 'Yes',
+          'No': 'No'
         },
         //arabic LANGUAGE
 
@@ -116,7 +123,14 @@ class LocaleString extends Translations {
           'Description For Admin': 'الوصف للأدمن',
           'Address For Admin': 'العنوان للأدمن',
           'Address For User': 'العنوان',
-          'Photos': 'الصور'
+          'Photos': 'الصور',
+          'Cash': 'كاش',
+          'installment': 'تقسيط',
+          'High': 'مرتفع',
+          'medium': 'متوسط',
+          'Low': 'منخفض',
+          'Yes': 'نعم',
+          'No': 'لا'
         },
       };
 }
