@@ -224,7 +224,7 @@ class PropertyManagement {
       builder: (context) => AlertDialog(
         title: const Text("Call "),
         content: SizedBox(
-          height: 100,
+          height: 120,
           child: Form(
             key: formKey,
             child: Property.showDropdown(
