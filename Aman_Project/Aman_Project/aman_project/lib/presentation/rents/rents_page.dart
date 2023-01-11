@@ -1,5 +1,6 @@
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/repositories/rents_provider.dart';
+import 'package:blinking_text/blinking_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -34,9 +35,25 @@ class _RentsPageState extends ConsumerState<RentsPage> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Rents",
-                  style: TextStyle(fontSize: 70),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(10),
+                  height: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Center(
+                    child: BlinkText('Rents',
+                        style: TextStyle(
+                          fontSize: 35.0,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        beginColor: Colors.black,
+                        endColor: Theme.of(context).primaryColor,
+                        times: 50,
+                        duration: const Duration(seconds: 2)),
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
