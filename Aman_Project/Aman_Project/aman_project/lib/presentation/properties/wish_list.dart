@@ -3,6 +3,7 @@ import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
+import 'package:blinking_text/blinking_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
@@ -78,22 +79,33 @@ class WishlistState extends ConsumerState<Wishlist> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Your WishList',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Center(
+                                  child: BlinkText('WishList',
+                                      style: TextStyle(
+                                        fontSize: 35.0,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                      beginColor: Colors.black,
+                                      endColor: Theme.of(context).primaryColor,
+                                      times: 50,
+                                      duration: const Duration(seconds: 2)),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Icon(
+                                  Icons.favorite,
+                                  color: Theme.of(context).primaryColor,
+                                  size: 35,
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Icon(
-                            Icons.favorite,
-                            color: Theme.of(context).primaryColor,
-                            size: 35,
-                          )
                         ],
                       ),
                     ),
