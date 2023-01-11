@@ -82,11 +82,6 @@ class WishlistState extends ConsumerState<Wishlist> {
                           Container(
                             padding: const EdgeInsets.all(20),
                             height: 80,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 2),
-                                borderRadius: BorderRadius.circular(25)),
                             child: Row(
                               children: [
                                 Center(
