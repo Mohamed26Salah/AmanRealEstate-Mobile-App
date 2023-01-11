@@ -6,6 +6,7 @@ import 'package:aman_project/models/property.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
 import '../shared_features/custom_loading_screen.dart';
@@ -200,7 +201,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    routeArgs.type,
+                                    (routeArgs.type).tr,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -225,7 +226,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    routeArgs.offered,
+                                    (routeArgs.offered).tr,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -356,10 +357,10 @@ class _DetailsState extends ConsumerState<Details> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Owner Number",
+                          Text(
+                            "Owner Number".tr,
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 19,
                               color: Colors.black,
                             ),
@@ -409,51 +410,52 @@ class _DetailsState extends ConsumerState<Details> {
                           shrinkWrap: true,
                           children: [
                             ExtractedWidgets().buildFeature(Icons.hotel,
-                                routeArgs.noRooms, "Rooms", context),
+                                routeArgs.noRooms, "Rooms".tr, context),
                             ExtractedWidgets().buildFeature(
                                 Icons.bathtub_outlined,
                                 routeArgs.noBathrooms,
-                                "Barthrooms",
+                                "Barthrooms".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.apartment_rounded,
                                 routeArgs.noFlats,
-                                "Flats",
+                                "Flats".tr,
                                 context),
                             ExtractedWidgets().buildFeature(Icons.house,
-                                routeArgs.furnished, "Furnished", context),
+                                routeArgs.furnished, "Furnished".tr, context),
                             ExtractedWidgets().buildFeature(Icons.stairs,
-                                routeArgs.floor, "Floor", context),
+                                routeArgs.floor, "Floor".tr, context),
                             ExtractedWidgets().buildFeature(
                                 Icons.local_activity,
                                 routeArgs.typeOFActivity,
-                                "Type Of Activity",
+                                "Type Of Activity".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.business_outlined,
                                 routeArgs.theNumberOFAB,
-                                "Adminstrative Building",
+                                "Adminstrative Building".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.domain_outlined,
                                 routeArgs.finishing,
-                                "Finishing",
+                                "Finishing".tr,
                                 context),
                             ExtractedWidgets().buildFeature(Icons.stairs,
-                                routeArgs.doublex, "Doublex", context),
+                                routeArgs.doublex, "Doublex".tr, context),
                             ExtractedWidgets().buildFeature(Icons.priority_high,
-                                routeArgs.priority, "Priority", context),
+                                routeArgs.priority, "Priority".tr, context),
                             ExtractedWidgets().buildFeature(Icons.attach_money,
-                                routeArgs.paymentMethod, "Payment", context),
+                                routeArgs.paymentMethod, "Payment".tr, context),
                           ],
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Owner Name",
-                        style: TextStyle(
+                        'Owner Name'.tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -470,11 +472,12 @@ class _DetailsState extends ConsumerState<Details> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Unit Name",
-                        style: TextStyle(
+                        "Unit Name".tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -491,11 +494,12 @@ class _DetailsState extends ConsumerState<Details> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Price",
-                        style: TextStyle(
+                        "Price".tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -507,11 +511,12 @@ class _DetailsState extends ConsumerState<Details> {
                       child: ExtractedWidgets()
                           .strokeWidget(r"$" + routeArgs.price.toString(), 16),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Description For User",
-                        style: TextStyle(
+                        "Description For User".tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -530,12 +535,12 @@ class _DetailsState extends ConsumerState<Details> {
                     ),
                     Visibility(
                       visible: isVisible,
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 24, left: 24, bottom: 16),
                         child: Text(
-                          "Description For Admin",
-                          style: TextStyle(
+                          "Description For Admin".tr,
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -558,12 +563,12 @@ class _DetailsState extends ConsumerState<Details> {
                     ),
                     Visibility(
                       visible: isVisible,
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 24, left: 24, bottom: 16),
                         child: Text(
-                          "Address For Admin",
-                          style: TextStyle(
+                          "Address For Admin".tr,
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -584,11 +589,12 @@ class _DetailsState extends ConsumerState<Details> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 16),
                       child: Text(
-                        "Address For User",
-                        style: TextStyle(
+                        "Address For User".tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -605,11 +611,12 @@ class _DetailsState extends ConsumerState<Details> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 24, left: 24, bottom: 24),
                       child: Text(
-                        "Photos",
-                        style: TextStyle(
+                        "Photos".tr,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

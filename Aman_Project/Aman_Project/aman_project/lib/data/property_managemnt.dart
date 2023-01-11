@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../models/chart_data.dart';
 import '../models/property.dart';
@@ -228,10 +229,10 @@ class PropertyManagement {
             key: formKey,
             child: Property.showDropdown(
                 context: context,
-                hint: 'Select Number',
+                hint: 'Select Number'.tr,
                 dropdownItems:
                     isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
-                text: "Phone Numbers",
+                text: "Phone Numbers".tr,
                 show: true,
                 value: chosenValue,
                 onChanged: (value) {
@@ -252,9 +253,9 @@ class PropertyManagement {
                 ),
               ),
             ),
-            child: const Text(
-              'CANCEL',
-              style: TextStyle(color: Colors.white),
+            child: Text(
+              'Cancel'.tr,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
           TextButton(
@@ -275,7 +276,7 @@ class PropertyManagement {
               ),
             ),
             child: Text(
-              'Call',
+              'Call'.tr,
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ),

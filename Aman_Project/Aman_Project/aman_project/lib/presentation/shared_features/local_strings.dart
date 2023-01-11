@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 
 class LocaleString extends Translations {
   @override
-  // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         //ENGLISH LANGUAGE
         'en_US': {
@@ -34,7 +33,32 @@ class LocaleString extends Translations {
           'Farm': 'Farm',
           'Factory': 'Factory',
           'Land': 'Land',
-          'Other': 'Other'
+          'Other': 'Other',
+          'For Sale': 'For Sale',
+          'For Rent': 'For Rent',
+          'Owner Number': 'Owner Number',
+          'Select Number': 'Select Number',
+          'Phone Numbers': 'Phone Numbers',
+          'Call': 'Call',
+          'Rooms': 'Rooms',
+          'Barthrooms': 'Barthrooms',
+          'Flats': 'Flats',
+          'Furnished': 'Furnished',
+          'Floor': 'Floor',
+          'Type Of Activity': 'Type Of Activity',
+          'Adminstrative Building': 'Adminstrative Building',
+          'Finishing': 'Finishing',
+          'Doublex': 'Doublex',
+          'Priority': 'Priority',
+          'Payment': 'Payment',
+          'Owner Name': 'Owner Name',
+          'Unit Name': 'Unit Name',
+          'Price': 'Price',
+          'Description For User': 'Description For User',
+          'Description For Admin': 'Description For Admin',
+          'Address For Admin': 'Address For Admin',
+          'Address For User': 'Address For User',
+          'Photos': 'Photos'
         },
         //arabic LANGUAGE
 
@@ -67,7 +91,32 @@ class LocaleString extends Translations {
           'Farm': 'مزرعة',
           'Factory': 'مصنع',
           'Land': 'أرض',
-          'Other': 'أخري'
+          'Other': 'أخري',
+          'For Sale': 'للبيع',
+          'For Rent': 'للايجار',
+          'Owner Number': 'رقم صاحب العقار',
+          'Select Number': 'أختر رقم',
+          'Phone Numbers': 'أرقام الهاتف',
+          'Call': 'اتصال',
+          'Rooms': 'غرف',
+          'Barthrooms': 'حمامات',
+          'Flats': 'شقق',
+          'Furnished': 'مفروش',
+          'Floor': 'الدور',
+          'Type Of Activity': 'نوع النشاط',
+          'Adminstrative Building': 'المباني الاداريه',
+          'Finishing': 'تشطيب',
+          'Doublex': 'دوبليكس',
+          'Priority': 'الاهمية',
+          'Payment': 'طريقه الدفع',
+          'Owner Name': 'اسم صاحب العقار',
+          'Unit Name': 'اسم العقار',
+          'Price': 'السعر',
+          'Description For User': 'الوصف',
+          'Description For Admin': 'الوصف للأدمن',
+          'Address For Admin': 'العنوان للأدمن',
+          'Address For User': 'العنوان',
+          'Photos': 'الصور'
         },
       };
 }
