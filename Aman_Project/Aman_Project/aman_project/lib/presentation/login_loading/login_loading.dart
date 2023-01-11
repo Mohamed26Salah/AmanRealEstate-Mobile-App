@@ -26,11 +26,6 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
     if (value) {
       FirebaseAuth.instance.idTokenChanges().listen((User? user) {
         if (user != null) {
-          //Salah Way
-          // Future userData = UserHelper().getUserData();
-          // ref.read(userDataProviderRepository.notifier).state = userData;
-          // Navigator.of(context).pushReplacementNamed('/home');
-
           UserHelper().getNewUserData().then((value) {
             UserModel user = UserModel.fromSnapshot(value);
             if (mounted) {
@@ -45,6 +40,7 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
 
       return value;
     } else {
+      if (!mounted) return false;
       Navigator.of(context).pushReplacementNamed('/login');
 
       return false;

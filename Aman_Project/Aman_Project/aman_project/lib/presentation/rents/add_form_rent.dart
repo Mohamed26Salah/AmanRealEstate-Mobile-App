@@ -224,6 +224,7 @@ class _AddFormRentState extends State<AddFormRent> {
                               startOFRent: startOFRent,
                               endOFRent: endOFRent,
                               rentType: rentType);
+                          if (!mounted) return;
                           Navigator.of(context).pop();
                           Navigator.of(context).pop();
                         }

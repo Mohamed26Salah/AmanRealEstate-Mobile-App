@@ -118,34 +118,6 @@ class PropertyManagement {
     try {
       DocumentReference docRef =
           FirebaseFirestore.instance.doc('properties/$docId');
-      // docRef.update({
-      //   'type': type,
-      //   'ownerName': ownerName,
-      //   'ownerNumber': ownerNumber,
-      //   'addressForUser': addressForUser,
-      //   'addressForAdmin': addressForAdmin,
-      //   'area': area,
-      //   'price': price,
-      //   'descriptionForUser': descriptionForUser,
-      //   'descriptionForAdmin': descriptionForAdmin,
-      //   'unitName': unitName,
-      //   'paymentMethod': paymentMethod,
-      //   'priority': priority,
-      //   'visible': visible,
-      //   'offered': offered,
-      //   'singleImage': singleImage,
-      //   'multiImages': mutliImages,
-      //   'typeOFActivity': typeOFActivity ?? "",
-      //   'noAB': noAB ?? "",
-      //   'noFloors': noFloors ?? "",
-      //   'noFlats': noFlats ?? "",
-      //   'noRooms': noRooms ?? "",
-      //   'noBathrooms': noBathrooms ?? "",
-      //   'finishing': finishing ?? "",
-      //   'furnished': furnished ?? "",
-      //   'floor': floor ?? "",
-      //   'doublex': doublex ?? "",
-      // });
       final property = Property(
         type: type,
         ownerName: ownerName,
@@ -212,7 +184,7 @@ class PropertyManagement {
     return [results, removedIDs];
   }
 
-  static Future<List<ChartData>> getData() async {
+  static Future<List<ChartData>> getPropertiesType() async {
     List data = [];
     Map datanum = {};
     List<ChartData> datanum2 = [];

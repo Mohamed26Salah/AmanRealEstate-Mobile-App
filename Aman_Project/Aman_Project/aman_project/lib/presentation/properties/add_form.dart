@@ -12,7 +12,7 @@ import '../../constants/globals.dart' as val;
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class AddForm extends ConsumerStatefulWidget {
-  AddForm({Key? key}) : super(key: key);
+  const AddForm({Key? key}) : super(key: key);
 
   @override
   ConsumerState<AddForm> createState() => AddFormState();
@@ -641,7 +641,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                   );
                                   imageManagement.clearImageProivders(ref);
                                 });
-
+                                if (!mounted) return;
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     '/home', (route) => false);
                                 goodMessageSnackBar(

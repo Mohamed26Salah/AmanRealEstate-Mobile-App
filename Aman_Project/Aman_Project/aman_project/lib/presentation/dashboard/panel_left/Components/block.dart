@@ -30,13 +30,13 @@ class _ChartBlockState extends State<ChartBlock> {
   void initState() {
     super.initState();
     if (widget.dataNum == 0) {
-      chartData = PropertyManagement.getData();
+      chartData = PropertyManagement.getPropertiesType();
     } else if (widget.dataNum == 1) {
-      chartData = UserHelper.getData2();
+      chartData = UserHelper.getUsersRoles();
     } else if (widget.dataNum == 2) {
-      chartData = RentsManagement.getData3();
+      chartData = RentsManagement.getRentsType();
     } else {
-      chartData = PropertyManagement.getData();
+      chartData = PropertyManagement.getPropertiesType();
     }
   }
 

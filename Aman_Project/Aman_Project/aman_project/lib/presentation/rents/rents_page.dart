@@ -144,7 +144,7 @@ class _SalahCardState extends ConsumerState<SalahCard> {
           splashColor: Theme.of(context).primaryColor,
           // focusColor: Colors.green.withOpacity(0.0),
           // hoverColor: Colors.blue.withOpacity(0.8),
-          child: Container(
+          child: SizedBox(
               width: (MediaQuery.of(context).size.width / 2) - 30,
               height: 180,
               child: Column(

@@ -12,7 +12,7 @@ import '../models/chart_data.dart';
 import '../presentation/shared_features/custom_message.dart';
 
 class UserHelper {
-  static saveUser(User user) async {
+  static saveUser() async {
     //Dont Put Instance common as it doesnt change when the user logs out
     final FirebaseFirestore db = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser!;
@@ -30,13 +30,13 @@ class UserHelper {
   }
 
 //Salah Way
-  Future<Object> getUserData() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    String id = user.uid;
-    final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(id).get();
-    return userDoc;
-  }
+  // Future<Object> getUserData() async {
+  //   final user = FirebaseAuth.instance.currentUser!;
+  //   String id = user.uid;
+  //   final DocumentSnapshot userDoc =
+  //       await FirebaseFirestore.instance.collection('users').doc(id).get();
+  //   return userDoc;
+  // }
 
   // Yasser Way
   Future<DocumentSnapshot> getNewUserData() async {
@@ -45,7 +45,7 @@ class UserHelper {
     return FirebaseFirestore.instance.collection('users').doc(id).get();
   }
 
-  static Future<List<UserModel>> getData2User({String? query}) async {
+  static Future<List<UserModel>> getUsersRolesEmails({String? query}) async {
     List<UserModel> datanum2 = [];
     await FirebaseFirestore.instance
         .collection('users')
@@ -62,19 +62,10 @@ class UserHelper {
         }
       }
     });
-    // await FirebaseFirestore.instance
-    //     .collection('properties')
-    //     .get()
-    //     .then((QuerySnapshot querySnapshot) {
-    //   for (var doc in querySnapshot.docs) {
-    //     data!.add(doc["Type"]);
-
-    //   }
-    // });
     return datanum2;
   }
 
-  static Future<List<ChartData>> getData2() async {
+  static Future<List<ChartData>> getUsersRoles() async {
     List data = [];
     Map datanum = {};
     List<ChartData> datanum2 = [];
@@ -122,16 +113,12 @@ class UserHelper {
           password: passwordController.text.trim(),
         );
         if (FirebaseAuth.instance.currentUser!.emailVerified) {
-          final user = FirebaseAuth.instance.currentUser!;
-          UserHelper.saveUser(user);
-          //Salah Way
-          // Future userData = UserHelper().getUserData();
-          // ref.read(userDataProviderRepository.notifier).state = userData;
-          //Yasser Way
           UserHelper().getNewUserData().then((value) {
             UserModel user = UserModel.fromSnapshot(value);
             ref.read(newUserDataProivder.notifier).state = user;
-            Navigator.of(context).pushReplacementNamed('/home');
+            // Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home', (route) => false);
           });
         } else {
           Navigator.of(context).pushNamed('/verify');
@@ -178,7 +165,6 @@ class UserHelper {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-
         Navigator.of(context).pushNamed('/verify');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {

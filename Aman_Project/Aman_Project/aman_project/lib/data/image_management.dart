@@ -51,7 +51,7 @@ class ImageManagement {
     uploadTask.snapshotEvents.listen((event) {
       switch (event.state) {
         case TaskState.running:
-          print("File is uploading");
+          // print("File is uploading");
           break;
         case TaskState.success:
           ref.getDownloadURL().then((value) {

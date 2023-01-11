@@ -36,7 +36,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
   @override
   Widget build(BuildContext context) {
     final userData = ref.watch(newUserDataProivder);
-
     return Scaffold(
       // bottomNavigationBar: const NavBarGR(),
       body: Container(

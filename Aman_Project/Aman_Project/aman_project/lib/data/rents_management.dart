@@ -112,7 +112,7 @@ class RentsManagement {
     return returnedType;
   }
 
-  static Future<List<ChartData>> getData3() async {
+  static Future<List<ChartData>> getRentsType() async {
     List data = [];
     Map datanum = {};
     List<ChartData> datanum2 = [];

@@ -39,17 +39,12 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
   }
 
   void redirectToHome() {
-    final user = FirebaseAuth.instance.currentUser!;
-    UserHelper.saveUser(user);
-    //Salah Way
-    // Future userData = UserHelper().getUserData();
-    // ref.read(userDataProviderRepository.notifier).state = userData;
-    // Navigator.of(context).pushNamed('/home');
-
+    UserHelper.saveUser();
     UserHelper().getNewUserData().then((value) {
       UserModel user = UserModel.fromSnapshot(value);
       ref.read(newUserDataProivder.notifier).state = user;
-      Navigator.of(context).pushReplacementNamed('/home');
+      // Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
     });
   }
 

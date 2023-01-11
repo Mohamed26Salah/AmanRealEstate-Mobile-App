@@ -22,7 +22,7 @@ void buildLanguageDialog(BuildContext context) async {
       builder: (builder) {
         return AlertDialog(
           title: const Text('Choose Your Language'),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: ListView.separated(
                 shrinkWrap: true,
