@@ -165,7 +165,7 @@ class RentsManagement {
     try {
       FirebaseFirestore.instance.collection('rents').get().then((value) {
         for (var element in value.docs) {
-          var rent = Rents.fromJson(element.data());
+          var rent = Rents.fromJson(element.data() , element.id); //hena fe t8yeer
           var rentType = figureRentType(
               rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd);
           if (rentType != rent.rentType) {
@@ -177,6 +177,16 @@ class RentsManagement {
           // FirebaseFirestore.instance.collection('rents').doc(element.id).update;
         }
       });
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  static deleteRent(String id) async {
+    try {
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('rents').doc(id);
+      docRef.delete();
     } on FirebaseException catch (e) {
       print(e);
     }

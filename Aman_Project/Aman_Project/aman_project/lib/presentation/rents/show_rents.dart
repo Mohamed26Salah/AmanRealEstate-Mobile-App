@@ -47,7 +47,7 @@ class _ShowCardState extends ConsumerState<ShowRent> {
         return ListView.builder(
           itemCount: data.size,
           itemBuilder: (context, index) {
-            var rent = Rents.fromJson(data.docs[index].data());
+            var rent = Rents.fromJson(data.docs[index].data() , data.docs[index].id);
             return RentWidget(
               rent: rent,
             );

@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  intl: ^0.18.0
   no_glow_scroll: ^0.0.1
   internet_connection_checker: ^1.0.0+1
   animated_text_kit: ^4.2.2

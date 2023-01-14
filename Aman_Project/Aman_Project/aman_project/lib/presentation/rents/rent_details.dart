@@ -138,4 +138,6 @@ class RentDetails extends StatelessWidget {
       ],
     );
   }
+
+  
 }

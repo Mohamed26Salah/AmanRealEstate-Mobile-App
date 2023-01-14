@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Rents {
-  // int docId;
+  String? docId;
   int rentPrice;
   String type;
   int area;
@@ -19,8 +19,7 @@ class Rents {
   DateTime endOFRent;
   String rentType;
   Rents(
-      {
-      // required this.docId,
+      {this.docId,
       required this.rentPrice,
       required this.type,
       required this.area,
@@ -37,7 +36,8 @@ class Rents {
       required this.startOFRent,
       required this.endOFRent,
       required this.rentType});
-  factory Rents.fromJson(Map<String, dynamic> json) => Rents(
+  factory Rents.fromJson(Map<String, dynamic> json, String id) => Rents(
+      docId: id,
       rentPrice: json["rentPrice"],
       type: json["type"],
       area: json["area"],
