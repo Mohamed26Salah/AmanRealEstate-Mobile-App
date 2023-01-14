@@ -59,10 +59,10 @@ class RentWidget extends StatelessWidget {
             // ],
             // shape: BoxShape.rectangle,
             image: DecorationImage(
-                // image: NetworkImage(mainImage),
-                image: AssetImage('assets/images/rent.jpg'),
-                fit: BoxFit.cover,
-              ),
+              // image: NetworkImage(mainImage),
+              image: AssetImage('assets/images/rent.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Container(
             padding: const EdgeInsets.all(20),
@@ -117,13 +117,15 @@ class RentWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Flexible(
-                    flex: 3,
+                Flexible(
+                    flex: 7,
                     child: Center(
                         child: Text(
                       overflow: TextOverflow.ellipsis,
-                      '233 Days',
-                      style: TextStyle(fontSize: 45, color: Theme.of(context).primaryColorLight),
+                      '${RentsManagement.figureHowManyDaysLeft(rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd, rent.rentType)} Days',
+                      style: TextStyle(
+                          fontSize: 45,
+                          color: Theme.of(context).primaryColorLight),
                     ))),
                 Expanded(
                   child: Container(),
@@ -219,7 +221,6 @@ class RentWidget extends StatelessWidget {
                         style: TextStyle(
                           color: Theme.of(context).primaryColorLight,
                           fontSize: 18,
-                          
                         ),
                       ),
                     ),

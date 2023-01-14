@@ -103,12 +103,11 @@ class _SearchState extends ConsumerState<MainPageRent> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon:  Icon(
+                          icon: Icon(
                             Icons.arrow_back_ios_new_outlined,
                             color: Colors.grey[400],
                             size: 28,
                           ),
-                          
                         ),
                       ],
                     ),
@@ -116,11 +115,19 @@ class _SearchState extends ConsumerState<MainPageRent> {
                 ),
               ),
             ),
-            const Padding(
-              padding:
-                  EdgeInsets.only(right: 24, left: 24, top: 10, bottom: 12),
-              //war top 24
+            const SizedBox(height: 15),
+            Center(
+              child: Text(
+                rentType,
+                style: TextStyle(
+                    fontSize: 45, color: Theme.of(context).backgroundColor),
+              ),
             ),
+            // const Padding(
+            //   padding:
+            //       EdgeInsets.only(right: 24, left: 24, top: 10, bottom: 12),
+            //   //war top 24
+            // ),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),

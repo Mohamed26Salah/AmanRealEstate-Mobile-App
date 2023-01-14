@@ -92,7 +92,6 @@ class RentsManagement {
     }
   }
 
-// if equal!!
   static String figureRentType(
       DateTime startOFRent, DateTime endOFRent, DateTime tor, DateTime torEnd) {
     var currentDate = DateTime.now();
@@ -111,6 +110,29 @@ class RentsManagement {
       returnedType = "DidntPay";
     }
     return returnedType;
+  }
+
+  static int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
+  }
+
+  static String figureHowManyDaysLeft(DateTime startOFRent, DateTime endOFRent,
+      DateTime tor, DateTime torEnd, String rentType) {
+    var currentDate = DateTime.now();
+    String daysLeft = "";
+    // var returnedType = "error";
+    if (rentType == "DidntStart") {
+      daysLeft = daysBetween(currentDate, tor).toString();
+    } else if (rentType == "Finished") {
+      daysLeft = daysBetween(endOFRent, currentDate).toString();
+    } else if (rentType == "Payed") {
+      daysLeft = daysBetween(currentDate, torEnd).toString();
+    } else if (rentType == "DidntPay") {
+      daysLeft = daysBetween(torEnd, currentDate).toString();
+    }
+    return daysLeft;
   }
 
   static Future<List<ChartData>> getRentsType() async {
@@ -159,6 +181,4 @@ class RentsManagement {
       print(e);
     }
   }
-
-  
 }
