@@ -91,7 +91,15 @@ class _UsersListWidgetState extends State<UsersListWidget> {
         } else {
           return Padding(
             padding: const EdgeInsets.all(50.0),
-            child: LoadingScreen(),
+            child: Column(
+              children: const [
+                Center(
+                  child: LoadingScreen(),
+                ),
+                SizedBox(height: 10),
+                Text("Loading Users"),
+              ],
+            ),
           );
         }
       },
