@@ -1,8 +1,8 @@
 import 'package:aman_project/common_widgets/property_details.dart';
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
-import 'package:aman_project/presentation/dashboard/panel_left/Components/alert_dialogue.dart';
-import 'package:aman_project/presentation/dashboard/panel_left/Components/alert_dialogue2.dart';
+import 'package:aman_project/presentation/dashboard/panel_left/Components/user_role_dialogue.dart';
+import 'package:aman_project/presentation/dashboard/panel_left/Components/add_number_dialogue.dart';
 import 'package:aman_project/presentation/dashboard/panel_left/Components/list_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
