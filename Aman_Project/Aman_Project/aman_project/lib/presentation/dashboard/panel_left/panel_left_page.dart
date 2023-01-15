@@ -1,8 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'package:aman_project/data/numbers_management.dart';
+import 'package:aman_project/models/number.dart';
 import 'package:aman_project/presentation/dashboard/panel_left/Components/dash_board_users.dart';
 import 'package:flutter/material.dart';
 import 'Components/block.dart';
+import 'Components/edit_number.dart';
 
 class PanelLeftPage extends StatefulWidget {
   @override
@@ -24,6 +27,7 @@ class _PanelLeftPageState extends State<PanelLeftPage> {
             Column(
               children: [
                 const DashBoardUsers(),
+                const EditNumber(),
                 Wrap(alignment: WrapAlignment.center, children: [
                   ChartBlock(
                     width: MediaQuery.of(context).size.width,

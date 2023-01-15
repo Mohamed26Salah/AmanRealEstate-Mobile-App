@@ -108,7 +108,7 @@ class ExtractedWidgets {
     );
   }
 
-  Stack strokeWidget(String text, double size) {
+  Stack strokeWidget(String text, double size, [Color? color]) {
     return Stack(
       children: [
         Text(
@@ -128,7 +128,7 @@ class ExtractedWidgets {
           overflow: TextOverflow.ellipsis,
           text,
           style: TextStyle(
-            color: Colors.white,
+            color: color ?? const Color.fromARGB(255, 255, 255, 255),
             fontSize: size,
             fontWeight: FontWeight.bold,
           ),
@@ -147,7 +147,6 @@ class ExtractedWidgets {
             Column(
               children: [
                 Text(
-                  
                   aboveText,
                   style: TextStyle(
                       color: Colors.grey[500],

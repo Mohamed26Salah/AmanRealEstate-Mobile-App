@@ -1,10 +1,12 @@
+import 'dart:ffi';
+
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
 
 class AlertDailogue extends StatefulWidget {
   String email;
-  final ValueChanged<int> update;
-  AlertDailogue({super.key, required this.email, required this.update});
+  final ValueChanged<int>? update;
+  AlertDailogue({super.key, required this.email, this.update});
 
   @override
   State<AlertDailogue> createState() => _AlertDailogueState();
@@ -36,11 +38,13 @@ class _AlertDailogueState extends State<AlertDailogue> {
       ),
       actions: [
         TextButton(
-            onPressed: () => {
-                  UserHelper.changeRole(widget.email, dropdownvalue),
-                  widget.update(100),
-                  Navigator.of(context).pop(),
-                },
+            onPressed: () {
+              UserHelper.changeRole(widget.email, dropdownvalue);
+              if (widget.update != null) {
+                widget.update!(100);
+              }
+              Navigator.of(context).pop();
+            },
             child: const Text("Submit")),
         TextButton(
             onPressed: () {
