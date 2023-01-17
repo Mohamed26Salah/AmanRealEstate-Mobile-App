@@ -104,7 +104,7 @@ class WishlistState extends ConsumerState<Wishlist> {
                         child: ListView.builder(
                           itemCount: ref.watch(whishlistProvider).length,
                           itemBuilder: (context, index) {
-                            // ref.read(resultsCount.notifier).state = data.size;
+                            
                             return PropertyWidget(
                               property: ref.watch(whishlistProvider)[index],
                             );
