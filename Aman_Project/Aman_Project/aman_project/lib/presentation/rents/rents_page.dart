@@ -20,10 +20,7 @@ class _RentsPageState extends ConsumerState<RentsPage> {
     await RentsManagement.updateRentsType();
     controller.success();
     ref.read(rentsButtonProivder.notifier).state = true;
-    // Timer(const Duration(seconds: 5), () {
-    //   controller.success();
-    //   ref.read(rentsButtonProivder.notifier).state = true;
-    // });
+
   }
 
   @override
