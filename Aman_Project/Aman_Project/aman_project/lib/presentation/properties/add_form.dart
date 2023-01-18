@@ -631,7 +631,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                       visible: visible!,
                                       offered: offered!,
                                       singleImage:
-                                          imageManagement.singleImageURl,
+                                          imageManagement.singleImageURl!,
                                       mutliImages: imageManagement.downloadUrls,
                                       floor: _floorController.text,
                                       doublex: doublex ?? "",

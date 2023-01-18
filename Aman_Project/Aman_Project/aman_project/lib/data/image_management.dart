@@ -14,7 +14,7 @@ class ImageManagement {
   final ImagePicker _pickerMutli = ImagePicker();
   File? myImage;
   File? compressedImage;
-  late String singleImageURl;
+  String? singleImageURl;
   //
   File? myImageMulti;
   File? compressedImageMulti;

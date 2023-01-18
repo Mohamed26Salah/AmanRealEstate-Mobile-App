@@ -309,6 +309,9 @@ class _AddFormRentState extends State<AddFormRent> {
                   style: const TextStyle(fontSize: 25),
                 ),
                 ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
                     onPressed: () async {
                       if (name == "StartOFRent") {
                         initialDate = DateTime.now();

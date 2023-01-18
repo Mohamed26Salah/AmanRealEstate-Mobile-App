@@ -230,8 +230,11 @@ class PropertyManagement {
         title: const Text("Call "),
         content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
+            width: double.maxFinite,
             child: ListView.builder(
-                itemCount: isVisible == true ? phoneNumbersVisibleToAdmin.length: adminNumbers.length,
+                itemCount: isVisible == true
+                    ? phoneNumbersVisibleToAdmin.length
+                    : adminNumbers.length,
                 itemBuilder: ((context, index) {
                   return Card(
                     elevation: 5,
