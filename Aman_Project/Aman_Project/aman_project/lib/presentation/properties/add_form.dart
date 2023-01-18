@@ -593,63 +593,75 @@ class AddFormState extends ConsumerState<AddForm> {
                         onPressed: () async {
                           if (userChoice != "") {
                             // Validate returns true if the form is valid, or false otherwise.
-                            if (_formKey.currentState!.validate()) {
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return const Center(
-                                      child: LoadingScreen(),
+                            if (imageManagement.myImage != null ||
+                                imageManagement.myImageMulti != null) {
+                              if (_formKey.currentState!.validate()) {
+                                showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return const Center(
+                                        child: LoadingScreen(),
+                                      );
+                                    });
+                                imageManagement
+                                    .uploadFile()
+                                    .then((value) async {
+                                  await imageManagement
+                                      .uploadMultipleImages()
+                                      .then((value) {
+                                    PropertyManagement().addPropertyData(
+                                      type: userChoice,
+                                      ownerName: _ownerNameController.text,
+                                      ownerNumber: _ownerNumberController.text,
+                                      addressForUser:
+                                          _addressForUserController.text,
+                                      addressForAdmin:
+                                          _addressForAdminController.text,
+                                      area: int.parse(_areaController.text),
+                                      price: int.parse(_priceController.text),
+                                      descriptionForUser:
+                                          _descriptionForUserController.text,
+                                      descriptionForAdmin:
+                                          _descriptionForAdminController.text,
+                                      unitName: _nameController.text,
+                                      paymentMethod: paymentMethod!,
+                                      priority: priority!,
+                                      visible: visible!,
+                                      offered: offered!,
+                                      singleImage:
+                                          imageManagement.singleImageURl,
+                                      mutliImages: imageManagement.downloadUrls,
+                                      floor: _floorController.text,
+                                      doublex: doublex ?? "",
+                                      noRooms: _noOFRoomsController.text,
+                                      noBathrooms:
+                                          _noOFBathroomsController.text,
+                                      finishing: finishing ?? "",
+                                      furnished: furnished ?? "",
+                                      noFloors: _noOFFloorsController.text,
+                                      noFlats: _noOFFlatsController.text,
+                                      typeOFActivity:
+                                          _typeOFActivityController.text,
+                                      noAB: _noOFABController.text,
                                     );
+                                    imageManagement.clearImageProivders(ref);
                                   });
-                              imageManagement.uploadFile().then((value) async {
-                                await imageManagement
-                                    .uploadMultipleImages()
-                                    .then((value) {
-                                  PropertyManagement().addPropertyData(
-                                    type: userChoice,
-                                    ownerName: _ownerNameController.text,
-                                    ownerNumber: _ownerNumberController.text,
-                                    addressForUser:
-                                        _addressForUserController.text,
-                                    addressForAdmin:
-                                        _addressForAdminController.text,
-                                    area: int.parse(_areaController.text),
-                                    price: int.parse(_priceController.text),
-                                    descriptionForUser:
-                                        _descriptionForUserController.text,
-                                    descriptionForAdmin:
-                                        _descriptionForAdminController.text,
-                                    unitName: _nameController.text,
-                                    paymentMethod: paymentMethod!,
-                                    priority: priority!,
-                                    visible: visible!,
-                                    offered: offered!,
-                                    singleImage: imageManagement.singleImageURl,
-                                    mutliImages: imageManagement.downloadUrls,
-                                    floor: _floorController.text,
-                                    doublex: doublex ?? "",
-                                    noRooms: _noOFRoomsController.text,
-                                    noBathrooms: _noOFBathroomsController.text,
-                                    finishing: finishing ?? "",
-                                    furnished: furnished ?? "",
-                                    noFloors: _noOFFloorsController.text,
-                                    noFlats: _noOFFlatsController.text,
-                                    typeOFActivity:
-                                        _typeOFActivityController.text,
-                                    noAB: _noOFABController.text,
-                                  );
-                                  imageManagement.clearImageProivders(ref);
+                                  if (!mounted) return;
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/home', (route) => false);
+                                  goodMessageSnackBar(
+                                      "Uploading", "Uploading to database");
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(val.snackBar);
                                 });
-                                if (!mounted) return;
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/home', (route) => false);
-                                goodMessageSnackBar(
-                                    "Uploading", "Uploading to database");
-                                ScaffoldMessenger.of(context)
-                                  ..hideCurrentSnackBar()
-                                  ..showSnackBar(val.snackBar);
-                              });
+                              }
+                            } else {
+                              errormessage("Error!", "Please upload images");
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(val.snackBar);
                             }
                           } else {
                             errormessage("Error!", "Please Choose a type!");
