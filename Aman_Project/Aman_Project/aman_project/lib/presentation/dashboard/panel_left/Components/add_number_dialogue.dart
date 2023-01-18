@@ -1,7 +1,7 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/models/number.dart';
-import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/shared_features/custom_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
                   ],
                 ),
               ),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "number",
                   hintText: "010XXXXXX",
                   controller: numberController,

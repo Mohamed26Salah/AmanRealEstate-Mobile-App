@@ -269,23 +269,26 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                           children: [
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
-                                DateFormat('yyyy-MM-dd').format(routeArgs.endOFRent),
-                                "End Of Rent",
+                                DateFormat('yyyy-MM-dd')
+                                    .format(routeArgs.startOFRent),
+                                "Start Of Contract",
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
-                                DateFormat('yyyy-MM-dd').format(routeArgs.startOFRent),
-                                "Start Of Rent",
+                                DateFormat('yyyy-MM-dd')
+                                    .format(routeArgs.endOFRent),
+                                "End Of Contract",
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
                                 DateFormat('yyyy-MM-dd').format(routeArgs.tor),
-                                "Time Of Rent",
+                                "Start Of Rent",
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
-                                DateFormat('yyyy-MM-dd').format(routeArgs.torEnd),
-                                "End Time Of Rent",
+                                DateFormat('yyyy-MM-dd')
+                                    .format(routeArgs.torEnd),
+                                "End Of Rent",
                                 context),
                             ExtractedWidgets().buildFeature(Icons.house,
                                 routeArgs.furnished, "Furnished", context),
@@ -384,14 +387,13 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
           backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(Icons.edit),
           onPressed: () async {
-            // await Navigator.of(context)
-            //     .pushNamed('/editProperty', arguments: routeArgs)
-            //     .then((value) {
-            //   ImageManagement().clearImageProivders(ref);
-            //   routeArgs = value as Property;
+            await Navigator.of(context)
+                .pushNamed('/editRents', arguments: routeArgs)
+                .then((value) {
+              routeArgs = value as Rents;
 
-            //   setState(() {});
-            // });
+              setState(() {});
+            });
           },
         ),
       ),

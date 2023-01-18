@@ -1,3 +1,4 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
@@ -12,7 +13,7 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class EditProperty extends ConsumerStatefulWidget {
   // Property routeArgs;
-  EditProperty({
+  const EditProperty({
     super.key,
     // required this.routeArgs
   });
@@ -114,7 +115,6 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
               )
             : GestureDetector(
                 onTap: () {
-                  print('yeessss');
                   FocusScope.of(context).unfocus();
                 },
                 child: Form(
@@ -158,103 +158,103 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                           const SizedBox(
                             height: 15,
                           ),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Owner Name",
                               hintText: "Owner Name",
                               controller: _ownerNameController,
                               type: "name",
                               show: routeArgs.ownerName.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Owner Number",
                               hintText: "01144..",
                               controller: _ownerNumberController,
                               type: "phone",
                               show: routeArgs.ownerNumber.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Address For User",
                               hintText: "Address User",
                               controller: _addressForUserController,
                               type: "address",
                               show: routeArgs.addressUser.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Address For Admin",
                               hintText: "Address Admin",
                               controller: _addressForAdminController,
                               type: "address",
                               show: routeArgs.addressAdmin.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Area",
                               hintText: "Area",
                               controller: _areaController,
                               type: "number",
                               show: routeArgs.area.toString().isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Price",
                               hintText: "Price",
                               controller: _priceController,
                               type: "number",
                               show: routeArgs.price.toString().isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Description For User",
                               hintText: "Description For User",
                               controller: _descriptionForUserController,
                               type: "address",
                               show: routeArgs.descriptionUser.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Description For Admin",
                               hintText: "Description For Admin",
                               controller: _descriptionForAdminController,
                               type: "address",
                               show: routeArgs.descriptionAdmin.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Unit Name",
                               hintText: "Unit Name",
                               controller: _nameController,
                               type: "name",
                               show: routeArgs.unitName.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Floor",
                               hintText: "Floor",
                               controller: _floorController,
                               type: "number",
                               show: routeArgs.floor!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Number Of Rooms",
                               hintText: "Number Of Rooms",
                               controller: _noOFRoomsController,
                               type: "number",
                               show: routeArgs.noRooms!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Number Of Bathrooms",
                               hintText: "Number Of Bathrooms",
                               controller: _noOFBathroomsController,
                               type: "number",
                               show: routeArgs.noBathrooms!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Number Of Floors",
                               hintText: "Number Of Floors",
                               controller: _noOFFloorsController,
                               type: "number",
                               show: routeArgs.noFloors!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Number Of Flats",
                               hintText: "Number Of Flats",
                               controller: _noOFFlatsController,
                               type: "number",
                               show: routeArgs.noFlats!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Type OF Activity",
                               hintText: "Type OF Activity",
                               controller: _typeOFActivityController,
                               type: "address",
                               show: routeArgs.typeOFActivity!.isNotEmpty),
-                          Property.buildTextField(
+                          FormManagement.buildTextField(
                               labelText: "Number Of administrative buildings",
                               hintText: "Number Of administrative buildings",
                               controller: _noOFABController,
                               type: "number",
                               show: routeArgs.theNumberOFAB!.isNotEmpty),
-                          Property.showDropdown(
+                          FormManagement.showDropdown(
                               dropdownItems: ["High", "medium", "Low"],
                               hint: "Select priority",
                               text: "Select priority",
@@ -266,7 +266,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   routeArgs.priority = val!;
                                 });
                               }),
-                          Property.showDropdown(
+                          FormManagement.showDropdown(
                               dropdownItems: ["Yes", "No"],
                               hint: "Select visibility",
                               text: "Select visibility",
@@ -278,7 +278,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   routeArgs.visible = val!;
                                 });
                               }),
-                          Property.showDropdown(
+                          FormManagement.showDropdown(
                               dropdownItems: ["For Sale", "For Rent"],
                               hint: "Select offering",
                               text: "Select offering",
@@ -290,7 +290,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   routeArgs.offered = val!;
                                 });
                               }),
-                          Property.showDropdown(
+                          FormManagement.showDropdown(
                               dropdownItems: ["Yes", "Half", "No"],
                               hint: "Finishing",
                               text: "Select Finishing",
@@ -302,7 +302,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   routeArgs.finishing = val;
                                 });
                               }),
-                          Property.showDropdown(
+                          FormManagement.showDropdown(
                               dropdownItems: ["Yes", "No"],
                               hint: "Select yes if Doublex",
                               text: "Select yes if Doublex",
@@ -497,7 +497,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  elevation: 0.0, 
+                                  elevation: 0.0,
                                   backgroundColor: Colors.red.withOpacity(0),
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
