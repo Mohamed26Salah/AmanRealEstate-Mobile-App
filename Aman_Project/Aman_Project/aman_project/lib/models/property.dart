@@ -156,7 +156,7 @@ class Property {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(11),
                     FilteringTextInputFormatter.allow(
-                      RegExp(r"^[0-9]*$"),
+                      RegExp("^[0-9]*"),
                     )
                   ],
                   validator: (value) {
@@ -186,7 +186,7 @@ class Property {
                     FilteringTextInputFormatter.allow(
                       // RegExp(r"[a-zA-Z0-9]+|\s"),
                       RegExp(
-                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$"),
+                          "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*"),
                     )
                   ],
                   validator: (value) {
