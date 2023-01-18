@@ -42,11 +42,11 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
                   ),
                   controller: nameController,
                   inputFormatters: [
-                    LengthLimitingTextInputFormatter(18),
+                    LengthLimitingTextInputFormatter(20),
                     FilteringTextInputFormatter.allow(
                       // RegExp(r"[a-zA-Z0-9]+|\s"),
                       RegExp(
-                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$"),
+                          "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*"),
                     )
                   ],
                 ),
