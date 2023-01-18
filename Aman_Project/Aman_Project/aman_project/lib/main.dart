@@ -1,6 +1,7 @@
 import 'package:aman_project/presentation/login_loading/login_loading.dart';
 import 'package:aman_project/presentation/properties/edit_property.dart';
 import 'package:aman_project/presentation/rents/add_form_rent.dart';
+import 'package:aman_project/presentation/rents/edit_rents.dart';
 import 'package:aman_project/presentation/rents/main_page_rents.dart';
 import 'package:aman_project/presentation/rents/rent_description.dart';
 import 'package:get/get.dart';
@@ -88,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         '/addFormRent': (context) => const AddFormRent(),
         '/MainPageRent': (context) => const MainPageRent(),
         '/rentDetails': (context) => const RentsDescription(),
-        // '/editRents': (context) => const RentsDescription(),
+        '/editRents': (context) => const EditRents(),
         '/location': (context) => const Location(),
       },
       theme: lightTheme,

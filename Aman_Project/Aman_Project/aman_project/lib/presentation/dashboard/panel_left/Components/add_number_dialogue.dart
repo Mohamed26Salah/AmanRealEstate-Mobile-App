@@ -1,10 +1,8 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/models/number.dart';
-import 'package:aman_project/models/property.dart';
-import 'package:aman_project/presentation/shared_features/custom_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -33,12 +31,12 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "name",
                   hintText: "",
                   controller: nameController,
                   type: "name"),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "number",
                   hintText: "010XXXXXX",
                   controller: numberController,
