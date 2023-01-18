@@ -32,8 +32,8 @@ extension ExtString on String {
   }
 
   bool get isValidName {
-    final nameRegExp =
-        RegExp(r"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$");
+    final nameRegExp = RegExp(
+        "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*");
     return nameRegExp.hasMatch(this);
   }
 
@@ -53,7 +53,7 @@ extension ExtString on String {
 
   bool get isValidAddress {
     final phoneRegExp = RegExp(
-        r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$");
+        "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*");
 
     return phoneRegExp.hasMatch(this);
   }
