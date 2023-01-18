@@ -158,32 +158,35 @@ class _DetailsState extends ConsumerState<Details> {
                           padding: const EdgeInsets.all(20),
                           decoration: const BoxDecoration(),
                           child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.white,
-                                      size: 24,
+                              Flexible(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Colors.white,
+                                        size: 24,
+                                      ),
                                     ),
-                                  ),
-                                  Visibility(
-                                    visible: isVisible,
-                                    child: Icon(
-                                      Icons.remove_red_eye_rounded,
-                                      color: visible,
-                                      size: 30,
-                                      shadows: [defaultShadow],
-                                    ),
-                                  )
-                                ],
+                                    Visibility(
+                                      visible: isVisible,
+                                      child: Icon(
+                                        Icons.remove_red_eye_rounded,
+                                        color: visible,
+                                        size: 30,
+                                        shadows: [defaultShadow],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -253,9 +256,7 @@ class _DetailsState extends ConsumerState<Details> {
                                         builder: (contextt, snapshot) {
                                           if (snapshot.connectionState ==
                                               ConnectionState.waiting) {
-                                            return const Center(
-                                              child: LoadingScreen(),
-                                            );
+                                            return const LoadingScreen();
                                           } else {
                                             return InkWell(
                                               onTap: () {

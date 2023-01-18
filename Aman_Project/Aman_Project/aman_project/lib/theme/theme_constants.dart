@@ -23,6 +23,7 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: colorPrimary,
+  splashColor: colorSplash,
   errorColor: colorError,
   focusColor: colorFocus,
   highlightColor: highlightColor,

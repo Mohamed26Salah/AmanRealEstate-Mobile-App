@@ -28,6 +28,7 @@ class WishlistState extends ConsumerState<Wishlist> {
 
   @override
   Widget build(BuildContext context) {
+    resultWhishlist = ref.watch(whishlistProvider);
     return resultWhishlist.isEmpty
         ? SafeArea(
             child: Center(
@@ -73,42 +74,61 @@ class WishlistState extends ConsumerState<Wishlist> {
                       height: 30,
                     ),
                     Container(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(10),
                       alignment: Alignment.topCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Your WishList',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                width: 1,
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(13)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Your Wishlist',
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Icon(
+                                Icons.favorite,
+                                color: Theme.of(context).primaryColor,
+                                size: 35,
+                              )
+                            ],
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Icon(
-                            Icons.favorite,
-                            color: Theme.of(context).primaryColor,
-                            size: 35,
-                          )
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.33,
+                    Container(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height / 1.4),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18),
-                        child: ListView.builder(
-                          itemCount: ref.watch(whishlistProvider).length,
-                          itemBuilder: (context, index) {
-                            
-                            return PropertyWidget(
-                              property: ref.watch(whishlistProvider)[index],
-                            );
-                          },
+                        padding: const EdgeInsets.all(11.0),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13)),
+                          elevation: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: ref.watch(whishlistProvider).length,
+                              itemBuilder: (context, index) {
+                                return PropertyWidget(
+                                  property: ref.watch(whishlistProvider)[index],
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ),
