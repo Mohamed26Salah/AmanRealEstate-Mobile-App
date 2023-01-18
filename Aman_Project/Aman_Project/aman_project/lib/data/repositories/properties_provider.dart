@@ -8,7 +8,7 @@ final searchInputProivder = StateProvider<String>((ref) {
 });
 
 final whishlistProvider = StateProvider<List<Property>>((ref) {
-  return [];
+  return [Property.alternate()];
 });
 
 final filterPriceProivder = StateProvider<String>((ref) {

@@ -33,11 +33,24 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Property.buildTextField(
-                  labelText: "name",
-                  hintText: "",
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 0, left: 15, right: 15, bottom: 10),
+                child: TextFormField(
+                  decoration: CommonStyle.textFieldStyle(
+                    labelText: "name",
+                  ),
                   controller: nameController,
-                  type: "name"),
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(18),
+                    FilteringTextInputFormatter.allow(
+                      // RegExp(r"[a-zA-Z0-9]+|\s"),
+                      RegExp(
+                          r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ ]*$"),
+                    )
+                  ],
+                ),
+              ),
               Property.buildTextField(
                   labelText: "number",
                   hintText: "010XXXXXX",
