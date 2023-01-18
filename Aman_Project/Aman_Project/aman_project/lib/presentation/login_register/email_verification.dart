@@ -112,7 +112,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                       height: 20,
                     ),
                     const Text(
-                      'Please Verify Your Email',
+                      'Please Verify Your Email \n Kindly check Spam',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

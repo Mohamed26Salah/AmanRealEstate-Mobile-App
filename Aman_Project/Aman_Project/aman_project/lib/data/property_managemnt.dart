@@ -1,6 +1,8 @@
 import 'package:aman_project/data/form_management.dart';
+import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../models/chart_data.dart';
@@ -211,36 +213,62 @@ class PropertyManagement {
   static void makePhoneCall(
       {required BuildContext context,
       Property? routeArgs,
-      bool isVisible = false}) async {
-    List<String>? phoneNumbersUsers = [];
-    phoneNumbersUsers.add('01152327193');
-    phoneNumbersUsers.add('01152327191');
-    phoneNumbersUsers.add('01152327192');
+      bool isVisible = false,
+      required WidgetRef ref}) async {
+    final adminNumbers = ref.watch(numberProv);
+    // Map<String, String>? phoneNumbersVisibleToUsers = {'number': '' , 'name': ''};
+    // for (int i = 0; i < adminNumbers.length; i++) {
+    //   phoneNumbersVisibleToUsers.add(adminNumbers[i].number);
+    //   phoneNumbersVisibleToUsers.
+    // }
 
-    List<String>? phoneNumbersAdmin = [];
-    phoneNumbersAdmin.add(routeArgs!.ownerNumber);
-    String? chosenValue;
+    List<String>? phoneNumbersVisibleToAdmin = [];
+    phoneNumbersVisibleToAdmin.add(routeArgs!.ownerNumber);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Call "),
         content: SizedBox(
-          height: 120,
-          child: Form(
-            key: formKey,
-            child: FormManagement.showDropdown(
-                context: context,
-                hint: 'Select Number'.tr,
-                dropdownItems:
-                    isVisible == true ? phoneNumbersAdmin : phoneNumbersUsers,
-                text: "Phone Numbers".tr,
-                show: true,
-                value: chosenValue,
-                onChanged: (value) {
-                  chosenValue = value;
-                }),
-          ),
-        ),
+            height: MediaQuery.of(context).size.height * 0.3,
+            child: ListView.builder(
+                itemCount: isVisible == true ? phoneNumbersVisibleToAdmin.length: adminNumbers.length,
+                itemBuilder: ((context, index) {
+                  return Card(
+                    elevation: 5,
+                    child: isVisible == true
+                        ? ListTile(
+                            title: Text(phoneNumbersVisibleToAdmin[index]),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.phone),
+                              onPressed: () async {
+                                if (await canLaunchUrlString(
+                                    'tel: +2${phoneNumbersVisibleToAdmin[index]}')) {
+                                  await launchUrlString(
+                                      'tel: +2${phoneNumbersVisibleToAdmin[index]}');
+                                } else {
+                                  throw 'Could not launch $phoneNumbersVisibleToAdmin';
+                                }
+                              },
+                            ),
+                          )
+                        : ListTile(
+                            title: Text(adminNumbers[index].number),
+                            subtitle: Text(adminNumbers[index].name),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.phone),
+                              onPressed: () async {
+                                if (await canLaunchUrlString(
+                                    'tel: +2${adminNumbers[index].number}')) {
+                                  await launchUrlString(
+                                      'tel: +2${adminNumbers[index].number}');
+                                } else {
+                                  throw 'Could not launch $adminNumbers';
+                                }
+                              },
+                            ),
+                          ),
+                  );
+                }))),
         actions: [
           TextButton(
             onPressed: () {
@@ -257,28 +285,6 @@ class PropertyManagement {
             child: Text(
               'Cancel'.tr,
               style: const TextStyle(color: Colors.white),
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              if (formKey.currentState!.validate()) {
-                if (await canLaunchUrlString('tel: +2${chosenValue!}')) {
-                  await launchUrlString('tel: +2${chosenValue!}');
-                } else {
-                  throw 'Could not launch $chosenValue';
-                }
-              }
-            },
-            style: TextButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-            ),
-            child: Text(
-              'Call'.tr,
-              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ),
         ],

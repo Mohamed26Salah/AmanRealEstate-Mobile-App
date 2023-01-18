@@ -1,5 +1,6 @@
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/property_managemnt.dart';
+import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
@@ -38,6 +39,7 @@ class _DetailsState extends ConsumerState<Details> {
   Widget build(BuildContext context) {
     Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
     final userData = ref.watch(newUserDataProivder);
+    final adminNumbers = ref.watch(numberProv);
     Future<bool> checkFavorite(String id) async {
       await _openDatabase();
       String whereString = "`propid` = ? and `email`= ?";
@@ -383,7 +385,8 @@ class _DetailsState extends ConsumerState<Details> {
                                       PropertyManagement.makePhoneCall(
                                           context: context,
                                           isVisible: isVisible,
-                                          routeArgs: routeArgs);
+                                          routeArgs: routeArgs, ref: ref);
+                                      
                                     },
                                     child: Icon(
                                       Icons.phone,
