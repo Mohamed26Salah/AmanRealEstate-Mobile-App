@@ -66,7 +66,7 @@ class RentsManagement {
       required DateTime startOFRent,
       required DateTime endOFRent,
       required String rentType}) async {
-    final docRent = FirebaseFirestore.instance.collection('rents').doc();
+    DocumentReference docRef = FirebaseFirestore.instance.doc('rents/$docId');
     final rent = Rents(
         rentPrice: rentPrice,
         type: type,
@@ -86,7 +86,7 @@ class RentsManagement {
         rentType: rentType);
     final json = rent.toJson();
     try {
-      await docRent.set(json);
+      docRef.update(json);
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -165,7 +165,8 @@ class RentsManagement {
     try {
       FirebaseFirestore.instance.collection('rents').get().then((value) {
         for (var element in value.docs) {
-          var rent = Rents.fromJson(element.data() , element.id); //hena fe t8yeer
+          var rent =
+              Rents.fromJson(element.data(), element.id); //hena fe t8yeer
           var rentType = figureRentType(
               rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd);
           if (rentType != rent.rentType) {

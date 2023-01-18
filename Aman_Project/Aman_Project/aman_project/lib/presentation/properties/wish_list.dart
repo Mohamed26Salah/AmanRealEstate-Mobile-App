@@ -110,7 +110,7 @@ class WishlistState extends ConsumerState<Wishlist> {
                     ),
                     Container(
                       constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height / 1.4),
+                          maxHeight: MediaQuery.of(context).size.height - 170),
                       child: Padding(
                         padding: const EdgeInsets.all(11.0),
                         child: Card(

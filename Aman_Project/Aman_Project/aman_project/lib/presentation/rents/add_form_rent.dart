@@ -1,3 +1,4 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,19 @@ class _AddFormRentState extends State<AddFormRent> {
   bool torVisibile = false;
   bool torEndVisibile = false;
   String rentType = "";
+  @override
+  void dispose() {
+    _rentPriceController.dispose();
+    _areaController.dispose();
+    _floorController.dispose();
+    _lessorNameController.dispose();
+    _lessorNumController.dispose();
+    _tenantNameController.dispose();
+    _tenantNumController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +92,7 @@ class _AddFormRentState extends State<AddFormRent> {
                   ),
                 ],
               ),
-              Property.showDropdown(
+              FormManagement.showDropdown(
                 dropdownItems: [
                   "Flat",
                   "Villa",
@@ -101,55 +115,55 @@ class _AddFormRentState extends State<AddFormRent> {
                   });
                 },
               ),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "price",
                   hintText: "price",
                   controller: _rentPriceController,
                   type: "number",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Area",
                   hintText: "Area",
                   controller: _areaController,
                   type: "number",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Floor",
                   hintText: "Floor",
                   controller: _floorController,
                   type: "number",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Lessor Name",
                   hintText: "Lessor Name",
                   controller: _lessorNameController,
                   type: "name",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Lessor Number",
                   hintText: "01144..",
                   controller: _lessorNumController,
                   type: "phone",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Tenant Name",
                   hintText: "Tenant Name",
                   controller: _tenantNameController,
                   type: "name",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Tenant Number",
                   hintText: "01144..",
                   controller: _tenantNumController,
                   type: "phone",
                   show: true),
-              Property.buildTextField(
+              FormManagement.buildTextField(
                   labelText: "Description",
                   hintText: "Description",
                   controller: _descriptionController,
                   type: "address",
                   show: true),
-              Property.showDropdown(
+              FormManagement.showDropdown(
                 dropdownItems: ["Yes", "No"],
                 hint: "Select yes if Furnished",
                 text: "Select yes if Furnished",
@@ -162,7 +176,7 @@ class _AddFormRentState extends State<AddFormRent> {
                   });
                 },
               ),
-              Property.showDropdown(
+              FormManagement.showDropdown(
                 dropdownItems: ["Yes", "Half", "No"],
                 hint: "Select Finishing",
                 text: "Select Finishing",

@@ -1,3 +1,4 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/image_provider.dart';
@@ -269,60 +270,60 @@ class AddFormState extends ConsumerState<AddForm> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Owner Name",
                       hintText: "Owner Name",
                       controller: _ownerNameController,
                       type: "name",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Owner Number",
                       hintText: "01144..",
                       controller: _ownerNumberController,
                       type: "phone",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Address For User",
                       hintText: "Address User",
                       controller: _addressForUserController,
                       type: "address",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Address For Admin",
                       hintText: "Address Admin",
                       controller: _addressForAdminController,
                       type: "address",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Area",
                       hintText: "Area",
                       controller: _areaController,
                       type: "number",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Price",
                       hintText: "Price",
                       controller: _priceController,
                       type: "number",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Description For User",
                       hintText: "Description User",
                       controller: _descriptionForUserController,
                       type: "address",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Description For Admin",
                       hintText: "Description Admin",
                       controller: _descriptionForAdminController,
                       type: "address",
                       show: true),
-                  Property.buildTextField(
+                  FormManagement.buildTextField(
                       labelText: "Unit Name",
                       hintText: "Unit Name",
                       controller: _nameController,
                       type: "name"),
-                  Property.showDropdown(
+                  FormManagement.showDropdown(
                     dropdownItems: ["Cash", "installment"],
                     hint: "Select Payment Method",
                     text: "Select Payment Method",
@@ -335,7 +336,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       });
                     },
                   ),
-                  Property.showDropdown(
+                  FormManagement.showDropdown(
                     dropdownItems: ["High", "medium", "Low"],
                     hint: "Select priority",
                     text: "Select priority",
@@ -348,7 +349,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       });
                     },
                   ),
-                  Property.showDropdown(
+                  FormManagement.showDropdown(
                     dropdownItems: ["Yes", "No"],
                     hint: "Select visibility",
                     text: "Select visibility",
@@ -361,7 +362,7 @@ class AddFormState extends ConsumerState<AddForm> {
                       });
                     },
                   ),
-                  Property.showDropdown(
+                  FormManagement.showDropdown(
                     dropdownItems: ["For Sale", "For Rent"],
                     hint: "Select offering",
                     text: "Select offering",
@@ -376,7 +377,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleFinishing,
-                    child: Property.showDropdown(
+                    child: FormManagement.showDropdown(
                       dropdownItems: ["Yes", "Half", "No"],
                       hint: "Select Finishing",
                       text: "Select Finishing",
@@ -392,7 +393,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleDoublex,
-                    child: Property.showDropdown(
+                    child: FormManagement.showDropdown(
                       dropdownItems: ["Yes", "No"],
                       hint: "Select yes if Doublex",
                       text: "Select yes if Doublex",
@@ -408,7 +409,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleFurnished,
-                    child: Property.showDropdown(
+                    child: FormManagement.showDropdown(
                       dropdownItems: ["Yes", "No"],
                       hint: "Select yes if Furnished",
                       text: "Select yes if Furnished",
@@ -424,7 +425,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleFloor,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Floor",
                         hintText: "Floor",
                         controller: _floorController,
@@ -433,7 +434,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleNoRooms,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Number Of Rooms",
                         hintText: "Number Of Rooms",
                         controller: _noOFRoomsController,
@@ -442,7 +443,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleNOBathrooms,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Number Of Bathrooms",
                         hintText: "Number Of Bathrooms",
                         controller: _noOFBathroomsController,
@@ -451,7 +452,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleNOFloors,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Number Of Floors",
                         hintText: "Number Of Floors",
                         controller: _noOFFloorsController,
@@ -460,7 +461,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleNoAB,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Number Of administrative buildings",
                         hintText: "Number Of administrative buildings",
                         controller: _noOFABController,
@@ -469,7 +470,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleNOFlats,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Number Of Flats",
                         hintText: "Number Of Flats",
                         controller: _noOFFlatsController,
@@ -478,7 +479,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   ),
                   Visibility(
                     visible: visibleTypeOFAcitivity,
-                    child: Property.buildTextField(
+                    child: FormManagement.buildTextField(
                         labelText: "Type OF Activity",
                         hintText: "Type OF Activity",
                         controller: _typeOFActivityController,

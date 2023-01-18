@@ -29,33 +29,38 @@ class _EditNumberState extends ConsumerState<EditNumber> {
     NumberManagement.getNumbers().then((value) {
       ref.read(numberProv.notifier).state = value;
     });
-    return Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(2),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              // Text(
-              //   "Admin Numbers",
-              //   style: TextStyle(color: Theme.of(context).primaryColor),
-              // ),
-              ExtractedWidgets().strokeWidget(
-                  "Admin Numbers", 20, Theme.of(context).primaryColor),
-              SizedBox(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                child: const ListNumber(),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    openDialog(name: "Add Number");
-                  },
-                  child: Icon(Icons.add))
-            ],
-          ),
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                // Text(
+                //   "Admin Numbers",
+                //   style: TextStyle(color: Theme.of(context).primaryColor),
+                // ),
+                ExtractedWidgets().strokeWidget(
+                    "Admin Numbers", 20, Theme.of(context).primaryColor),
+                SizedBox(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: const ListNumber(),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      openDialog(name: "Add Number");
+                    },
+                    child: Icon(Icons.add))
+              ],
+            ),
+          )),
+    );
   }
 }

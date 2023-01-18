@@ -29,16 +29,6 @@ class UserHelper {
     }
   }
 
-//Salah Way
-  // Future<Object> getUserData() async {
-  //   final user = FirebaseAuth.instance.currentUser!;
-  //   String id = user.uid;
-  //   final DocumentSnapshot userDoc =
-  //       await FirebaseFirestore.instance.collection('users').doc(id).get();
-  //   return userDoc;
-  // }
-
-  // Yasser Way
   Future<DocumentSnapshot> getNewUserData() async {
     final user = FirebaseAuth.instance.currentUser!;
     String id = user.uid;
@@ -201,7 +191,6 @@ class UserHelper {
     final user = FirebaseAuth.instance.currentUser!;
     try {
       await user.updatePassword(newPassword);
-
       FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/');
       ScaffoldMessenger.of(context).showSnackBar(

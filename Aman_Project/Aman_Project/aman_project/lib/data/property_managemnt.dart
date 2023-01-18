@@ -1,3 +1,4 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -227,7 +228,7 @@ class PropertyManagement {
           height: 120,
           child: Form(
             key: formKey,
-            child: Property.showDropdown(
+            child: FormManagement.showDropdown(
                 context: context,
                 hint: 'Select Number'.tr,
                 dropdownItems:

@@ -1,7 +1,7 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/models/number.dart';
-import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/shared_features/custom_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,12 +33,25 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Property.buildTextField(
-                  labelText: "name",
-                  hintText: "",
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 0, left: 15, right: 15, bottom: 10),
+                child: TextFormField(
+                  decoration: CommonStyle.textFieldStyle(
+                    labelText: "name",
+                  ),
                   controller: nameController,
-                  type: "name"),
-              Property.buildTextField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(20),
+                    FilteringTextInputFormatter.allow(
+                      // RegExp(r"[a-zA-Z0-9]+|\s"),
+                      RegExp(
+                          "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*"),
+                    )
+                  ],
+                ),
+              ),
+              FormManagement.buildTextField(
                   labelText: "number",
                   hintText: "010XXXXXX",
                   controller: numberController,
