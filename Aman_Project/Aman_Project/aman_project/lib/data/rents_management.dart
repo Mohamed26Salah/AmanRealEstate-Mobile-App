@@ -125,34 +125,39 @@ class RentsManagement {
     return (torEnd.add(Duration(days: addedTime)));
   }
 
-  static updateRentDaysDifference(
-      DateTime tor, DateTime torEnd, String docId) async {
+  static  updateRentDaysDifference(
+      DateTime tor, DateTime torEnd, String docId, Rents routeArgs) {
     try {
+      print('tor $tor \n torEND $torEnd');
       int difference = daysBetween(tor, torEnd);
-      tor = addDaysToStartRent(tor, addedTime: difference);
-      torEnd = addDaysToEndRent(torEnd, addedTime: difference);
-      updateTorAndTorEnd(tor, torEnd, docId);
+      routeArgs.tor = addDaysToStartRent(tor, addedTime: difference);
+      routeArgs.torEnd = addDaysToEndRent(torEnd, addedTime: difference);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
+      print('update tor $tor \n update torEND $torEnd');
+
+      // return [tor, torEnd];
     } catch (e) {
       print(e);
+      // return [];
     }
   }
 
-  static updateRents30Days(DateTime tor, DateTime torEnd, String docId) async {
+  static updateRents30Days(DateTime tor, DateTime torEnd, String docId, Rents routeArgs) async {
     try {
-      tor = addDaysToStartRent(tor);
-      torEnd = addDaysToEndRent(torEnd);
-      updateTorAndTorEnd(tor, torEnd, docId);
+      routeArgs.tor = addDaysToStartRent(tor);
+      routeArgs.torEnd = addDaysToEndRent(torEnd);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
     } catch (e) {
       print(e);
     }
   }
 
   static updateRentsCustomDays(
-      DateTime tor, DateTime torEnd, String docId, int customDays) async {
+      DateTime tor, DateTime torEnd, String docId, int customDays, Rents routeArgs) async {
     try {
-      tor = addDaysToStartRent(tor, addedTime: customDays);
-      torEnd = addDaysToEndRent(torEnd, addedTime: customDays);
-      updateTorAndTorEnd(tor, torEnd, docId);
+      routeArgs.tor = addDaysToStartRent(tor, addedTime: customDays);
+      routeArgs.torEnd = addDaysToEndRent(torEnd, addedTime: customDays);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
     } catch (e) {
       print(e);
     }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
@@ -304,12 +306,14 @@ class ExtractedWidgets {
 }
 
 class PaidButtonWidget extends StatefulWidget {
-  const PaidButtonWidget({
-    Key? key,
-    required this.isVisible,
-    required this.context,
-    required this.routeArgsRents,
-  }) : super(key: key);
+  final ValueChanged<Rents>? update;
+  const PaidButtonWidget(
+      {Key? key,
+      required this.isVisible,
+      required this.context,
+      required this.routeArgsRents,
+      this.update})
+      : super(key: key);
 
   final bool isVisible;
   final BuildContext context;
@@ -335,7 +339,7 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                 title: const Text("How Many Days?"),
                 content: SingleChildScrollView(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height - 450,
                     width: double.maxFinite,
                     child: Column(
                       children: [
@@ -345,14 +349,20 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                             title:
                                 const Text("Start and End of Rent Differing"),
                             onTap: () {
+                              var ListTemp = [];
+                              print('End' +
+                                  widget.routeArgsRents.torEnd.toString());
+                              print('Start' +
+                                  widget.routeArgsRents.tor.toString());
                               RentsManagement.updateRentDaysDifference(
-                                  widget.routeArgsRents.tor =
-                                      widget.routeArgsRents.tor,
-                                  widget.routeArgsRents.torEnd =
-                                      widget.routeArgsRents.torEnd,
-                                  widget.routeArgsRents.docId!);
+                                  widget.routeArgsRents.tor,
+                                  widget.routeArgsRents.torEnd,
+                                  widget.routeArgsRents.docId!,
+                                  widget.routeArgsRents);
+                              if (widget.update != null) {
+                                widget.update!(widget.routeArgsRents);
+                              }
                               Navigator.pop(context, widget.routeArgsRents);
-                              setState(() {});
                             },
                           ),
                         ),
@@ -362,18 +372,21 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                             title: const Text("Add 30 Days"),
                             onTap: () {
                               RentsManagement.updateRents30Days(
-                                  widget.routeArgsRents.tor =
-                                      widget.routeArgsRents.tor,
-                                  widget.routeArgsRents.torEnd =
-                                      widget.routeArgsRents.torEnd,
-                                  widget.routeArgsRents.docId!);
+                                  widget.routeArgsRents.tor,
+                                  widget.routeArgsRents.torEnd,
+                                  widget.routeArgsRents.docId!,
+                                  widget.routeArgsRents);
+                              print(widget.routeArgsRents.torEnd);
+                              if (widget.update != null) {
+                                widget.update!(widget.routeArgsRents);
+                              }
+
                               Navigator.pop(context, widget.routeArgsRents);
-                              setState(() {});
                             },
                           ),
                         ),
                         Form(
-                          key: formKey,
+                          key: _formKey,
                           child: Column(
                             children: [
                               Card(
@@ -396,15 +409,15 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       RentsManagement.updateRentsCustomDays(
-                                          widget.routeArgsRents.tor =
-                                              widget.routeArgsRents.tor,
-                                          widget.routeArgsRents.torEnd =
-                                              widget.routeArgsRents.torEnd,
+                                          widget.routeArgsRents.tor,
+                                          widget.routeArgsRents.torEnd,
                                           widget.routeArgsRents.docId!,
-                                          int.parse(_customController.text));
+                                          int.parse(_customController.text), widget.routeArgsRents);
+                                      if (widget.update != null) {
+                                        widget.update!(widget.routeArgsRents);
+                                      }
                                       Navigator.pop(
                                           context, widget.routeArgsRents);
-                                      setState(() {});
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(

@@ -19,10 +19,16 @@ class RentsDescription extends ConsumerStatefulWidget {
 }
 
 class _RentsDescriptionState extends ConsumerState<RentsDescription> {
+  
   @override
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
-
+    void update(Rents routeArgss) {
+    print('days left + ${routeArgss.torEnd}');
+    setState(() {
+      routeArgs = routeArgss;
+    });
+  }
     Color? rentTypeColor;
     if (routeArgs.rentType == "Payed") {
       rentTypeColor = Colors.green;
@@ -326,7 +332,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                     PaidButtonWidget(
                         isVisible: isPaidButton,
                         context: context,
-                        routeArgsRents: routeArgs),
+                        routeArgsRents: routeArgs,update: update,),
                     ExtractedWidgets().deleteButton(
                         isVisible: true,
                         context: context,
