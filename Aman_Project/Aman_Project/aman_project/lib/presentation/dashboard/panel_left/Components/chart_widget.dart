@@ -19,12 +19,7 @@ class _CategoryChartState extends State<CategoryChart> {
       child: SfCartesianChart(
           plotAreaBorderWidth: 1,
           primaryXAxis: CategoryAxis(
-            labelStyle: TextStyle(
-                fontSize: MediaQuery.of(context).size.width > 390
-                    ? MediaQuery.of(context).size.width > 600
-                        ? 16
-                        : 14
-                    : 10),
+            labelStyle: const TextStyle(fontSize: 10),
             majorGridLines: const MajorGridLines(width: 1),
           ),
           primaryYAxis:
