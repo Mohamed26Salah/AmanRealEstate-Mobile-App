@@ -1,18 +1,16 @@
-import 'dart:ffi';
-
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
 
-class AlertDailogue extends StatefulWidget {
-  String email;
+class UserRoleDialogue extends StatefulWidget {
+  final String email;
   final ValueChanged<int>? update;
-  AlertDailogue({super.key, required this.email, this.update});
+  const UserRoleDialogue({super.key, required this.email, this.update});
 
   @override
-  State<AlertDailogue> createState() => _AlertDailogueState();
+  State<UserRoleDialogue> createState() => _UserRoleDialogueState();
 }
 
-class _AlertDailogueState extends State<AlertDailogue> {
+class _UserRoleDialogueState extends State<UserRoleDialogue> {
   var items = [
     'user',
     'moderator',

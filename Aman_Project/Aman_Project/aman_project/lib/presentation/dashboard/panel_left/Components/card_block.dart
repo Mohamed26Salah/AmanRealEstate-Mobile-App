@@ -4,81 +4,81 @@ import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
 import '../../../../models/chart_data.dart';
 import '../../../shared_features/custom_loading_screen.dart';
-import 'cards.dart';
+import 'dash_board_card.dart';
 
-class ChartBlock extends StatefulWidget {
-  final double width;
-  final String text;
-  final int icon;
+class CardBlock extends StatefulWidget {
+  final double? width;
+
   final int dataNum;
-  bool isExpanded;
-  ChartBlock(
-      {super.key,
-      required this.width,
-      this.isExpanded = false,
-      this.text = "Units",
-      this.icon = 0xf7f5,
-      this.dataNum = 0});
+
+  const CardBlock({super.key, this.width, this.dataNum = 0});
 
   @override
-  State<ChartBlock> createState() => _ChartBlockState();
+  State<CardBlock> createState() => _CardBlockState();
 }
 
-class _ChartBlockState extends State<ChartBlock> {
+class _CardBlockState extends State<CardBlock> {
   Future<List<ChartData>>? chartData;
+  int widgetIcon = 0xf7f5;
+  String widgetText = "Units";
   @override
   void initState() {
     super.initState();
     if (widget.dataNum == 0) {
       chartData = PropertyManagement.getPropertiesType();
     } else if (widget.dataNum == 1) {
+      widgetIcon = 0xeb93;
+      widgetText = "Users";
       chartData = UserHelper.getUsersRoles();
     } else if (widget.dataNum == 2) {
       chartData = RentsManagement.getRentsType();
+      widgetIcon = 0xf0624;
+      widgetText = "Rents";
     } else {
       chartData = PropertyManagement.getPropertiesType();
     }
   }
 
   bool onend = false;
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
+    double widgetWidth = widget.width ?? MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         setState(() {
-          //changing the current expandableState
-          widget.isExpanded = !widget.isExpanded;
-          if (!widget.isExpanded) {
+          isExpanded = !isExpanded;
+          if (!isExpanded) {
             onend = false;
           }
         });
       },
+      // Future bulider to get the chart data from firebase cached
       child: FutureBuilder(
         future: chartData,
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.done) {
             return AnimatedContainer(
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 400),
               margin: const EdgeInsets.symmetric(vertical: 10.0),
-              width: widget.width,
-              height:
-                  !widget.isExpanded ? widget.width * 0.4 : widget.width * 1.2,
+              width: widgetWidth,
+              height: !isExpanded ? widgetWidth * 0.4 : widgetWidth * 1.2,
               onEnd: () {
                 setState(() {
-                  onend = widget.isExpanded;
+                  onend = isExpanded;
                 });
               },
-              child: Cards1(
+              //rebuilding the card with apropriate width on tap
+              child: DashboardCard(
                 expand: onend,
                 chartData: snapshot.data,
-                text: widget.text,
-                icon: widget.icon,
+                text: widgetText,
+                icon: widgetIcon,
               ),
             );
-          } else {
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
             return Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
@@ -90,6 +90,8 @@ class _ChartBlockState extends State<ChartBlock> {
                 ],
               ),
             );
+          } else {
+            return Text(snapshot.error.toString());
           }
         },
       ),

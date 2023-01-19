@@ -1,14 +1,14 @@
 import 'package:aman_project/presentation/dashboard/panel_left/Components/users_list_widget.dart';
 import 'package:flutter/material.dart';
 
-class DashBoardUsers extends StatefulWidget {
-  const DashBoardUsers({super.key});
+class DashboardUsers extends StatefulWidget {
+  const DashboardUsers({super.key});
 
   @override
-  State<DashBoardUsers> createState() => _DashBoardUsersState();
+  State<DashboardUsers> createState() => _DashboardUsersState();
 }
 
-class _DashBoardUsersState extends State<DashBoardUsers> {
+class _DashboardUsersState extends State<DashboardUsers> {
   String? query;
   @override
   Widget build(BuildContext context) {

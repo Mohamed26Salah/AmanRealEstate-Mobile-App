@@ -5,7 +5,7 @@ import '../profile/edit_profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../properties/main_page.dart';
 import 'package:flutter/material.dart';
-import '../dashboard/panel_left/panel_left_page.dart';
+import '../dashboard/panel_left/dash_board.dart';
 import '../rents/rents_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +52,7 @@ class _NavBarState extends ConsumerState<NavBar> {
 
     if (userData?.role == 'admin') {
       pages.add(const RentsPage());
-      pages.add(PanelLeftPage());
+      pages.add(Dashboard());
     }
     if (userData?.role == 'moderator') {
       pages.add(const RentsPage());

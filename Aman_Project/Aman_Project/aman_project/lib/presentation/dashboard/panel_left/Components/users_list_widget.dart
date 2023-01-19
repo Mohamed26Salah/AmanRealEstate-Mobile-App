@@ -41,7 +41,7 @@ class _UsersListWidgetState extends State<UsersListWidget> {
     Future openDialog({required String name, required ValueChanged update}) =>
         showDialog(
           context: context,
-          builder: (context) => AlertDailogue(email: name, update: update),
+          builder: (context) => UserRoleDialogue(email: name, update: update),
         );
     return FutureBuilder(
       future: usertData,

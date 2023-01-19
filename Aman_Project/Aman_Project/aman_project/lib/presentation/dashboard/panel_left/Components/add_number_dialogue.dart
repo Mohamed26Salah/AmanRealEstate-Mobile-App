@@ -9,18 +9,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-class AlertDailogue2 extends ConsumerStatefulWidget {
-  String email;
+class AddNumberDialogue extends ConsumerStatefulWidget {
+  final String email;
   final ValueChanged<int>? update;
-  bool disable;
-  AlertDailogue2(
+  final bool disable;
+  const AddNumberDialogue(
       {super.key, required this.email, this.update, required this.disable});
 
   @override
-  ConsumerState<AlertDailogue2> createState() => _AlertDailogue2State();
+  ConsumerState<AddNumberDialogue> createState() => _AlertDailogue2State();
 }
 
-class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
+class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   @override
@@ -44,7 +44,6 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
                     FilteringTextInputFormatter.allow(
-                      // RegExp(r"[a-zA-Z0-9]+|\s"),
                       RegExp(
                           "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*"),
                     )
@@ -77,19 +76,13 @@ class _AlertDailogue2State extends ConsumerState<AlertDailogue2> {
                         if (value != '') {
                           builtId = value;
                           var temp = ref.watch(numberProv);
-                          //problme here
                           temp.add(Number(
                               Id: builtId,
                               name: nameController.text,
                               number: numberController.text));
                           ref.read(numberProv.notifier).state = temp.toList();
-                          // print("added Number");
-                        } else {
-                          //print("Error happened");
-                        }
+                        } else {}
                       });
-
-                      //print("scass" + ref.watch(numberProv).toString());
                       Navigator.of(context).pop();
                     }
                   },
