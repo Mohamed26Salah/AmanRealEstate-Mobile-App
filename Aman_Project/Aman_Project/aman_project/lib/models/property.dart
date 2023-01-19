@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../presentation/shared_features/custom_decoration.dart';
-
 class Property {
   String? docId;
   String addressAdmin;

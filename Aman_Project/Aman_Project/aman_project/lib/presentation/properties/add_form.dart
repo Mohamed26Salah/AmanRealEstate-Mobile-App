@@ -610,7 +610,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                     .then((value) async {
                                   await imageManagement
                                       .uploadMultipleImages()
-                                      .then((value) {
+                                      .then((value) async {
                                     PropertyManagement().addPropertyData(
                                       type: userChoice,
                                       ownerName: _ownerNameController.text,
