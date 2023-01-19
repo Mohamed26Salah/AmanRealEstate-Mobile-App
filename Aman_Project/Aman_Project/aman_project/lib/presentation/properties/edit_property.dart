@@ -4,6 +4,7 @@ import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import '../shared_features/custom_message.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import '../../constants/globals.dart' as val;
@@ -151,9 +152,9 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               ),
                             ],
                           ),
-                          const Text(
-                            "Edit",
-                            style: TextStyle(
+                          Text(
+                            "Edit".tr,
+                            style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
@@ -162,121 +163,122 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             height: 15,
                           ),
                           FormManagement.buildTextField(
-                              labelText: "Owner Name",
-                              hintText: "Owner Name",
+                              labelText: "Owner Name".tr,
+                              hintText: "Owner Name".tr,
                               controller: _ownerNameController,
                               type: "name",
                               show: routeArgs.ownerName.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Owner Number",
+                              labelText: "Owner Number".tr,
                               hintText: "01144..",
                               controller: _ownerNumberController,
                               type: "phone",
                               show: routeArgs.ownerNumber.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Address For User",
-                              hintText: "Address User",
+                              labelText: "Address For User".tr,
+                              hintText: "Address User".tr,
                               controller: _addressForUserController,
                               type: "address",
                               show: routeArgs.addressUser.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Address For Admin",
-                              hintText: "Address Admin",
+                              labelText: "Address For Admin".tr,
+                              hintText: "Address Admin".tr,
                               controller: _addressForAdminController,
                               type: "address",
                               show: routeArgs.addressAdmin.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Area",
-                              hintText: "Area",
+                              labelText: "Area".tr,
+                              hintText: "Area".tr,
                               controller: _areaController,
                               type: "number",
                               show: routeArgs.area.toString().isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Price",
-                              hintText: "Price",
+                              labelText: "Price".tr,
+                              hintText: "Price".tr,
                               controller: _priceController,
                               type: "number",
                               show: routeArgs.price.toString().isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Description For User",
-                              hintText: "Description For User",
+                              labelText: "Description For User".tr,
+                              hintText: "Description For User".tr,
                               controller: _descriptionForUserController,
                               type: "address",
                               show: routeArgs.descriptionUser.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Description For Admin",
-                              hintText: "Description For Admin",
+                              labelText: "Description For Admin".tr,
+                              hintText: "Description For Admin".tr,
                               controller: _descriptionForAdminController,
                               type: "address",
                               show: routeArgs.descriptionAdmin.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Unit Name",
-                              hintText: "Unit Name",
+                              labelText: "Unit Name".tr,
+                              hintText: "Unit Name".tr,
                               controller: _nameController,
                               type: "name",
                               show: routeArgs.unitName.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Floor",
-                              hintText: "Floor",
+                              labelText: "Floor".tr,
+                              hintText: "Floor".tr,
                               controller: _floorController,
                               type: "number",
                               show: routeArgs.floor!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Number Of Rooms",
-                              hintText: "Number Of Rooms",
+                              labelText: "Number Of Rooms".tr,
+                              hintText: "Number Of Rooms".tr,
                               controller: _noOFRoomsController,
                               type: "number",
                               show: routeArgs.noRooms!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Number Of Bathrooms",
-                              hintText: "Number Of Bathrooms",
+                              labelText: "Number Of Bathrooms".tr,
+                              hintText: "Number Of Bathrooms".tr,
                               controller: _noOFBathroomsController,
                               type: "number",
                               show: routeArgs.noBathrooms!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Number Of Floors",
-                              hintText: "Number Of Floors",
+                              labelText: "Number Of Floors".tr,
+                              hintText: "Number Of Floors".tr,
                               controller: _noOFFloorsController,
                               type: "number",
                               show: routeArgs.noFloors!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Number Of Flats",
-                              hintText: "Number Of Flats",
+                              labelText: "Number Of Flats".tr,
+                              hintText: "Number Of Flats".tr,
                               controller: _noOFFlatsController,
                               type: "number",
                               show: routeArgs.noFlats!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Type OF Activity",
-                              hintText: "Type OF Activity",
+                              labelText: "Type Of Activity".tr,
+                              hintText: "Type Of Activity".tr,
                               controller: _typeOFActivityController,
                               type: "address",
                               show: routeArgs.typeOFActivity!.isNotEmpty,
                               context: context),
                           FormManagement.buildTextField(
-                              labelText: "Number Of administrative buildings",
-                              hintText: "Number Of administrative buildings",
+                              labelText:
+                                  "Number Of administrative buildings".tr,
+                              hintText: "Number Of administrative buildings".tr,
                               controller: _noOFABController,
                               type: "number",
                               show: routeArgs.theNumberOFAB!.isNotEmpty,
                               context: context),
                           FormManagement.showDropdown(
                               dropdownItems: ["High", "medium", "Low"],
-                              hint: "Select priority",
-                              text: "Select priority",
+                              hint: "Select priority".tr,
+                              text: "Select priority".tr,
                               value: routeArgs.priority,
                               show: true,
                               context: context,
@@ -287,8 +289,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               }),
                           FormManagement.showDropdown(
                               dropdownItems: ["Yes", "No"],
-                              hint: "Select visibility",
-                              text: "Select visibility",
+                              hint: "Select visibility".tr,
+                              text: "Select visibility".tr,
                               value: routeArgs.visible,
                               show: true,
                               context: context,
@@ -299,8 +301,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               }),
                           FormManagement.showDropdown(
                               dropdownItems: ["For Sale", "For Rent"],
-                              hint: "Select offering",
-                              text: "Select offering",
+                              hint: "Select offering".tr,
+                              text: "Select offering".tr,
                               value: routeArgs.offered,
                               show: true,
                               context: context,
@@ -311,8 +313,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               }),
                           FormManagement.showDropdown(
                               dropdownItems: ["Yes", "Half", "No"],
-                              hint: "Finishing",
-                              text: "Select Finishing",
+                              hint: "Finishing".tr,
+                              text: "Select Finishing".tr,
                               value: routeArgs.finishing,
                               show: routeArgs.finishing!.isNotEmpty,
                               context: context,
@@ -323,8 +325,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               }),
                           FormManagement.showDropdown(
                               dropdownItems: ["Yes", "No"],
-                              hint: "Select yes if Doublex",
-                              text: "Select yes if Doublex",
+                              hint: "Select yes if Doublex".tr,
+                              text: "Select yes if Doublex".tr,
                               value: routeArgs.doublex,
                               show: routeArgs.doublex!.isNotEmpty,
                               context: context,
@@ -333,10 +335,10 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                   routeArgs.doublex = val;
                                 });
                               }),
-                          const Center(
+                          Center(
                             child: Text(
-                              "Edit main image",
-                              style: TextStyle(fontSize: 20),
+                              "Edit main image".tr,
+                              style: const TextStyle(fontSize: 20),
                             ),
                           ),
                           const SizedBox(
@@ -378,14 +380,14 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                           Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Text(
-                                  "Edit Multiple Sub-Images",
-                                  style: TextStyle(fontSize: 20),
+                                  "Edit Multiple Sub-Images".tr,
+                                  style: const TextStyle(fontSize: 20),
                                 ),
                                 Text(
-                                  "(Limit 20 Images Only!)",
-                                  style: TextStyle(fontSize: 10),
+                                  "(Limit 20 Images Only!)".tr,
+                                  style: const TextStyle(fontSize: 10),
                                 ),
                               ],
                             ),
@@ -508,7 +510,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                     });
                                   } else {
                                     errormessage(
-                                        "Error!", "Some Fields are Wrong!");
+                                        "Error".tr, "Some Fields are Wrong!");
                                     ScaffoldMessenger.of(context)
                                       ..hideCurrentSnackBar()
                                       ..showSnackBar(val.snackBar);
@@ -523,10 +525,10 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                     ),
                                   ),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
-                                    'Submit',
-                                    style: TextStyle(
+                                    'Submit'.tr,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,

@@ -5,6 +5,7 @@ import 'package:aman_project/data/repositories/image_provider.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import '../shared_features/custom_loading_screen.dart';
 import '../shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
@@ -216,9 +217,9 @@ class AddFormState extends ConsumerState<AddForm> {
                           ),
                         ],
                       ),
-                      const Text(
-                        "Add",
-                        style: TextStyle(
+                      Text(
+                        "Add".tr,
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
@@ -228,7 +229,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "Select The type",
+                      "Select Type".tr,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
@@ -247,15 +248,16 @@ class AddFormState extends ConsumerState<AddForm> {
                                   const SizedBox(
                                     width: 7,
                                   ),
-                                  buildOption("Flat", flatButton1, 1),
-                                  buildOption("Villa", villaButton2, 2),
-                                  buildOption("Building", buildingButton3, 3),
-                                  buildOption("Store", storeButton4, 4),
-                                  buildOption("Clinic", clinicButton5, 5),
-                                  buildOption("Farm", farmButton6, 6),
-                                  buildOption("Factory", factoryButton7, 7),
-                                  buildOption("Land", landButton8, 8),
-                                  buildOption("Other", otherButton9, 9),
+                                  buildOption("Flat".tr, flatButton1, 1),
+                                  buildOption("Villa".tr, villaButton2, 2),
+                                  buildOption(
+                                      "Building".tr, buildingButton3, 3),
+                                  buildOption("Store".tr, storeButton4, 4),
+                                  buildOption("Clinic".tr, clinicButton5, 5),
+                                  buildOption("Farm".tr, farmButton6, 6),
+                                  buildOption("Factory".tr, factoryButton7, 7),
+                                  buildOption("Land".tr, landButton8, 8),
+                                  buildOption("Other".tr, otherButton9, 9),
                                   const SizedBox(
                                     width: 7,
                                   ),
@@ -278,71 +280,71 @@ class AddFormState extends ConsumerState<AddForm> {
                     height: 20,
                   ),
                   FormManagement.buildTextField(
-                      labelText: "Owner Name",
-                      hintText: "Owner Name",
+                      labelText: "Owner Name".tr,
+                      hintText: "Owner Name".tr,
                       controller: _ownerNameController,
                       type: "name",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Owner Number",
+                      labelText: "Owner Number".tr,
                       hintText: "01144..",
                       controller: _ownerNumberController,
                       type: "phone",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Address For User",
-                      hintText: "Address User",
+                      labelText: "Address For User".tr,
+                      hintText: "Address User".tr,
                       controller: _addressForUserController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Address For Admin",
-                      hintText: "Address Admin",
+                      labelText: "Address For Admin".tr,
+                      hintText: "Address Admin".tr,
                       controller: _addressForAdminController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Area",
-                      hintText: "Area",
+                      labelText: "Area".tr,
+                      hintText: "Area".tr,
                       controller: _areaController,
                       type: "number",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Price",
-                      hintText: "Price",
+                      labelText: "Price".tr,
+                      hintText: "Price".tr,
                       controller: _priceController,
                       type: "number",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Description For User",
-                      hintText: "Description User",
+                      labelText: "Description For User".tr,
+                      hintText: "Description User".tr,
                       controller: _descriptionForUserController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Description For Admin",
-                      hintText: "Description Admin",
+                      labelText: "Description For Admin".tr,
+                      hintText: "Description Admin".tr,
                       controller: _descriptionForAdminController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
-                      labelText: "Unit Name",
-                      hintText: "Unit Name",
+                      labelText: "Unit Name".tr,
+                      hintText: "Unit Name".tr,
                       controller: _nameController,
                       type: "name",
                       context: context),
                   FormManagement.showDropdown(
-                    dropdownItems: ["Cash", "installment"],
-                    hint: "Select Payment Method",
-                    text: "Select Payment Method",
+                    dropdownItems: ["Cash".tr, "installment".tr],
+                    hint: "Select Payment Method".tr,
+                    text: "Select Payment Method".tr,
                     show: true,
                     value: paymentMethod,
                     context: context,
@@ -353,9 +355,9 @@ class AddFormState extends ConsumerState<AddForm> {
                     },
                   ),
                   FormManagement.showDropdown(
-                    dropdownItems: ["High", "medium", "Low"],
-                    hint: "Select priority",
-                    text: "Select priority",
+                    dropdownItems: ["High".tr, "medium".tr, "Low".tr],
+                    hint: "Select priority".tr,
+                    text: "Select priority".tr,
                     show: true,
                     value: priority,
                     context: context,
@@ -366,9 +368,9 @@ class AddFormState extends ConsumerState<AddForm> {
                     },
                   ),
                   FormManagement.showDropdown(
-                    dropdownItems: ["Yes", "No"],
-                    hint: "Select visibility",
-                    text: "Select visibility",
+                    dropdownItems: ["Yes".tr, "No".tr],
+                    hint: "Select visibility".tr,
+                    text: "Select visibility".tr,
                     show: true,
                     value: visible,
                     context: context,
@@ -379,9 +381,9 @@ class AddFormState extends ConsumerState<AddForm> {
                     },
                   ),
                   FormManagement.showDropdown(
-                    dropdownItems: ["For Sale", "For Rent"],
-                    hint: "Select offering",
-                    text: "Select offering",
+                    dropdownItems: ["For Sale".tr, "For Rent".tr],
+                    hint: "Select offering".tr,
+                    text: "Select offering".tr,
                     show: true,
                     value: offered,
                     context: context,
@@ -394,9 +396,9 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleFinishing,
                     child: FormManagement.showDropdown(
-                      dropdownItems: ["Yes", "Half", "No"],
-                      hint: "Select Finishing",
-                      text: "Select Finishing",
+                      dropdownItems: ["Yes".tr, "Half".tr, "No".tr],
+                      hint: "Select Finishing".tr,
+                      text: "Select Finishing".tr,
                       show: true,
                       value: finishing,
                       context: context,
@@ -410,9 +412,9 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleDoublex,
                     child: FormManagement.showDropdown(
-                      dropdownItems: ["Yes", "No"],
-                      hint: "Select yes if Doublex",
-                      text: "Select yes if Doublex",
+                      dropdownItems: ["Yes".tr, "No".tr],
+                      hint: "Select yes if Doublex".tr,
+                      text: "Select yes if Doublex".tr,
                       show: true,
                       value: doublex,
                       context: context,
@@ -426,9 +428,9 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleFurnished,
                     child: FormManagement.showDropdown(
-                      dropdownItems: ["Yes", "No"],
-                      hint: "Select yes if Furnished",
-                      text: "Select yes if Furnished",
+                      dropdownItems: ["Yes".tr, "No".tr],
+                      hint: "Select yes if Furnished".tr,
+                      text: "Select yes if Furnished".tr,
                       show: true,
                       value: furnished,
                       context: context,
@@ -442,8 +444,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleFloor,
                     child: FormManagement.buildTextField(
-                        labelText: "Floor",
-                        hintText: "Floor",
+                        labelText: "Floor".tr,
+                        hintText: "Floor".tr,
                         controller: _floorController,
                         type: "number",
                         show: true,
@@ -452,8 +454,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleNoRooms,
                     child: FormManagement.buildTextField(
-                        labelText: "Number Of Rooms",
-                        hintText: "Number Of Rooms",
+                        labelText: "Rooms".tr,
+                        hintText: "Rooms".tr,
                         controller: _noOFRoomsController,
                         type: "number",
                         show: true,
@@ -462,8 +464,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleNOBathrooms,
                     child: FormManagement.buildTextField(
-                        labelText: "Number Of Bathrooms",
-                        hintText: "Number Of Bathrooms",
+                        labelText: "Barthrooms".tr,
+                        hintText: "Barthrooms".tr,
                         controller: _noOFBathroomsController,
                         type: "number",
                         show: true,
@@ -472,8 +474,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleNOFloors,
                     child: FormManagement.buildTextField(
-                        labelText: "Number Of Floors",
-                        hintText: "Number Of Floors",
+                        labelText: "Number Of Floors".tr,
+                        hintText: "Number Of Floors".tr,
                         controller: _noOFFloorsController,
                         type: "number",
                         show: true),
@@ -481,8 +483,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleNoAB,
                     child: FormManagement.buildTextField(
-                        labelText: "Number Of administrative buildings",
-                        hintText: "Number Of administrative buildings",
+                        labelText: "Number Of administrative buildings".tr,
+                        hintText: "Number Of administrative buildings".tr,
                         controller: _noOFABController,
                         type: "number",
                         show: true),
@@ -490,8 +492,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleNOFlats,
                     child: FormManagement.buildTextField(
-                        labelText: "Number Of Flats",
-                        hintText: "Number Of Flats",
+                        labelText: "Number Of Flats".tr,
+                        hintText: "Number Of Flats".tr,
                         controller: _noOFFlatsController,
                         type: "number",
                         show: true),
@@ -499,16 +501,16 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleTypeOFAcitivity,
                     child: FormManagement.buildTextField(
-                        labelText: "Type OF Activity",
-                        hintText: "Type OF Activity",
+                        labelText: "Type OF Activity".tr,
+                        hintText: "Type OF Activity".tr,
                         controller: _typeOFActivityController,
                         type: "address",
                         show: true),
                   ),
-                  const Center(
+                  Center(
                     child: Text(
-                      "Upload main image",
-                      style: TextStyle(fontSize: 20),
+                      "Upload main image".tr,
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ),
                   const SizedBox(
@@ -545,14 +547,14 @@ class AddFormState extends ConsumerState<AddForm> {
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
-                          "Upload Multiple Sub-Images",
-                          style: TextStyle(fontSize: 20),
+                          "Upload Multiple Sub-Images".tr,
+                          style: const TextStyle(fontSize: 20),
                         ),
                         Text(
-                          "(Limit 20 Images Only!)",
-                          style: TextStyle(fontSize: 10),
+                          "(Limit 20 Images Only!)".tr,
+                          style: const TextStyle(fontSize: 10),
                         ),
                       ],
                     ),
@@ -673,21 +675,23 @@ class AddFormState extends ConsumerState<AddForm> {
                                   if (!mounted) return;
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                       '/home', (route) => false);
-                                  goodMessageSnackBar(
-                                      "Uploading", "Uploading to database");
+                                  goodMessageSnackBar("Uploading".tr,
+                                      "Uploading to database".tr);
                                   ScaffoldMessenger.of(context)
                                     ..hideCurrentSnackBar()
                                     ..showSnackBar(val.snackBar);
                                 });
                               }
                             } else {
-                              errormessage("Error!", "Please upload images");
+                              errormessage(
+                                  "Error".tr, "Please upload images".tr);
                               ScaffoldMessenger.of(context)
                                 ..hideCurrentSnackBar()
                                 ..showSnackBar(val.snackBar);
                             }
                           } else {
-                            errormessage("Error!", "Please Choose a type!");
+                            errormessage(
+                                "Error".tr, "Please Choose a type!".tr);
                             ScaffoldMessenger.of(context)
                               ..hideCurrentSnackBar()
                               ..showSnackBar(val.snackBar);
@@ -702,10 +706,10 @@ class AddFormState extends ConsumerState<AddForm> {
                             ),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Submit',
-                            style: TextStyle(
+                            'Submit'.tr,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,

@@ -121,7 +121,27 @@ class LocaleString extends Translations {
           'Success': 'Success',
           'Successfully deleted property': 'Successfully deleted property',
           'Are you sure you would like to delete this property?':
-              'Are you sure you would like to delete this property?'
+              'Are you sure you would like to delete this property?',
+          'Add': 'Add',
+          'Please upload images': 'Please upload images',
+          'Please Choose a type!': 'Please Choose a type!',
+          'Uploading': 'Uploading',
+          'Uploading to database': 'Uploading to database',
+          'Number Of Floors': 'Number Of Floors',
+          'Number Of administrative buildings':
+              'Number Of administrative buildings',
+          'Number Of Flats': 'Number Of Flats',
+          'Upload main image': 'Upload main image',
+          'Upload Multiple Sub-Images': 'Upload Multiple Sub-Images',
+          '(Limit 20 Images Only!)': '(Limit 20 Images Only!)',
+          'Select Payment Method': 'Select Payment Method',
+          'Select priority': 'Select priority',
+          'Select visibility': 'Select visibility',
+          'Select offering': 'Select offering',
+          'Select yes if Doublex': 'Select yes if Doublex',
+          'Edit': 'Edit',
+          'Edit main image': 'Edit main image',
+          'Edit Multiple Sub-Images': 'Edit Multiple Sub-Images'
         },
         //arabic LANGUAGE
 
@@ -242,7 +262,26 @@ class LocaleString extends Translations {
           'Success': 'نجاح',
           'Successfully deleted property': 'تم الحذف بنجاح',
           'Are you sure you would like to delete this property?':
-              'هل انت متأكد من انك تريد الحذف؟'
+              'هل انت متأكد من انك تريد الحذف؟',
+          'Add': 'أضافة',
+          'Please upload images': 'الرجاء تحميل الصور',
+          'Please Choose a type!': 'الرجاء اختيار نوع',
+          'Uploading': 'جاري التحميل',
+          'Uploading to database': 'التحميل الى قاعدة البيانات',
+          'Number Of Floors': 'عدد الادوار',
+          'Number Of administrative buildings': 'عدد المباني الأدارية',
+          'Number Of Flats': 'عدد الشقق',
+          'Upload main image': 'تحميل الصورة الرئيسية',
+          'Upload Multiple Sub-Images': 'تحميل الصور المتعددة',
+          '(Limit 20 Images Only!)': 'حد اقصى 20 صورة',
+          'Select Payment Method': 'أختر طريقة الدفع',
+          'Select priority': 'أختر الأهمية',
+          'Select visibility': 'أختر الظهور للمستخدم',
+          'Select offering': 'أختر نوع العقد',
+          'Select yes if Doublex': 'أختر نعم اذا كانت دوبليكس',
+          'Edit': 'تعديل',
+          'Edit main image': 'تعديل الصورة الرئيسية',
+          'Edit Multiple Sub-Images': 'تعديل الصور الفرعية'
         },
       };
 }
