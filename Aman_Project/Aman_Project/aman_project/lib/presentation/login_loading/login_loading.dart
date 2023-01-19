@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:aman_project/data/numbers_management.dart';
+import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +34,9 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
               ref.read(newUserDataProivder.notifier).state = user;
               Navigator.of(context).pushReplacementNamed('/home');
             }
+          });
+          NumberManagement.getNumbers().then((value) {
+            ref.read(numberProv.notifier).state = value;
           });
         } else {
           Navigator.of(context).pushReplacementNamed('/login');

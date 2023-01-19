@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:aman_project/data/numbers_management.dart';
+import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,14 +40,19 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     if (isEmailVerified) timer?.cancel();
   }
 
-  void redirectToHome() {
+  void redirectToHome()  {
     UserHelper.saveUser();
-    UserHelper().getNewUserData().then((value) {
+     UserHelper().getNewUserData().then((value) {
       UserModel user = UserModel.fromSnapshot(value);
       ref.read(newUserDataProivder.notifier).state = user;
       // Navigator.of(context).pushReplacementNamed('/home');
+      NumberManagement.getNumbers().then((value) {
+            ref.read(numberProv.notifier).state = value;
+          });
+      
       Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
     });
+
   }
 
   @override
@@ -112,7 +119,12 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                       height: 20,
                     ),
                     const Text(
-                      'Please Verify Your Email \n Kindly check Spam',
+                      'Please Verify Your Email',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      'Kindly check Spam',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
