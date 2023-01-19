@@ -150,7 +150,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         controller: confirmPasswordController,
                         obscureText: true,
                         decoration: CommonStyle.textFieldStyle(
-                            labelText: ("Confirm Password".tr),
+                            labelText: ("Confirm your Password".tr),
                             hintText: ("Type your new password".tr)),
                         validator: (value) {
                           if (value != newPasswordController.value.text) {
@@ -281,10 +281,10 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     onPressed: (() {
                       UserHelper().signOut(context);
                     }),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        'Sign out',
-                        style: TextStyle(
+                        'Sign out'.tr,
+                        style: const TextStyle(
                           fontSize: 18,
                           letterSpacing: 2,
                           color: Colors.white,

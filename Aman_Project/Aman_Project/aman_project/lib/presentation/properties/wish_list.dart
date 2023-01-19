@@ -5,6 +5,7 @@ import 'package:aman_project/models/property.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'property_widget_card.dart';
@@ -88,7 +89,7 @@ class WishlistState extends ConsumerState<Wishlist> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Your Wishlist',
+                                'Your Wishlist'.tr,
                                 style: TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,

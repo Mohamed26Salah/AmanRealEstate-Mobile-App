@@ -2,6 +2,7 @@ import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/presentation/properties/show_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import '../../data/repositories/user_providers.dart';
 import 'filter.dart';
 import '../../data/repositories/properties_provider.dart';
@@ -65,7 +66,7 @@ class _SearchState extends ConsumerState<Search> {
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: 'Search'.tr,
                   hintStyle: TextStyle(
                     fontSize: 28,
                     color: Colors.grey[400],
@@ -205,7 +206,7 @@ class _SearchState extends ConsumerState<Search> {
   }
 
   Widget textType() {
-    var type = "Properties";
+    var type = "Properties".tr;
     if (ref.watch(filterTypeProivder) != "" ||
         ref.watch(filterRoomProivder) != "" ||
         ref.watch(filterBathroomProivder) != "" ||

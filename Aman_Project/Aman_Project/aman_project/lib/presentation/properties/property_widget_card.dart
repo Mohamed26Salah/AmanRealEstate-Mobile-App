@@ -2,6 +2,7 @@ import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:get/get.dart';
 
 // final userRoleProvider = FutureProvider((ref) async {
 //   return await UserHelper().getUser();
@@ -73,7 +74,7 @@ class PropertyWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        property.type,
+                        property.type.tr,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -98,7 +99,7 @@ class PropertyWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        property.offered,
+                        property.offered.tr,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,

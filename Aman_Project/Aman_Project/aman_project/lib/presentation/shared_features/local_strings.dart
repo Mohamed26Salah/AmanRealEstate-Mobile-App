@@ -69,7 +69,21 @@ class LocaleString extends Translations {
           'Remember Me?': 'Remember Me?',
           'Forgot Password?': 'Forgot Password?',
           'Sign Up': 'Sign Up',
-          'Confirm your Password': 'Confirm your Password'
+          'Confirm your Password': 'Confirm your Password',
+          'Search': 'Search',
+          'Properties': 'Properties',
+          'Low To High': 'Low To High',
+          'High To Low': 'High To Low',
+          'Filter': 'Filter',
+          'your search': 'your search',
+          'Bathrooms': 'Bathrooms',
+          'Sign out': 'Sign out',
+          'Your Wishlist': 'Your Wishlist',
+          'Home': 'Home',
+          'Likes': 'Likes',
+          'Profile': 'Profile',
+          'Rents': 'Rents',
+          'Dashboard': 'Dashboard'
         },
         //arabic LANGUAGE
 
@@ -138,7 +152,21 @@ class LocaleString extends Translations {
           'Remember Me?': 'تذكرني ؟',
           'Forgot Password?': 'هل نسيت كلمه المرور؟',
           'Sign Up': 'اشتراك',
-          'Confirm your Password': 'أكد كلمة المرور'
+          'Confirm your Password': 'أكد كلمة المرور',
+          'Search': 'بحث',
+          'Properties': 'عقارات',
+          'Low To High': 'من الأقل الى الأعلى',
+          'High To Low': 'من الأعلى الى الأقل',
+          'Filter': 'فلتر',
+          'your search': 'البحث الخاص بك',
+          'Bathrooms': 'حمامات',
+          'Sign out': 'تسجيل الخروج',
+          'Your Wishlist': 'قائمة امنياتك',
+          'Home': 'الرئيسية',
+          'Likes': 'المفضلة',
+          'Profile': 'تعديل',
+          'Rents': 'الايجارات',
+          'Dashboard': 'لوحة التحكم'
         },
       };
 }

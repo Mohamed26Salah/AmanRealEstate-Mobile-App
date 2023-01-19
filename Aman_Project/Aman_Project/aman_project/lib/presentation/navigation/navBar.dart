@@ -1,5 +1,6 @@
 import 'package:aman_project/presentation/properties/wish_list.dart';
 import 'package:aman_project/theme/colors.dart';
+import 'package:get/get.dart';
 import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
 import '../profile/edit_profile.dart';
@@ -82,31 +83,31 @@ class _NavBarState extends ConsumerState<NavBar> {
             gap: 8,
             // onTabChange: (value) => print,
             tabs: [
-              const GButton(
+              GButton(
                 icon: Icons.home,
-                text: 'Home',
+                text: 'Home'.tr,
               ),
-              const GButton(
+              GButton(
                 icon: Icons.favorite,
-                text: 'Likes',
+                text: 'Likes'.tr,
               ),
-              const GButton(
+              GButton(
                 icon: Icons.person,
-                text: 'Profile',
+                text: 'Profile'.tr,
               ),
               // const GButton(
               //   icon: Icons.location_pin,
               //   text: 'Location',
               // ),
               if (userData?.role == 'admin')
-                const GButton(
+                GButton(
                   icon: Icons.apartment,
-                  text: 'Rents',
+                  text: 'Rents'.tr,
                 ),
               if (userData?.role == 'admin')
-                const GButton(
+                GButton(
                   icon: Icons.dashboard,
-                  text: 'Dashboard',
+                  text: 'Dashboard'.tr,
                 ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 class Filter extends ConsumerStatefulWidget {
   const Filter({super.key});
@@ -113,39 +114,39 @@ class _FilterState extends ConsumerState<Filter> {
     switch (id) {
       case 11:
         flatButton11 = true;
-        typeFilter = "Flat";
+        typeFilter = "Flat".tr;
         break;
       case 12:
         villaButton12 = true;
-        typeFilter = "Villa";
+        typeFilter = "Villa".tr;
         break;
       case 13:
         buildingButton13 = true;
-        typeFilter = "Building";
+        typeFilter = "Building".tr;
         break;
       case 14:
         storeButton14 = true;
-        typeFilter = "Store";
+        typeFilter = "Store".tr;
         break;
       case 15:
         clinicButton15 = true;
-        typeFilter = "Clinic";
+        typeFilter = "Clinic".tr;
         break;
       case 16:
         farmButton16 = true;
-        typeFilter = "Farm";
+        typeFilter = "Farm".tr;
         break;
       case 17:
         factoryButton17 = true;
-        typeFilter = "Factory";
+        typeFilter = "Factory".tr;
         break;
       case 18:
         landButton18 = true;
-        typeFilter = "Land";
+        typeFilter = "Land".tr;
         break;
       case 19:
         otherButton19 = true;
-        typeFilter = "Other";
+        typeFilter = "Other".tr;
         break;
       default:
     }
@@ -161,11 +162,11 @@ class _FilterState extends ConsumerState<Filter> {
     switch (id) {
       case 20:
         ascendingButton20 = true;
-        priceFilter = "LTH";
+        priceFilter = "Low To High".tr;
         break;
       case 21:
         descendingButton21 = true;
-        priceFilter = "HTL";
+        priceFilter = "High To Low".tr;
         break;
 
       default:
@@ -181,20 +182,20 @@ class _FilterState extends ConsumerState<Filter> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
+            children: [
               Text(
-                "Filter",
-                style: TextStyle(
+                "Filter".tr,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Text(
-                "your search",
-                style: TextStyle(
+                "your search".tr,
+                style: const TextStyle(
                   fontSize: 24,
                 ),
               ),
@@ -203,9 +204,9 @@ class _FilterState extends ConsumerState<Filter> {
           const SizedBox(
             height: 32,
           ),
-          const Text(
-            "Price",
-            style: TextStyle(
+          Text(
+            "Price".tr,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -213,13 +214,13 @@ class _FilterState extends ConsumerState<Filter> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildOption("L T H ", ascendingButton20, 20),
-              buildOption("H T L", descendingButton21, 21),
+              buildOption("Low To High".tr, ascendingButton20, 20),
+              buildOption("High To Low".tr, descendingButton21, 21),
             ],
           ),
-          const Text(
-            "Type",
-            style: TextStyle(
+          Text(
+            "Type".tr,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -242,15 +243,15 @@ class _FilterState extends ConsumerState<Filter> {
                           const SizedBox(
                             width: 7,
                           ),
-                          buildOption("Flat", flatButton11, 11),
-                          buildOption("Villa", villaButton12, 12),
-                          buildOption("Building", buildingButton13, 13),
-                          buildOption("Store", storeButton14, 14),
-                          buildOption("Clinic", clinicButton15, 15),
-                          buildOption("Farm", farmButton16, 16),
-                          buildOption("Factory", factoryButton17, 17),
-                          buildOption("Land", landButton18, 18),
-                          buildOption("Other", otherButton19, 19),
+                          buildOption("Flat".tr, flatButton11, 11),
+                          buildOption("Villa".tr, villaButton12, 12),
+                          buildOption("Building".tr, buildingButton13, 13),
+                          buildOption("Store".tr, storeButton14, 14),
+                          buildOption("Clinic".tr, clinicButton15, 15),
+                          buildOption("Farm".tr, farmButton16, 16),
+                          buildOption("Factory".tr, factoryButton17, 17),
+                          buildOption("Land".tr, landButton18, 18),
+                          buildOption("Other".tr, otherButton19, 19),
                           const SizedBox(
                             width: 7,
                           ),
@@ -272,9 +273,9 @@ class _FilterState extends ConsumerState<Filter> {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            "Rooms",
-            style: TextStyle(
+          Text(
+            "Rooms".tr,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -323,9 +324,9 @@ class _FilterState extends ConsumerState<Filter> {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            "Bathrooms",
-            style: TextStyle(
+          Text(
+            "Bathrooms".tr,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -391,9 +392,9 @@ class _FilterState extends ConsumerState<Filter> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: const Text(
-                  "Filter",
-                  style: TextStyle(
+                child: Text(
+                  "Filter".tr,
+                  style: const TextStyle(
                     fontSize: 15,
                     letterSpacing: 2,
                   ),
