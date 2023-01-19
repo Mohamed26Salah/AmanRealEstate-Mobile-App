@@ -12,7 +12,7 @@ import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
 import '../shared_features/custom_loading_screen.dart';
 
-import '../../common_widgets/property_details.dart';
+import '../../common_widgets/extracted_widgets.dart';
 
 class Details extends ConsumerStatefulWidget {
   // final Property? property;
@@ -381,7 +381,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: () {
-                                      PropertyManagement.makePhoneCall(
+                                      PropertyManagement.makePhoneCallProperty(
                                           context: context,
                                           isVisible: isVisible,
                                           routeArgs: routeArgs,
@@ -645,7 +645,7 @@ class _DetailsState extends ConsumerState<Details> {
                       ),
                     ),
                     ExtractedWidgets()
-                        .deleteButton(isVisible, context, routeArgs)
+                        .deleteButton(isVisible: isVisible, context: context, routeArgsProperty: routeArgs, type: 'property')
                   ],
                 ),
               ),

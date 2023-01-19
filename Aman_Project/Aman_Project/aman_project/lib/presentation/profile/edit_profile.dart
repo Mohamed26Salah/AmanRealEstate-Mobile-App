@@ -64,11 +64,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                               ),
                             ],
                             shape: BoxShape.circle,
-
-                            // image: const DecorationImage(
-                            //   image: AssetImage('assets/images/owner.jpg'),
-                            //   fit: BoxFit.cover,
-                            // ),
                           ),
                           child: Center(
                             // child: Text(userData?.email ?? "Loading"),
@@ -76,21 +71,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                               (userData?.email ?? "Loading")[0].capitalize!,
                               style: const TextStyle(fontSize: 50),
                             ),
-                            // Consumer(builder: (_, ref, __) {
-                            //   return ref.watch(userDataProvider).when(
-                            //       data: (value) {
-                            //     return Text(
-                            //       '${value.get('email')}'[0].capitalize!,
-                            //       style: const TextStyle(fontSize: 50),
-                            //     );
-                            //   }, error: (Object error, StackTrace err) {
-                            //     return Text("error");
-                            //   }, loading: () {
-                            //     return CircularProgressIndicator();
-                            //   });
-                            // }
-
-                            // ),
                           ),
                         ),
                       ],
@@ -99,21 +79,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   const SizedBox(
                     height: 20,
                   ),
-                  // Text('${user.email}'),
-                  //Yasser Way
-                  // Text(userData?.email ?? "Loading"),
-                  //Salah Way
-                  // Text(userEmail)
                   Text(userData?.email ?? "Loading"),
-                  // Consumer(builder: (_, ref, __) {
-                  //   return ref.watch(userDataProvider).when(data: (value) {
-                  //     return Text(value.get('email'));
-                  //   }, error: (Object error, StackTrace err) {
-                  //     return Text("error");
-                  //   }, loading: () {
-                  //     return CircularProgressIndicator();
-                  //   });
-                  // }),
                 ],
               ),
               const SizedBox(
@@ -164,8 +130,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                 ),
               ),
 
-              // buildTextField(
-              //     "Confirm Password".tr, 'Type your new password'.tr, true),
               const SizedBox(
                 height: 30,
               ),
@@ -201,7 +165,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           newPassword = newPasswordController.text;
                         });
                         UserHelper().changePassword(context, newPassword);
-                        // changePassword();
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -301,37 +264,5 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     );
   }
 
-  Widget buildTextField(String labelText, String? placeholder,
-      bool isPasswordTextField, TextEditingController controller) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: TextField(
-        controller: controller,
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-          suffixIcon: isPasswordTextField
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscurePassword = !isObscurePassword;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.grey,
-                  ),
-                )
-              : null,
-          contentPadding: const EdgeInsets.only(bottom: 5),
-          labelText: labelText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: placeholder,
-          hintStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
+  
 }

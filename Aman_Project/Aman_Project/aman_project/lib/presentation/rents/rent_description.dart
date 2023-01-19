@@ -1,4 +1,4 @@
-import 'package:aman_project/common_widgets/property_details.dart';
+import 'package:aman_project/common_widgets/extracted_widgets.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:aman_project/presentation/rents/rent_details.dart';
@@ -9,6 +9,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import '../../constants/globals.dart' as val;
+import '../../data/property_managemnt.dart';
 
 class RentsDescription extends ConsumerStatefulWidget {
   const RentsDescription({super.key});
@@ -34,6 +35,12 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
     }
     if (routeArgs.rentType == 'DidntStart') {
       rentTypeColor = Colors.yellow[700];
+    }
+
+    bool isPaidButton = false;
+
+    if (routeArgs.rentType == 'DidntPay') {
+      isPaidButton = true;
     }
 
     return SafeArea(
@@ -237,10 +244,10 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: () {
-                                      // PropertyManagement.makePhoneCall(
-                                      //     context: context,
-                                      //     isVisible: isVisible,
-                                      //     routeArgs: routeArgs);
+                                      print('sss');
+                                      RentsManagement.makePhoneCallRents(
+                                          context: context,
+                                          routeArgs: routeArgs);
                                     },
                                     child: Icon(
                                       Icons.phone,
@@ -304,79 +311,16 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                       ),
                     ),
                     RentDetails(routeArgs: routeArgs),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text("Delete"),
-                              content: const Text(
-                                  "Are you sure you would like to delete this property? "),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    backgroundColor:
-                                        Theme.of(context).focusColor,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'CANCEL',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    RentsManagement.deleteRent(
-                                        routeArgs.docId!);
-                                    Navigator.of(context).pushReplacementNamed(
-                                        '/MainPageRent',
-                                        arguments: routeArgs.rentType);
-                                    goodMessageSnackBar("Success",
-                                        "Successfully deleted property!");
-                                    ScaffoldMessenger.of(context)
-                                      ..hideCurrentSnackBar()
-                                      ..showSnackBar(val.snackBar);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'YES',
-                                    style: TextStyle(
-                                        color: Theme.of(context).errorColor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          backgroundColor: Theme.of(context).errorColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          "Delete",
-                        ),
-                      ),
-                    ),
+                    
+                    ExtractedWidgets().paidButton(
+                        isVisible: isPaidButton,
+                        context: context,
+                        routeArgsRents: routeArgs),
+                        ExtractedWidgets().deleteButton(
+                        isVisible: true,
+                        context: context,
+                        type: 'rent',
+                        routeArgsRents: routeArgs),
                   ],
                 ),
               ),

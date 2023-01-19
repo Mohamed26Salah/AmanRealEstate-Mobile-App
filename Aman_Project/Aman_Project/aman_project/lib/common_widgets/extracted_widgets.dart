@@ -1,3 +1,5 @@
+import 'package:aman_project/data/rents_management.dart';
+import 'package:aman_project/models/rent.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -220,7 +222,11 @@ class ExtractedWidgets {
   }
 
   Visibility deleteButton(
-      bool isVisible, BuildContext context, Property routeArgs) {
+      {required bool isVisible,
+      required BuildContext context,
+      Property? routeArgsProperty,
+      Rents? routeArgsRents,
+      required String type}) {
     return Visibility(
       visible: isVisible,
       child: Padding(
@@ -231,8 +237,8 @@ class ExtractedWidgets {
               context: context,
               builder: (context) => AlertDialog(
                 title: const Text("Delete"),
-                content: const Text(
-                    "Are you sure you would like to delete this property? "),
+                content:
+                    Text("Are you sure you would like to delete this $type? "),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -253,10 +259,20 @@ class ExtractedWidgets {
                   ),
                   TextButton(
                     onPressed: () {
-                      PropertyManagement.deleteProduct(routeArgs.docId!);
-                      Navigator.pushReplacementNamed(context, '/home');
+                      if (type == 'property') {
+                        PropertyManagement.deleteProduct(
+                            routeArgsProperty!.docId!);
+                        Navigator.pop(context);
+                        Navigator.of(context).pushReplacementNamed('/home');
+                      } else if (type == 'rent') {
+                        RentsManagement.deleteRent(routeArgsRents!.docId!);
+                        Navigator.pop(context);
+                        Navigator.of(context).pushReplacementNamed(
+                            '/MainPageRent',
+                            arguments: routeArgsRents.rentType);
+                      }
                       goodMessageSnackBar(
-                          "Success", "Successfully deleted property!");
+                          "Success", "Successfully deleted $type!");
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(val.snackBar);
@@ -288,6 +304,75 @@ class ExtractedWidgets {
           ),
           child: const Text(
             "Delete",
+          ),
+        ),
+      ),
+    );
+  }
+
+  Visibility paidButton({
+    required bool isVisible,
+    required BuildContext context,
+    required Rents routeArgsRents,
+  }) {
+    return Visibility(
+      visible: isVisible,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text("Paid"),
+                content: const Text("Did this person pay the rent? "),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).focusColor,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'CANCEL',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'YES',
+                      style: TextStyle(color: Theme.of(context).splashColor),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 0.0,
+            backgroundColor: Theme.of(context).splashColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+          ),
+          child: const Text(
+            "Paid",
           ),
         ),
       ),

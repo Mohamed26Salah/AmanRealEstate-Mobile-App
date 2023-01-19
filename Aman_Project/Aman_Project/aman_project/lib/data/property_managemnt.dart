@@ -211,7 +211,7 @@ class PropertyManagement {
     return datanum2;
   }
 
-  static void makePhoneCall(
+  static void makePhoneCallProperty(
       {required BuildContext context,
       Property? routeArgs,
       bool isVisible = false,

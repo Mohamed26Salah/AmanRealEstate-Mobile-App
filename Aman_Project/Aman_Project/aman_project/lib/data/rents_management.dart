@@ -1,6 +1,9 @@
 import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:no_glow_scroll/no_glow_scroll.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../models/chart_data.dart';
 
@@ -191,5 +194,69 @@ class RentsManagement {
     } on FirebaseException catch (e) {
       print(e);
     }
+  }
+
+  static void makePhoneCallRents({
+    required BuildContext context,
+    Rents? routeArgs,
+  }) async {
+
+    Map<String, String> phoneNumbersVisibleToAdmin = {routeArgs!.tenantName : routeArgs.tenantNum , routeArgs.lessorName : routeArgs.lessorNum};
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Contacts Info "),
+        content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: double.maxFinite,
+            child: NoGlowScroll(
+              child: ListView.builder(
+                  itemCount: phoneNumbersVisibleToAdmin.length,
+                itemBuilder: ((context, index) {
+                  final entry = phoneNumbersVisibleToAdmin.entries.elementAt(index);
+                  return Card(
+                    elevation: 5,
+                    child: ListTile(
+                            title: Text(entry.key),
+                            subtitle: Text(entry.value),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.phone),
+                              onPressed: () async {
+                                if (await canLaunchUrlString(
+                                    'tel: +2${entry.value}')) {
+                                  await launchUrlString(
+                                      'tel: +2${entry.value}');
+                                } else {
+                                  throw 'Could not launch ${entry.value}';
+                                }
+                              },
+                            ),
+                          )
+                        
+                  );
+                }),
+              ),
+            )),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).focusColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+            child: Text(
+              'Cancel'.tr,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:aman_project/common_widgets/property_details.dart';
+import 'package:aman_project/common_widgets/extracted_widgets.dart';
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 
