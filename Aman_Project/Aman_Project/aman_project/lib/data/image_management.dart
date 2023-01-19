@@ -184,6 +184,26 @@ class ImageManagement {
     String url = await taskSnapshot.ref.getDownloadURL();
     return url;
   }
+
+  static deleteSingleImage(String image) async {
+    int lastPercentageIndex = image.lastIndexOf('%');
+    int dotIndex = image.lastIndexOf('.');
+    String id = image.substring(lastPercentageIndex + 3, dotIndex);
+    // print(id);
+    final ref = FirebaseStorage.instance.ref().child("pictures/$id.jpg");
+    ref.delete();
+  }
+
+  static deleteMultiImages(List<dynamic> listOFImages) async {
+    for (int i = 0; i < listOFImages.length; i++) {
+      int lastPercentageIndex = listOFImages[i].lastIndexOf('%');
+      int dotIndex = listOFImages[i].lastIndexOf('.');
+      String id = listOFImages[i].substring(lastPercentageIndex + 3, dotIndex);
+      // print(id);
+      final ref = FirebaseStorage.instance.ref().child("pictures/$id.jpg");
+      ref.delete();
+    }
+  }
 }
 
 class ImageManagementWidget {

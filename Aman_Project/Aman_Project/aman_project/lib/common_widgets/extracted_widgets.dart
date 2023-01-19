@@ -188,8 +188,6 @@ class ExtractedWidgets {
     }
   }
 
-  
-
   Widget buildPhoto(String url) {
     return AspectRatio(
       aspectRatio: 3 / 2,
@@ -248,12 +246,14 @@ class ExtractedWidgets {
                     onPressed: () {
                       if (type == 'property') {
                         PropertyManagement.deleteProduct(
-                            routeArgsProperty!.docId!);
+                            routeArgsProperty!.docId!,
+                            routeArgsProperty.singleImage,
+                            routeArgsProperty.multiImages);
                         Navigator.pop(context);
                         Navigator.of(context).pushReplacementNamed('/home');
                       } else if (type == 'rent') {
                         RentsManagement.deleteRent(routeArgsRents!.docId!);
-                      
+
                         Navigator.pop(context);
                         Navigator.of(context).pushReplacementNamed(
                             '/MainPageRent',

@@ -1,6 +1,7 @@
-import 'package:aman_project/data/form_management.dart';
+import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
@@ -158,10 +159,13 @@ class PropertyManagement {
     }
   }
 
-  static deleteProduct(String id) async {
+  static deleteProduct(
+      String id, String singleImage, List<dynamic> multiImages) async {
     try {
       DocumentReference docRef =
           FirebaseFirestore.instance.collection('properties').doc(id);
+      ImageManagement.deleteSingleImage(singleImage);
+      ImageManagement.deleteMultiImages(multiImages);
       docRef.delete();
     } on FirebaseException catch (e) {
       print(e);
