@@ -531,13 +531,14 @@ class _DetailsState extends ConsumerState<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 26 , left: 24),
+                      padding: const EdgeInsets.only(bottom: 26, left: 24),
                       child: SizedBox(
                         height: 200,
                         child: ListView.builder(
                           itemCount: routeArgs.multiImages.length,
                           itemBuilder: (context, index) {
-                            return ExtractedWidgets().buildPhoto(routeArgs.multiImages[index]);
+                            return ExtractedWidgets()
+                                .buildPhoto(routeArgs.multiImages[index]);
                           },
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,

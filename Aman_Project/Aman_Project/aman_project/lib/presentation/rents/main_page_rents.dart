@@ -2,6 +2,7 @@ import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:aman_project/presentation/rents/show_rents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import '../../data/repositories/user_providers.dart';
 
 class MainPageRent extends ConsumerStatefulWidget {
@@ -57,7 +58,7 @@ class _SearchState extends ConsumerState<MainPageRent> {
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: 'Search'.tr,
                   hintStyle: TextStyle(
                     fontSize: 28,
                     color: Colors.grey[400],
@@ -118,16 +119,11 @@ class _SearchState extends ConsumerState<MainPageRent> {
             const SizedBox(height: 15),
             Center(
               child: Text(
-                rentType,
+                rentType.tr,
                 style: TextStyle(
                     fontSize: 45, color: Theme.of(context).backgroundColor),
               ),
             ),
-            // const Padding(
-            //   padding:
-            //       EdgeInsets.only(right: 24, left: 24, top: 10, bottom: 12),
-            //   //war top 24
-            // ),
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),

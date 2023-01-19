@@ -1,7 +1,7 @@
-
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CardRent extends StatelessWidget {
   const CardRent({
@@ -29,17 +29,7 @@ class CardRent extends StatelessWidget {
         child: Container(
           height: 210,
           decoration: const BoxDecoration(
-            // borderRadius: BorderRadius.circular(15),
-            // boxShadow: [
-            //   BoxShadow(
-            //     spreadRadius: 2,
-            //     blurRadius: 10,
-            //     color: Colors.black.withOpacity(0.1),
-            //   ),
-            // ],
-            // shape: BoxShape.rectangle,
             image: DecorationImage(
-              // image: NetworkImage(mainImage),
               image: AssetImage('assets/images/rent.jpg'),
               fit: BoxFit.cover,
             ),
@@ -63,7 +53,7 @@ class CardRent extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      rent.type,
+                      rent.type.tr,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -88,7 +78,7 @@ class CardRent extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      rent.rentType,
+                      rent.rentType.tr,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -104,7 +94,7 @@ class CardRent extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       '${RentsManagement.figureHowManyDaysLeft(rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd, rent.rentType)} Days',
                       style: TextStyle(
-                          fontSize: 45,
+                          fontSize: 30,
                           color: Theme.of(context).primaryColorLight),
                     ))),
                 Expanded(
@@ -145,55 +135,6 @@ class CardRent extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
-                    // Row(
-                    //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     // Row(
-                    //     //   children: [
-                    //      Icon(
-                    //       Icons.phone,
-                    //       color: Theme.of(context).primaryColorLight,
-                    //       size: 14,
-                    //     ),
-                    //     // const SizedBox(
-                    //     //   width: 4,
-                    //     // ),
-                    //     Flexible(
-                    //       child: Padding(
-                    //         padding: const EdgeInsets.only(right: 5),
-                    //         child: Text(
-                    //           overflow: TextOverflow.ellipsis,
-                    //           rent.tenantNum,
-                    //           style:  TextStyle(
-                    //             color: Theme.of(context).primaryColorLight,
-                    //             fontSize: 14,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 15,
-                    //     ),
-                    //      Icon(
-                    //       Icons.zoom_out_map,
-                    //       color: Theme.of(context).primaryColorLight,
-                    //       size: 16,
-                    //     ),
-                    //     // const SizedBox(
-                    //     //   width: 4,
-                    //     // ),
-                    //     Text(
-                    //       "${rent.area} sq/m",
-                    //       style:  TextStyle(
-                    //         color: Theme.of(context).primaryColorLight,
-                    //         fontSize: 14,
-                    //       ),
-                    //     ),
-                    //     //   ],
-                    //     // ),
-                    //   ],
-                    // ),
-    
                     Center(
                       child: Text(
                         overflow: TextOverflow.ellipsis,

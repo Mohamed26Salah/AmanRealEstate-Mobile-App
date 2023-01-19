@@ -2,6 +2,7 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/repositories/rents_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class RentsPage extends ConsumerStatefulWidget {
@@ -20,96 +21,91 @@ class _RentsPageState extends ConsumerState<RentsPage> {
     await RentsManagement.updateRentsType();
     controller.success();
     ref.read(rentsButtonProivder.notifier).state = true;
-
   }
 
   @override
   Widget build(BuildContext context) {
     rentsButton = ref.watch(rentsButtonProivder);
-    return SafeArea(
-      child: Scaffold(
-        body: (rentsButton)
-            ? SingleChildScrollView(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      body: (rentsButton)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Rents".tr,
+                  style: const TextStyle(fontSize: 70),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Rents",
-                      style: TextStyle(fontSize: 70),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            SalahCard(
-                                image: "assets/images/validating-ticket.png",
-                                text: "Paid",
-                                rentType: "Payed"),
-                            SalahCard(
-                                image: "assets/images/paper-money.png",
-                                text: "No Paid",
-                                rentType: "DidntPay"),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            SalahCard(
-                                image: "assets/images/contract.png",
-                                text: "New Contract",
-                                rentType: "DidntStart"),
-                            SalahCard(
-                                image: "assets/images/no.png",
-                                text: "Expired contract",
-                                rentType: "Finished"),
-                          ],
-                        ),
+                        SalahCard(
+                            image: "assets/images/validating-ticket.png",
+                            text: "Paid".tr,
+                            rentType: "Payed"),
+                        SalahCard(
+                            image: "assets/images/paper-money.png",
+                            text: "Not Paid".tr,
+                            rentType: "DidntPay"),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SalahCard(
+                            image: "assets/images/contract.png",
+                            text: "New Contract".tr,
+                            rentType: "DidntStart"),
+                        SalahCard(
+                            image: "assets/images/no.png",
+                            text: "Expired contract".tr,
+                            rentType: "Finished"),
                       ],
                     ),
                   ],
                 ),
+              ],
             )
-            : Center(
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/images/house.png", width: 100),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Update Rents Data',
-                        style:
-                            TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      RoundedLoadingButton(
-                        color: const Color.fromARGB(255, 205, 153, 51),
-                        controller: _btnController,
-                        onPressed: () => _getRentsData(_btnController),
-                        child: const Text('Gets Rents Data!'),
-                      )
-                    ],
-                  ),
+          : Center(
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/house.png", width: 100),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Update Rents Data'.tr,
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    RoundedLoadingButton(
+                      color: const Color.fromARGB(255, 205, 153, 51),
+                      controller: _btnController,
+                      onPressed: () => _getRentsData(_btnController),
+                      child: Text('Gets Rents Data!'.tr),
+                    )
+                  ],
                 ),
               ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/addFormRent');
-            // context.push('/addFormUnits');
-          },
-        ),
+            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/addFormRent');
+          // context.push('/addFormUnits');
+        },
       ),
     );
   }

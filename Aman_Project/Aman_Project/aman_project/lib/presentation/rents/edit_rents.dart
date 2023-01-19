@@ -5,6 +5,7 @@ import 'package:aman_project/presentation/shared_features/custom_loading_screen.
 import 'package:aman_project/presentation/shared_features/custom_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:get/get.dart';
 import '../../constants/globals.dart' as val;
 
 class EditRents extends StatefulWidget {
@@ -74,12 +75,6 @@ class _EditRentsState extends State<EditRents> {
     }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   shadowColor: Colors.white,
-      //   elevation: 0,
-
-      // ),
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
@@ -89,7 +84,6 @@ class _EditRentsState extends State<EditRents> {
                   child: Column(
             children: [
               Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -104,9 +98,9 @@ class _EditRentsState extends State<EditRents> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Text(
-                    "Add Rent",
-                    style: TextStyle(
+                  Text(
+                    "Edit Rent".tr,
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
@@ -125,8 +119,8 @@ class _EditRentsState extends State<EditRents> {
                   "Land",
                   "Other"
                 ],
-                hint: "Select Type",
-                text: "Select Type",
+                hint: "Select Type".tr,
+                text: "Select Type".tr,
                 show: true,
                 value: routeArgs.type,
                 context: context,
@@ -137,57 +131,57 @@ class _EditRentsState extends State<EditRents> {
                 },
               ),
               FormManagement.buildTextField(
-                  labelText: "price",
-                  hintText: "price",
+                  labelText: "Price".tr,
+                  hintText: "Price".tr,
                   controller: _rentPriceController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Area",
-                  hintText: "Area",
+                  labelText: "Area".tr,
+                  hintText: "Area".tr,
                   controller: _areaController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Floor",
-                  hintText: "Floor",
+                  labelText: "Floor".tr,
+                  hintText: "Floor".tr,
                   controller: _floorController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Lessor Name",
-                  hintText: "Lessor Name",
+                  labelText: "Lessor Name".tr,
+                  hintText: "Lessor Name".tr,
                   controller: _lessorNameController,
                   type: "name",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Lessor Number",
+                  labelText: "Lessor Number".tr,
                   hintText: "01144..",
                   controller: _lessorNumController,
                   type: "phone",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Tenant Name",
-                  hintText: "Tenant Name",
+                  labelText: "Tenant Name".tr,
+                  hintText: "Tenant Name".tr,
                   controller: _tenantNameController,
                   type: "name",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Tenant Number",
+                  labelText: "Tenant Number".tr,
                   hintText: "01144..",
                   controller: _tenantNumController,
                   type: "phone",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Description",
-                  hintText: "Description",
+                  labelText: "Description".tr,
+                  hintText: "Description".tr,
                   controller: _descriptionController,
                   type: "address",
                   show: true),
               FormManagement.showDropdown(
                 dropdownItems: ["Yes", "No"],
-                hint: "Select yes if Furnished",
-                text: "Select yes if Furnished",
+                hint: "Select yes if Furnished".tr,
+                text: "Select yes if Furnished".tr,
                 show: true,
                 value: routeArgs.furnished,
                 context: context,
@@ -199,8 +193,8 @@ class _EditRentsState extends State<EditRents> {
               ),
               FormManagement.showDropdown(
                 dropdownItems: ["Yes", "Half", "No"],
-                hint: "Select Finishing",
-                text: "Select Finishing",
+                hint: "Select Finishing".tr,
+                text: "Select Finishing".tr,
                 show: true,
                 value: routeArgs.finishing,
                 context: context,
@@ -227,27 +221,28 @@ class _EditRentsState extends State<EditRents> {
                     torEnd = DateTime(2000, 01, 01);
                   });
                 },
-                child: const Text('Change Rent Date?'),
+                child: Text('Change Rent Date?'.tr),
               ),
 
               AbsorbPointer(
                 absorbing: changeRentDate,
-                child: buildDatePicker(startOFRent, 'StartOFRent',
+                child: buildDatePicker(startOFRent, 'Start Of Contract'.tr,
                     startOFRentVisilbe, disabledColor),
               ),
               AbsorbPointer(
                 absorbing: changeRentDate,
-                child: buildDatePicker(
-                    endOFRent, 'EndOFRent', endOFRentVisible, disabledColor),
-              ),
-              AbsorbPointer(
-                absorbing: changeRentDate,
-                child: buildDatePicker(tor, 'TOR', torVisibile, disabledColor),
+                child: buildDatePicker(endOFRent, 'End Of Contract'.tr,
+                    endOFRentVisible, disabledColor),
               ),
               AbsorbPointer(
                 absorbing: changeRentDate,
                 child: buildDatePicker(
-                    torEnd, 'TOR-END', torEndVisibile, disabledColor),
+                    tor, 'Start Of Rent'.tr, torVisibile, disabledColor),
+              ),
+              AbsorbPointer(
+                absorbing: changeRentDate,
+                child: buildDatePicker(
+                    torEnd, 'End Of Rent'.tr, torEndVisibile, disabledColor),
               ),
               // buildDatePicker(startOFRent, 'StartOFRent', startOFRentVisilbe),
               // buildDatePicker(endOFRent, 'EndOFRent', endOFRentVisible),
@@ -313,7 +308,8 @@ class _EditRentsState extends State<EditRents> {
                           Navigator.pop(context, routeArgs);
                         }
                       } else {
-                        errormessage("Error!", "Please Put all Dates Right!");
+                        errormessage(
+                            "Error".tr, "Please Put all Dates Right".tr);
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(val.snackBar);
@@ -328,10 +324,10 @@ class _EditRentsState extends State<EditRents> {
                         ),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        'Submit',
-                        style: TextStyle(
+                        'Submit'.tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -384,22 +380,22 @@ class _EditRentsState extends State<EditRents> {
                       backgroundColor: disabledColor,
                     ),
                     onPressed: () async {
-                      if (name == "StartOFRent") {
+                      if (name == "Start Of Contract".tr) {
                         initialDate = DateTime.now();
                         dateConstrainLeast = DateTime(DateTime.now().year - 10);
                         dateConstrainMost = DateTime(DateTime.now().year + 25);
                       }
-                      if (name == "EndOFRent") {
+                      if (name == "End Of Contract".tr) {
                         initialDate = startOFRent;
                         dateConstrainLeast = startOFRent;
                         dateConstrainMost = DateTime(DateTime.now().year + 25);
                       }
-                      if (name == "TOR") {
+                      if (name == "Start Of Rent".tr) {
                         initialDate = startOFRent;
                         dateConstrainLeast = startOFRent;
                         dateConstrainMost = endOFRent;
                       }
-                      if (name == "TOR-END") {
+                      if (name == "End Of Rent".tr) {
                         initialDate = tor;
                         dateConstrainLeast = tor;
                         dateConstrainMost = endOFRent;
@@ -416,22 +412,22 @@ class _EditRentsState extends State<EditRents> {
                       if (newDateTime == null) return;
                       setState(() {
                         date = newDateTime;
-                        if (name == "StartOFRent") {
+                        if (name == "Start Of Contract".tr) {
                           startOFRent = newDateTime;
                         }
-                        if (name == "EndOFRent") {
+                        if (name == "End Of Contract".tr) {
                           endOFRent = newDateTime;
                         }
-                        if (name == "TOR") {
+                        if (name == "Start Of Rent".tr) {
                           tor = newDateTime;
                         }
-                        if (name == "TOR-END") {
+                        if (name == "End Of Rent".tr) {
                           torEnd = newDateTime;
                         }
                         updateVisibility();
                       });
                     },
-                    child: const Text('Select Date')),
+                    child: Text('Select Date'.tr)),
               ],
             ),
           ),

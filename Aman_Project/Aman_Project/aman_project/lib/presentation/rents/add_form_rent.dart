@@ -3,6 +3,7 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:get/get.dart';
 import '../shared_features/custom_loading_screen.dart';
 import '../../constants/globals.dart' as val;
 import '../shared_features/custom_message.dart';
@@ -53,12 +54,6 @@ class _AddFormRentState extends State<AddFormRent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   shadowColor: Colors.white,
-      //   elevation: 0,
-
-      // ),
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
@@ -68,13 +63,10 @@ class _AddFormRentState extends State<AddFormRent> {
                   child: Column(
             children: [
               Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        elevation: 0 // Background color
-                        ),
+                        backgroundColor: Colors.grey[300], elevation: 0),
                     child: const Icon(
                       Icons.arrow_back_ios_new_outlined,
                       color: Colors.black,
@@ -83,9 +75,9 @@ class _AddFormRentState extends State<AddFormRent> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Text(
-                    "Add Rent",
-                    style: TextStyle(
+                  Text(
+                    "Add Rent".tr,
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
@@ -94,18 +86,18 @@ class _AddFormRentState extends State<AddFormRent> {
               ),
               FormManagement.showDropdown(
                 dropdownItems: [
-                  "Flat",
-                  "Villa",
-                  "Building",
-                  "Store",
-                  "Clinic",
-                  "Factory",
-                  "Farm",
-                  "Land",
-                  "Other"
+                  "Flat".tr,
+                  "Villa".tr,
+                  "Building".tr,
+                  "Store".tr,
+                  "Clinic".tr,
+                  "Factory".tr,
+                  "Farm".tr,
+                  "Land".tr,
+                  "Other".tr
                 ],
-                hint: "Select Type",
-                text: "Select Type",
+                hint: "Select Type".tr,
+                text: "Select Type".tr,
                 show: true,
                 value: type,
                 context: context,
@@ -116,57 +108,57 @@ class _AddFormRentState extends State<AddFormRent> {
                 },
               ),
               FormManagement.buildTextField(
-                  labelText: "price",
-                  hintText: "price",
+                  labelText: "Price".tr,
+                  hintText: "Price".tr,
                   controller: _rentPriceController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Area",
-                  hintText: "Area",
+                  labelText: "Area".tr,
+                  hintText: "Area".tr,
                   controller: _areaController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Floor",
-                  hintText: "Floor",
+                  labelText: "Floor".tr,
+                  hintText: "Floor".tr,
                   controller: _floorController,
                   type: "number",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Lessor Name",
-                  hintText: "Lessor Name",
+                  labelText: "Lessor Name".tr,
+                  hintText: "Lessor Name".tr,
                   controller: _lessorNameController,
                   type: "name",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Lessor Number",
+                  labelText: "Lessor Number".tr,
                   hintText: "01144..",
                   controller: _lessorNumController,
                   type: "phone",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Tenant Name",
-                  hintText: "Tenant Name",
+                  labelText: "Tenant Name".tr,
+                  hintText: "Tenant Name".tr,
                   controller: _tenantNameController,
                   type: "name",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Tenant Number",
+                  labelText: "Tenant Number".tr,
                   hintText: "01144..",
                   controller: _tenantNumController,
                   type: "phone",
                   show: true),
               FormManagement.buildTextField(
-                  labelText: "Description",
-                  hintText: "Description",
+                  labelText: "Description".tr,
+                  hintText: "Description".tr,
                   controller: _descriptionController,
                   type: "address",
                   show: true),
               FormManagement.showDropdown(
-                dropdownItems: ["Yes", "No"],
-                hint: "Select yes if Furnished",
-                text: "Select yes if Furnished",
+                dropdownItems: ["Yes".tr, "No".tr],
+                hint: "Select yes if Furnished".tr,
+                text: "Select yes if Furnished".tr,
                 show: true,
                 value: furnished,
                 context: context,
@@ -177,9 +169,9 @@ class _AddFormRentState extends State<AddFormRent> {
                 },
               ),
               FormManagement.showDropdown(
-                dropdownItems: ["Yes", "Half", "No"],
-                hint: "Select Finishing",
-                text: "Select Finishing",
+                dropdownItems: ["Yes".tr, "Half".tr, "No".tr],
+                hint: "Select Finishing".tr,
+                text: "Select Finishing".tr,
                 show: true,
                 value: finishing,
                 context: context,
@@ -189,10 +181,12 @@ class _AddFormRentState extends State<AddFormRent> {
                   });
                 },
               ),
-              buildDatePicker(startOFRent, 'StartOFRent', startOFRentVisilbe),
-              buildDatePicker(endOFRent, 'EndOFRent', endOFRentVisible),
-              buildDatePicker(tor, 'TOR', torVisibile),
-              buildDatePicker(torEnd, 'TOR-END', torEndVisibile),
+              buildDatePicker(
+                  startOFRent, 'Start Of Contract'.tr, startOFRentVisilbe),
+              buildDatePicker(
+                  endOFRent, 'End Of Contract'.tr, endOFRentVisible),
+              buildDatePicker(tor, 'Start Of Rent'.tr, torVisibile),
+              buildDatePicker(torEnd, 'End Of Rent'.tr, torEndVisibile),
               Padding(
                 padding: const EdgeInsets.only(
                     top: 0, left: 15, right: 15, bottom: 20),
@@ -243,7 +237,8 @@ class _AddFormRentState extends State<AddFormRent> {
                           Navigator.of(context).pop();
                         }
                       } else {
-                        errormessage("Error!", "Please Put all Dates Right!");
+                        errormessage(
+                            "Error".tr, "Please Put all Dates Right".tr);
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(val.snackBar);
@@ -258,10 +253,10 @@ class _AddFormRentState extends State<AddFormRent> {
                         ),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        'Submit',
-                        style: TextStyle(
+                        'Submit'.tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -313,22 +308,22 @@ class _AddFormRentState extends State<AddFormRent> {
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
                     onPressed: () async {
-                      if (name == "StartOFRent") {
+                      if (name == "Start Of Contract".tr) {
                         initialDate = DateTime.now();
                         dateConstrainLeast = DateTime(DateTime.now().year - 10);
                         dateConstrainMost = DateTime(DateTime.now().year + 25);
                       }
-                      if (name == "EndOFRent") {
+                      if (name == "End Of Contract".tr) {
                         initialDate = startOFRent;
                         dateConstrainLeast = startOFRent;
                         dateConstrainMost = DateTime(DateTime.now().year + 25);
                       }
-                      if (name == "TOR") {
+                      if (name == "Start Of Rent".tr) {
                         initialDate = startOFRent;
                         dateConstrainLeast = startOFRent;
                         dateConstrainMost = endOFRent;
                       }
-                      if (name == "TOR-END") {
+                      if (name == "End Of Rent".tr) {
                         initialDate = tor;
                         dateConstrainLeast = tor;
                         dateConstrainMost = endOFRent;
@@ -345,22 +340,22 @@ class _AddFormRentState extends State<AddFormRent> {
                       if (newDateTime == null) return;
                       setState(() {
                         date = newDateTime;
-                        if (name == "StartOFRent") {
+                        if (name == "Start Of Contract".tr) {
                           startOFRent = newDateTime;
                         }
-                        if (name == "EndOFRent") {
+                        if (name == "End Of Contract".tr) {
                           endOFRent = newDateTime;
                         }
-                        if (name == "TOR") {
+                        if (name == "Start Of Rent".tr) {
                           tor = newDateTime;
                         }
-                        if (name == "TOR-END") {
+                        if (name == "End Of Rent".tr) {
                           torEnd = newDateTime;
                         }
                         updateVisibility();
                       });
                     },
-                    child: const Text('Select Date')),
+                    child: Text('Select Date'.tr)),
               ],
             ),
           ),
