@@ -187,10 +187,10 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     ),
                     child: Text(
                       "Cancel".tr,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
                         letterSpacing: 2,
-                        color: Colors.black,
+                        color: Theme.of(context).backgroundColor,
                       ),
                     ),
                   ),

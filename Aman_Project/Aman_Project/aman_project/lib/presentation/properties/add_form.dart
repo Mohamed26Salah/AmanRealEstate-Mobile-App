@@ -184,7 +184,6 @@ class AddFormState extends ConsumerState<AddForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -192,22 +191,30 @@ class AddFormState extends ConsumerState<AddForm> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Column(
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey[300],
-                            elevation: 0 // Background color
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Theme.of(context).primaryColorLight,
+                                elevation: 0 // Background color
+                                ),
+                            child: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Theme.of(context).backgroundColor,
                             ),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new_outlined,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          imageManagement.clearImageProivders(ref);
-                          Navigator.pop(context);
-                        },
+                            onPressed: () {
+                              imageManagement.clearImageProivders(ref);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
                       ),
                       const Text(
                         "Add",
@@ -275,54 +282,63 @@ class AddFormState extends ConsumerState<AddForm> {
                       hintText: "Owner Name",
                       controller: _ownerNameController,
                       type: "name",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Owner Number",
                       hintText: "01144..",
                       controller: _ownerNumberController,
                       type: "phone",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Address For User",
                       hintText: "Address User",
                       controller: _addressForUserController,
                       type: "address",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Address For Admin",
                       hintText: "Address Admin",
                       controller: _addressForAdminController,
                       type: "address",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Area",
                       hintText: "Area",
                       controller: _areaController,
                       type: "number",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Price",
                       hintText: "Price",
                       controller: _priceController,
                       type: "number",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Description For User",
                       hintText: "Description User",
                       controller: _descriptionForUserController,
                       type: "address",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Description For Admin",
                       hintText: "Description Admin",
                       controller: _descriptionForAdminController,
                       type: "address",
-                      show: true),
+                      show: true,
+                      context: context),
                   FormManagement.buildTextField(
                       labelText: "Unit Name",
                       hintText: "Unit Name",
                       controller: _nameController,
-                      type: "name"),
+                      type: "name",
+                      context: context),
                   FormManagement.showDropdown(
                     dropdownItems: ["Cash", "installment"],
                     hint: "Select Payment Method",
@@ -430,7 +446,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Floor",
                         controller: _floorController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleNoRooms,
@@ -439,7 +456,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Number Of Rooms",
                         controller: _noOFRoomsController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleNOBathrooms,
@@ -448,7 +466,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Number Of Bathrooms",
                         controller: _noOFBathroomsController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleNOFloors,
@@ -489,7 +508,7 @@ class AddFormState extends ConsumerState<AddForm> {
                   const Center(
                     child: Text(
                       "Upload main image",
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
                   const SizedBox(
@@ -504,7 +523,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         width: MediaQuery.of(context).size.width - 30,
                         height: 180,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(
+                                color: Theme.of(context).backgroundColor),
                             borderRadius: BorderRadius.circular(8)),
                         child: ref.watch(imageFileProivder) == null
                             ? const Center(
@@ -528,11 +548,11 @@ class AddFormState extends ConsumerState<AddForm> {
                       children: const [
                         Text(
                           "Upload Multiple Sub-Images",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
+                          style: TextStyle(fontSize: 20),
                         ),
                         Text(
                           "(Limit 20 Images Only!)",
-                          style: TextStyle(color: Colors.black, fontSize: 10),
+                          style: TextStyle(fontSize: 10),
                         ),
                       ],
                     ),
@@ -549,7 +569,8 @@ class AddFormState extends ConsumerState<AddForm> {
                       width: MediaQuery.of(context).size.width - 30,
                       height: 180,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(
+                              color: Theme.of(context).backgroundColor),
                           borderRadius: BorderRadius.circular(8)),
                       child: (ref.watch(imagesListFileProivder).isEmpty)
                           ? const Center(
@@ -727,7 +748,8 @@ class AddFormState extends ConsumerState<AddForm> {
             child: Text(
               text,
               style: TextStyle(
-                color: selected ? Colors.white : Colors.black,
+                color:
+                    selected ? Colors.white : Theme.of(context).backgroundColor,
                 fontSize: 14,
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:aman_project/presentation/shared_features/custom_decoration.dart';
+import 'package:aman_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,17 +9,25 @@ class FormManagement {
       required String hintText,
       required TextEditingController controller,
       required String type,
-      bool? show}) {
+      bool? show,
+      BuildContext? context}) {
+    var contextTextColor =
+        context == null ? blackColor : Theme.of(context).backgroundColor;
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 10),
       child: type == 'number' || type == 'phone'
           ? show == false
               ? const SizedBox()
               : TextFormField(
+                  style: TextStyle(
+                    color: contextTextColor,
+                  ),
                   controller: controller,
                   obscureText: false,
                   decoration: CommonStyle.textFieldStyle(
-                      labelText: labelText, hintText: hintText),
+                      labelText: labelText,
+                      hintText: hintText,
+                      context: context),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(11),
                     FilteringTextInputFormatter.allow(
@@ -44,10 +53,15 @@ class FormManagement {
           : show == false
               ? const SizedBox()
               : TextFormField(
+                  style: TextStyle(
+                    color: contextTextColor,
+                  ),
                   controller: controller,
                   obscureText: false,
                   decoration: CommonStyle.textFieldStyle(
-                      labelText: labelText, hintText: hintText),
+                      labelText: labelText,
+                      hintText: hintText,
+                      context: context),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
                       // RegExp(r"[a-zA-Z0-9]+|\s"),
@@ -95,7 +109,9 @@ class FormManagement {
                 Text(text),
                 DropdownButtonFormField(
                   //To avoid long text overflowing.
-
+                  style: TextStyle(
+                    color: Theme.of(context).backgroundColor,
+                  ),
                   isExpanded: true,
                   hint: Text(
                     hint,
@@ -128,7 +144,7 @@ class FormManagement {
                     }
                     return null;
                   },
-                  dropdownColor: Colors.grey[200],
+
                   borderRadius: BorderRadius.circular(12),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -144,7 +160,6 @@ class FormManagement {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     filled: true,
-                    fillColor: Colors.grey[200],
                   ),
                 ),
               ],

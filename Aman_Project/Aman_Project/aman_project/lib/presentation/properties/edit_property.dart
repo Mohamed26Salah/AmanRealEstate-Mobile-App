@@ -96,7 +96,6 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: applychanges
             ? Center(
@@ -130,30 +129,34 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
+                              const SizedBox(
+                                width: 15,
+                              ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.grey[300],
+                                    backgroundColor:
+                                        Theme.of(context).primaryColorLight,
                                     elevation: 0 // Background color
                                     ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.arrow_back_ios_new_outlined,
-                                  color: Colors.black,
+                                  color: Theme.of(context).backgroundColor,
                                 ),
                                 onPressed: () {
                                   imageManagement.clearImageProivders(ref);
-                                  Navigator.pop(context);
+                                  Navigator.pop(context, routeArgs);
                                 },
                               ),
-                              const Text(
-                                "Edit",
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
                             ],
+                          ),
+                          const Text(
+                            "Edit",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(
                             height: 15,
@@ -163,97 +166,113 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               hintText: "Owner Name",
                               controller: _ownerNameController,
                               type: "name",
-                              show: routeArgs.ownerName.isNotEmpty),
+                              show: routeArgs.ownerName.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Owner Number",
                               hintText: "01144..",
                               controller: _ownerNumberController,
                               type: "phone",
-                              show: routeArgs.ownerNumber.isNotEmpty),
+                              show: routeArgs.ownerNumber.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Address For User",
                               hintText: "Address User",
                               controller: _addressForUserController,
                               type: "address",
-                              show: routeArgs.addressUser.isNotEmpty),
+                              show: routeArgs.addressUser.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Address For Admin",
                               hintText: "Address Admin",
                               controller: _addressForAdminController,
                               type: "address",
-                              show: routeArgs.addressAdmin.isNotEmpty),
+                              show: routeArgs.addressAdmin.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Area",
                               hintText: "Area",
                               controller: _areaController,
                               type: "number",
-                              show: routeArgs.area.toString().isNotEmpty),
+                              show: routeArgs.area.toString().isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Price",
                               hintText: "Price",
                               controller: _priceController,
                               type: "number",
-                              show: routeArgs.price.toString().isNotEmpty),
+                              show: routeArgs.price.toString().isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Description For User",
                               hintText: "Description For User",
                               controller: _descriptionForUserController,
                               type: "address",
-                              show: routeArgs.descriptionUser.isNotEmpty),
+                              show: routeArgs.descriptionUser.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Description For Admin",
                               hintText: "Description For Admin",
                               controller: _descriptionForAdminController,
                               type: "address",
-                              show: routeArgs.descriptionAdmin.isNotEmpty),
+                              show: routeArgs.descriptionAdmin.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Unit Name",
                               hintText: "Unit Name",
                               controller: _nameController,
                               type: "name",
-                              show: routeArgs.unitName.isNotEmpty),
+                              show: routeArgs.unitName.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Floor",
                               hintText: "Floor",
                               controller: _floorController,
                               type: "number",
-                              show: routeArgs.floor!.isNotEmpty),
+                              show: routeArgs.floor!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Number Of Rooms",
                               hintText: "Number Of Rooms",
                               controller: _noOFRoomsController,
                               type: "number",
-                              show: routeArgs.noRooms!.isNotEmpty),
+                              show: routeArgs.noRooms!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Number Of Bathrooms",
                               hintText: "Number Of Bathrooms",
                               controller: _noOFBathroomsController,
                               type: "number",
-                              show: routeArgs.noBathrooms!.isNotEmpty),
+                              show: routeArgs.noBathrooms!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Number Of Floors",
                               hintText: "Number Of Floors",
                               controller: _noOFFloorsController,
                               type: "number",
-                              show: routeArgs.noFloors!.isNotEmpty),
+                              show: routeArgs.noFloors!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Number Of Flats",
                               hintText: "Number Of Flats",
                               controller: _noOFFlatsController,
                               type: "number",
-                              show: routeArgs.noFlats!.isNotEmpty),
+                              show: routeArgs.noFlats!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Type OF Activity",
                               hintText: "Type OF Activity",
                               controller: _typeOFActivityController,
                               type: "address",
-                              show: routeArgs.typeOFActivity!.isNotEmpty),
+                              show: routeArgs.typeOFActivity!.isNotEmpty,
+                              context: context),
                           FormManagement.buildTextField(
                               labelText: "Number Of administrative buildings",
                               hintText: "Number Of administrative buildings",
                               controller: _noOFABController,
                               type: "number",
-                              show: routeArgs.theNumberOFAB!.isNotEmpty),
+                              show: routeArgs.theNumberOFAB!.isNotEmpty,
+                              context: context),
                           FormManagement.showDropdown(
                               dropdownItems: ["High", "medium", "Low"],
                               hint: "Select priority",
@@ -317,8 +336,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                           const Center(
                             child: Text(
                               "Edit main image",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           const SizedBox(
@@ -331,7 +349,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             width: MediaQuery.of(context).size.width - 30,
                             height: 180,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
+                                border: Border.all(
+                                    color: Theme.of(context).backgroundColor),
                                 borderRadius: BorderRadius.circular(8)),
                             child: ref.watch(imageFileProivder) == null
                                 ? Center(
@@ -362,13 +381,11 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                               children: const [
                                 Text(
                                   "Edit Multiple Sub-Images",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20),
+                                  style: TextStyle(fontSize: 20),
                                 ),
                                 Text(
                                   "(Limit 20 Images Only!)",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 10),
+                                  style: TextStyle(fontSize: 10),
                                 ),
                               ],
                             ),
@@ -380,7 +397,8 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                             width: MediaQuery.of(context).size.width - 30,
                             height: 180,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
+                                border: Border.all(
+                                    color: Theme.of(context).backgroundColor),
                                 borderRadius: BorderRadius.circular(8)),
                             child: (ref.watch(imagesListFileProivder).isEmpty)
                                 ? GridView.builder(

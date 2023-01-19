@@ -223,6 +223,7 @@ class ImageManagementWidget {
         ),
         child: Center(
           child: Icon(
+            color: Colors.black,
             iconData,
             size: 30,
           ),

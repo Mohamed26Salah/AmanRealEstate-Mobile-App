@@ -365,7 +365,6 @@ class _DetailsState extends ConsumerState<Details> {
                             textAlign: TextAlign.right,
                             style: const TextStyle(
                               fontSize: 19,
-                              color: Colors.black,
                             ),
                           ),
                           Row(
@@ -385,8 +384,8 @@ class _DetailsState extends ConsumerState<Details> {
                                       PropertyManagement.makePhoneCall(
                                           context: context,
                                           isVisible: isVisible,
-                                          routeArgs: routeArgs, ref: ref);
-                                      
+                                          routeArgs: routeArgs,
+                                          ref: ref);
                                     },
                                     child: Icon(
                                       Icons.phone,
@@ -663,7 +662,7 @@ class _DetailsState extends ConsumerState<Details> {
                   .pushNamed('/editProperty', arguments: routeArgs)
                   .then((value) {
                 ImageManagement().clearImageProivders(ref);
-                routeArgs = value as Property;
+                routeArgs = (value ?? routeArgs) as Property;
 
                 setState(() {});
               });

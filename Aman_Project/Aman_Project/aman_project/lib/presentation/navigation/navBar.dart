@@ -1,4 +1,5 @@
 import 'package:aman_project/presentation/properties/wish_list.dart';
+import 'package:aman_project/theme/colors.dart';
 import '../../data/repositories/user_providers.dart';
 import '../../theme/theme_manager.dart';
 import '../profile/edit_profile.dart';
@@ -74,7 +75,7 @@ class _NavBarState extends ConsumerState<NavBar> {
             tabBorderRadius: 100,
             iconSize: 25,
             padding: const EdgeInsets.all(15),
-            backgroundColor: (Colors.grey[300])!,
+            backgroundColor: greyColor,
             color: Colors.black,
             activeColor: Colors.white,
             tabBackgroundColor: Theme.of(context).primaryColor,

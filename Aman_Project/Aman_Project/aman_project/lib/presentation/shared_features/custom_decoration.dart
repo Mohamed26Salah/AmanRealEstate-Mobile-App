@@ -1,25 +1,31 @@
+import 'package:aman_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class CommonStyle {
   static InputDecoration textFieldStyle(
-      {String labelText = "", String hintText = "", String? value}) {
+      {String labelText = "",
+      String hintText = "",
+      String? value,
+      BuildContext? context}) {
+    var contextTextColor =
+        context == null ? blackColor : Theme.of(context).backgroundColor;
     return InputDecoration(
       contentPadding: const EdgeInsets.all(12),
       labelText: labelText,
       hintText: hintText,
-      labelStyle: const TextStyle(color: Colors.black),
+      hintStyle: TextStyle(color: contextTextColor),
+      labelStyle: TextStyle(color: contextTextColor),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+        borderSide: const BorderSide(color: colorPrimary),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color.fromARGB(255, 205, 153, 51)),
+        borderSide: const BorderSide(color: colorPrimary),
         borderRadius: BorderRadius.circular(12),
       ),
-      fillColor: Colors.grey[200],
       filled: true,
     );
   }
