@@ -47,14 +47,16 @@ class ImageManagement {
     Reference ref = storageRef
         .child('pictures/${DateTime.now().microsecondsSinceEpoch}.jpg');
     final uploadTask = ref.putFile(file, metaData);
-
-    uploadTask.snapshotEvents.listen((event) {
+    //B2AKED
+    singleImageURl = await (await uploadTask).ref.getDownloadURL();
+    uploadTask.snapshotEvents.listen((event) async {
       switch (event.state) {
         case TaskState.running:
-          // print("File is uploading");
+          final progress = 100.0 * (event.bytesTransferred / event.totalBytes);
+          print("Upload is $progress% complete.");
           break;
         case TaskState.success:
-          ref.getDownloadURL().then((value) {
+          await ref.getDownloadURL().then((value) {
             singleImageURl = value;
           });
           break;
