@@ -626,13 +626,13 @@ class AddFormState extends ConsumerState<AddForm> {
                                         child: LoadingScreen(),
                                       );
                                     });
-                                imageManagement
+                                await imageManagement
                                     .uploadFile()
                                     .then((value) async {
                                   await imageManagement
                                       .uploadMultipleImages()
                                       .then((value) async {
-                                    PropertyManagement().addPropertyData(
+                                    await PropertyManagement().addPropertyData(
                                       type: userChoice,
                                       ownerName: _ownerNameController.text,
                                       ownerNumber: _ownerNumberController.text,
@@ -651,8 +651,9 @@ class AddFormState extends ConsumerState<AddForm> {
                                       priority: priority!,
                                       visible: visible!,
                                       offered: offered!,
-                                      singleImage:
-                                          imageManagement.singleImageURl!,
+                                      singleImage: imageManagement
+                                              .singleImageURl ??
+                                          'https://i.picsum.photos/id/825/200/300.jpg?hmac=02AaqBOvx8gwrGt7a3HWzJHnZXrMzYoXbAYwjJWH40E',
                                       mutliImages: imageManagement.downloadUrls,
                                       floor: _floorController.text,
                                       doublex: doublex ?? "",

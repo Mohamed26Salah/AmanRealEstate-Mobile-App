@@ -462,10 +462,10 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
                                     setState(() {
                                       applychanges = true;
                                     });
-                                    imageManagement
+                                    await imageManagement
                                         .editUploadFile(routeArgs)
                                         .then((value) async {
-                                      imageManagement
+                                      await imageManagement
                                           .editUploadMutilbeImages(routeArgs)
                                           .then((value2) async {
                                         await PropertyManagement.updateProperty(
