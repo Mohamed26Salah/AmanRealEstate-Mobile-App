@@ -2,6 +2,7 @@ import 'package:aman_project/presentation/shared_features/custom_decoration.dart
 import 'package:aman_project/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class FormManagement {
   static Padding buildTextField(
@@ -37,13 +38,13 @@ class FormManagement {
                   validator: (value) {
                     if (type == 'number') {
                       if (!value!.isValidNumber) {
-                        return 'Please enter a valid $labelText';
+                        return 'Please enter a valid'.tr + labelText;
                       }
                       return null;
                     }
                     if (type == 'phone') {
                       if (!value!.isValidPhone) {
-                        return 'Please enter a valid $labelText';
+                        return 'Please enter a valid'.tr + labelText;
                       }
                       return null;
                     }
@@ -73,13 +74,13 @@ class FormManagement {
                     if (type == 'name') {
                       //I hcange from valid name to valid ADDRESS
                       if (!value!.isValidAddress) {
-                        return 'Please enter a valid $labelText';
+                        return 'Please enter a valid'.tr + labelText;
                       }
                       return null;
                     }
                     if (type == 'address') {
                       if (!value!.isValidAddress) {
-                        return 'Please enter a valid $labelText';
+                        return 'Please enter a valid'.tr + labelText;
                       }
                       return null;
                     }
@@ -140,7 +141,7 @@ class FormManagement {
                   //French accent
                   validator: (value) {
                     if (value == null) {
-                      return 'Please Select';
+                      return 'Please Select'.tr;
                     }
                     return null;
                   },

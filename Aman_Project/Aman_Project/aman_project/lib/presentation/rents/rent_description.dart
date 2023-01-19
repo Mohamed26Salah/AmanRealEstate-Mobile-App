@@ -112,7 +112,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    routeArgs.type,
+                                    routeArgs.type.tr,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -137,7 +137,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    routeArgs.rentType,
+                                    routeArgs.rentType.tr,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -252,12 +252,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 ),
                                 child: Center(
                                   child: GestureDetector(
-                                    onTap: () {
-                                      print('sss');
-                                      RentsManagement.makePhoneCallRents(
-                                          context: context,
-                                          routeArgs: routeArgs);
-                                    },
+                                    onTap: () {},
                                     child: Icon(
                                       Icons.phone,
                                       color: Theme.of(context).primaryColor,
@@ -287,49 +282,116 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 Icons.date_range,
                                 DateFormat('yyyy-MM-dd')
                                     .format(routeArgs.startOFRent),
-                                "Start Of Contract",
+                                "Start Of Contract".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
                                 DateFormat('yyyy-MM-dd')
                                     .format(routeArgs.endOFRent),
-                                "End Of Contract",
+                                "End Of Contract".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
                                 DateFormat('yyyy-MM-dd').format(routeArgs.tor),
-                                "Start Of Rent",
+                                "Start Of Rent".tr,
                                 context),
                             ExtractedWidgets().buildFeature(
                                 Icons.date_range,
                                 DateFormat('yyyy-MM-dd')
                                     .format(routeArgs.torEnd),
-                                "End Of Rent",
+                                "End Of Rent".tr,
                                 context),
-                            ExtractedWidgets().buildFeature(Icons.house,
-                                routeArgs.furnished, "Furnished", context),
+                            ExtractedWidgets().buildFeature(
+                                Icons.house,
+                                routeArgs.furnished.tr,
+                                "Furnished".tr,
+                                context),
                             ExtractedWidgets().buildFeature(Icons.stairs,
-                                routeArgs.floor, "Floor", context),
+                                routeArgs.floor, "Floor".tr, context),
                             ExtractedWidgets().buildFeature(
                                 Icons.domain_outlined,
-                                routeArgs.finishing,
-                                "Finishing",
+                                routeArgs.finishing.tr,
+                                "Finishing".tr,
                                 context),
                           ],
                         ),
                       ),
                     ),
                     RentDetails(routeArgs: routeArgs),
-                    
-                    ExtractedWidgets().paidButton(
-                        isVisible: isPaidButton,
-                        context: context,
-                        routeArgsRents: routeArgs),
-                        ExtractedWidgets().deleteButton(
-                        isVisible: true,
-                        context: context,
-                        type: 'rent',
-                        routeArgsRents: routeArgs),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text("Delete".tr),
+                              content: Text(
+                                  "Are you sure you would like to delete this property?"
+                                      .tr),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).focusColor,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Cancel'.tr,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    RentsManagement.deleteRent(
+                                        routeArgs.docId!);
+                                    Navigator.of(context).pushReplacementNamed(
+                                        '/MainPageRent',
+                                        arguments: routeArgs.rentType);
+                                    goodMessageSnackBar("Success".tr,
+                                        "Successfully deleted property".tr);
+                                    ScaffoldMessenger.of(context)
+                                      ..hideCurrentSnackBar()
+                                      ..showSnackBar(val.snackBar);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Yes'.tr,
+                                    style: TextStyle(
+                                        color: Theme.of(context).errorColor),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          backgroundColor: Theme.of(context).errorColor,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          "Delete".tr,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

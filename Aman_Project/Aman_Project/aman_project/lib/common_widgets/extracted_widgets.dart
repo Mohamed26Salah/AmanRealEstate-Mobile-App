@@ -2,6 +2,7 @@ import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../data/property_managemnt.dart';
 import '../models/property.dart';
@@ -14,11 +15,11 @@ class ExtractedWidgets {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+        Padding(
+          padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
           child: Text(
-            "Description For User",
-            style: TextStyle(
+            "Description For User".tr,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -36,11 +37,11 @@ class ExtractedWidgets {
         ),
         Visibility(
           visible: isVisible,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
             child: Text(
-              "Description For Admin",
-              style: TextStyle(
+              "Description For Admin".tr,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -62,11 +63,11 @@ class ExtractedWidgets {
         ),
         Visibility(
           visible: isVisible,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
             child: Text(
-              "Address For Admin",
-              style: TextStyle(
+              "Address For Admin".tr,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -86,11 +87,11 @@ class ExtractedWidgets {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(right: 24, left: 24, bottom: 16),
+        Padding(
+          padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
           child: Text(
-            "Address For User",
-            style: TextStyle(
+            "Address For User".tr,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -221,9 +222,9 @@ class ExtractedWidgets {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text("Delete"),
-                content:
-                    Text("Are you sure you would like to delete this $type? "),
+                title: Text("Delete".tr),
+                content: Text(
+                    "Are you sure you would like to delete this property?".tr),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -237,8 +238,8 @@ class ExtractedWidgets {
                         ),
                       ),
                     ),
-                    child: const Text(
-                      'CANCEL',
+                    child: Text(
+                      'Cancel'.tr,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -260,7 +261,7 @@ class ExtractedWidgets {
                             arguments: routeArgsRents.rentType);
                       }
                       goodMessageSnackBar(
-                          "Success", "Successfully deleted $type!");
+                          "Success".tr, "Successfully deleted property".tr);
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(val.snackBar);
@@ -273,7 +274,7 @@ class ExtractedWidgets {
                       ),
                     ),
                     child: Text(
-                      'YES',
+                      'Yes'.tr,
                       style: TextStyle(color: Theme.of(context).errorColor),
                     ),
                   ),
@@ -290,8 +291,8 @@ class ExtractedWidgets {
               ),
             ),
           ),
-          child: const Text(
-            "Delete",
+          child: Text(
+            "Delete".tr,
           ),
         ),
       ),
