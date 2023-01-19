@@ -96,7 +96,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         obscureText: true,
                         decoration: CommonStyle.textFieldStyle(
                             labelText: ("New Password".tr),
-                            hintText: ("Type your new password".tr)),
+                            hintText: ("Type your new password".tr),
+                            context: context),
                         validator: (value) {
                           if (!value!.isValidPassword) {
                             return 'enter At Least 8 characters one letter and one number'
@@ -117,7 +118,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         obscureText: true,
                         decoration: CommonStyle.textFieldStyle(
                             labelText: ("Confirm your Password".tr),
-                            hintText: ("Type your new password".tr)),
+                            hintText: ("Type your new password".tr),
+                            context: context),
                         validator: (value) {
                           if (value != newPasswordController.value.text) {
                             return 'Passwords do not match!'.tr;
@@ -129,7 +131,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   ],
                 ),
               ),
-
               const SizedBox(
                 height: 30,
               ),
@@ -186,7 +187,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                 ],
               ),
               const SizedBox(height: 10),
-
               Column(
                 children: [
                   Card(
@@ -263,6 +263,4 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       ),
     );
   }
-
-  
 }

@@ -478,7 +478,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Number Of Floors".tr,
                         controller: _noOFFloorsController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleNoAB,
@@ -487,7 +488,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Number Of administrative buildings".tr,
                         controller: _noOFABController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleNOFlats,
@@ -496,7 +498,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Number Of Flats".tr,
                         controller: _noOFFlatsController,
                         type: "number",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Visibility(
                     visible: visibleTypeOFAcitivity,
@@ -505,7 +508,8 @@ class AddFormState extends ConsumerState<AddForm> {
                         hintText: "Type OF Activity".tr,
                         controller: _typeOFActivityController,
                         type: "address",
-                        show: true),
+                        show: true,
+                        context: context),
                   ),
                   Center(
                     child: Text(

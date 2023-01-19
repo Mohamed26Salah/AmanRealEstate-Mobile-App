@@ -38,8 +38,7 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                     top: 0, left: 15, right: 15, bottom: 10),
                 child: TextFormField(
                   decoration: CommonStyle.textFieldStyle(
-                    labelText: "name",
-                  ),
+                      labelText: "name", context: context),
                   controller: nameController,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
@@ -54,7 +53,8 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                   labelText: "number",
                   hintText: "010XXXXXX",
                   controller: numberController,
-                  type: "phone"),
+                  type: "phone",
+                  context: context),
             ],
           ),
         ),
