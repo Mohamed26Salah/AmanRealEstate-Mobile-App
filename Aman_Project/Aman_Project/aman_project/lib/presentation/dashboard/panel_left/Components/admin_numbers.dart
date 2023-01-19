@@ -7,6 +7,7 @@ import 'package:aman_project/presentation/dashboard/panel_left/Components/list_n
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 class AdminNumbers extends ConsumerStatefulWidget {
   const AdminNumbers({super.key});
@@ -47,7 +48,7 @@ class _EditNumberState extends ConsumerState<AdminNumbers> {
                 //   style: TextStyle(color: Theme.of(context).primaryColor),
                 // ),
                 ExtractedWidgets().strokeWidget(
-                    "Admin Numbers", 20, Theme.of(context).primaryColor),
+                    "Admin Numbers".tr, 20, Theme.of(context).primaryColor),
                 SizedBox(
                   height: 200,
                   width: MediaQuery.of(context).size.width,
@@ -55,7 +56,7 @@ class _EditNumberState extends ConsumerState<AdminNumbers> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      openDialog(name: "Add Number");
+                      openDialog(name: "Add Number".tr);
                     },
                     child: const Icon(Icons.add))
               ],

@@ -211,10 +211,10 @@ class _SearchState extends ConsumerState<Search> {
         ref.watch(filterRoomProivder) != "" ||
         ref.watch(filterBathroomProivder) != "" ||
         ref.watch(filterPriceProivder) != "") {
-      type = "Filtered Properties";
+      type = "Filtered Properties".tr;
     }
     if (ref.watch(searchInputProivder) != "") {
-      type = "Searched Properties";
+      type = "Searched Properties".tr;
     }
     return Text(
       type,

@@ -1,5 +1,6 @@
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserRoleDialogue extends StatefulWidget {
   final String email;
@@ -43,17 +44,17 @@ class _UserRoleDialogueState extends State<UserRoleDialogue> {
               }
               Navigator.of(context).pop();
             },
-            child: const Text("Submit")),
+            child: Text("Submit".tr)),
         TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text("Cancel")),
+            child: Text("Cancel".tr)),
         TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text("Delete",
+            child: Text("Delete".tr,
                 style: TextStyle(color: Theme.of(context).errorColor)))
       ],
     );

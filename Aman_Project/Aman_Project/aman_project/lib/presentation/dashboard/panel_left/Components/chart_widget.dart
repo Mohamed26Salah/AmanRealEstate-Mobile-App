@@ -34,11 +34,6 @@ class _CategoryChartState extends State<CategoryChart> {
               pointColorMapper: (ChartData segment, _) {
                 return returnColor(segment.x);
               },
-              // gradient: const LinearGradient(
-              //   colors: [Color(0xffffc414), Color(0xff14ffe9)],
-              //   begin: Alignment.bottomLeft,
-              //   end: Alignment.topRight,
-              // ),
               borderRadius: BorderRadius.circular(10),
             )
           ]),

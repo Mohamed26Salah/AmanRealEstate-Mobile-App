@@ -336,7 +336,7 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text("How Many Days?"),
+                title: Text("How Many Days?".tr),
                 content: SingleChildScrollView(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height - 450,
@@ -346,8 +346,7 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                         Card(
                           elevation: 15,
                           child: ListTile(
-                            title:
-                                const Text("Start and End of Rent Differing"),
+                            title: Text("Start and End of Rent Differing".tr),
                             onTap: () {
                               var ListTemp = [];
                               print('End' +
@@ -369,7 +368,7 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                         Card(
                           elevation: 15,
                           child: ListTile(
-                            title: const Text("Add 30 Days"),
+                            title: Text("Add 30 Days".tr),
                             onTap: () {
                               RentsManagement.updateRents30Days(
                                   widget.routeArgsRents.tor,
@@ -394,8 +393,8 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: FormManagement.buildTextField(
-                                      labelText: "Add Custom Days",
-                                      hintText: "Add Custom Days",
+                                      labelText: "Add Custom Days".tr,
+                                      hintText: "Add Custom Days".tr,
                                       controller: _customController,
                                       type: "number",
                                       show: true,
@@ -430,10 +429,10 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                                       ),
                                     ),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
-                                      'Submit',
-                                      style: TextStyle(
+                                      'Submit'.tr,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
@@ -463,9 +462,9 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                           ),
                         ),
                       ),
-                      child: const Text(
-                        'CANCEL',
-                        style: TextStyle(color: Colors.white),
+                      child: Text(
+                        'Cancel'.tr,
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -482,8 +481,8 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
               ),
             ),
           ),
-          child: const Text(
-            "Paid",
+          child: Text(
+            "Paid".tr,
           ),
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:aman_project/presentation/shared_features/custom_decoration.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -38,7 +39,7 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                     top: 0, left: 15, right: 15, bottom: 10),
                 child: TextFormField(
                   decoration: CommonStyle.textFieldStyle(
-                      labelText: "name", context: context),
+                      labelText: "name".tr, context: context),
                   controller: nameController,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
@@ -50,7 +51,7 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                 ),
               ),
               FormManagement.buildTextField(
-                  labelText: "number",
+                  labelText: "number".tr,
                   hintText: "010XXXXXX",
                   controller: numberController,
                   type: "phone",
@@ -62,8 +63,9 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
       actions: [
         Visibility(
             visible: widget.disable,
-            child: const Text(
-                "Can't add more than 10 numbers please delete one to add another")),
+            child: Text(
+                "Cant add more than 10 numbers please delete one to add another"
+                    .tr)),
         TextButton(
             onPressed: widget.disable
                 ? null
@@ -86,12 +88,12 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                       Navigator.of(context).pop();
                     }
                   },
-            child: const Text("Submit")),
+            child: Text("Submit".tr)),
         TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text("Cancel",
+            child: Text("Cancel".tr,
                 style: TextStyle(color: Theme.of(context).errorColor)))
       ],
     );

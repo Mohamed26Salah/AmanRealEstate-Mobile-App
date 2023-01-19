@@ -141,7 +141,23 @@ class LocaleString extends Translations {
           'Select yes if Doublex': 'Select yes if Doublex',
           'Edit': 'Edit',
           'Edit main image': 'Edit main image',
-          'Edit Multiple Sub-Images': 'Edit Multiple Sub-Images'
+          'Edit Multiple Sub-Images': 'Edit Multiple Sub-Images',
+          'Any': 'Any',
+          'Type': 'Type',
+          'Add Custom Days': 'Add Custom Days',
+          'Add 30 Days': 'Add 30 Days',
+          'Start and End of Rent Differing': 'Start and End of Rent Differing',
+          'How Many Days?': 'How Many Days?',
+          'Filtered Properties': 'Filtered Properties',
+          'Searched Properties': 'Searched Properties',
+          'name': 'name',
+          'number': 'number',
+          'Cant add more than 10 numbers please delete one to add another':
+              'Cant add more than 10 numbers please delete one to add another',
+          'Add Number': 'Add Number',
+          'Admin Numbers': 'Admin Numbers',
+          'Units': 'Units',
+          'Users': 'Users'
         },
         //arabic LANGUAGE
 
@@ -212,7 +228,7 @@ class LocaleString extends Translations {
           'Sign Up': 'اشتراك',
           'Confirm your Password': 'أكد كلمة المرور',
           'Search': 'بحث',
-          'Properties': 'عقارات',
+          'Properties': 'عقار',
           'Low To High': 'من الأقل الى الأعلى',
           'High To Low': 'من الأعلى الى الأقل',
           'Filter': 'فلتر',
@@ -281,7 +297,23 @@ class LocaleString extends Translations {
           'Select yes if Doublex': 'أختر نعم اذا كانت دوبليكس',
           'Edit': 'تعديل',
           'Edit main image': 'تعديل الصورة الرئيسية',
-          'Edit Multiple Sub-Images': 'تعديل الصور الفرعية'
+          'Edit Multiple Sub-Images': 'تعديل الصور الفرعية',
+          'Any': 'أي شئ',
+          'Type': 'نوع',
+          'Add Custom Days': 'أضف عدد الايام',
+          'Add 30 Days': 'أضافة 30 يوم',
+          'Start and End of Rent Differing': 'الفرق بين بداية ونهاية الايجار',
+          'How Many Days?': 'كم عدد الايام؟',
+          'Filtered Properties': 'عقار',
+          'Searched Properties': 'عقار من نواتج البحث',
+          'name': 'الأسم',
+          'number': 'الرقم',
+          'Cant add more than 10 numbers please delete one to add another':
+              'لا يمكن أضافة اكثر من 10 أرقام الرجاء مسح رقم لاأضافة الأخر',
+          'Add Number': 'أضافة رقم',
+          'Admin Numbers': 'أرقام المشرفين',
+          'Units': 'عقارات',
+          'Users': 'المستخدمين'
         },
       };
 }

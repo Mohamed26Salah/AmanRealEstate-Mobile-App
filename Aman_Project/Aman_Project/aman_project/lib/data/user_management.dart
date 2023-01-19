@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/globals.dart' as val;
@@ -123,20 +124,20 @@ class UserHelper {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           Navigator.of(context).pop();
-          errormessage("Error!", "No user found for that email.");
+          errormessage("Error".tr, "No user found for that email.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         } else if (e.code == 'wrong-password') {
           Navigator.of(context).pop();
-          errormessage("Error!", "Wrong password provided for that user.");
+          errormessage("Error".tr, "Wrong password provided for that user.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         }
       }
     } else {
-      errormessage("Error!", "No Internet Connection!");
+      errormessage("Error".tr, "No Internet Connection!");
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(val.snackBar);
@@ -166,13 +167,14 @@ class UserHelper {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           Navigator.of(context).pop();
-          errormessage("Error!", "The password provided is too weak.");
+          errormessage("Error".tr, "The password provided is too weak.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         } else if (e.code == 'email-already-in-use') {
           Navigator.of(context).pop();
-          errormessage("Error!", "The account already exists for that email.");
+          errormessage(
+              "Error".tr, "The account already exists for that email.");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
@@ -181,7 +183,7 @@ class UserHelper {
         print(e);
       }
     } else {
-      errormessage("Error!", "No Internet Connection!");
+      errormessage("Error".tr, "No Internet Connection!");
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(val.snackBar);

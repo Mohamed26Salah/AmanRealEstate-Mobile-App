@@ -2,6 +2,7 @@ import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/data/user_management.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../models/chart_data.dart';
 import '../../../shared_features/custom_loading_screen.dart';
 import 'dash_board_card.dart';
@@ -20,7 +21,7 @@ class CardBlock extends StatefulWidget {
 class _CardBlockState extends State<CardBlock> {
   Future<List<ChartData>>? chartData;
   int widgetIcon = 0xf7f5;
-  String widgetText = "Units";
+  String widgetText = "Units".tr;
   @override
   void initState() {
     super.initState();
@@ -28,12 +29,12 @@ class _CardBlockState extends State<CardBlock> {
       chartData = PropertyManagement.getPropertiesType();
     } else if (widget.dataNum == 1) {
       widgetIcon = 0xeb93;
-      widgetText = "Users";
+      widgetText = "Users".tr;
       chartData = UserHelper.getUsersRoles();
     } else if (widget.dataNum == 2) {
       chartData = RentsManagement.getRentsType();
       widgetIcon = 0xf0624;
-      widgetText = "Rents";
+      widgetText = "Rents".tr;
     } else {
       chartData = PropertyManagement.getPropertiesType();
     }

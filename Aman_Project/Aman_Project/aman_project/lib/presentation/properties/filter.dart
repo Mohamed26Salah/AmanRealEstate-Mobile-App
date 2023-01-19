@@ -302,7 +302,7 @@ class _FilterState extends ConsumerState<Filter> {
                           buildOption("2", roomsButton2, 2),
                           buildOption("3", roomsButton3, 3),
                           buildOption("4", roomsButton4, 4),
-                          buildOption("Any", roomsButton5, 5),
+                          buildOption("Any".tr, roomsButton5, 5),
                           const SizedBox(
                             width: 7,
                           ),
@@ -353,7 +353,7 @@ class _FilterState extends ConsumerState<Filter> {
                           buildOption("2", bathroomButton7, 7),
                           buildOption("3", bathroomButton8, 8),
                           buildOption("4", bathroomButton9, 9),
-                          buildOption("Any", bathroomButton10, 10),
+                          buildOption("Any".tr, bathroomButton10, 10),
                           const SizedBox(
                             width: 7,
                           ),
