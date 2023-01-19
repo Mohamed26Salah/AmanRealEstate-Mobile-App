@@ -73,15 +73,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   Text(
-                    'Hello',
+                    'Hello'.tr,
                     style: GoogleFonts.bebasNeue(
                         fontSize: 52,
                         color: const Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Welcome To Aman',
-                    style: TextStyle(
+                  Text(
+                    'Welcome To Aman'.tr,
+                    style: const TextStyle(
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 50),
@@ -177,10 +177,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Sign Up',
-                            style: TextStyle(
+                            'Sign Up'.tr,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,

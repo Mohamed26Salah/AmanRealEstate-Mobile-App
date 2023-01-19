@@ -65,7 +65,11 @@ class LocaleString extends Translations {
           'medium': 'medium',
           'Low': 'Low',
           'Yes': 'Yes',
-          'No': 'No'
+          'No': 'No',
+          'Remember Me?': 'Remember Me?',
+          'Forgot Password?': 'Forgot Password?',
+          'Sign Up': 'Sign Up',
+          'Confirm your Password': 'Confirm your Password'
         },
         //arabic LANGUAGE
 
@@ -130,7 +134,11 @@ class LocaleString extends Translations {
           'medium': 'متوسط',
           'Low': 'منخفض',
           'Yes': 'نعم',
-          'No': 'لا'
+          'No': 'لا',
+          'Remember Me?': 'تذكرني ؟',
+          'Forgot Password?': 'هل نسيت كلمه المرور؟',
+          'Sign Up': 'اشتراك',
+          'Confirm your Password': 'أكد كلمة المرور'
         },
       };
 }

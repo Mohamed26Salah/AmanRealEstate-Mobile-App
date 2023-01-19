@@ -226,15 +226,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               remember = !remember;
                             });
                           },
-                          child: const Text("Remember Me?"))
+                          child: Text("Remember Me?".tr))
                     ],
                   ),
 
                   const SizedBox(height: 15),
                   GestureDetector(
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(
+                    child: Text(
+                      'Forgot Password?'.tr,
+                      style: const TextStyle(
                         decoration: TextDecoration.underline,
                         color: Colors.black,
                         fontSize: 20,
