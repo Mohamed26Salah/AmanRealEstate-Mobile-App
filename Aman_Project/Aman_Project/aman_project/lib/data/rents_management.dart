@@ -115,6 +115,61 @@ class RentsManagement {
     return returnedType;
   }
 
+  static DateTime addDaysToStartRent(DateTime tor, {int addedTime = 30}) {
+    tor = DateTime(tor.year, tor.month, tor.day);
+    return (tor.add(Duration(days: addedTime)));
+  }
+
+  static DateTime addDaysToEndRent(DateTime torEnd, {int addedTime = 30}) {
+    torEnd = DateTime(torEnd.year, torEnd.month, torEnd.day);
+    return (torEnd.add(Duration(days: addedTime)));
+  }
+
+  static updateRentDaysDifference(
+      DateTime tor, DateTime torEnd, String docId) async {
+    try {
+      int difference = daysBetween(tor, torEnd);
+      tor = addDaysToStartRent(tor, addedTime: difference);
+      torEnd = addDaysToEndRent(torEnd, addedTime: difference);
+      updateTorAndTorEnd(tor, torEnd, docId);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static updateRents30Days(DateTime tor, DateTime torEnd, String docId) async {
+    try {
+      tor = addDaysToStartRent(tor);
+      torEnd = addDaysToEndRent(torEnd);
+      updateTorAndTorEnd(tor, torEnd, docId);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static updateRentsCustomDays(
+      DateTime tor, DateTime torEnd, String docId, int customDays) async {
+    try {
+      tor = addDaysToStartRent(tor, addedTime: customDays);
+      torEnd = addDaysToEndRent(torEnd, addedTime: customDays);
+      updateTorAndTorEnd(tor, torEnd, docId);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static updateTorAndTorEnd(DateTime tor, DateTime torEnd, String docId) {
+    DocumentReference docRef = FirebaseFirestore.instance.doc('rents/$docId');
+    try {
+      docRef.update({
+        'tor': tor,
+        'torEnd': torEnd,
+      });
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
   static int daysBetween(DateTime from, DateTime to) {
     from = DateTime(from.year, from.month, from.day);
     to = DateTime(to.year, to.month, to.day);
@@ -200,8 +255,10 @@ class RentsManagement {
     required BuildContext context,
     Rents? routeArgs,
   }) async {
-
-    Map<String, String> phoneNumbersVisibleToAdmin = {routeArgs!.tenantName : routeArgs.tenantNum , routeArgs.lessorName : routeArgs.lessorNum};
+    Map<String, String> phoneNumbersVisibleToAdmin = {
+      routeArgs!.tenantName: routeArgs.tenantNum,
+      routeArgs.lessorName: routeArgs.lessorNum
+    };
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -211,29 +268,27 @@ class RentsManagement {
             width: double.maxFinite,
             child: NoGlowScroll(
               child: ListView.builder(
-                  itemCount: phoneNumbersVisibleToAdmin.length,
+                itemCount: phoneNumbersVisibleToAdmin.length,
                 itemBuilder: ((context, index) {
-                  final entry = phoneNumbersVisibleToAdmin.entries.elementAt(index);
+                  final entry =
+                      phoneNumbersVisibleToAdmin.entries.elementAt(index);
                   return Card(
-                    elevation: 5,
-                    child: ListTile(
-                            title: Text(entry.key),
-                            subtitle: Text(entry.value),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.phone),
-                              onPressed: () async {
-                                if (await canLaunchUrlString(
-                                    'tel: +2${entry.value}')) {
-                                  await launchUrlString(
-                                      'tel: +2${entry.value}');
-                                } else {
-                                  throw 'Could not launch ${entry.value}';
-                                }
-                              },
-                            ),
-                          )
-                        
-                  );
+                      elevation: 5,
+                      child: ListTile(
+                        title: Text(entry.key),
+                        subtitle: Text(entry.value),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.phone),
+                          onPressed: () async {
+                            if (await canLaunchUrlString(
+                                'tel: +2${entry.value}')) {
+                              await launchUrlString('tel: +2${entry.value}');
+                            } else {
+                              throw 'Could not launch ${entry.value}';
+                            }
+                          },
+                        ),
+                      ));
                 }),
               ),
             )),

@@ -318,80 +318,20 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                       ),
                     ),
                     RentDetails(routeArgs: routeArgs),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text("Delete".tr),
-                              content: Text(
-                                  "Are you sure you would like to delete this property?"
-                                      .tr),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    backgroundColor:
-                                        Theme.of(context).focusColor,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Cancel'.tr,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    RentsManagement.deleteRent(
-                                        routeArgs.docId!);
-                                    Navigator.of(context).pushReplacementNamed(
-                                        '/MainPageRent',
-                                        arguments: routeArgs.rentType);
-                                    goodMessageSnackBar("Success".tr,
-                                        "Successfully deleted property".tr);
-                                    ScaffoldMessenger.of(context)
-                                      ..hideCurrentSnackBar()
-                                      ..showSnackBar(val.snackBar);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Yes'.tr,
-                                    style: TextStyle(
-                                        color: Theme.of(context).errorColor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          backgroundColor: Theme.of(context).errorColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          "Delete".tr,
-                        ),
-                      ),
-                    ),
+
+                    // ExtractedWidgets().paidButton(
+                    //     isVisible: isPaidButton,
+                    //     context: context,
+                    //     routeArgsRents: routeArgs),
+                    PaidButtonWidget(
+                        isVisible: isPaidButton,
+                        context: context,
+                        routeArgsRents: routeArgs),
+                    ExtractedWidgets().deleteButton(
+                        isVisible: true,
+                        context: context,
+                        type: 'rent',
+                        routeArgsRents: routeArgs),
                   ],
                 ),
               ),

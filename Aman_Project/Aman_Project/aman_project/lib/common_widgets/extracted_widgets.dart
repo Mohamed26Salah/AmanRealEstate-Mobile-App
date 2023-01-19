@@ -1,3 +1,4 @@
+import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,6 +9,8 @@ import '../data/property_managemnt.dart';
 import '../models/property.dart';
 import '../presentation/shared_features/custom_message.dart';
 import '../../constants/globals.dart' as val;
+
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class ExtractedWidgets {
   Column propertyDetailsDescriptionAndAddress(
@@ -298,14 +301,30 @@ class ExtractedWidgets {
       ),
     );
   }
+}
 
-  Visibility paidButton({
-    required bool isVisible,
-    required BuildContext context,
-    required Rents routeArgsRents,
-  }) {
+class PaidButtonWidget extends StatefulWidget {
+  const PaidButtonWidget({
+    Key? key,
+    required this.isVisible,
+    required this.context,
+    required this.routeArgsRents,
+  }) : super(key: key);
+
+  final bool isVisible;
+  final BuildContext context;
+  final Rents routeArgsRents;
+
+  @override
+  State<PaidButtonWidget> createState() => _PaidButtonWidgetState();
+}
+
+class _PaidButtonWidgetState extends State<PaidButtonWidget> {
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController _customController = TextEditingController();
     return Visibility(
-      visible: isVisible,
+      visible: widget.isVisible,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: ElevatedButton(
@@ -313,38 +332,128 @@ class ExtractedWidgets {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text("Paid"),
-                content: const Text("Did this person pay the rent? "),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).focusColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                title: const Text("How Many Days?"),
+                content: SingleChildScrollView(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: double.maxFinite,
+                    child: Column(
+                      children: [
+                        Card(
+                          elevation: 15,
+                          child: ListTile(
+                            title:
+                                const Text("Start and End of Rent Differing"),
+                            onTap: () {
+                              RentsManagement.updateRentDaysDifference(
+                                  widget.routeArgsRents.tor =
+                                      widget.routeArgsRents.tor,
+                                  widget.routeArgsRents.torEnd =
+                                      widget.routeArgsRents.torEnd,
+                                  widget.routeArgsRents.docId!);
+                              Navigator.pop(context, widget.routeArgsRents);
+                              setState(() {});
+                            },
+                          ),
                         ),
-                      ),
-                    ),
-                    child: const Text(
-                      'CANCEL',
-                      style: TextStyle(color: Colors.white),
+                        Card(
+                          elevation: 15,
+                          child: ListTile(
+                            title: const Text("Add 30 Days"),
+                            onTap: () {
+                              RentsManagement.updateRents30Days(
+                                  widget.routeArgsRents.tor =
+                                      widget.routeArgsRents.tor,
+                                  widget.routeArgsRents.torEnd =
+                                      widget.routeArgsRents.torEnd,
+                                  widget.routeArgsRents.docId!);
+                              Navigator.pop(context, widget.routeArgsRents);
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              Card(
+                                elevation: 15,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: FormManagement.buildTextField(
+                                      labelText: "Add Custom Days",
+                                      hintText: "Add Custom Days",
+                                      controller: _customController,
+                                      type: "number",
+                                      show: true,
+                                      context: context),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                width: 100,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      RentsManagement.updateRentsCustomDays(
+                                          widget.routeArgsRents.tor =
+                                              widget.routeArgsRents.tor,
+                                          widget.routeArgsRents.torEnd =
+                                              widget.routeArgsRents.torEnd,
+                                          widget.routeArgsRents.docId!,
+                                          int.parse(_customController.text));
+                                      Navigator.pop(
+                                          context, widget.routeArgsRents);
+                                      setState(() {});
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 10,
+                                    backgroundColor:
+                                        Theme.of(context).primaryColorDark,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Submit',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                ),
+                actions: [
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Text(
-                      'YES',
-                      style: TextStyle(color: Theme.of(context).splashColor),
+                      child: const Text(
+                        'CANCEL',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
