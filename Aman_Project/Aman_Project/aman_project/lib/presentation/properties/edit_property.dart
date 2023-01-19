@@ -87,7 +87,7 @@ class _EditPropertyState extends ConsumerState<EditProperty> {
       _descriptionForAdminController.text = routeArgs.descriptionAdmin;
       _nameController.text = routeArgs.unitName;
       _floorController.text = routeArgs.floor!;
-      _noOFRoomsController.text = routeArgs.noFloors!;
+      _noOFRoomsController.text = routeArgs.noRooms!;
       _noOFBathroomsController.text = routeArgs.noBathrooms!;
       _noOFFloorsController.text = routeArgs.noFloors!;
       _noOFABController.text = routeArgs.theNumberOFAB!;

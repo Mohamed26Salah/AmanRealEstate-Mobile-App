@@ -1,4 +1,7 @@
+import 'package:aman_project/data/numbers_management.dart';
+import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/models/number.dart';
 import 'package:aman_project/models/user.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -109,6 +112,10 @@ class UserHelper {
             // Navigator.of(context).pushReplacementNamed('/home');
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/home', (route) => false);
+          });
+
+          NumberManagement.getNumbers().then((value) {
+            ref.read(numberProv.notifier).state = value;
           });
         } else {
           Navigator.of(context).pushNamed('/verify');
