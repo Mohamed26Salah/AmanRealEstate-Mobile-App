@@ -298,10 +298,7 @@ class _DetailsState extends ConsumerState<Details> {
                                     height: 25,
                                   ),
                                   Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      // Row(
-                                      //   children: [
                                       Icon(
                                         Icons.location_on,
                                         shadows: [defaultShadow],
@@ -520,106 +517,8 @@ class _DetailsState extends ConsumerState<Details> {
                       child: ExtractedWidgets()
                           .strokeWidget(r"$" + routeArgs.price.toString(), 16),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 24, left: 24, bottom: 16),
-                      child: Text(
-                        "Description For User".tr,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 24, left: 24, bottom: 24),
-                      child: Text(
-                        routeArgs.descriptionUser,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey[500],
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 24, left: 24, bottom: 16),
-                        child: Text(
-                          "Description For Admin".tr,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 24, left: 24, bottom: 24),
-                        child: Text(
-                          routeArgs.descriptionAdmin,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 24, left: 24, bottom: 16),
-                        child: Text(
-                          "Address For Admin".tr,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 24, left: 24, bottom: 24),
-                        child: Text(
-                          routeArgs.addressAdmin,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 24, left: 24, bottom: 16),
-                      child: Text(
-                        "Address For User".tr,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 24, left: 24, bottom: 24),
-                      child: Text(
-                        routeArgs.addressUser,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey[500],
-                        ),
-                      ),
-                    ),
+                    ExtractedWidgets().propertyDetailsDescriptionAndAddress(
+                        routeArgs, isVisible),
                     Padding(
                       padding: const EdgeInsets.only(
                           right: 24, left: 24, bottom: 24),
@@ -632,20 +531,25 @@ class _DetailsState extends ConsumerState<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 26),
-                      child: Container(
+                      padding: const EdgeInsets.only(bottom: 26 , left: 24),
+                      child: SizedBox(
                         height: 200,
-                        child: ListView(
+                        child: ListView.builder(
+                          itemCount: routeArgs.multiImages.length,
+                          itemBuilder: (context, index) {
+                            return ExtractedWidgets().buildPhoto(routeArgs.multiImages[index]);
+                          },
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
-                          children: ExtractedWidgets()
-                              .buildPhotos(routeArgs.multiImages),
                         ),
                       ),
                     ),
-                    ExtractedWidgets()
-                        .deleteButton(isVisible: isVisible, context: context, routeArgsProperty: routeArgs, type: 'property')
+                    ExtractedWidgets().deleteButton(
+                        isVisible: isVisible,
+                        context: context,
+                        routeArgsProperty: routeArgs,
+                        type: 'property')
                   ],
                 ),
               ),

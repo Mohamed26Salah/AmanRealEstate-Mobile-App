@@ -188,22 +188,9 @@ class ExtractedWidgets {
     }
   }
 
-  List<Widget> buildPhotos(List<dynamic> images) {
-    List<Widget> list = [];
+  
 
-    list.add(
-      const SizedBox(
-        width: 24,
-      ),
-    );
-
-    for (var i = 0; i < images.length; i++) {
-      list.add(buildPhoto(images[i], i));
-    }
-    return list;
-  }
-
-  Widget buildPhoto(String url, int index) {
+  Widget buildPhoto(String url) {
     return AspectRatio(
       aspectRatio: 3 / 2,
       child: Container(
@@ -266,6 +253,7 @@ class ExtractedWidgets {
                         Navigator.of(context).pushReplacementNamed('/home');
                       } else if (type == 'rent') {
                         RentsManagement.deleteRent(routeArgsRents!.docId!);
+                      
                         Navigator.pop(context);
                         Navigator.of(context).pushReplacementNamed(
                             '/MainPageRent',

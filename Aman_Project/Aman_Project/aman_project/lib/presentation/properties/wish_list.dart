@@ -32,38 +32,40 @@ class WishlistState extends ConsumerState<Wishlist> {
     resultWhishlist = ref.watch(whishlistProvider);
     return resultWhishlist.isEmpty
         ? SafeArea(
-            child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Image.asset("assets/images/wishlist.png", width: 200),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Your WishList is Empty!',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Text(
-                    'Esplore more and shortlist some items',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
+            child: SingleChildScrollView(
+              child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    Image.asset("assets/images/wishlist.png", width: 200),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed("/home");
-                    },
-                    child: const Text('Start SHOPPING'),
-                  ),
-                ])),
+                    const Text(
+                      'Your WishList is Empty!',
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Text(
+                      'Esplore more and shortlist some items',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed("/home");
+                      },
+                      child: const Text('Start SHOPPING'),
+                    ),
+                  ])),
+            ),
           )
         : resultWhishlist[0].docId == '-1'
             ? const Center(child: LoadingScreen())

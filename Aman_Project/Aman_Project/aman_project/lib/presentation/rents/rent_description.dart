@@ -43,6 +43,15 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
       isPaidButton = true;
     }
 
+    Orientation screenLandscape = MediaQuery.of(context).orientation;
+    var sizeLandscape = MediaQuery.of(context).size.height;
+
+    if (screenLandscape == Orientation.landscape) {
+      sizeLandscape *= 0.8;
+    } else {
+      sizeLandscape *= 0.4;
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -64,7 +73,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         ),
                       ),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: sizeLandscape,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/images/rent.jpg'),
