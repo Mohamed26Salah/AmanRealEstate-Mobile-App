@@ -115,6 +115,32 @@ class _SearchState extends ConsumerState<MainPageRent> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: 24, left: 24, top: 10, bottom: 0),
+              //war top 24
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    ref.watch(resultsCountRent).toString(),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  const Text(
+                    "Rents",
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 15),
             Center(
               child: Card(

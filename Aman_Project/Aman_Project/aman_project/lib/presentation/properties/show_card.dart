@@ -34,7 +34,7 @@ class _ShowCardState extends ConsumerState<ShowCard> {
     try {
       return choosedPropertyTypeToGetData.when(data: (data) {
         Future.delayed(const Duration(milliseconds: 100), () {
-          ref.read(resultsCount.notifier).state = data.size;
+          ref.read(resultsCountProperty.notifier).state = data.size;
         });
         return (data.size != 0)
             ? ListView.builder(
