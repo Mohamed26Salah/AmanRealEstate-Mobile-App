@@ -7,8 +7,10 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoadingAnimationWidget.dotsTriangle(
-      color: const Color.fromARGB(255, 205, 153, 51),
-      size: MediaQuery.of(context).size.shortestSide - 295,
+      color: Theme.of(context).primaryColor,
+      size: (MediaQuery.of(context).size.longestSide -
+              MediaQuery.of(context).size.shortestSide) /
+          3,
     );
   }
 }

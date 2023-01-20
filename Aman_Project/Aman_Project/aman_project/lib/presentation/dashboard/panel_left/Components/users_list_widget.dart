@@ -89,20 +89,75 @@ class _UsersListWidgetState extends State<UsersListWidget> {
             ],
           );
         } else {
-          return Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: Column(
-              children: const [
-                Center(
-                  child: LoadingScreen(),
-                ),
-                SizedBox(height: 10),
-                Text("Loading Users"),
-              ],
-            ),
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Center(
+                    child: LoadingScreen(),
+                  ),
+                  SizedBox(height: 10),
+                  Text("Loading Users"),
+                ],
+              ),
+            ],
           );
         }
       },
     );
   }
 }
+
+/*   
+const SizedBox(height: 10),
+              ElevatedButton(
+                  onPressed: () => showSearch(
+                        context: context,
+                        delegate: SearchPage(
+                          onQueryUpdate: print,
+                          items: snapshot.data!,
+                          searchLabel: 'Search people',
+                          suggestion: const Center(
+                            child:
+                                Text('Filter people by name, surname or age'),
+                          ),
+                          failure: const Center(
+                            child: Text('No person found :('),
+                          ),
+                          filter: (person) => [
+                            person.email,
+                            person.role,
+                          ],
+                          sort: (a, b) => a.compareTo(b),
+                          builder: (person) => ListTile(
+                            leading: CircleAvatar(
+                                radius: 15,
+                                backgroundColor: Color.fromARGB(
+                                    255,
+                                    rng.nextInt(255),
+                                    rng.nextInt(255),
+                                    rng.nextInt(255)),
+                                child: Text(
+                                  person.email.substring(0, 1),
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                )),
+                            title: Text(person.email),
+                            subtitle: Text(person.role),
+                            trailing: MyEditButton(
+                                onPressed: () {
+                                  openDialog(
+                                      name: person.email, update: _update);
+                                },
+                                height: 35,
+                                borderRadius: BorderRadius.circular(20),
+                                child: const Icon(
+                                  Icons.edit_outlined,
+                                )),
+                          ),
+                        ),
+                      ),
+                  child: const Icon(Icons.search)),
+      */             
