@@ -24,7 +24,7 @@ class _SearchState extends ConsumerState<MainPageRent> {
     String rentType = ModalRoute.of(context)!.settings.arguments.toString();
     final userData = ref.watch(newUserDataProivder);
     bool isVisible = false;
-    if (userData?.role == 'admin') {
+    if (userData?.role == 'admin' || userData?.role == 'moderator') {
       setState(() {
         isVisible = true;
       });

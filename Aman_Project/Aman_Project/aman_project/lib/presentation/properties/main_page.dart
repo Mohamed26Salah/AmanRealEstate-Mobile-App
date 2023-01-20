@@ -28,7 +28,7 @@ class _SearchState extends ConsumerState<Search> {
     FlutterNativeSplash.remove();
     final userData = ref.watch(newUserDataProivder);
     bool isVisible = false;
-    if (userData?.role == 'admin') {
+    if (userData?.role == 'admin'|| userData?.role == 'moderator') {
       setState(() {
         isVisible = true;
       });
