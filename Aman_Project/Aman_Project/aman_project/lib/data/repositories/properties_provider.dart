@@ -51,19 +51,11 @@ final filteredProperty = StreamProvider((ref) {
     query = query.where("type", isEqualTo: ref.watch(filterTypeProivder));
   }
   if (ref.watch(filterRoomProivder) != "") {
-    if (ref.watch(filterRoomProivder) == "Any") {
-      query = query.where("noRooms", isNotEqualTo: "");
-    } else {
-      query = query.where("noRooms", isEqualTo: ref.watch(filterRoomProivder));
-    }
+    query = query.where("noRooms", isEqualTo: ref.watch(filterRoomProivder));
   }
   if (ref.watch(filterBathroomProivder) != "") {
-    if (ref.watch(filterBathroomProivder) == "Any") {
-      query = query.where("noBathrooms", isNotEqualTo: "");
-    } else {
-      query = query.where("noBathrooms",
-          isEqualTo: ref.watch(filterBathroomProivder));
-    }
+    query = query.where("noBathrooms",
+        isEqualTo: ref.watch(filterBathroomProivder));
   }
   // if (ref.watch(searchInputProivder) != "") {
   //   query = query.where("unitName",
