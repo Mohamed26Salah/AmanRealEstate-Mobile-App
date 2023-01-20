@@ -34,7 +34,7 @@ class PropertyWidget extends StatelessWidget {
     }
     // print(mainImage);
     return Hero(
-      tag: property.singleImage,
+      tag: property.docId.toString(),
       child: GestureDetector(
         onTap: () => selectedProperty(context),
         child: Card(
