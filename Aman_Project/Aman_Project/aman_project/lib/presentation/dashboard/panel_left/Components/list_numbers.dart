@@ -53,7 +53,12 @@ class _ListNumberState extends ConsumerState<ListNumber> {
                           .then((value) {
                         if (value) {
                           var temp = ref.watch(numberProv);
-                          temp.remove(numbersList[index]);
+                          try {
+                            temp.remove(numbersList[index]);
+                          } catch (e) {
+                            print(e);
+                          }
+
                           ref.read(numberProv.notifier).state = temp.toList();
                         } else {
                           // print("failed to remove number");
