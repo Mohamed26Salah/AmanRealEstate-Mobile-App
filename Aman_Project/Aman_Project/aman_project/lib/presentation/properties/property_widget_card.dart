@@ -1,3 +1,4 @@
+import 'package:aman_project/common_widgets/extracted_widgets.dart';
 import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -119,25 +120,12 @@ class PropertyWidget extends StatelessWidget {
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                property.unitName,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              child: ExtractedWidgets()
+                                          .strokeWidget(property.unitName, 18),
                             ),
                           ),
-                          Text(
-                            r"$" + property.price.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          ExtractedWidgets().strokeWidget(
+                                      r"$" + property.price.toString(), 18),
                         ],
                       ),
                       const SizedBox(
@@ -159,14 +147,8 @@ class PropertyWidget extends StatelessWidget {
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                property.addressUser,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
+                              child: ExtractedWidgets().strokeWidget(
+                                            property.addressUser, 14)
                             ),
                           ),
                           const SizedBox(
@@ -180,13 +162,8 @@ class PropertyWidget extends StatelessWidget {
                           // const SizedBox(
                           //   width: 4,
                           // ),
-                          Text(
-                            "${property.area} sq/m",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
+                          ExtractedWidgets().strokeWidget(
+                                      '${property.area} sq/m', 14),
                           //   ],
                           // ),
                         ],

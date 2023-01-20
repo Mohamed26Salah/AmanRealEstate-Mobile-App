@@ -156,30 +156,34 @@ class _DetailsState extends ConsumerState<Details> {
                       decoration: const BoxDecoration(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.white,
-                                  size: 24,
+                          Flexible(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
                                 ),
-                              ),
-                              Visibility(
-                                visible: isVisible,
-                                child: Icon(
-                                  Icons.remove_red_eye_rounded,
-                                  color: visible,
-                                  size: 30,
-                                  shadows: [defaultShadow],
-                                ),
-                              )
-                            ],
+                                Visibility(
+                                  visible: isVisible,
+                                  child: Icon(
+                                    Icons.remove_red_eye_rounded,
+                                    color: visible,
+                                    size: 30,
+                                    shadows: [defaultShadow],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
@@ -472,8 +476,13 @@ class _DetailsState extends ConsumerState<Details> {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-              child: ExtractedWidgets()
-                  .strokeWidget(r"$" + routeArgs.price.toString(), 16),
+              child: Text(
+                r"$" + routeArgs.price.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey[500],
+                ),
+              ),
             ),
             ExtractedWidgets()
                 .propertyDetailsDescriptionAndAddress(routeArgs, isVisible),
