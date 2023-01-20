@@ -132,7 +132,7 @@ class _DetailsState extends ConsumerState<Details> {
           children: [
             NoGlowScroll(
               child: Hero(
-                tag: routeArgs.singleImage,
+                tag: routeArgs.docId.toString(),
                 child: Card(
                   margin: const EdgeInsets.only(bottom: 24),
                   clipBehavior: Clip.antiAlias,
@@ -242,7 +242,7 @@ class _DetailsState extends ConsumerState<Details> {
                                 builder: (contextt, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return const LoadingScreen();
+                                    return const CircularProgressIndicator();
                                   } else {
                                     return InkWell(
                                       onTap: () {
