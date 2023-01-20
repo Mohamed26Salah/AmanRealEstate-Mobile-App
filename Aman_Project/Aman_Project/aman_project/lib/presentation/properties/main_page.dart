@@ -28,7 +28,7 @@ class _SearchState extends ConsumerState<Search> {
     FlutterNativeSplash.remove();
     final userData = ref.watch(newUserDataProivder);
     bool isVisible = false;
-    if (userData?.role == 'admin'|| userData?.role == 'moderator') {
+    if (userData?.role == 'admin' || userData?.role == 'moderator') {
       setState(() {
         isVisible = true;
       });
@@ -124,7 +124,7 @@ class _SearchState extends ConsumerState<Search> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ref.watch(resultsCount).toString(),
+                    ref.watch(resultsCountProperty).toString(),
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

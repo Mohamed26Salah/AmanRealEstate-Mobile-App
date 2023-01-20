@@ -50,3 +50,6 @@ final searchInputProivderRent = StateProvider<String>((ref) {
 final rentTypeUserChoice = StateProvider<String>((ref) {
   return "";
 });
+final resultsCountRent = StateProvider<int>((ref) {
+  return 0;
+});
