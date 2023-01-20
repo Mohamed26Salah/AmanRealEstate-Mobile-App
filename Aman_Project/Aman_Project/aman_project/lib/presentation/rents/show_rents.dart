@@ -20,6 +20,11 @@ class _ShowCardState extends ConsumerState<ShowRent> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   AsyncValue<QuerySnapshot<Map<String, dynamic>>>? getType() {
     if (widget.rentType == "DidntStart") {
       return ref.watch(didntStartSP);

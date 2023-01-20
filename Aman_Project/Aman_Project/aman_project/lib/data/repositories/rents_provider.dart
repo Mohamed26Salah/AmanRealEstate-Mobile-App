@@ -5,7 +5,7 @@ final rentsButtonProivder = StateProvider<bool>((ref) {
   return false;
 });
 
-final didntStartSP = StreamProvider((ref) {
+final didntStartSP = StreamProvider.autoDispose((ref) {
   print("prov1");
   return FirebaseFirestore.instance
       .collection('rents')
@@ -13,28 +13,28 @@ final didntStartSP = StreamProvider((ref) {
       .snapshots();
 });
 
-final finishedSP = StreamProvider((ref) {
+final finishedSP = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('rents')
       .where("rentType", isEqualTo: "Finished")
       .snapshots();
 });
 
-final payedSP = StreamProvider((ref) {
+final payedSP = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('rents')
       .where("rentType", isEqualTo: "Payed")
       .snapshots();
 });
 
-final didntPaySP = StreamProvider((ref) {
+final didntPaySP = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('rents')
       .where("rentType", isEqualTo: "DidntPay")
       .snapshots();
 });
 
-final searchedRents = StreamProvider((ref) {
+final searchedRents = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('rents')
       .where("rentType", isEqualTo: ref.watch(rentTypeUserChoice))

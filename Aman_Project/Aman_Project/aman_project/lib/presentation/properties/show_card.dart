@@ -4,6 +4,7 @@ import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,11 @@ class ShowCard extends ConsumerStatefulWidget {
 }
 
 class _ShowCardState extends ConsumerState<ShowCard> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Query query = FirebaseFirestore.instance.collection('properties');
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class _ShowCardState extends ConsumerState<ShowCard> {
         });
         return (data.size != 0)
             ? NoGlowScroll(
-              child: ListView.builder(
+                child: ListView.builder(
                   itemCount: data.size,
                   itemBuilder: (context, index) {
                     // if (mounted) {}
@@ -63,7 +69,7 @@ class _ShowCardState extends ConsumerState<ShowCard> {
                     }
                   },
                 ),
-            )
+              )
             : Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

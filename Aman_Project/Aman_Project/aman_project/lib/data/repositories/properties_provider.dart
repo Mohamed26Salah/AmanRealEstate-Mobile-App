@@ -28,23 +28,23 @@ final resultsCountProperty = StateProvider<int>((ref) {
   return 0;
 });
 
-final getPropertyData = StreamProvider((ref) {
+final getPropertyData = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance.collection('properties').snapshots();
 });
-final getUserPropertyData = StreamProvider((ref) {
+final getUserPropertyData = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('properties')
       .where("visible", isEqualTo: "Yes")
       .snapshots();
 });
-final searchedProperty = StreamProvider((ref) {
+final searchedProperty = StreamProvider.autoDispose((ref) {
   return FirebaseFirestore.instance
       .collection('properties')
       .where("unitName",
           isGreaterThanOrEqualTo: ref.watch(searchInputProivder).toLowerCase())
       .snapshots();
 });
-final filteredProperty = StreamProvider((ref) {
+final filteredProperty = StreamProvider.autoDispose((ref) {
   // ref.read(searchInputProivder.notifier).state = "";
   Query query = FirebaseFirestore.instance.collection('properties');
   if (ref.watch(filterTypeProivder) != "") {
