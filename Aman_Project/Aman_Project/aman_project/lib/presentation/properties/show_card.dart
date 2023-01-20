@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:no_glow_scroll/no_glow_scroll.dart';
 
 class ShowCard extends ConsumerStatefulWidget {
   const ShowCard({super.key});
@@ -37,30 +38,32 @@ class _ShowCardState extends ConsumerState<ShowCard> {
           ref.read(resultsCountProperty.notifier).state = data.size;
         });
         return (data.size != 0)
-            ? ListView.builder(
-                itemCount: data.size,
-                itemBuilder: (context, index) {
-                  // if (mounted) {}
-                  // Future.delayed(const Duration(milliseconds: 100), () {
-                  //   ref.read(resultsCount.notifier).state = data.size;
-                  // });
-                  var property = Property.fromJson(
-                      data.docs[index].data(), data.docs[index].id);
-                  if (userData!.role == "user") {
-                    if (property.visible == "No") {
-                      return const SizedBox.shrink();
+            ? NoGlowScroll(
+              child: ListView.builder(
+                  itemCount: data.size,
+                  itemBuilder: (context, index) {
+                    // if (mounted) {}
+                    // Future.delayed(const Duration(milliseconds: 100), () {
+                    //   ref.read(resultsCount.notifier).state = data.size;
+                    // });
+                    var property = Property.fromJson(
+                        data.docs[index].data(), data.docs[index].id);
+                    if (userData!.role == "user") {
+                      if (property.visible == "No") {
+                        return const SizedBox.shrink();
+                      } else {
+                        return PropertyWidget(
+                          property: property,
+                        );
+                      }
                     } else {
                       return PropertyWidget(
                         property: property,
                       );
                     }
-                  } else {
-                    return PropertyWidget(
-                      property: property,
-                    );
-                  }
-                },
-              )
+                  },
+                ),
+            )
             : Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

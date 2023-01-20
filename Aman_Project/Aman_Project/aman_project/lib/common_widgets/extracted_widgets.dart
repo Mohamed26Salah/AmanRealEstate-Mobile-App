@@ -229,7 +229,7 @@ class ExtractedWidgets {
               builder: (context) => AlertDialog(
                 title: Text("Delete".tr),
                 content: Text(
-                    "Are you sure you would like to delete this property?".tr),
+                    "Are you sure you would like to delete this $type?".tr),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -245,7 +245,7 @@ class ExtractedWidgets {
                     ),
                     child: Text(
                       'Cancel'.tr,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                   TextButton(
@@ -254,19 +254,19 @@ class ExtractedWidgets {
                         PropertyManagement.deleteProduct(
                             routeArgsProperty!.docId!,
                             routeArgsProperty.singleImage,
-                            routeArgsProperty.multiImages);
+                            routeArgsProperty.multiImages,
+                            context);
+
                         Navigator.pop(context);
-                        Navigator.of(context).pushReplacementNamed('/home');
+                        Navigator.pop(context);
                       } else if (type == 'rent') {
                         RentsManagement.deleteRent(routeArgsRents!.docId!);
 
                         Navigator.pop(context);
-                        Navigator.of(context).pushReplacementNamed(
-                            '/MainPageRent',
-                            arguments: routeArgsRents.rentType);
+                        Navigator.pop(context);
                       }
                       goodMessageSnackBar(
-                          "Success".tr, "Successfully deleted property".tr);
+                          "Success".tr, "Successfully deleted $type".tr);
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(val.snackBar);

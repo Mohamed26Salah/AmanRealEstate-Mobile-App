@@ -128,10 +128,10 @@ class _DetailsState extends ConsumerState<Details> {
 
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            NoGlowScroll(
-              child: Hero(
+        body: NoGlowScroll(
+          child: ListView(
+            children: [
+              Hero(
                 tag: routeArgs.docId.toString(),
                 child: Card(
                   margin: const EdgeInsets.only(bottom: 24),
@@ -334,190 +334,190 @@ class _DetailsState extends ConsumerState<Details> {
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 24, left: 24, right: 24, top: 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Owner Number".tr,
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      fontSize: 19,
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 24, left: 24, right: 24, top: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Owner Number".tr,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        fontSize: 19,
+                      ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.3),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              PropertyManagement.makePhoneCallProperty(
-                                  context: context,
-                                  isVisible: isVisible,
-                                  routeArgs: routeArgs,
-                                  ref: ref);
-                            },
-                            child: Icon(
-                              Icons.phone,
-                              color: Theme.of(context).primaryColor,
-                              size: 20,
+                    Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                PropertyManagement.makePhoneCallProperty(
+                                    context: context,
+                                    isVisible: isVisible,
+                                    routeArgs: routeArgs,
+                                    ref: ref);
+                              },
+                              child: Icon(
+                                Icons.phone,
+                                color: Theme.of(context).primaryColor,
+                                size: 20,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24),
-              child: SizedBox(
-                height: 100,
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  children: [
-                    ExtractedWidgets().buildFeature(
-                        Icons.hotel, routeArgs.noRooms, "Rooms".tr, context),
-                    ExtractedWidgets().buildFeature(Icons.bathtub_outlined,
-                        routeArgs.noBathrooms, "Barthrooms".tr, context),
-                    ExtractedWidgets().buildFeature(Icons.apartment_rounded,
-                        routeArgs.noFlats, "Flats".tr, context),
-                    ExtractedWidgets().buildFeature(Icons.house,
-                        routeArgs.furnished!.tr, "Furnished".tr, context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.stairs, routeArgs.floor, "Floor".tr, context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.local_activity,
-                        routeArgs.typeOFActivity,
-                        "Type Of Activity".tr,
-                        context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.business_outlined,
-                        routeArgs.theNumberOFAB,
-                        "Adminstrative Building".tr,
-                        context),
-                    ExtractedWidgets().buildFeature(Icons.domain_outlined,
-                        routeArgs.finishing!.tr, "Finishing".tr, context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.stairs, routeArgs.doublex, "Doublex".tr, context),
-                    ExtractedWidgets().buildFeature(Icons.priority_high,
-                        routeArgs.priority.tr, "Priority".tr, context),
-                    ExtractedWidgets().buildFeature(Icons.attach_money,
-                        routeArgs.paymentMethod.tr, "Payment".tr, context),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
-              child: Text(
-                'Owner Name'.tr,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24),
+                child: SizedBox(
+                  height: 100,
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    children: [
+                      ExtractedWidgets().buildFeature(
+                          Icons.hotel, routeArgs.noRooms, "Rooms".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.bathtub_outlined,
+                          routeArgs.noBathrooms, "Barthrooms".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.apartment_rounded,
+                          routeArgs.noFlats, "Flats".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.house,
+                          routeArgs.furnished!.tr, "Furnished".tr, context),
+                      ExtractedWidgets().buildFeature(
+                          Icons.stairs, routeArgs.floor, "Floor".tr, context),
+                      ExtractedWidgets().buildFeature(
+                          Icons.local_activity,
+                          routeArgs.typeOFActivity,
+                          "Type Of Activity".tr,
+                          context),
+                      ExtractedWidgets().buildFeature(
+                          Icons.business_outlined,
+                          routeArgs.theNumberOFAB,
+                          "Adminstrative Building".tr,
+                          context),
+                      ExtractedWidgets().buildFeature(Icons.domain_outlined,
+                          routeArgs.finishing!.tr, "Finishing".tr, context),
+                      ExtractedWidgets().buildFeature(
+                          Icons.stairs, routeArgs.doublex, "Doublex".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.priority_high,
+                          routeArgs.priority.tr, "Priority".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.attach_money,
+                          routeArgs.paymentMethod.tr, "Payment".tr, context),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-              child: Text(
-                routeArgs.ownerName,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey[500],
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                child: Text(
+                  'Owner Name'.tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
-              child: Text(
-                "Unit Name".tr,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                child: Text(
+                  routeArgs.ownerName,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[500],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-              child: Text(
-                routeArgs.unitName,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey[500],
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                child: Text(
+                  "Unit Name".tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
-              child: Text(
-                "Price".tr,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                child: Text(
+                  routeArgs.unitName,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[500],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-              child: Text(
-                r"$" + routeArgs.price.toString(),
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey[500],
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
+                child: Text(
+                  "Price".tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            ExtractedWidgets()
-                .propertyDetailsDescriptionAndAddress(routeArgs, isVisible),
-            Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-              child: Text(
-                "Photos".tr,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                child: Text(
+                  r"$" + routeArgs.price.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[500],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 26, left: 24),
-              child: SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  itemCount: routeArgs.multiImages.length,
-                  itemBuilder: (context, index) {
-                    return ExtractedWidgets()
-                        .buildPhoto(routeArgs.multiImages[index]);
-                  },
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
+              ExtractedWidgets()
+                  .propertyDetailsDescriptionAndAddress(routeArgs, isVisible),
+              Padding(
+                padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
+                child: Text(
+                  "Photos".tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            ExtractedWidgets().deleteButton(
-                isVisible: isVisible,
-                context: context,
-                routeArgsProperty: routeArgs,
-                type: 'property'),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 26, left: 24),
+                child: SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: routeArgs.multiImages.length,
+                    itemBuilder: (context, index) {
+                      return ExtractedWidgets()
+                          .buildPhoto(routeArgs.multiImages[index]);
+                    },
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                  ),
+                ),
+              ),
+              ExtractedWidgets().deleteButton(
+                  isVisible: isVisible,
+                  context: context,
+                  routeArgsProperty: routeArgs,
+                  type: 'property'),
+            ],
+          ),
         ),
         floatingActionButton: Visibility(
           visible: isVisible,
