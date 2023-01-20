@@ -160,6 +160,7 @@ class LocaleString extends Translations {
           'Users': 'Users',
           'No Data is Found': 'No Data is Found',
           'Successfully Added Property': 'Successfully Added Property',
+          'Search By Lessor': 'Search By Lessor',
         },
         //arabic LANGUAGE
 
@@ -317,7 +318,8 @@ class LocaleString extends Translations {
           'Units': 'عقارات',
           'Users': 'المستخدمين',
           'No Data is Found': 'لم يتم العثور علي شئ',
-          'Successfully Added Property' : 'تم الاضافة ب نجاح'
+          'Successfully Added Property' : 'تم الاضافة ب نجاح',
+          'Search By Lessor': 'بحث عن المؤجر'
         },
       };
 }

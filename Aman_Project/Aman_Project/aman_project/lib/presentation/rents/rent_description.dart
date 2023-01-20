@@ -225,9 +225,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                   Text(
                     "Owner Number".tr,
                     textAlign: TextAlign.right,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 19,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   Row(
@@ -236,9 +236,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColor
-                              .withOpacity(0.3),
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.3),
                           shape: BoxShape.circle,
                         ),
                         child: Center(
@@ -271,14 +270,12 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                   children: [
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.startOFRent),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.startOFRent),
                         "Start Of Contract".tr,
                         context),
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.endOFRent),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.endOFRent),
                         "End Of Contract".tr,
                         context),
                     ExtractedWidgets().buildFeature(
@@ -288,22 +285,15 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         context),
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.torEnd),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.torEnd),
                         "End Of Rent".tr,
                         context),
+                    ExtractedWidgets().buildFeature(Icons.house,
+                        routeArgs.furnished.tr, "Furnished".tr, context),
                     ExtractedWidgets().buildFeature(
-                        Icons.house,
-                        routeArgs.furnished.tr,
-                        "Furnished".tr,
-                        context),
-                    ExtractedWidgets().buildFeature(Icons.stairs,
-                        routeArgs.floor, "Floor".tr, context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.domain_outlined,
-                        routeArgs.finishing.tr,
-                        "Finishing".tr,
-                        context),
+                        Icons.stairs, routeArgs.floor, "Floor".tr, context),
+                    ExtractedWidgets().buildFeature(Icons.domain_outlined,
+                        routeArgs.finishing.tr, "Finishing".tr, context),
                   ],
                 ),
               ),

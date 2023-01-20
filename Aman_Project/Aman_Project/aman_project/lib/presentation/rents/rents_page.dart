@@ -29,14 +29,30 @@ class _RentsPageState extends ConsumerState<RentsPage> {
     return Scaffold(
       body: (rentsButton)
           ? Center(
-            child: SafeArea(
+              child: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Rents".tr,
-                        style: const TextStyle(fontSize: 70),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              color: Theme.of(context).hintColor,
+                            ),
+                            borderRadius: BorderRadius.circular(13)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Rents".tr,
+                                style: const TextStyle(fontSize: 50),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 50,
@@ -76,7 +92,7 @@ class _RentsPageState extends ConsumerState<RentsPage> {
                   ),
                 ),
               ),
-          )
+            )
           : Center(
               child: SafeArea(
                 child: Column(

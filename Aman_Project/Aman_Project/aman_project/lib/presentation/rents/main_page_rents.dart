@@ -57,9 +57,9 @@ class _SearchState extends ConsumerState<MainPageRent> {
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Search'.tr,
+                  hintText: 'Search By Lessor'.tr,
                   hintStyle: TextStyle(
-                    fontSize: 28,
+                    fontSize: 22,
                     color: Colors.grey[400],
                   ),
                   enabledBorder: UnderlineInputBorder(
@@ -117,10 +117,27 @@ class _SearchState extends ConsumerState<MainPageRent> {
             ),
             const SizedBox(height: 15),
             Center(
-              child: Text(
-                rentType.tr,
-                style: TextStyle(
-                    fontSize: 45, color: Theme.of(context).backgroundColor),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).hintColor,
+                    ),
+                    borderRadius: BorderRadius.circular(13)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        rentType.tr,
+                        style: TextStyle(
+                            fontSize: 45,
+                            color: Theme.of(context).backgroundColor),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             Expanded(

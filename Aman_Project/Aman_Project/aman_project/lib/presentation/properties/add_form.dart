@@ -660,7 +660,7 @@ class AddFormState extends ConsumerState<AddForm> {
                                       offered: offered!,
                                       singleImage: imageManagement
                                               .singleImageURl ??
-                                          'https://i.picsum.photos/id/825/200/300.jpg?hmac=02AaqBOvx8gwrGt7a3HWzJHnZXrMzYoXbAYwjJWH40E',
+                                          'https://firebasestorage.googleapis.com/v0/b/aman-real-estate.appspot.com/o/pictures%2FApp_Icon-removebg-preview.png?alt=media&token=4f7258f0-df5d-49b5-833e-0215437ec0af',
                                       mutliImages: imageManagement.downloadUrls,
                                       floor: _floorController.text,
                                       doublex: doublex ?? "",

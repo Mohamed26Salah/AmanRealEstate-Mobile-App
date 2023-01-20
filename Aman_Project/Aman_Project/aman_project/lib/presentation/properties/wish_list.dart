@@ -35,17 +35,18 @@ class WishlistState extends ConsumerState<Wishlist> {
         ? SafeArea(
             child: Center(
                 child: NoGlowScroll(
-                  child: SingleChildScrollView(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+              child: SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Image.asset("assets/images/wishlist.png", width: 200),
                       const SizedBox(
                         height: 20,
                       ),
                       const Text(
                         'Your WishList is Empty!',
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 30,
@@ -67,8 +68,8 @@ class WishlistState extends ConsumerState<Wishlist> {
                         child: const Text('Start SHOPPING'),
                       ),
                     ]),
-                  ),
-                )),
+              ),
+            )),
           )
         : resultWhishlist[0].docId == '-1'
             ? const Center(child: LoadingScreen())
