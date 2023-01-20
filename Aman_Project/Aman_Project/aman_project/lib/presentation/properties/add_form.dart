@@ -680,8 +680,8 @@ class AddFormState extends ConsumerState<AddForm> {
                                   if (!mounted) return;
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                       '/home', (route) => false);
-                                  goodMessageSnackBar("Uploading".tr,
-                                      "Uploading to database".tr);
+                                  goodMessageSnackBar("Success".tr,
+                                      "Successfully Added Property".tr);
                                   ScaffoldMessenger.of(context)
                                     ..hideCurrentSnackBar()
                                     ..showSnackBar(val.snackBar);

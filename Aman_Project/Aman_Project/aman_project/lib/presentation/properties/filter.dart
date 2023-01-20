@@ -437,10 +437,13 @@ class _FilterState extends ConsumerState<Filter> {
                 color: Colors.grey,
               )),
           child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(
-                fontSize: 14,
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
               ),
             ),
           ),

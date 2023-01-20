@@ -160,7 +160,7 @@ class PropertyManagement {
   }
 
   static deleteProduct(
-      String id, String singleImage, List<dynamic> multiImages) async {
+      String id, String singleImage, List<dynamic> multiImages, BuildContext context) async {
     try {
       DocumentReference docRef =
           FirebaseFirestore.instance.collection('properties').doc(id);

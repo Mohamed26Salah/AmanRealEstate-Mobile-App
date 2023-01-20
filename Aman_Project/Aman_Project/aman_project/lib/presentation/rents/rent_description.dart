@@ -59,133 +59,119 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
       child: Scaffold(
         body: ListView(
           children: [
-            NoGlowScroll(
-              child: Hero(
-                tag: routeArgs.docId.toString(),
-                child: Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.only(bottom: 24),
-                  clipBehavior: Clip.antiAlias,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
+            Hero(
+              tag: routeArgs.docId.toString(),
+              child: Card(
+                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 24),
+                clipBehavior: Clip.antiAlias,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: Container(
+                  height: sizeLandscape,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/rent.jpg'),
+                      fit: BoxFit.cover,
                     ),
                   ),
                   child: Container(
-                    height: sizeLandscape,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/rent.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                              size: 24,
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          width: 80,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 4,
                           ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
+                          child: Center(
+                            child: Text(
+                              routeArgs.type.tr,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            width: 80,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: rentTypeColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
                             ),
+                          ),
+                          width: 80,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 4,
+                          ),
+                          child: Center(
+                            child: Text(
+                              routeArgs.rentType.tr,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                            flex: 7,
                             child: Center(
-                              child: Text(
-                                routeArgs.type.tr,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: rentTypeColor,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            width: 80,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4,
-                            ),
-                            child: Center(
-                              child: Text(
-                                routeArgs.rentType.tr,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                              flex: 7,
-                              child: Center(
-                                  child: Text(
-                                overflow: TextOverflow.ellipsis,
-                                '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
-                                style: TextStyle(
-                                    fontSize: 45,
-                                    color: Theme.of(context)
-                                        .primaryColorLight),
-                              ))),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5),
-                                      child: Text(
-                                        overflow: TextOverflow.ellipsis,
-                                        routeArgs.lessorName,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
+                                child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
+                              style: TextStyle(
+                                  fontSize: 45,
+                                  color: Theme.of(context)
+                                      .primaryColorLight),
+                            ))),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(right: 5),
                                     child: Text(
                                       overflow: TextOverflow.ellipsis,
-                                      routeArgs.tenantName,
+                                      routeArgs.lessorName,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .primaryColorLight,
@@ -194,26 +180,38 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Center(
-                                child: Text(
-                                  overflow: TextOverflow.ellipsis,
-                                  r"$" + routeArgs.rentPrice.toString(),
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).primaryColorLight,
-                                    fontSize: 18,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    routeArgs.tenantName,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .primaryColorLight,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Center(
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                r"$" + routeArgs.rentPrice.toString(),
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).primaryColorLight,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),

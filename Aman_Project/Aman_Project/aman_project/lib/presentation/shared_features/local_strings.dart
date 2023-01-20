@@ -158,7 +158,8 @@ class LocaleString extends Translations {
           'Admin Numbers': 'Admin Numbers',
           'Units': 'Units',
           'Users': 'Users',
-          'No Data is Found': 'No Data is Found'
+          'No Data is Found': 'No Data is Found',
+          'Successfully Added Property': 'Successfully Added Property',
         },
         //arabic LANGUAGE
 
@@ -315,7 +316,8 @@ class LocaleString extends Translations {
           'Admin Numbers': 'أرقام المشرفين',
           'Units': 'عقارات',
           'Users': 'المستخدمين',
-          'No Data is Found': 'لم يتم العثور علي شئ'
+          'No Data is Found': 'لم يتم العثور علي شئ',
+          'Successfully Added Property' : 'تم الاضافة ب نجاح'
         },
       };
 }
