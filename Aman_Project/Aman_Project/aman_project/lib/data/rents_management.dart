@@ -125,48 +125,58 @@ class RentsManagement {
     return (torEnd.add(Duration(days: addedTime)));
   }
 
-  static  updateRentDaysDifference(
-      DateTime tor, DateTime torEnd, String docId, Rents routeArgs) {
+  static updateRentDaysDifference(String docId, Rents routeArgs) {
     try {
-      print('tor $tor \n torEND $torEnd');
-      int difference = daysBetween(tor, torEnd);
-      routeArgs.tor = addDaysToStartRent(tor, addedTime: difference);
-      routeArgs.torEnd = addDaysToEndRent(torEnd, addedTime: difference);
-      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
-      print('update tor $tor \n update torEND $torEnd');
-
-      // return [tor, torEnd];
+      int difference = daysBetween(routeArgs.tor, routeArgs.torEnd);
+      routeArgs.tor = addDaysToStartRent(routeArgs.tor, addedTime: difference);
+      routeArgs.torEnd =
+          addDaysToEndRent(routeArgs.torEnd, addedTime: difference);
+      routeArgs.rentType = RentsManagement.figureRentType(routeArgs.startOFRent,
+          routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
+          routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
       print(e);
       // return [];
     }
   }
 
-  static updateRents30Days(DateTime tor, DateTime torEnd, String docId, Rents routeArgs) async {
+  static updateRents30Days(String docId, Rents routeArgs) async {
     try {
-      routeArgs.tor = addDaysToStartRent(tor);
-      routeArgs.torEnd = addDaysToEndRent(torEnd);
-      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
+      routeArgs.tor = addDaysToStartRent(routeArgs.tor);
+      routeArgs.torEnd = addDaysToEndRent(routeArgs.torEnd);
+      routeArgs.rentType = RentsManagement.figureRentType(routeArgs.startOFRent,
+          routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
+          routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
       print(e);
     }
   }
 
   static updateRentsCustomDays(
-      DateTime tor, DateTime torEnd, String docId, int customDays, Rents routeArgs) async {
+      String docId, int customDays, Rents routeArgs) async {
     try {
-      routeArgs.tor = addDaysToStartRent(tor, addedTime: customDays);
-      routeArgs.torEnd = addDaysToEndRent(torEnd, addedTime: customDays);
-      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId);
+      routeArgs.tor = addDaysToStartRent(routeArgs.tor, addedTime: customDays);
+      routeArgs.torEnd =
+          addDaysToEndRent(routeArgs.torEnd, addedTime: customDays);
+      routeArgs.rentType = RentsManagement.figureRentType(routeArgs.startOFRent,
+          routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd);
+      updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
+          routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
       print(e);
     }
   }
 
-  static updateTorAndTorEnd(DateTime tor, DateTime torEnd, String docId) {
+  static updateTorAndTorEnd(DateTime tor, DateTime torEnd, String docId,
+      DateTime startOFContract, DateTime endOFContract, String rentType) {
     DocumentReference docRef = FirebaseFirestore.instance.doc('rents/$docId');
+    // var rentType = RentsManagement.figureRentType(
+    //     startOFContract, endOFContract, tor, torEnd);
     try {
       docRef.update({
+        'rentType': rentType,
         'tor': tor,
         'torEnd': torEnd,
       });

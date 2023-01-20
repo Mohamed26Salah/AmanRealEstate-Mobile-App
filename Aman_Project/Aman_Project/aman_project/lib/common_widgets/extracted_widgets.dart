@@ -348,14 +348,12 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                           child: ListTile(
                             title: Text("Start and End of Rent Differing".tr),
                             onTap: () {
-                              var ListTemp = [];
-                              print('End' +
-                                  widget.routeArgsRents.torEnd.toString());
-                              print('Start' +
-                                  widget.routeArgsRents.tor.toString());
+                              // var ListTemp = [];
+                              // print('End' +
+                              //     widget.routeArgsRents.torEnd.toString());
+                              // print('Start' +
+                              //     widget.routeArgsRents.tor.toString());
                               RentsManagement.updateRentDaysDifference(
-                                  widget.routeArgsRents.tor,
-                                  widget.routeArgsRents.torEnd,
                                   widget.routeArgsRents.docId!,
                                   widget.routeArgsRents);
                               if (widget.update != null) {
@@ -371,8 +369,6 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                             title: Text("Add 30 Days".tr),
                             onTap: () {
                               RentsManagement.updateRents30Days(
-                                  widget.routeArgsRents.tor,
-                                  widget.routeArgsRents.torEnd,
                                   widget.routeArgsRents.docId!,
                                   widget.routeArgsRents);
                               print(widget.routeArgsRents.torEnd);
@@ -408,10 +404,9 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       RentsManagement.updateRentsCustomDays(
-                                          widget.routeArgsRents.tor,
-                                          widget.routeArgsRents.torEnd,
                                           widget.routeArgsRents.docId!,
-                                          int.parse(_customController.text), widget.routeArgsRents);
+                                          int.parse(_customController.text),
+                                          widget.routeArgsRents);
                                       if (widget.update != null) {
                                         widget.update!(widget.routeArgsRents);
                                       }
