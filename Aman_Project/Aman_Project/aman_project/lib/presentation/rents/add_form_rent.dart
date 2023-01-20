@@ -235,7 +235,8 @@ class _AddFormRentState extends State<AddFormRent> {
                               type: type!,
                               area: int.parse(_areaController.text),
                               floor: _floorController.text,
-                              lessorName: _lessorNameController.text,
+                              lessorName:
+                                  _lessorNameController.text.toLowerCase(),
                               tenantName: _tenantNameController.text,
                               lessorNum: _lessorNumController.text,
                               tenantNum: _tenantNumController.text,

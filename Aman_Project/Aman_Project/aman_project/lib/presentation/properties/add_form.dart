@@ -652,7 +652,8 @@ class AddFormState extends ConsumerState<AddForm> {
                                           _descriptionForUserController.text,
                                       descriptionForAdmin:
                                           _descriptionForAdminController.text,
-                                      unitName: _nameController.text,
+                                      unitName:
+                                          _nameController.text.toLowerCase(),
                                       paymentMethod: paymentMethod!,
                                       priority: priority!,
                                       visible: visible!,
