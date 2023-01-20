@@ -93,9 +93,10 @@ class CardRent extends StatelessWidget {
                         child: Text(
                       overflow: TextOverflow.ellipsis,
                       '${RentsManagement.figureHowManyDaysLeft(rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd, rent.rentType)} Days',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Theme.of(context).primaryColorLight),
+                      style: const TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                      ),
                     ))),
                 Expanded(
                   child: Container(),
@@ -111,8 +112,8 @@ class CardRent extends StatelessWidget {
                             child: Text(
                               overflow: TextOverflow.ellipsis,
                               rent.lessorName,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColorLight,
+                              style: const TextStyle(
+                                color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -123,8 +124,8 @@ class CardRent extends StatelessWidget {
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             rent.tenantName,
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColorLight,
+                            style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -139,8 +140,8 @@ class CardRent extends StatelessWidget {
                       child: Text(
                         overflow: TextOverflow.ellipsis,
                         r"$" + rent.rentPrice.toString(),
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColorLight,
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontSize: 18,
                         ),
                       ),

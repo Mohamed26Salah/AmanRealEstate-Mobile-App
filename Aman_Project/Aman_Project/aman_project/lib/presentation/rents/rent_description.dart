@@ -152,10 +152,10 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                   child: Text(
                                 overflow: TextOverflow.ellipsis,
                                 '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
-                                style: TextStyle(
-                                    fontSize: 45,
-                                    color: Theme.of(context)
-                                        .primaryColorLight),
+                                style: const TextStyle(
+                                  fontSize: 45,
+                                  color: Colors.white,
+                                ),
                               ))),
                           Expanded(
                             child: Container(),
@@ -168,14 +168,12 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 children: [
                                   Flexible(
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 5),
+                                      padding: const EdgeInsets.only(right: 5),
                                       child: Text(
                                         overflow: TextOverflow.ellipsis,
                                         routeArgs.lessorName,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
+                                        style: const TextStyle(
+                                          color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -186,9 +184,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                     child: Text(
                                       overflow: TextOverflow.ellipsis,
                                       routeArgs.tenantName,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .primaryColorLight,
+                                      style: const TextStyle(
+                                        color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -203,9 +200,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
                                   r"$" + routeArgs.rentPrice.toString(),
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).primaryColorLight,
+                                  style: const TextStyle(
+                                    color: Colors.white,
                                     fontSize: 18,
                                   ),
                                 ),
@@ -227,9 +223,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                   Text(
                     "Owner Number".tr,
                     textAlign: TextAlign.right,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 19,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   Row(
@@ -238,9 +234,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColor
-                              .withOpacity(0.3),
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.3),
                           shape: BoxShape.circle,
                         ),
                         child: Center(
@@ -273,14 +268,12 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                   children: [
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.startOFRent),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.startOFRent),
                         "Start Of Contract".tr,
                         context),
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.endOFRent),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.endOFRent),
                         "End Of Contract".tr,
                         context),
                     ExtractedWidgets().buildFeature(
@@ -290,22 +283,15 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         context),
                     ExtractedWidgets().buildFeature(
                         Icons.date_range,
-                        DateFormat('yyyy-MM-dd')
-                            .format(routeArgs.torEnd),
+                        DateFormat('yyyy-MM-dd').format(routeArgs.torEnd),
                         "End Of Rent".tr,
                         context),
+                    ExtractedWidgets().buildFeature(Icons.house,
+                        routeArgs.furnished.tr, "Furnished".tr, context),
                     ExtractedWidgets().buildFeature(
-                        Icons.house,
-                        routeArgs.furnished.tr,
-                        "Furnished".tr,
-                        context),
-                    ExtractedWidgets().buildFeature(Icons.stairs,
-                        routeArgs.floor, "Floor".tr, context),
-                    ExtractedWidgets().buildFeature(
-                        Icons.domain_outlined,
-                        routeArgs.finishing.tr,
-                        "Finishing".tr,
-                        context),
+                        Icons.stairs, routeArgs.floor, "Floor".tr, context),
+                    ExtractedWidgets().buildFeature(Icons.domain_outlined,
+                        routeArgs.finishing.tr, "Finishing".tr, context),
                   ],
                 ),
               ),
