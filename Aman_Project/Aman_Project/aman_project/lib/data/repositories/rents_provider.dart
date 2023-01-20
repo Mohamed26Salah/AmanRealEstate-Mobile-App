@@ -6,6 +6,7 @@ final rentsButtonProivder = StateProvider<bool>((ref) {
 });
 
 final didntStartSP = StreamProvider((ref) {
+  print("prov1");
   return FirebaseFirestore.instance
       .collection('rents')
       .where("rentType", isEqualTo: "DidntStart")
