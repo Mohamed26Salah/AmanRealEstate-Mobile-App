@@ -151,10 +151,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 child: Text(
                               overflow: TextOverflow.ellipsis,
                               '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 45,
-                                  color: Theme.of(context)
-                                      .primaryColorLight),
+                                 color: Colors.white,),
                             ))),
                         Expanded(
                           child: Container(),
@@ -172,9 +171,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                     child: Text(
                                       overflow: TextOverflow.ellipsis,
                                       routeArgs.lessorName,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .primaryColorLight,
+                                      style: const TextStyle(
+                                        color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -185,9 +183,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                   child: Text(
                                     overflow: TextOverflow.ellipsis,
                                     routeArgs.tenantName,
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .primaryColorLight,
+                                    style: const TextStyle(
+                                      color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -202,9 +199,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                               child: Text(
                                 overflow: TextOverflow.ellipsis,
                                 r"$" + routeArgs.rentPrice.toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color:
-                                      Theme.of(context).primaryColorLight,
+                                      Colors.white,
                                   fontSize: 18,
                                 ),
                               ),
@@ -225,9 +222,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                   Text(
                     "Owner Number".tr,
                     textAlign: TextAlign.right,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 19,
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.white,
                     ),
                   ),
                   Row(
