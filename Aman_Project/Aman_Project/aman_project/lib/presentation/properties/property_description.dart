@@ -120,7 +120,7 @@ class _DetailsState extends ConsumerState<Details> {
       blurRadius: 2,
     );
     bool isVisible = false;
-    if (userData?.role == 'admin') {
+    if (userData?.role == 'admin' || userData?.role == 'moderator') {
       setState(() {
         isVisible = true;
       });

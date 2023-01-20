@@ -99,7 +99,7 @@ class _NavBarState extends ConsumerState<NavBar> {
               //   icon: Icons.location_pin,
               //   text: 'Location',
               // ),
-              if (userData?.role == 'admin')
+              if (userData?.role == 'admin' || userData?.role == 'moderator')
                 GButton(
                   icon: Icons.apartment,
                   text: 'Rents'.tr,

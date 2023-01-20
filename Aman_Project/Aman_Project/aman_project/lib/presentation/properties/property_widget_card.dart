@@ -33,6 +33,11 @@ class PropertyWidget extends StatelessWidget {
       property.offered = "For Rent";
       color = Colors.red;
     }
+    var defaultShadow = Shadow(
+      color: Colors.black,
+      offset: Offset.fromDirection(1.5, 3),
+      blurRadius: 2,
+    );
     // print(mainImage);
     return Hero(
       tag: property.docId.toString(),
@@ -136,9 +141,10 @@ class PropertyWidget extends StatelessWidget {
                         children: [
                           // Row(
                           //   children: [
-                          const Icon(
+                           Icon(
                             Icons.location_on,
                             color: Colors.white,
+                            shadows: [defaultShadow],
                             size: 14,
                           ),
                           // const SizedBox(
@@ -154,9 +160,10 @@ class PropertyWidget extends StatelessWidget {
                           const SizedBox(
                             width: 15,
                           ),
-                          const Icon(
+                          Icon(
                             Icons.zoom_out_map,
                             color: Colors.white,
+                            shadows: [defaultShadow],
                             size: 16,
                           ),
                           // const SizedBox(
