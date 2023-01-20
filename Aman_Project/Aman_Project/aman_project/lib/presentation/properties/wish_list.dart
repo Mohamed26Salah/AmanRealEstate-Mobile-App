@@ -6,6 +6,7 @@ import 'package:aman_project/presentation/shared_features/custom_loading_screen.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'property_widget_card.dart';
@@ -32,40 +33,42 @@ class WishlistState extends ConsumerState<Wishlist> {
     resultWhishlist = ref.watch(whishlistProvider);
     return resultWhishlist.isEmpty
         ? SafeArea(
-            child: SingleChildScrollView(
-              child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    Image.asset("assets/images/wishlist.png", width: 200),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Your WishList is Empty!',
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      'Esplore more and shortlist some items',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+            child: Center(
+                child: NoGlowScroll(
+                  child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                      Image.asset("assets/images/wishlist.png", width: 200),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacementNamed("/home");
-                      },
-                      child: const Text('Start SHOPPING'),
-                    ),
-                  ])),
-            ),
+                      const Text(
+                        'Your WishList is Empty!',
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Text(
+                        'Esplore more and shortlist some items',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed("/home");
+                        },
+                        child: const Text('Start SHOPPING'),
+                      ),
+                    ]),
+                  ),
+                )),
           )
         : resultWhishlist[0].docId == '-1'
             ? const Center(child: LoadingScreen())
