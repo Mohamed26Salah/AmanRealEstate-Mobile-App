@@ -414,9 +414,9 @@ class _FilterState extends ConsumerState<Filter> {
         onTap: () {
           if (id <= 5) {
             updateButtonsUIRooms(id);
-          } else if (id > 5 && id <= 9) {
+          } else if (id > 5 && id <= 10) {
             updateButtonsUIBathroom(id);
-          } else if (id > 9 && id <= 19) {
+          } else if (id > 10 && id <= 19) {
             updateButtonsUIType(id);
           } else {
             updateButtonsUIPrice(id);
