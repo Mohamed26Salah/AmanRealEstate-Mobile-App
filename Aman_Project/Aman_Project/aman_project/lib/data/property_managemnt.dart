@@ -1,12 +1,6 @@
 import 'package:aman_project/data/image_management.dart';
-import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
-import 'package:no_glow_scroll/no_glow_scroll.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../models/chart_data.dart';
 import '../models/property.dart';
 
@@ -215,91 +209,5 @@ class PropertyManagement {
     return datanum2;
   }
 
-  static void makePhoneCallProperty(
-      {required BuildContext context,
-      Property? routeArgs,
-      bool isVisible = false,
-      required WidgetRef ref}) async {
-    final adminNumbers = ref.watch(numberProv);
-    // List<String>? phoneNumbersVisibleToUsers = [];
-    // for (int i = 0; i < adminNumbers.length; i++) {
-    //   phoneNumbersVisibleToUsers.add(adminNumbers[i].number);
-
-    // }
-
-    List<String>? phoneNumbersVisibleToAdmin = [];
-    phoneNumbersVisibleToAdmin.add(routeArgs!.ownerNumber);
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Admins Info "),
-        content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
-            width: double.maxFinite,
-            child: NoGlowScroll(
-              child: ListView.builder(
-                itemCount: isVisible == true
-                    ? phoneNumbersVisibleToAdmin.length
-                    : adminNumbers.length,
-                itemBuilder: ((context, index) {
-                  return Card(
-                    elevation: 5,
-                    child: isVisible == true
-                        ? ListTile(
-                            title: Text(phoneNumbersVisibleToAdmin[index]),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.phone),
-                              onPressed: () async {
-                                if (await canLaunchUrlString(
-                                    'tel: +2${phoneNumbersVisibleToAdmin[index]}')) {
-                                  await launchUrlString(
-                                      'tel: +2${phoneNumbersVisibleToAdmin[index]}');
-                                } else {
-                                  throw 'Could not launch $phoneNumbersVisibleToAdmin';
-                                }
-                              },
-                            ),
-                          )
-                        : ListTile(
-                            title: Text(adminNumbers[index].number),
-                            subtitle: Text(adminNumbers[index].name),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.phone),
-                              onPressed: () async {
-                                if (await canLaunchUrlString(
-                                    'tel: +2${adminNumbers[index].number}')) {
-                                  await launchUrlString(
-                                      'tel: +2${adminNumbers[index].number}');
-                                } else {
-                                  throw 'Could not launch $adminNumbers';
-                                }
-                              },
-                            ),
-                          ),
-                  );
-                }),
-              ),
-            )),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Theme.of(context).focusColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-            ),
-            child: Text(
-              'Cancel'.tr,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  
 }

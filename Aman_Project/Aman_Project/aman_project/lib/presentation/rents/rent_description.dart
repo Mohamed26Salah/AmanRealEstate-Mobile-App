@@ -239,7 +239,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         ),
                         child: Center(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              ExtractedWidgets.makePhoneCallRents(context: context, routeArgs: routeArgs);
+                            },
                             child: Icon(
                               Icons.phone,
                               color: Theme.of(context).primaryColor,

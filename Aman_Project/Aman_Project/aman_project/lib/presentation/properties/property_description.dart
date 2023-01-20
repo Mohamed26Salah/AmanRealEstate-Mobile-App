@@ -360,7 +360,7 @@ class _DetailsState extends ConsumerState<Details> {
                           child: Center(
                             child: GestureDetector(
                               onTap: () {
-                                PropertyManagement.makePhoneCallProperty(
+                                ExtractedWidgets.makePhoneCallProperty(
                                     context: context,
                                     isVisible: isVisible,
                                     routeArgs: routeArgs,
