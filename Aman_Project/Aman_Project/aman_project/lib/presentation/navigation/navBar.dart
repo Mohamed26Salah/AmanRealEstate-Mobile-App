@@ -12,22 +12,7 @@ import '../rents/rents_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// class navBar extends StatelessWidget {
-//   const navBar({super.key});
 
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: const NavBar(title: 'Flutter Demo Home Page'),
-//     );
-//   }
-// }
 
 class NavBar extends ConsumerStatefulWidget {
   final ThemeManager? themeManager;

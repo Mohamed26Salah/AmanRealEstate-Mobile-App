@@ -24,7 +24,7 @@ final filterBathroomProivder = StateProvider<String>((ref) {
   return "";
 });
 //MainPage
-final resultsCount = StateProvider<int>((ref) {
+final resultsCountProperty = StateProvider<int>((ref) {
   return 0;
 });
 
