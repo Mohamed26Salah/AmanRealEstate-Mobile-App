@@ -295,14 +295,14 @@ class AddFormState extends ConsumerState<AddForm> {
                       context: context),
                   FormManagement.buildTextField(
                       labelText: "Address For User".tr,
-                      hintText: "Address User".tr,
+                      hintText: "Address For User".tr,
                       controller: _addressForUserController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
                       labelText: "Address For Admin".tr,
-                      hintText: "Address Admin".tr,
+                      hintText: "Address For Admin".tr,
                       controller: _addressForAdminController,
                       type: "address",
                       show: true,
@@ -323,14 +323,14 @@ class AddFormState extends ConsumerState<AddForm> {
                       context: context),
                   FormManagement.buildTextField(
                       labelText: "Description For User".tr,
-                      hintText: "Description User".tr,
+                      hintText: "Description For User".tr,
                       controller: _descriptionForUserController,
                       type: "address",
                       show: true,
                       context: context),
                   FormManagement.buildTextField(
                       labelText: "Description For Admin".tr,
-                      hintText: "Description Admin".tr,
+                      hintText: "Description For Admin".tr,
                       controller: _descriptionForAdminController,
                       type: "address",
                       show: true,
@@ -504,8 +504,8 @@ class AddFormState extends ConsumerState<AddForm> {
                   Visibility(
                     visible: visibleTypeOFAcitivity,
                     child: FormManagement.buildTextField(
-                        labelText: "Type OF Activity".tr,
-                        hintText: "Type OF Activity".tr,
+                        labelText: "Type Of Activity".tr,
+                        hintText: "Type Of Activity".tr,
                         controller: _typeOFActivityController,
                         type: "address",
                         show: true,

@@ -319,7 +319,7 @@ class ExtractedWidgets {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Admins Info "),
+        title: Text("Admins Info".tr),
         content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
             width: double.maxFinite,
@@ -401,7 +401,7 @@ class ExtractedWidgets {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Contacts Info "),
+        title: Text("Contacts Info".tr),
         content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
             width: double.maxFinite,

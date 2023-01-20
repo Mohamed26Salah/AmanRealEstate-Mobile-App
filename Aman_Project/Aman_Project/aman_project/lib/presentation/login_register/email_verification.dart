@@ -6,6 +6,7 @@ import 'package:aman_project/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 import '../../data/user_management.dart';
 
@@ -40,19 +41,18 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     if (isEmailVerified) timer?.cancel();
   }
 
-  void redirectToHome()  {
+  void redirectToHome() {
     UserHelper.saveUser();
-     UserHelper().getNewUserData().then((value) {
+    UserHelper().getNewUserData().then((value) {
       UserModel user = UserModel.fromSnapshot(value);
       ref.read(newUserDataProivder.notifier).state = user;
       // Navigator.of(context).pushReplacementNamed('/home');
       NumberManagement.getNumbers().then((value) {
-            ref.read(numberProv.notifier).state = value;
-          });
-      
+        ref.read(numberProv.notifier).state = value;
+      });
+
       Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
     });
-
   }
 
   @override
@@ -93,10 +93,10 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                   children: [
                     Image.asset("assets/images/happy.png", width: 100),
                     const SizedBox(height: 15),
-                    const Text(
-                      'Welcome To Aman',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    Text(
+                      'Welcome To Aman'.tr,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton(
@@ -107,7 +107,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                       onPressed: () {
                         redirectToHome();
                       },
-                      child: const Text('Continue'),
+                      child: Text('Continue'.tr),
                     ),
                   ],
                 )
@@ -118,15 +118,15 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      'Please Verify Your Email',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    Text(
+                      'Please Verify Your Email'.tr,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    const Text(
-                      'Kindly check Spam',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    Text(
+                      'Kindly check Spam'.tr,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 40,
@@ -139,7 +139,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                       onPressed: () {
                         sendVerificationEmail();
                       },
-                      child: const Text('Resend Verification Email'),
+                      child: Text('Resend Verification Email'.tr),
                     )
                   ],
                 ),

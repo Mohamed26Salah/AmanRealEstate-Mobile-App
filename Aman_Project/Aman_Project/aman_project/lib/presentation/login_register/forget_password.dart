@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../shared_features/custom_decoration.dart';
 
@@ -57,15 +58,15 @@ class _LoginPageState extends State<ForgetPassword> {
                     ),
                   ),
                   Text(
-                    'Enter Email',
+                    'Enter Email'.tr,
                     style: GoogleFonts.bebasNeue(
                         fontSize: 52,
                         color: const Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Receive an email to reset your password',
-                    style: TextStyle(
+                  Text(
+                    'Receive an email to reset your password'.tr,
+                    style: const TextStyle(
                         fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
                   ),
                   const SizedBox(height: 50),
@@ -78,13 +79,14 @@ class _LoginPageState extends State<ForgetPassword> {
                       controller: _emailController,
                       obscureText: false,
                       decoration: CommonStyle.textFieldStyle(
-                          labelText: "Enter your Email", hintText: "Email"),
+                          labelText: "Enter your Email".tr,
+                          hintText: "Email".tr),
                       validator: (value) {
                         if (!value!.isValidEmail) {
-                          return 'Enter valid email';
+                          return 'Enter valid email'.tr;
                         }
                         if (value[value.length - 1] == '.') {
-                          return 'Enter valid email';
+                          return 'Enter valid email'.tr;
                         }
                         return null;
                       },
@@ -109,8 +111,8 @@ class _LoginPageState extends State<ForgetPassword> {
                           if (_formKey.currentState!.validate()) {
                             forgetPassword();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Password Reset Email Sent'),
+                              SnackBar(
+                                content: Text('Password Reset Email Sent'.tr),
                                 behavior: SnackBarBehavior.floating,
                               ),
                             );
@@ -125,10 +127,10 @@ class _LoginPageState extends State<ForgetPassword> {
                             ),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Recover Password',
-                            style: TextStyle(
+                            'Recover Password'.tr,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,

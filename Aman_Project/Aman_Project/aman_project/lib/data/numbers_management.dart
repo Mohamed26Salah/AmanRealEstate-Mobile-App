@@ -1,5 +1,6 @@
 import 'package:aman_project/models/number.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class NumberManagement {
   static Future<List<Number>> getNumbers() async {
@@ -29,7 +30,7 @@ class NumberManagement {
       docNumber.set(json);
       return docNumber.id;
     } catch (e) {
-      print("error happened");
+      print("error happened".tr);
       return '';
     }
   }

@@ -105,7 +105,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                               return 'enter At Least 8 characters one letter and one number'
                                   .tr;
                             }
-          
+
                             if (value.isEmpty) {
                               return 'Password cannot be empty'.tr;
                             }
@@ -195,8 +195,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                       elevation: 3,
                       child: ListTile(
                         trailing: Switch(
-                            value:
-                                widget.themeManager!.themeMode == ThemeMode.dark,
+                            value: widget.themeManager!.themeMode ==
+                                ThemeMode.dark,
                             onChanged: (newValue) {
                               UserHelper().savePref(newValue);
                               // savePref(newValue);
@@ -217,18 +217,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         },
                       ),
                     ),
-                    // Card(
-                    //   elevation: 3,
-                    //   child: ListTile(
-                    //     trailing: const Icon(
-                    //       Icons.keyboard_arrow_right,
-                    //     ),
-                    //     title: Text("Company Location".tr),
-                    //     onTap: () {
-                    //       Navigator.of(context).pushNamed('/location');
-                    //     },
-                    //   ),
-                    // ),
                     const SizedBox(
                       height: 30,
                     ),

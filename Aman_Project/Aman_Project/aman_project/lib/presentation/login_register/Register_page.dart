@@ -98,10 +98,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: ("Email".tr)),
                       validator: (value) {
                         if (!value!.isValidEmail) {
-                          return 'Enter valid email';
+                          return 'Enter valid email'.tr;
                         }
                         if (value[value.length - 1] == '.') {
-                          return 'Enter valid email';
+                          return 'Enter valid email'.tr;
                         }
                         return null;
                       },
@@ -142,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return 'enter At Least 8 characters one letter and one number';
                         }
                         if (value != _passwordController.value.text) {
-                          return 'Passwords do not match';
+                          return 'Passwords do not match'.tr;
                         }
                         return null;
                       },

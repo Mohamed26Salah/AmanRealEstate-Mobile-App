@@ -87,7 +87,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           return ('Enter valid email'.tr);
                         }
                         if (value[value.length - 1] == '.') {
-                          return 'Enter valid email';
+                          return 'Enter valid email'.tr;
                         }
                         return null;
                       },
@@ -195,7 +195,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                     ),
                   ),
-
                   // SignInButton(
                   //   Buttons.Google,
                   //   text: "Sign in with Google",
@@ -246,12 +245,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       Navigator.of(context).pushNamed('/forget');
                     },
                   ),
-                  // const Text(
-                  //   'Do Not Have An Account ? ',
-                  //   style: TextStyle(
-                  //     fontSize: 10,
-                  //   ),
-                  // ),
                 ],
               ),
             ),

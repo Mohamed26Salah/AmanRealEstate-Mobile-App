@@ -165,6 +165,22 @@ class LocaleString extends Translations {
           'Explore more and shortlist some items':
               'Explore more and shortlist some items',
           'Start Shopping': 'Start Shopping',
+          'Continue': 'Continue',
+          'Please Verify Your Email': 'Please Verify Your Email',
+          'Kindly check Spam': 'Kindly check Spam',
+          'Resend Verification Email': 'Resend Verification Email',
+          'Enter Email': 'Enter Email',
+          'Receive an email to reset your password':
+              'Receive an email to reset your password',
+          'Password Reset Email Sent': 'Password Reset Email Sent',
+          'Recover Password': 'Recover Password',
+          'Passwords do not match': 'Passwords do not match',
+          'Admins Info': 'Admins Info',
+          'Contacts Info': 'Contacts Info',
+          'error happened': 'error happened',
+          'property removed': 'property removed',
+          'Password Changed successfully.. Login again please':
+              'Password Changed successfully.. Login again please'
         },
         //arabic LANGUAGE
 
@@ -327,6 +343,24 @@ class LocaleString extends Translations {
           'Explore more and shortlist some items':
               'استكشف المزيد وقم بوضع قائمة مختصرة لبعض العناصر',
           'Start Shopping': 'ابدأ التسوق',
+          'Continue': 'أكمل',
+          'Please Verify Your Email': 'برجاء تفعيل البريد الالكتروني',
+          'Kindly check Spam': '(Spam)رجاء تفقد جزء الرسائل المزعجة',
+          'Resend Verification Email':
+              'أعادة ارسال رسالة التفعيل علي البريد الالكتروني',
+          'Enter Email': 'أدخل بريدك الالكتروني',
+          'Receive an email to reset your password':
+              'أرسال بريد ألكتروني لاعادة كلمة المرور',
+          'Password Reset Email Sent':
+              'تم أرسال بريد الكتروني لأستعادة كلمة المرور',
+          'Recover Password': 'أستعادة كلمة المرور',
+          'Passwords do not match': 'كلمة المرور غير متطابقة',
+          'Admins Info': 'تفاصيل المشرف',
+          'Contacts Info': 'تفاصيل التواصل',
+          'error happened': 'حدث خطأ',
+          'property removed': 'تم أزالة عقار',
+          'Password Changed successfully.. Login again please':
+              'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد'
         },
       };
 }

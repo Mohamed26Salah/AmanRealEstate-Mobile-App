@@ -1,6 +1,7 @@
 import 'package:aman_project/data/image_management.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../models/chart_data.dart';
 import '../models/property.dart';
 
@@ -153,8 +154,8 @@ class PropertyManagement {
     }
   }
 
-  static deleteProduct(
-      String id, String singleImage, List<dynamic> multiImages, BuildContext context) async {
+  static deleteProduct(String id, String singleImage, List<dynamic> multiImages,
+      BuildContext context) async {
     try {
       DocumentReference docRef =
           FirebaseFirestore.instance.collection('properties').doc(id);
@@ -180,7 +181,7 @@ class PropertyManagement {
           results.add(property);
         });
       } catch (e) {
-        print("property removed");
+        print("property removed".tr);
         removedIDs.add(id);
       }
     }
@@ -208,6 +209,4 @@ class PropertyManagement {
 
     return datanum2;
   }
-
-  
 }

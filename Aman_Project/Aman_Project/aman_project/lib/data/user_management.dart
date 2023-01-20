@@ -203,9 +203,10 @@ class UserHelper {
       FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           backgroundColor: Colors.black26,
-          content: Text('Password Changed successfully.. Login again please'),
+          content:
+              Text('Password Changed successfully.. Login again please'.tr),
         ),
       );
       // ignore: empty_catches
@@ -245,9 +246,4 @@ class UserHelper {
     final washingtonRef = FirebaseFirestore.instance.doc(path);
     washingtonRef.update({"role": dropdownvalue});
   }
-
-  // getPref() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   theme = preferences.getBool("theme")!;
-  // }
 }
