@@ -322,7 +322,11 @@ class LocaleString extends Translations {
           'Units': 'عقارات',
           'Users': 'المستخدمين',
           'No Data is Found': 'لم يتم العثور علي شئ',
-          'Search By Lessor': 'بحث عن المؤجر'
+          'Search By Lessor': 'بحث عن المؤجر',
+          'Your WishList is Empty': 'قائمة رغباتك فارغة',
+          'Explore more and shortlist some items':
+              'استكشف المزيد وقم بوضع قائمة مختصرة لبعض العناصر',
+          'Start Shopping': 'ابدأ التسوق',
         },
       };
 }
