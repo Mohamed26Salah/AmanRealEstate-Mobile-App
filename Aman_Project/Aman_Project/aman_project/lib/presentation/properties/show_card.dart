@@ -6,6 +6,7 @@ import 'package:aman_project/presentation/shared_features/custom_loading_screen.
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 class ShowCard extends ConsumerStatefulWidget {
   const ShowCard({super.key});
@@ -32,30 +33,48 @@ class _ShowCardState extends ConsumerState<ShowCard> {
 
     try {
       return choosedPropertyTypeToGetData.when(data: (data) {
-        return ListView.builder(
-          itemCount: data.size,
-          itemBuilder: (context, index) {
-            // if (mounted) {}
-            Future.delayed(const Duration(milliseconds: 100), () {
-              ref.read(resultsCount.notifier).state = data.size;
-            });
-            var property =
-                Property.fromJson(data.docs[index].data(), data.docs[index].id);
-            if (userData!.role == "user") {
-              if (property.visible == "No") {
-                return const SizedBox.shrink();
-              } else {
-                return PropertyWidget(
-                  property: property,
-                );
-              }
-            } else {
-              return PropertyWidget(
-                property: property,
+        Future.delayed(const Duration(milliseconds: 100), () {
+          ref.read(resultsCount.notifier).state = data.size;
+        });
+        return (data.size != 0)
+            ? ListView.builder(
+                itemCount: data.size,
+                itemBuilder: (context, index) {
+                  // if (mounted) {}
+                  // Future.delayed(const Duration(milliseconds: 100), () {
+                  //   ref.read(resultsCount.notifier).state = data.size;
+                  // });
+                  var property = Property.fromJson(
+                      data.docs[index].data(), data.docs[index].id);
+                  if (userData!.role == "user") {
+                    if (property.visible == "No") {
+                      return const SizedBox.shrink();
+                    } else {
+                      return PropertyWidget(
+                        property: property,
+                      );
+                    }
+                  } else {
+                    return PropertyWidget(
+                      property: property,
+                    );
+                  }
+                },
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/NotFound.png", width: 100),
+                    const SizedBox(height: 15),
+                    Text(
+                      'No Data is Found'.tr,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               );
-            }
-          },
-        );
       }, loading: () {
         return const Center(
           child: LoadingScreen(),

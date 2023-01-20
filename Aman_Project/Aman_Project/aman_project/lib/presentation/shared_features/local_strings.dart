@@ -157,7 +157,8 @@ class LocaleString extends Translations {
           'Add Number': 'Add Number',
           'Admin Numbers': 'Admin Numbers',
           'Units': 'Units',
-          'Users': 'Users'
+          'Users': 'Users',
+          'No Data is Found': 'No Data is Found'
         },
         //arabic LANGUAGE
 
@@ -313,7 +314,8 @@ class LocaleString extends Translations {
           'Add Number': 'أضافة رقم',
           'Admin Numbers': 'أرقام المشرفين',
           'Units': 'عقارات',
-          'Users': 'المستخدمين'
+          'Users': 'المستخدمين',
+          'No Data is Found': 'لم يتم العثور علي شئ'
         },
       };
 }
