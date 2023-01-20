@@ -22,6 +22,7 @@ import 'presentation/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 bool? theme = false;
 ThemeManager _themeManager = ThemeManager();
@@ -34,7 +35,8 @@ getPref() async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await getPref();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

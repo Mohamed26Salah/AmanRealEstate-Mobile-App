@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../data/repositories/user_providers.dart';
 import 'filter.dart';
 import '../../data/repositories/properties_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class Search extends ConsumerStatefulWidget {
   const Search({super.key});
@@ -24,6 +25,7 @@ class _SearchState extends ConsumerState<Search> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     final userData = ref.watch(newUserDataProivder);
     bool isVisible = false;
     if (userData?.role == 'admin') {

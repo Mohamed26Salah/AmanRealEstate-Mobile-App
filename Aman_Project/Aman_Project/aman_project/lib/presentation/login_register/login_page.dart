@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../data/user_management.dart';
 import '../shared_features/custom_decoration.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   bool remember = false;
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return Scaffold(
       body: SafeArea(
         child: Form(
