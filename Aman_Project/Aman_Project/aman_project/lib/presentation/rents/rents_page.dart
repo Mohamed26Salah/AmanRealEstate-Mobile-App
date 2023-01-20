@@ -34,23 +34,26 @@ class _RentsPageState extends ConsumerState<RentsPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              color: Theme.of(context).hintColor,
-                            ),
-                            borderRadius: BorderRadius.circular(13)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Rents".tr,
-                                style: const TextStyle(fontSize: 50),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                width: 1,
+                                color: Theme.of(context).hintColor,
                               ),
-                            ],
+                              borderRadius: BorderRadius.circular(13)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Rents".tr,
+                                  style: const TextStyle(fontSize: 50),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

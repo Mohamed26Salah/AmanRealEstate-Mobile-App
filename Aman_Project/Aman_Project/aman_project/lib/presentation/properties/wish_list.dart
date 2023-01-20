@@ -43,17 +43,17 @@ class WishlistState extends ConsumerState<Wishlist> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Your WishList is Empty!',
-                        style: TextStyle(
+                      Text(
+                        'Your WishList is Empty'.tr,
+                        style: const TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
-                      const Text(
-                        'Esplore more and shortlist some items',
-                        style: TextStyle(fontSize: 15),
+                      Text(
+                        'Explore more and shortlist some items'.tr,
+                        style: const TextStyle(fontSize: 15),
                       ),
                       const SizedBox(
                         height: 40,
@@ -65,7 +65,7 @@ class WishlistState extends ConsumerState<Wishlist> {
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed("/home");
                         },
-                        child: const Text('Start SHOPPING'),
+                        child: Text('Start Shopping'.tr),
                       ),
                     ]),
               ),

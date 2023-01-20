@@ -159,7 +159,11 @@ class LocaleString extends Translations {
           'Units': 'Units',
           'Users': 'Users',
           'No Data is Found': 'No Data is Found',
-          'Search By Lessor': 'Search By Lessor'
+          'Search By Lessor': 'Search By Lessor',
+          'Your WishList is Empty': 'Your WishList is Empty',
+          'Explore more and shortlist some items':
+              'Explore more and shortlist some items',
+          'Start Shopping': 'Start Shopping'
         },
         //arabic LANGUAGE
 
@@ -317,7 +321,11 @@ class LocaleString extends Translations {
           'Units': 'عقارات',
           'Users': 'المستخدمين',
           'No Data is Found': 'لم يتم العثور علي شئ',
-          'Search By Lessor': 'بحث عن المؤجر'
+          'Search By Lessor': 'بحث عن المؤجر',
+          'Your WishList is Empty': 'قائمة رغباتك فارغة',
+          'Explore more and shortlist some items':
+              'استكشف المزيد وقم بوضع قائمة مختصرة لبعض العناصر',
+          'Start Shopping': 'ابدأ التسوق'
         },
       };
 }
