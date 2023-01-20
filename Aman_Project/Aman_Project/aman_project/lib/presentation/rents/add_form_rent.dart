@@ -54,7 +54,6 @@ class _AddFormRentState extends State<AddFormRent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -62,18 +61,26 @@ class _AddFormRentState extends State<AddFormRent> {
               child: SingleChildScrollView(
                   child: Column(
             children: [
-              Row(
+              Column(
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300], elevation: 0),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).primaryColorLight),
+                        child: Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          color: Theme.of(context).backgroundColor,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
                   ),
                   Text(
                     "Add Rent".tr,
@@ -112,49 +119,57 @@ class _AddFormRentState extends State<AddFormRent> {
                   hintText: "Price".tr,
                   controller: _rentPriceController,
                   type: "number",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Area".tr,
                   hintText: "Area".tr,
                   controller: _areaController,
                   type: "number",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Floor".tr,
                   hintText: "Floor".tr,
                   controller: _floorController,
                   type: "number",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Lessor Name".tr,
                   hintText: "Lessor Name".tr,
                   controller: _lessorNameController,
                   type: "name",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Lessor Number".tr,
                   hintText: "01144..",
                   controller: _lessorNumController,
                   type: "phone",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Tenant Name".tr,
                   hintText: "Tenant Name".tr,
                   controller: _tenantNameController,
                   type: "name",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Tenant Number".tr,
                   hintText: "01144..",
                   controller: _tenantNumController,
                   type: "phone",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.buildTextField(
                   labelText: "Description".tr,
                   hintText: "Description".tr,
                   controller: _descriptionController,
                   type: "address",
-                  show: true),
+                  show: true,
+                  context: context),
               FormManagement.showDropdown(
                 dropdownItems: ["Yes".tr, "No".tr],
                 hint: "Select yes if Furnished".tr,
@@ -289,12 +304,8 @@ class _AddFormRentState extends State<AddFormRent> {
             width: MediaQuery.of(context).size.width - 40,
             height: 70,
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromARGB(255, 205, 153, 51), spreadRadius: 2),
-              ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

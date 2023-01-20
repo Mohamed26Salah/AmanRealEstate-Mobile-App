@@ -54,7 +54,6 @@ class _SearchState extends ConsumerState<MainPageRent> {
                 style: const TextStyle(
                   fontSize: 28,
                   height: 1,
-                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration(

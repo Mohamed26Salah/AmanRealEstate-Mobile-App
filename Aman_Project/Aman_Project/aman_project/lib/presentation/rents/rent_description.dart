@@ -2,14 +2,11 @@ import 'package:aman_project/common_widgets/extracted_widgets.dart';
 import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:aman_project/presentation/rents/rent_details.dart';
-import 'package:aman_project/presentation/shared_features/custom_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
-import '../../constants/globals.dart' as val;
-import '../../data/property_managemnt.dart';
 
 class RentsDescription extends ConsumerStatefulWidget {
   const RentsDescription({super.key});
@@ -19,16 +16,16 @@ class RentsDescription extends ConsumerStatefulWidget {
 }
 
 class _RentsDescriptionState extends ConsumerState<RentsDescription> {
-  
   @override
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     void update(Rents routeArgss) {
-    print('days left + ${routeArgss.torEnd}');
-    setState(() {
-      routeArgs = routeArgss;
-    });
-  }
+      print('days left + ${routeArgss.torEnd}');
+      setState(() {
+        routeArgs = routeArgss;
+      });
+    }
+
     Color? rentTypeColor;
     if (routeArgs.rentType == "Payed") {
       rentTypeColor = Colors.green;
@@ -330,9 +327,11 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                     //     context: context,
                     //     routeArgsRents: routeArgs),
                     PaidButtonWidget(
-                        isVisible: isPaidButton,
-                        context: context,
-                        routeArgsRents: routeArgs,update: update,),
+                      isVisible: isPaidButton,
+                      context: context,
+                      routeArgsRents: routeArgs,
+                      update: update,
+                    ),
                     ExtractedWidgets().deleteButton(
                         isVisible: true,
                         context: context,

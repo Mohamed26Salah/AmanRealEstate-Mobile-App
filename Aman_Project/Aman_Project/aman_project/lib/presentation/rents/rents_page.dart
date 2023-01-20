@@ -28,48 +28,52 @@ class _RentsPageState extends ConsumerState<RentsPage> {
     rentsButton = ref.watch(rentsButtonProivder);
     return Scaffold(
       body: (rentsButton)
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Rents".tr,
-                  style: const TextStyle(fontSize: 70),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+          ? SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SalahCard(
-                            image: "assets/images/validating-ticket.png",
-                            text: "Paid".tr,
-                            rentType: "Payed"),
-                        SalahCard(
-                            image: "assets/images/paper-money.png",
-                            text: "Not Paid".tr,
-                            rentType: "DidntPay"),
-                      ],
+                    Text(
+                      "Rents".tr,
+                      style: const TextStyle(fontSize: 70),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SalahCard(
-                            image: "assets/images/contract.png",
-                            text: "New Contract".tr,
-                            rentType: "DidntStart"),
-                        SalahCard(
-                            image: "assets/images/no.png",
-                            text: "Expired contract".tr,
-                            rentType: "Finished"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SalahCard(
+                                image: "assets/images/validating-ticket.png",
+                                text: "Paid".tr,
+                                rentType: "Payed"),
+                            SalahCard(
+                                image: "assets/images/paper-money.png",
+                                text: "Not Paid".tr,
+                                rentType: "DidntPay"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SalahCard(
+                                image: "assets/images/contract.png",
+                                text: "New Contract".tr,
+                                rentType: "DidntStart"),
+                            SalahCard(
+                                image: "assets/images/no.png",
+                                text: "Expired contract".tr,
+                                rentType: "Finished"),
+                          ],
+                        ),
                       ],
                     ),
                   ],
                 ),
-              ],
+              ),
             )
           : Center(
               child: SafeArea(

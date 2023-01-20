@@ -36,7 +36,6 @@ class _DashboardUsersState extends State<DashboardUsers> {
             style: const TextStyle(
               fontSize: 28,
               height: 1,
-              color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
             decoration: InputDecoration(

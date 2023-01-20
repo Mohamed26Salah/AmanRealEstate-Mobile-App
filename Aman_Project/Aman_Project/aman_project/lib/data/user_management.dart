@@ -224,6 +224,11 @@ class UserHelper {
     preferences.setBool("theme", theme);
   }
 
+  saveLangPref(int langNumber) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setInt("langNumber", langNumber);
+  }
+
   static void changeRole(String email, String dropdownvalue) async {
     String path = '';
 
