@@ -4,15 +4,9 @@ import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'Components/card_block.dart';
 import 'Components/admin_numbers.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class Dashboard extends StatelessWidget {
+  Dashboard({super.key});
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
   bool visible = false;
 
   @override
