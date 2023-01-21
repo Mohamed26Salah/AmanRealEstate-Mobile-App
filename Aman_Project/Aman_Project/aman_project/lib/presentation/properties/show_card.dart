@@ -4,7 +4,6 @@ import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/presentation/properties/property_widget_card.dart';
 import 'package:aman_project/presentation/shared_features/custom_loading_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';

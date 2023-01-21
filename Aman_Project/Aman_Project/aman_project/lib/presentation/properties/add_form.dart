@@ -2,7 +2,6 @@ import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/image_management.dart';
 import 'package:aman_project/data/property_managemnt.dart';
 import 'package:aman_project/data/repositories/image_provider.dart';
-import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';

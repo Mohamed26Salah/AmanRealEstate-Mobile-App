@@ -181,7 +181,8 @@ class LocaleString extends Translations {
           'property removed': 'property removed',
           'Password Changed successfully.. Login again please':
               'Password Changed successfully.. Login again please',
-          'Searched Rents': 'Searched Rents'
+          'Searched Rents': 'Searched Rents',
+          'Another email has been send!': 'Another email has been send!'
         },
         //arabic LANGUAGE
 
@@ -362,7 +363,8 @@ class LocaleString extends Translations {
           'property removed': 'تم أزالة عقار',
           'Password Changed successfully.. Login again please':
               'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد',
-          'Searched Rents': 'الإيجارات التي تم البحث عنها'
+          'Searched Rents': 'الإيجارات التي تم البحث عنها',
+          'Another email has been send!': '!تم إرسال بريد إلكتروني آخر'
         },
       };
 }

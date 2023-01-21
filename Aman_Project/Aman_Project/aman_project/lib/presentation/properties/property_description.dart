@@ -1,6 +1,4 @@
 import 'package:aman_project/data/image_management.dart';
-import 'package:aman_project/data/property_managemnt.dart';
-import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/property.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import 'package:sqflite/sqflite.dart';
-import '../shared_features/custom_loading_screen.dart';
 
 import '../../common_widgets/extracted_widgets.dart';
 
@@ -160,7 +157,6 @@ class _DetailsState extends ConsumerState<Details> {
                           Flexible(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              
                               children: [
                                 GestureDetector(
                                   onTap: () {
@@ -412,8 +408,8 @@ class _DetailsState extends ConsumerState<Details> {
                           context),
                       ExtractedWidgets().buildFeature(Icons.domain_outlined,
                           routeArgs.finishing!.tr, "Finishing".tr, context),
-                      ExtractedWidgets().buildFeature(
-                          Icons.stairs, routeArgs.doublex, "Doublex".tr, context),
+                      ExtractedWidgets().buildFeature(Icons.stairs,
+                          routeArgs.doublex, "Doublex".tr, context),
                       ExtractedWidgets().buildFeature(Icons.priority_high,
                           routeArgs.priority.tr, "Priority".tr, context),
                       ExtractedWidgets().buildFeature(Icons.attach_money,

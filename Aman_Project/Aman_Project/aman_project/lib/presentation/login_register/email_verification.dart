@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-
 import '../../data/user_management.dart';
 import '../shared_features/custom_loading_screen.dart';
 
@@ -71,6 +70,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     super.dispose();
   }
 
+// content: Text('$e'),
   Future sendVerificationEmail() async {
     try {
       final user = FirebaseAuth.instance.currentUser!;
@@ -78,7 +78,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('$e'),
+          content: Text('Another email has been send!'.tr),
           behavior: SnackBarBehavior.floating,
         ),
       );

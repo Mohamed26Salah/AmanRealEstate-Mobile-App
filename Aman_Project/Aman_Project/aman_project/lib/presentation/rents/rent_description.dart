@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:no_glow_scroll/no_glow_scroll.dart';
 
 class RentsDescription extends ConsumerStatefulWidget {
   const RentsDescription({super.key});
@@ -152,8 +151,9 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                               overflow: TextOverflow.ellipsis,
                               '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
                               style: const TextStyle(
-                                  fontSize: 45,
-                                 color: Colors.white,),
+                                fontSize: 45,
+                                color: Colors.white,
+                              ),
                             ))),
                         Expanded(
                           child: Container(),
@@ -161,13 +161,11 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(right: 5),
+                                    padding: const EdgeInsets.only(right: 5),
                                     child: Text(
                                       overflow: TextOverflow.ellipsis,
                                       routeArgs.lessorName,
@@ -200,8 +198,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                                 overflow: TextOverflow.ellipsis,
                                 r"$" + routeArgs.rentPrice.toString(),
                                 style: const TextStyle(
-                                  color:
-                                      Colors.white,
+                                  color: Colors.white,
                                   fontSize: 18,
                                 ),
                               ),
@@ -240,7 +237,8 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              ExtractedWidgets.makePhoneCallRents(context: context, routeArgs: routeArgs);
+                              ExtractedWidgets.makePhoneCallRents(
+                                  context: context, routeArgs: routeArgs);
                             },
                             child: Icon(
                               Icons.phone,

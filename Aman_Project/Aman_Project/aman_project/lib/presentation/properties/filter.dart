@@ -162,11 +162,11 @@ class _FilterState extends ConsumerState<Filter> {
     switch (id) {
       case 20:
         ascendingButton20 = true;
-        priceFilter = "Low To High".tr;
+        priceFilter = "LTH";
         break;
       case 21:
         descendingButton21 = true;
-        priceFilter = "High To Low".tr;
+        priceFilter = "HTL";
         break;
 
       default:

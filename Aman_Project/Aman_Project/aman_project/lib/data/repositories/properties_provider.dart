@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:aman_project/models/property.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

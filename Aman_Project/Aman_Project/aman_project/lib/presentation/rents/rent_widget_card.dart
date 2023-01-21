@@ -1,4 +1,3 @@
-import 'package:aman_project/data/rents_management.dart';
 import 'package:aman_project/models/rent.dart';
 import 'package:aman_project/presentation/rents/rent_card.dart';
 import 'package:flutter/material.dart';
@@ -42,4 +41,3 @@ class RentWidget extends StatelessWidget {
     );
   }
 }
-

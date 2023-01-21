@@ -1,6 +1,5 @@
 import 'package:aman_project/data/form_management.dart';
 import 'package:aman_project/data/rents_management.dart';
-import 'package:aman_project/models/property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';

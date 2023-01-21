@@ -1,9 +1,5 @@
 import 'package:aman_project/models/rent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
-import 'package:no_glow_scroll/no_glow_scroll.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../models/chart_data.dart';
 
@@ -265,6 +261,4 @@ class RentsManagement {
       print(e);
     }
   }
-
-  
 }
