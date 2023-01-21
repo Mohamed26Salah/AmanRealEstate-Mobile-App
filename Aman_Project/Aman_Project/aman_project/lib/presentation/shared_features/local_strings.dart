@@ -57,7 +57,7 @@ class LocaleString extends Translations {
           'Description For User': 'Description For User',
           'Description For Admin': 'Description For Admin',
           'Address For Admin': 'Address For Admin',
-          'Address' : 'Address',
+          'Address': 'Address',
           'Address For User': 'Address For User',
           'Photos': 'Photos',
           'Cash': 'Cash',
@@ -159,7 +159,7 @@ class LocaleString extends Translations {
           'Admin Numbers': 'Admin Numbers',
           'Units': 'Units',
           'Users': 'Users',
-          'user' : 'user',
+          'user': 'user',
           'moderator': 'moderator',
           'No Data is Found': 'No Data is Found',
           'Successfully Added Property': 'Successfully Added Property',
@@ -186,12 +186,15 @@ class LocaleString extends Translations {
               'Password Changed successfully.. Login again please',
           'Searched Rents': 'Searched Rents',
           'Another email has been send!': 'Another email has been send!',
-          'Successfully changed password' : 'Successfully changed password',
-          'Owner Info' : 'Owner Info',
-          'Admin Info' : 'Admin Info',
+          'Successfully changed password': 'Successfully changed password',
+          'Owner Info': 'Owner Info',
+          'Admin Info': 'Admin Info',
           'Not Supported Device': 'Not Supported Device',
           'sqm': 'sqm',
-          'Wrong password provided for that user': 'Wrong password provided for that user'
+          'Wrong password provided for that user':
+              'Wrong password provided for that user',
+          "This operation is sensitive and requires recent authentication. Log in again before retrying this request.":
+              "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
         },
         //arabic LANGUAGE
 
@@ -245,7 +248,7 @@ class LocaleString extends Translations {
           'Owner Name': 'اسم صاحب العقار',
           'Unit Name': 'اسم العقار',
           'Price': 'السعر',
-          'Description For User': 'الوصف للمستخدم' ,
+          'Description For User': 'الوصف للمستخدم',
           'Description For Admin': 'الوصف للأدمن',
           'Address For Admin': 'العنوان للأدمن',
           'Address For User': 'العنوان للمستخدم',
@@ -349,7 +352,7 @@ class LocaleString extends Translations {
           'Admin Numbers': 'أرقام المشرفين',
           'Units': 'عقارات',
           'Users': 'المستخدم',
-          'user' : 'المستخدم',
+          'user': 'المستخدم',
           'moderator': 'مساعد مشرف',
           'No Data is Found': 'لم يتم العثور علي شئ',
           'Search By Lessor': 'بحث عن المؤجر',
@@ -377,12 +380,15 @@ class LocaleString extends Translations {
               'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد',
           'Searched Rents': 'الإيجارات التي تم البحث عنها',
           'Another email has been send!': '!تم إرسال بريد إلكتروني آخر',
-          'Successfully changed password' : 'تم تغيير كلمة المرور ب نجاح',
-          'Owner Info' : 'معلومات المالك',
-          'Admin Info' : 'معلومات المشرف',
-          'Not Supported Device' : 'الجهاز غير مدعوم',
-          'Wrong password provided for that user' : 'كلمة المرور خاطئة لهذا المستخدم',
-          'sqm' : 'متر مربع'
+          'Successfully changed password': 'تم تغيير كلمة المرور ب نجاح',
+          'Owner Info': 'معلومات المالك',
+          'Admin Info': 'معلومات المشرف',
+          'Not Supported Device': 'الجهاز غير مدعوم',
+          'Wrong password provided for that user':
+              'كلمة المرور خاطئة لهذا المستخدم',
+          'sqm': 'متر مربع',
+          "This operation is sensitive and requires recent authentication. Log in again before retrying this request.":
+              "هذه العملية حساسة وتتطلب مصادقة حديثة. قم بتسجيل الدخول مرة أخرى قبل إعادة محاولة هذا الطلب."
         },
       };
 }

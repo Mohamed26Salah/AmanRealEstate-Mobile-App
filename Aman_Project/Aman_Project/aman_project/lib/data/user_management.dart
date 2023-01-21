@@ -195,18 +195,23 @@ class UserHelper {
   }
   //Edit Profile Functions
 
-  changePassword(BuildContext context, String newPassword) async {
+  Future<bool> changePassword(BuildContext context, String newPassword) async {
     final user = FirebaseAuth.instance.currentUser!;
     try {
       await user.updatePassword(newPassword);
       FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/');
-      goodMessageSnackBar("Success".tr, "Password Changed successfully.. Login again please".tr);
+      goodMessageSnackBar("Success".tr,
+          "Password Changed successfully.. Login again please".tr);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(val.snackBar);
+      return true;
       // ignore: empty_catches
-    } catch (error) {}
+    } catch (error) {
+      print(error);
+      return false;
+    }
   }
 
   signOut(BuildContext context, WidgetRef ref) async {

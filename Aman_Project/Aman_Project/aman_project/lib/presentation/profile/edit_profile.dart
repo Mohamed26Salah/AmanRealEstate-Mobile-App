@@ -1,12 +1,14 @@
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/data/user_management.dart';
+import 'package:aman_project/presentation/shared_features/custom_message.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:no_glow_scroll/no_glow_scroll.dart';
 import '../../theme/theme_manager.dart';
 import '../shared_features/change_lang.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../constants/globals.dart' as val;
 import '../shared_features/custom_decoration.dart';
 
 ThemeManager _themeManager = ThemeManager();
@@ -163,11 +165,27 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        final user = FirebaseAuth.instance.currentUser!;
+                        print(user);
                         if (_formKey1.currentState!.validate()) {
                           setState(() {
                             newPassword = newPasswordController.text;
                           });
-                          UserHelper().changePassword(context, newPassword);
+
+                          UserHelper()
+                              .changePassword(context, newPassword)
+                              .then((value) {
+                            print(value);
+                            if (!value) {
+                              errormessage(
+                                  "Error".tr,
+                                  "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
+                                      .tr);
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(val.snackBar);
+                            }
+                          });
                         }
                       },
                       style: ElevatedButton.styleFrom(
