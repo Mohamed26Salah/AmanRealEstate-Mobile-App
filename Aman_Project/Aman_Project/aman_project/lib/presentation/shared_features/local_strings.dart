@@ -194,7 +194,8 @@ class LocaleString extends Translations {
           'Wrong password provided for that user':
               'Wrong password provided for that user',
           "This operation is sensitive and requires recent authentication. Log in again before retrying this request.":
-              "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
+              "This operation is sensitive and requires recent authentication. Log in again before retrying this request.",
+          'Choose Your Language': 'Choose Your Language'
         },
         //arabic LANGUAGE
 
@@ -388,7 +389,8 @@ class LocaleString extends Translations {
               'كلمة المرور خاطئة لهذا المستخدم',
           'sqm': 'متر مربع',
           "This operation is sensitive and requires recent authentication. Log in again before retrying this request.":
-              "هذه العملية حساسة وتتطلب مصادقة حديثة. قم بتسجيل الدخول مرة أخرى قبل إعادة محاولة هذا الطلب."
+              "هذه العملية حساسة وتتطلب مصادقة حديثة. قم بتسجيل الدخول مرة أخرى قبل إعادة محاولة هذا الطلب.",
+          'Choose Your Language': 'اختر لغتك'
         },
       };
 }

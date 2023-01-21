@@ -1,5 +1,6 @@
 import 'package:aman_project/presentation/dashboard/panel_left/Components/users_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DashboardUsers extends StatefulWidget {
   const DashboardUsers({super.key});
@@ -39,7 +40,7 @@ class _DashboardUsersState extends State<DashboardUsers> {
               fontWeight: FontWeight.bold,
             ),
             decoration: InputDecoration(
-              hintText: 'Search',
+              hintText: 'Search'.tr,
               hintStyle: TextStyle(
                 fontSize: 28,
                 color: Colors.grey[400],
