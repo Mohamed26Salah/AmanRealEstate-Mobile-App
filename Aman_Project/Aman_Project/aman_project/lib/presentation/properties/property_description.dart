@@ -39,7 +39,6 @@ class _DetailsState extends ConsumerState<Details> {
   Widget build(BuildContext context) {
     Property routeArgs = ModalRoute.of(context)!.settings.arguments as Property;
     final userData = ref.watch(newUserDataProivder);
-    final adminNumbers = ref.watch(numberProv);
     Future<bool> checkFavorite(String id) async {
       await _openDatabase();
       String whereString = "`propid` = ? and `email`= ?";
