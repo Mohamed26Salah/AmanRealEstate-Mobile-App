@@ -126,11 +126,11 @@ class PropertyWidget extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
                               child: ExtractedWidgets()
-                                          .strokeWidget(property.unitName, 18),
+                                  .strokeWidget(property.unitName, 18),
                             ),
                           ),
                           ExtractedWidgets().strokeWidget(
-                                      r"$" + property.price.toString(), 18),
+                              r"$" + property.price.toString(), 18),
                         ],
                       ),
                       const SizedBox(
@@ -141,7 +141,7 @@ class PropertyWidget extends StatelessWidget {
                         children: [
                           // Row(
                           //   children: [
-                           Icon(
+                          Icon(
                             Icons.location_on,
                             color: Colors.white,
                             shadows: [defaultShadow],
@@ -152,10 +152,9 @@ class PropertyWidget extends StatelessWidget {
                           // ),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: ExtractedWidgets().strokeWidget(
-                                            property.addressUser, 14)
-                            ),
+                                padding: const EdgeInsets.only(right: 5),
+                                child: ExtractedWidgets()
+                                    .strokeWidget(property.addressUser, 14)),
                           ),
                           const SizedBox(
                             width: 15,
@@ -169,8 +168,8 @@ class PropertyWidget extends StatelessWidget {
                           // const SizedBox(
                           //   width: 4,
                           // ),
-                          ExtractedWidgets().strokeWidget(
-                                      '${property.area}${'sqm'.tr}', 14),
+                          ExtractedWidgets()
+                              .strokeWidget('${property.area} ${'sqm'.tr}', 14),
                           //   ],
                           // ),
                         ],

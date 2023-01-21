@@ -149,7 +149,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                             child: Center(
                                 child: Text(
                               overflow: TextOverflow.ellipsis,
-                              '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
+                              '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} ${"Days".tr}',
                               style: const TextStyle(
                                 fontSize: 45,
                                 color: Colors.white,

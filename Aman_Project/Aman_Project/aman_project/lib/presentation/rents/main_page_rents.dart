@@ -16,7 +16,6 @@ class _SearchState extends ConsumerState<MainPageRent> {
   @override
   void dispose() {
     _inputSearchController.dispose();
-    ref.read(searchInputProivderRent.notifier).state = "";
     super.dispose();
   }
 

@@ -88,19 +88,19 @@ class CardRent extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                    flex: 7,
+                    // flex: 1,
                     child: Center(
                         child: Text(
-                      overflow: TextOverflow.ellipsis,
-                      '${RentsManagement.figureHowManyDaysLeft(rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd, rent.rentType)} Days',
-                      style: const TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                      ),
-                    ))),
-                Expanded(
-                  child: Container(),
-                ),
+                  overflow: TextOverflow.ellipsis,
+                  '${RentsManagement.figureHowManyDaysLeft(rent.startOFRent, rent.endOFRent, rent.tor, rent.torEnd, rent.rentType)} ${"Days".tr}',
+                  style: const TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                ))),
+                // Expanded(
+                //   child: Container(),
+                // ),
                 Column(
                   children: [
                     Row(

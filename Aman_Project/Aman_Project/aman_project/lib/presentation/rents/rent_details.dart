@@ -28,7 +28,7 @@ class RentDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
           child: Text(
-            '${routeArgs.area} sq/m',
+            '${routeArgs.area} ${'sqm'.tr}',
             style: TextStyle(
               fontSize: 18,
               color: Colors.grey[500],
@@ -138,6 +138,4 @@ class RentDetails extends StatelessWidget {
       ],
     );
   }
-
-  
 }

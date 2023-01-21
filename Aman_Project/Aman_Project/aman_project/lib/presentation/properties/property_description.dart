@@ -318,7 +318,7 @@ class _DetailsState extends ConsumerState<Details> {
                                     size: 16,
                                   ),
                                   ExtractedWidgets().strokeWidget(
-                                      '${routeArgs.area}${'sqm'.tr}', 14),
+                                      '${routeArgs.area} ${'sqm'.tr}', 14),
                                 ],
                               ),
                             ],
