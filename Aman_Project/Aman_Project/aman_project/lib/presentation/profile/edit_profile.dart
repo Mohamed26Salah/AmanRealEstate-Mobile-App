@@ -232,7 +232,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                         ),
                       ),
                       onPressed: (() {
-                        UserHelper().signOut(context);
+                        UserHelper().signOut(context, ref);
                       }),
                       child: Center(
                         child: Text(

@@ -16,6 +16,7 @@ class _SearchState extends ConsumerState<MainPageRent> {
   @override
   void dispose() {
     _inputSearchController.dispose();
+    ref.read(searchInputProivderRent.notifier).state = "";
     super.dispose();
   }
 
@@ -30,151 +31,154 @@ class _SearchState extends ConsumerState<MainPageRent> {
       });
     }
 
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        // bottomNavigationBar: const NavBarGR(),
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(searchInputProivderRent.notifier).state = "";
+        return true;
+      },
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          // bottomNavigationBar: const NavBarGR(),
 
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 48, left: 24, right: 24, bottom: 0),
-              child: TextField(
-                controller: _inputSearchController,
-                autofocus: false,
-                enableInteractiveSelection: false,
-                // onChanged: (value) {
-                //   ref.read(searchInputProivder.notifier).state = value;
-                // },
-                onSubmitted: (value) {
-                  ref.read(searchInputProivderRent.notifier).state = value;
-                },
-                style: const TextStyle(
-                  fontSize: 28,
-                  height: 1,
-                  fontWeight: FontWeight.bold,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Search By Lessor'.tr,
-                  hintStyle: TextStyle(
-                    fontSize: 22,
-                    color: Colors.grey[400],
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 48, left: 24, right: 24, bottom: 0),
+                child: TextField(
+                  controller: _inputSearchController,
+                  autofocus: false,
+                  enableInteractiveSelection: false,
+                  // onChanged: (value) {
+                  //   ref.read(searchInputProivder.notifier).state = value;
+                  // },
+                  onSubmitted: (value) {
+                    ref.read(searchInputProivderRent.notifier).state = value;
+                  },
+                  style: const TextStyle(
+                    fontSize: 28,
+                    height: 1,
+                    fontWeight: FontWeight.bold,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (Colors.grey[400])!,
+                  decoration: InputDecoration(
+                    hintText: 'Search By Lessor'.tr,
+                    hintStyle: TextStyle(
+                      fontSize: 22,
+                      color: Colors.grey[400],
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (Colors.grey[400])!,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (Colors.grey[400])!,
+                      ),
                     ),
-                  ),
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (Colors.grey[400])!,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (Colors.grey[400])!,
+                      ),
                     ),
-                  ),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween, // added line
-                      mainAxisSize: MainAxisSize.min, // added li
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color: Colors.grey[400],
-                          size: 28,
-                        ),
-                      ],
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (Colors.grey[400])!,
+                      ),
                     ),
-                  ),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween, // added line
-                      mainAxisSize: MainAxisSize.min, // a
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_outlined,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween, // added line
+                        mainAxisSize: MainAxisSize.min, // added li
+                        children: [
+                          Icon(
+                            Icons.search,
                             color: Colors.grey[400],
                             size: 28,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  right: 24, left: 24, top: 10, bottom: 0),
-              //war top 24
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    ref.watch(resultsCountRent).toString(),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    "Rents",
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).hintColor,
+                        ],
                       ),
-                      borderRadius: BorderRadius.circular(13)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          rentType.tr,
-                          style: TextStyle(
-                              fontSize: 45,
-                              color: Theme.of(context).backgroundColor),
-                        ),
-                      ],
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween, // added line
+                        mainAxisSize: MainAxisSize.min, // a
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              ref.read(searchInputProivderRent.notifier).state =
+                                  "";
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.grey[400],
+                              size: 28,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: ShowRent(rentType: rentType)),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(
+                    right: 24, left: 24, top: 10, bottom: 0),
+                //war top 24
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      ref.watch(resultsCountRent).toString(),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    textType(),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: 1,
+                          color: Theme.of(context).hintColor,
+                        ),
+                        borderRadius: BorderRadius.circular(13)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            rentType.tr,
+                            style: TextStyle(
+                                fontSize: 45,
+                                color: Theme.of(context).backgroundColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: ShowRent(rentType: rentType)),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -200,6 +204,19 @@ class _SearchState extends ConsumerState<MainPageRent> {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+    );
+  }
+
+  Widget textType() {
+    var type = "Rents".tr;
+    if (ref.watch(searchInputProivderRent) != "") {
+      type = "Searched Rents".tr;
+    }
+    return Text(
+      type,
+      style: const TextStyle(
+        fontSize: 24,
       ),
     );
   }

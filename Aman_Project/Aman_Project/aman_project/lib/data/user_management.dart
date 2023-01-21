@@ -1,5 +1,6 @@
 import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
+import 'package:aman_project/data/repositories/properties_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/number.dart';
 import 'package:aman_project/models/user.dart';
@@ -213,7 +214,7 @@ class UserHelper {
     } catch (error) {}
   }
 
-  signOut(BuildContext context) async {
+  signOut(BuildContext context, WidgetRef ref) async {
     await FirebaseAuth.instance.signOut();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setBool("remember", false);

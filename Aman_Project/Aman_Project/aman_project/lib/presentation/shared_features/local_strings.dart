@@ -180,7 +180,8 @@ class LocaleString extends Translations {
           'error happened': 'error happened',
           'property removed': 'property removed',
           'Password Changed successfully.. Login again please':
-              'Password Changed successfully.. Login again please'
+              'Password Changed successfully.. Login again please',
+          'Searched Rents': 'Searched Rents'
         },
         //arabic LANGUAGE
 
@@ -328,7 +329,7 @@ class LocaleString extends Translations {
           'Start and End of Rent Differing': 'الفرق بين بداية ونهاية الايجار',
           'How Many Days?': 'كم عدد الايام؟',
           'Filtered Properties': 'عقار',
-          'Searched Properties': 'عقار من نواتج البحث',
+          'Searched Properties': 'العقارات التي تم البحث عنها',
           'name': 'الأسم',
           'number': 'الرقم',
           'Cant add more than 10 numbers please delete one to add another':
@@ -360,7 +361,8 @@ class LocaleString extends Translations {
           'error happened': 'حدث خطأ',
           'property removed': 'تم أزالة عقار',
           'Password Changed successfully.. Login again please':
-              'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد'
+              'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد',
+          'Searched Rents': 'الإيجارات التي تم البحث عنها'
         },
       };
 }

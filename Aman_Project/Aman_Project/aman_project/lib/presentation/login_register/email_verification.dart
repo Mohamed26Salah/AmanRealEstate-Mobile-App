@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../data/user_management.dart';
+import '../shared_features/custom_loading_screen.dart';
 
 class EmailVerification extends ConsumerStatefulWidget {
   const EmailVerification({super.key});
@@ -42,9 +43,17 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
     if (isEmailVerified) timer?.cancel();
   }
 
-  void redirectToHome() {
-    UserHelper.saveUser();
-    UserHelper().getNewUserData().then((value) {
+  Future<void> redirectToHome() async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: LoadingScreen(),
+          );
+        });
+    await UserHelper.saveUser();
+    await UserHelper().getNewUserData().then((value) {
       UserModel user = UserModel.fromSnapshot(value);
       ref.read(newUserDataProivder.notifier).state = user;
       // Navigator.of(context).pushReplacementNamed('/home');
