@@ -1,3 +1,4 @@
+import 'package:aman_project/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,12 +33,11 @@ class _LoginPageState extends State<ForgetPassword> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        backgroundColor: Colors.grey[300],
+        leading: BackButton(color: Theme.of(context).backgroundColor),
+        backgroundColor: Theme.of(context).primaryColorLight,
         elevation: 0,
         title: const Text(""),
       ),
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -58,16 +58,16 @@ class _LoginPageState extends State<ForgetPassword> {
                     ),
                   ),
                   Text(
+                    textAlign: TextAlign.center,
                     'Enter Email'.tr,
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52,
-                        color: const Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     'Receive an email to reset your password'.tr,
-                    style: const TextStyle(
-                        fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
+                    style: TextStyle(
+                        fontSize: 18, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 50),
 
@@ -80,7 +80,8 @@ class _LoginPageState extends State<ForgetPassword> {
                       obscureText: false,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: "Enter your Email".tr,
-                          hintText: "Email".tr),
+                          hintText: "Email".tr,
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email'.tr;
@@ -97,12 +98,12 @@ class _LoginPageState extends State<ForgetPassword> {
                   //sign in button
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 0),
+                        top: 0, left: 15, right: 15, bottom: 10),
                     child: Container(
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 15, bottom: 5),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: blackColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
@@ -120,7 +121,7 @@ class _LoginPageState extends State<ForgetPassword> {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0.0,
-                          backgroundColor: Colors.red.withOpacity(0),
+                          backgroundColor: blackColor,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(2),
@@ -131,7 +132,7 @@ class _LoginPageState extends State<ForgetPassword> {
                           child: Text(
                             'Recover Password'.tr,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),

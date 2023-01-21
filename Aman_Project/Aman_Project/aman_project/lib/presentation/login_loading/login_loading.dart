@@ -25,54 +25,56 @@ class _LoginLoadingState extends ConsumerState<LoginLoading> {
   }
 
   Future<bool?> getPrefs(BuildContext cont) async {
-    List locale = [
-      {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
-      {'name': 'العربيه', 'locale': const Locale('ar', 'EG')},
-    ];
-    var toBeUsedLocale = locale[0]['locale'];
+    if (mounted) {
+      List locale = [
+        {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
+        {'name': 'العربيه', 'locale': const Locale('ar', 'EG')},
+      ];
+      var toBeUsedLocale = locale[0]['locale'];
 
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool value = false;
-    int value2 = 0;
-    value = preferences.getBool("remember") ?? false;
-    value2 = preferences.getInt("langNumber") ?? 0;
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      bool value = false;
+      int value2 = 0;
+      value = preferences.getBool("remember") ?? false;
+      value2 = preferences.getInt("langNumber") ?? 0;
 
-    await Future.delayed(const Duration(seconds: 1));
-    if (value2 == 0) {
-      toBeUsedLocale = locale[0]['locale'];
-    } else {
-      toBeUsedLocale = locale[1]['locale'];
-    }
+      await Future.delayed(const Duration(seconds: 1));
+      if (value2 == 0) {
+        toBeUsedLocale = locale[0]['locale'];
+      } else {
+        toBeUsedLocale = locale[1]['locale'];
+      }
 
-    if (value) {
-      FirebaseAuth.instance.idTokenChanges().listen((User? user) {
-        if (user != null) {
-          UserHelper().getNewUserData().then((value) {
-            UserModel user = UserModel.fromSnapshot(value);
-            if (mounted) {
-              ref.read(newUserDataProivder.notifier).state = user;
-              Navigator.of(context).pushReplacementNamed('/home');
-              updateLanguage(toBeUsedLocale);
-            }
-          });
-          if (mounted) {
-            NumberManagement.getNumbers().then((value) {
-              ref.read(numberProv.notifier).state = value;
+      if (value) {
+        FirebaseAuth.instance.idTokenChanges().listen((User? user) {
+          if (user != null) {
+            UserHelper().getNewUserData().then((value) {
+              UserModel user = UserModel.fromSnapshot(value);
+              if (mounted) {
+                ref.read(newUserDataProivder.notifier).state = user;
+                Navigator.of(context).pushReplacementNamed('/home');
+                updateLanguage(toBeUsedLocale);
+              }
             });
+            if (mounted) {
+              NumberManagement.getNumbers().then((value) {
+                ref.read(numberProv.notifier).state = value;
+              });
+            }
+          } else {
+            Navigator.of(context).pushReplacementNamed('/login');
+            updateLanguage(toBeUsedLocale);
           }
-        } else {
-          Navigator.of(context).pushReplacementNamed('/login');
-          updateLanguage(toBeUsedLocale);
-        }
-      });
+        });
 
-      return value;
-    } else {
-      if (!mounted) return false;
-      Navigator.of(context).pushReplacementNamed('/login');
-      updateLanguage(toBeUsedLocale);
+        return value;
+      } else {
+        if (!mounted) return false;
+        Navigator.of(context).pushReplacementNamed('/login');
+        updateLanguage(toBeUsedLocale);
 
-      return false;
+        return false;
+      }
     }
   }
 

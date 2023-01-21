@@ -34,7 +34,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -46,18 +45,22 @@ class _RegisterPageState extends State<RegisterPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey[300],
-                            elevation: 0 // Background color
-                            ),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new_outlined,
-                          color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Theme.of(context).backgroundColor,
+                              elevation: 0 // Background color
+                              ),
+                          child: Icon(
+                            Icons.arrow_back_ios_new_outlined,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
                       ),
                     ],
                   ),
@@ -75,14 +78,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text(
                     'Hello'.tr,
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52,
-                        color: const Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     'Welcome To Aman'.tr,
-                    style: const TextStyle(
-                        fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
+                    style: TextStyle(
+                        fontSize: 18, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 50),
 
@@ -95,7 +97,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: false,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: ("Enter your Email".tr),
-                          hintText: ("Email".tr)),
+                          hintText: ("Email".tr),
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return 'Enter valid email'.tr;
@@ -117,7 +120,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: ("Enter your Password".tr),
-                          hintText: ("Password".tr)),
+                          hintText: ("Password".tr),
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
@@ -136,7 +140,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: ("Confirm your Password".tr),
-                          hintText: ("Password".tr)),
+                          hintText: ("Password".tr),
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';

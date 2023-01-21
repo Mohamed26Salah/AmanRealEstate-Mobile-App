@@ -1,3 +1,4 @@
+import 'package:aman_project/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,14 +62,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Text(
                     ('Hello'.tr),
                     style: GoogleFonts.bebasNeue(
-                        fontSize: 52,
-                        color: const Color.fromARGB(255, 205, 153, 51)),
+                        fontSize: 52, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     ('Welcome To Aman'.tr),
-                    style: const TextStyle(
-                        fontSize: 18, color: Color.fromARGB(255, 205, 153, 51)),
+                    style: TextStyle(
+                        fontSize: 18, color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 50),
 
@@ -81,7 +81,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       obscureText: false,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: ("Enter your Email".tr),
-                          hintText: ("Email".tr)),
+                          hintText: ("Email".tr),
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidEmail) {
                           return ('Enter valid email'.tr);
@@ -103,7 +104,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       obscureText: true,
                       decoration: CommonStyle.textFieldStyle(
                           labelText: ("Enter your Password".tr),
-                          hintText: ("Password".tr)),
+                          hintText: ("Password".tr),
+                          context: context),
                       validator: (value) {
                         if (!value!.isValidPassword) {
                           return 'enter At Least 8 characters one letter and one number';
@@ -121,7 +123,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 15, bottom: 5),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: blackColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
@@ -148,7 +150,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           child: Text(
                             ('Sign In'.tr),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -166,7 +168,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       padding: const EdgeInsets.only(
                           top: 5, left: 15, right: 15, bottom: 5),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: blackColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ElevatedButton(
@@ -186,7 +188,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           child: Text(
                             ('Register'.tr),
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -235,9 +237,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   GestureDetector(
                     child: Text(
                       'Forgot Password?'.tr,
-                      style: const TextStyle(
+                      style: TextStyle(
                         decoration: TextDecoration.underline,
-                        color: Colors.black,
+                        color: Theme.of(context).backgroundColor,
                         fontSize: 20,
                       ),
                     ),
@@ -245,6 +247,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       Navigator.of(context).pushNamed('/forget');
                     },
                   ),
+                  const SizedBox(height: 15),
                 ],
               ),
             ),

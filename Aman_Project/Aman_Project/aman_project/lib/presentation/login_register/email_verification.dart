@@ -3,6 +3,7 @@ import 'package:aman_project/data/numbers_management.dart';
 import 'package:aman_project/data/repositories/number_provider.dart';
 import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/models/user.dart';
+import 'package:aman_project/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -79,8 +80,8 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        backgroundColor: Colors.grey[300],
+        backgroundColor: blackColor,
+        leading: const BackButton(),
         elevation: 0,
         title: const Text(""),
       ),
@@ -91,7 +92,14 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset("assets/images/happy.png", width: 100),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/happy.png",
+                        width: 100,
+                        color: Theme.of(context).backgroundColor,
+                      ),
+                    ),
                     const SizedBox(height: 15),
                     Text(
                       'Welcome To Aman'.tr,
@@ -101,8 +109,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                     const SizedBox(height: 15),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 205, 153, 51),
+                        backgroundColor: Theme.of(context).primaryColor,
                       ),
                       onPressed: () {
                         redirectToHome();
@@ -113,8 +120,14 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                 )
               : Column(
                   children: [
-                    Image.asset("assets/images/icons8-email-open-100.png",
-                        width: 100),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/icons8-email-open-100.png",
+                        width: 100,
+                        color: Theme.of(context).backgroundColor,
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -124,6 +137,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
+                      textAlign: TextAlign.center,
                       'Kindly check Spam'.tr,
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
@@ -133,8 +147,7 @@ class _EmailVerificationState extends ConsumerState<EmailVerification> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 205, 153, 51),
+                        backgroundColor: Theme.of(context).primaryColor,
                       ),
                       onPressed: () {
                         sendVerificationEmail();

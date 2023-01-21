@@ -163,7 +163,7 @@ class UserHelper {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-        Navigator.of(context).pushNamed('/verify');
+        Navigator.of(context).pushReplacementNamed('/verify');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           Navigator.of(context).pop();
