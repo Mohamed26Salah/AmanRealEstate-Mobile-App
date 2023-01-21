@@ -181,3 +181,6 @@ final rentTypeUserChoice = StateProvider<String>((ref) {
 final resultsCountRent = StateProvider<int>((ref) {
   return 0;
 });
+clearRentProivders(WidgetRef ref) {
+  ref.read(searchInputProivderRent.notifier).state = "";
+}
