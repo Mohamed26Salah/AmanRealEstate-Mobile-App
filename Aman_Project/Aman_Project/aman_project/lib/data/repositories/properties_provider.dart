@@ -99,8 +99,16 @@ final filteredProperty = StreamProvider.autoDispose((ref) {
 
   return query.snapshots() as Stream<QuerySnapshot<Map<String, dynamic>>>;
 });
-clearProivders(WidgetRef ref) {
+clearFilterProivders(WidgetRef ref) {
   // ref.read(searchInputProivder.notifier).state = "";
+  ref.read(filterTypeProivder.notifier).state = "";
+  ref.read(filterRoomProivder.notifier).state = "";
+  ref.read(filterBathroomProivder.notifier).state = "";
+  ref.read(filterPriceProivder.notifier).state = "";
+}
+
+clearAllProivders(WidgetRef ref) {
+  ref.read(searchInputProivder.notifier).state = "";
   ref.read(filterTypeProivder.notifier).state = "";
   ref.read(filterRoomProivder.notifier).state = "";
   ref.read(filterBathroomProivder.notifier).state = "";

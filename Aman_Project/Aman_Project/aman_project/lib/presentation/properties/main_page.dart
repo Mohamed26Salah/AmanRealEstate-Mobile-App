@@ -110,6 +110,15 @@ class _SearchState extends ConsumerState<Search> {
                               color: Theme.of(context).primaryColor,
                               size: 28,
                             )),
+                        IconButton(
+                            onPressed: () {
+                              clearAllProivders(ref);
+                            },
+                            icon: Icon(
+                              Icons.restore,
+                              color: Theme.of(context).primaryColor,
+                              size: 28,
+                            )),
                       ],
                     ),
                   ),

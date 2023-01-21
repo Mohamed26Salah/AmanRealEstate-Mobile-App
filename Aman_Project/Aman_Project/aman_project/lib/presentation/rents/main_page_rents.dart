@@ -95,6 +95,15 @@ class _SearchState extends ConsumerState<MainPageRent> {
                             color: Colors.grey[400],
                             size: 28,
                           ),
+                          IconButton(
+                              onPressed: () {
+                                clearRentProivders(ref);
+                              },
+                              icon: Icon(
+                                Icons.restore,
+                                color: Theme.of(context).primaryColor,
+                                size: 28,
+                              )),
                         ],
                       ),
                     ),
