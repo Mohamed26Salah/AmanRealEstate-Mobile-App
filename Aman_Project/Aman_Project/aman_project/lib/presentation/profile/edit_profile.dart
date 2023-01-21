@@ -98,7 +98,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           obscureText: true,
                           decoration: CommonStyle.textFieldStyle(
                               labelText: ("New Password".tr),
-                              hintText: ("Type your new password".tr),
+                              hintText: ("Type Your New Password".tr),
                               context: context),
                           validator: (value) {
                             if (!value!.isValidPassword) {
@@ -120,7 +120,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           obscureText: true,
                           decoration: CommonStyle.textFieldStyle(
                               labelText: ("Confirm your Password".tr),
-                              hintText: ("Type your new password".tr),
+                              hintText: ("Type Your New Password".tr),
                               context: context),
                           validator: (value) {
                             if (value != newPasswordController.value.text) {

@@ -18,13 +18,23 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 class ExtractedWidgets {
   Column propertyDetailsDescriptionAndAddress(
       Property routeArgs, bool isVisible) {
+    var descriptionUserr = "Description For User";
+    var addressUser = "Address For User";
+    if (isVisible) {
+      descriptionUserr = "Description For User";
+      addressUser = "Address For User";
+    } else {
+      descriptionUserr = "Description";
+      addressUser = "Address";
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
           child: Text(
-            "Description For User".tr,
+            descriptionUserr.tr,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -96,7 +106,7 @@ class ExtractedWidgets {
         Padding(
           padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
           child: Text(
-            "Address For User".tr,
+            addressUser.tr,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -316,7 +326,8 @@ class ExtractedWidgets {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Admins Info".tr),
+        title:
+            isVisible == true ? Text("Owner Info".tr) : Text("Admins Info".tr),
         content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
             width: double.maxFinite,
@@ -339,7 +350,12 @@ class ExtractedWidgets {
                                   await launchUrlString(
                                       'tel: +2${phoneNumbersVisibleToAdmin[index]}');
                                 } else {
-                                  throw 'Could not launch $phoneNumbersVisibleToAdmin';
+                                  // throw 'Could not launch $phoneNumbersVisibleToAdmin';
+                                  errormessage("Error".tr,
+                                      "Not Supported Device".tr);
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(val.snackBar);
                                 }
                               },
                             ),

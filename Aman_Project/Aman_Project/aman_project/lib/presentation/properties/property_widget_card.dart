@@ -170,7 +170,7 @@ class PropertyWidget extends StatelessWidget {
                           //   width: 4,
                           // ),
                           ExtractedWidgets().strokeWidget(
-                                      '${property.area} sq/m', 14),
+                                      '${property.area}${'sqm'.tr}', 14),
                           //   ],
                           // ),
                         ],

@@ -57,6 +57,7 @@ class LocaleString extends Translations {
           'Description For User': 'Description For User',
           'Description For Admin': 'Description For Admin',
           'Address For Admin': 'Address For Admin',
+          'Address' : 'Address',
           'Address For User': 'Address For User',
           'Photos': 'Photos',
           'Cash': 'Cash',
@@ -158,6 +159,8 @@ class LocaleString extends Translations {
           'Admin Numbers': 'Admin Numbers',
           'Units': 'Units',
           'Users': 'Users',
+          'user' : 'user',
+          'moderator': 'moderator',
           'No Data is Found': 'No Data is Found',
           'Successfully Added Property': 'Successfully Added Property',
           'Search By Lessor': 'Search By Lessor',
@@ -182,7 +185,13 @@ class LocaleString extends Translations {
           'Password Changed successfully.. Login again please':
               'Password Changed successfully.. Login again please',
           'Searched Rents': 'Searched Rents',
-          'Another email has been send!': 'Another email has been send!'
+          'Another email has been send!': 'Another email has been send!',
+          'Successfully changed password' : 'Successfully changed password',
+          'Owner Info' : 'Owner Info',
+          'Admin Info' : 'Admin Info',
+          'Not Supported Device': 'Not Supported Device',
+          'sqm': 'sqm',
+          'Wrong password provided for that user': 'Wrong password provided for that user'
         },
         //arabic LANGUAGE
 
@@ -236,10 +245,12 @@ class LocaleString extends Translations {
           'Owner Name': 'اسم صاحب العقار',
           'Unit Name': 'اسم العقار',
           'Price': 'السعر',
-          'Description For User': 'الوصف',
+          'Description For User': 'الوصف للمستخدم' ,
           'Description For Admin': 'الوصف للأدمن',
           'Address For Admin': 'العنوان للأدمن',
-          'Address For User': 'العنوان',
+          'Address For User': 'العنوان للمستخدم',
+          'Address': 'العنوان',
+          'Description': 'الوصف',
           'Photos': 'الصور',
           'Cash': 'كاش',
           'installment': 'تقسيط',
@@ -279,7 +290,6 @@ class LocaleString extends Translations {
           'Lessor Number': 'رقم المؤجر',
           'Tenant Name': 'أسم المستأجر',
           'Tenant Number': 'رقم المستأجر',
-          'Description': 'الوصف',
           'Select yes if Furnished': 'أختر نعم إذا كانت مفروشة',
           'Select Finishing': 'أختر حالة التشطيب',
           'Half': 'نصف تشطيب',
@@ -338,7 +348,9 @@ class LocaleString extends Translations {
           'Add Number': 'أضافة رقم',
           'Admin Numbers': 'أرقام المشرفين',
           'Units': 'عقارات',
-          'Users': 'المستخدمين',
+          'Users': 'المستخدم',
+          'user' : 'المستخدم',
+          'moderator': 'مساعد مشرف',
           'No Data is Found': 'لم يتم العثور علي شئ',
           'Search By Lessor': 'بحث عن المؤجر',
           'Your WishList is Empty': 'قائمة رغباتك فارغة',
@@ -364,7 +376,13 @@ class LocaleString extends Translations {
           'Password Changed successfully.. Login again please':
               'تم تغير كلمة المرور بنجاح ..الرجاء اعادة التسجيل من جديد',
           'Searched Rents': 'الإيجارات التي تم البحث عنها',
-          'Another email has been send!': '!تم إرسال بريد إلكتروني آخر'
+          'Another email has been send!': '!تم إرسال بريد إلكتروني آخر',
+          'Successfully changed password' : 'تم تغيير كلمة المرور ب نجاح',
+          'Owner Info' : 'معلومات المالك',
+          'Admin Info' : 'معلومات المشرف',
+          'Not Supported Device' : 'الجهاز غير مدعوم',
+          'Wrong password provided for that user' : 'كلمة المرور خاطئة لهذا المستخدم',
+          'sqm' : 'متر مربع'
         },
       };
 }

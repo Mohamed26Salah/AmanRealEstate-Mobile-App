@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:aman_project/models/chart_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CategoryChart extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CategoryChartState extends State<CategoryChart> {
           series: <ChartSeries<ChartData, String>>[
             ColumnSeries<ChartData, String>(
               dataSource: widget.dataChart,
-              xValueMapper: (ChartData datax, _) => datax.x,
+              xValueMapper: (ChartData datax, _) => datax.x.tr,
               yValueMapper: (ChartData datay, _) => datay.y,
               name: '',
               pointColorMapper: (ChartData segment, _) {

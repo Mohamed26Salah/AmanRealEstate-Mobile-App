@@ -50,12 +50,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  Theme.of(context).backgroundColor,
+                                  Theme.of(context).primaryColorLight,
                               elevation: 0 // Background color
                               ),
                           child: Icon(
                             Icons.arrow_back_ios_new_outlined,
-                            color: Theme.of(context).primaryColorLight,
+                            color: Theme.of(context).backgroundColor,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

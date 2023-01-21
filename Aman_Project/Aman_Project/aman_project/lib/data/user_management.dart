@@ -129,7 +129,7 @@ class UserHelper {
             ..showSnackBar(val.snackBar);
         } else if (e.code == 'wrong-password') {
           Navigator.of(context).pop();
-          errormessage("Error".tr, "Wrong password provided for that user.");
+          errormessage("Error".tr, "Wrong password provided for that user");
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
@@ -201,13 +201,10 @@ class UserHelper {
       await user.updatePassword(newPassword);
       FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.black26,
-          content:
-              Text('Password Changed successfully.. Login again please'.tr),
-        ),
-      );
+      goodMessageSnackBar("Success".tr, "Password Changed successfully.. Login again please".tr);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(val.snackBar);
       // ignore: empty_catches
     } catch (error) {}
   }
