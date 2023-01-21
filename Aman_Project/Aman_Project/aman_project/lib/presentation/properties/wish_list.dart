@@ -195,7 +195,6 @@ class WishlistState extends ConsumerState<Wishlist> {
         await _database.delete("favs",
             where: whereString, whereArgs: whereArguments);
       } catch (e) {
-        print(e);
       }
     } else {}
   }

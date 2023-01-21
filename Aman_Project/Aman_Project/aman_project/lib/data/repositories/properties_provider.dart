@@ -46,13 +46,11 @@ final _propertyDataController = StreamController();
 final getPropertyData = StreamProvider((ref) {
   FirebaseAuth.instance.idTokenChanges().listen((user) {
     if (user != null) {
-      print("here is a User");
       FirebaseFirestore.instance
           .collection('properties')
           .snapshots()
           .listen((snapshot) => _propertyDataController.add(snapshot));
     } else {
-      print("NO Not a User");
       _propertyDataController.addStream(const Stream.empty());
     }
   });

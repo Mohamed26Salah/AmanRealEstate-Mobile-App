@@ -56,7 +56,6 @@ class _ListNumberState extends ConsumerState<ListNumber> {
                           try {
                             temp.remove(numbersList[index]);
                           } catch (e) {
-                            print(e);
                           }
 
                           ref.read(numberProv.notifier).state = temp.toList();

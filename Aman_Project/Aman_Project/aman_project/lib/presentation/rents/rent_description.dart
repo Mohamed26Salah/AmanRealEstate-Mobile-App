@@ -19,7 +19,6 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     void update(Rents routeArgss) {
-      print('days left + ${routeArgss.torEnd}');
       setState(() {
         routeArgs = routeArgss;
       });

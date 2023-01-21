@@ -53,7 +53,6 @@ class ImageManagement {
       switch (event.state) {
         case TaskState.running:
           final progress = 100.0 * (event.bytesTransferred / event.totalBytes);
-          print("Upload is $progress% complete.");
           break;
         case TaskState.success:
           await ref.getDownloadURL().then((value) {
