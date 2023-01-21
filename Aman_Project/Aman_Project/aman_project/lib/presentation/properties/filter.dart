@@ -114,39 +114,39 @@ class _FilterState extends ConsumerState<Filter> {
     switch (id) {
       case 11:
         flatButton11 = true;
-        typeFilter = "Flat".tr;
+        typeFilter = "Flat";
         break;
       case 12:
         villaButton12 = true;
-        typeFilter = "Villa".tr;
+        typeFilter = "Villa";
         break;
       case 13:
         buildingButton13 = true;
-        typeFilter = "Building".tr;
+        typeFilter = "Building";
         break;
       case 14:
         storeButton14 = true;
-        typeFilter = "Store".tr;
+        typeFilter = "Store";
         break;
       case 15:
         clinicButton15 = true;
-        typeFilter = "Clinic".tr;
+        typeFilter = "Clinic";
         break;
       case 16:
         farmButton16 = true;
-        typeFilter = "Farm".tr;
+        typeFilter = "Farm";
         break;
       case 17:
         factoryButton17 = true;
-        typeFilter = "Factory".tr;
+        typeFilter = "Factory";
         break;
       case 18:
         landButton18 = true;
-        typeFilter = "Land".tr;
+        typeFilter = "Land";
         break;
       case 19:
         otherButton19 = true;
-        typeFilter = "Other".tr;
+        typeFilter = "Other";
         break;
       default:
     }
