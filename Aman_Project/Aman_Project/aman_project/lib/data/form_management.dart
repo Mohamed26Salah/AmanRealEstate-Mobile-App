@@ -149,15 +149,15 @@ class FormManagement {
                   borderRadius: BorderRadius.circular(12),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 205, 153, 51),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor,
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 205, 153, 51), width: 2),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     filled: true,

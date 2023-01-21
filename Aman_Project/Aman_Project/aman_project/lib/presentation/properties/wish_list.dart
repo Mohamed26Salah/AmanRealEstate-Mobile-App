@@ -183,8 +183,8 @@ class WishlistState extends ConsumerState<Wishlist> {
     String whereString = "`propid` IN (?) and `email`= ?";
     final userData = ref.watch(newUserDataProivder);
     var removedIdsString =
-        "${removedIDs.toString().substring(1, removedIDs.toString().length - 1)}";
-    print(removedIDs);
+        removedIDs.toString().substring(1, removedIDs.toString().length - 1);
+
     if (userData != null) {
       List<dynamic> whereArguments = [removedIdsString, userData.email];
       try {

@@ -114,7 +114,7 @@ class _RentsPageState extends ConsumerState<RentsPage> {
                       height: 40,
                     ),
                     RoundedLoadingButton(
-                      color: const Color.fromARGB(255, 205, 153, 51),
+                      color: Theme.of(context).primaryColor,
                       controller: _btnController,
                       onPressed: () => _getRentsData(_btnController),
                       child: Text('Gets Rents Data!'.tr),
