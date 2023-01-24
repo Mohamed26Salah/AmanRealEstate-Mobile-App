@@ -34,42 +34,46 @@ class WishlistState extends ConsumerState<Wishlist> {
     return resultWhishlist.isEmpty
         ? SafeArea(
             child: Center(
-                child: NoGlowScroll(
-              child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/images/wishlist.png", width: 200),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Your WishList is Empty'.tr,
-                        style: const TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        'Explore more and shortlist some items'.tr,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed("/home");
-                        },
-                        child: Text('Start Shopping'.tr),
-                      ),
-                    ]),
+              child: NoGlowScroll(
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/images/wishlist.png", width: 200),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Your WishList is Empty'.tr,
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            'Explore more and shortlist some items'.tr,
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed("/home");
+                            },
+                            child: Text('Start Shopping'.tr),
+                          ),
+                        ]),
+                  ),
+                ),
               ),
-            )),
+            ),
           )
         : resultWhishlist[0].docId == '-1'
             ? const Center(child: LoadingScreen())
@@ -191,7 +195,6 @@ class WishlistState extends ConsumerState<Wishlist> {
         await _database.delete("favs",
             where: whereString, whereArgs: whereArguments);
       } catch (e) {
-        print(e);
       }
     } else {}
   }

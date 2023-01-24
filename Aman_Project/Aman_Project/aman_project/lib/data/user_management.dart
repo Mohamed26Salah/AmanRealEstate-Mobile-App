@@ -179,7 +179,6 @@ class UserHelper {
             ..showSnackBar(val.snackBar);
         }
       } catch (e) {
-        print(e);
       }
     } else {
       errormessage("Error".tr, "No Internet Connection!");
@@ -209,7 +208,6 @@ class UserHelper {
       return true;
       // ignore: empty_catches
     } catch (error) {
-      print(error);
       return false;
     }
   }

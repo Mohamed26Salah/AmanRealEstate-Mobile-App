@@ -534,7 +534,6 @@ class _PaidButtonWidgetState extends State<PaidButtonWidget> {
                               RentsManagement.updateRents30Days(
                                   widget.routeArgsRents.docId!,
                                   widget.routeArgsRents);
-                              print(widget.routeArgsRents.torEnd);
                               if (widget.update != null) {
                                 widget.update!(widget.routeArgsRents);
                               }

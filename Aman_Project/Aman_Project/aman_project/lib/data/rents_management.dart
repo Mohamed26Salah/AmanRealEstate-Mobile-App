@@ -43,7 +43,6 @@ class RentsManagement {
     try {
       await docRent.set(json);
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -87,7 +86,6 @@ class RentsManagement {
     try {
       docRef.update(json);
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -132,7 +130,6 @@ class RentsManagement {
       updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
           routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
-      print(e);
       // return [];
     }
   }
@@ -146,7 +143,6 @@ class RentsManagement {
       updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
           routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
-      print(e);
     }
   }
 
@@ -161,7 +157,6 @@ class RentsManagement {
       updateTorAndTorEnd(routeArgs.tor, routeArgs.torEnd, docId,
           routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.rentType);
     } catch (e) {
-      print(e);
     }
   }
 
@@ -177,7 +172,6 @@ class RentsManagement {
         'torEnd': torEnd,
       });
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -218,7 +212,6 @@ class RentsManagement {
         }
       });
     } on FirebaseException catch (e) {
-      print(e);
     }
 
     for (var e in data) {
@@ -248,7 +241,6 @@ class RentsManagement {
         }
       });
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -258,7 +250,6 @@ class RentsManagement {
           FirebaseFirestore.instance.collection('rents').doc(id);
       docRef.delete();
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 }

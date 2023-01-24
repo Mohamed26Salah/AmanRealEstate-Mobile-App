@@ -166,7 +166,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     ElevatedButton(
                       onPressed: () {
                         final user = FirebaseAuth.instance.currentUser!;
-                        print(user);
                         if (_formKey1.currentState!.validate()) {
                           setState(() {
                             newPassword = newPasswordController.text;
@@ -175,7 +174,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           UserHelper()
                               .changePassword(context, newPassword)
                               .then((value) {
-                            print(value);
                             if (!value) {
                               errormessage(
                                   "Error".tr,

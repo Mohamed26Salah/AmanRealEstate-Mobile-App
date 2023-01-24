@@ -88,7 +88,6 @@ class _ShowCardState extends ConsumerState<ShowRent> {
         );
       });
     } on Error catch (e) {
-      print(e);
       return Scaffold(
           body: Center(
         child: Column(

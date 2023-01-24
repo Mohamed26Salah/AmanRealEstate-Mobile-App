@@ -19,7 +19,6 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
   Widget build(BuildContext context) {
     Rents routeArgs = ModalRoute.of(context)!.settings.arguments as Rents;
     void update(Rents routeArgss) {
-      print('days left + ${routeArgss.torEnd}');
       setState(() {
         routeArgs = routeArgss;
       });
@@ -149,7 +148,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                             child: Center(
                                 child: Text(
                               overflow: TextOverflow.ellipsis,
-                              '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} Days',
+                              '${RentsManagement.figureHowManyDaysLeft(routeArgs.startOFRent, routeArgs.endOFRent, routeArgs.tor, routeArgs.torEnd, routeArgs.rentType)} ${"Days".tr}',
                               style: const TextStyle(
                                 fontSize: 45,
                                 color: Colors.white,

@@ -83,7 +83,6 @@ class PropertyManagement {
     try {
       await docProperty.set(json);
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -150,7 +149,6 @@ class PropertyManagement {
       final json = property.toJson();
       docRef.update(json);
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -163,7 +161,6 @@ class PropertyManagement {
       ImageManagement.deleteMultiImages(multiImages);
       docRef.delete();
     } on FirebaseException catch (e) {
-      print(e);
     }
   }
 
@@ -181,7 +178,6 @@ class PropertyManagement {
           results.add(property);
         });
       } catch (e) {
-        print("property removed".tr);
         removedIDs.add(id);
       }
     }
