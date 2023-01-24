@@ -14,3 +14,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final newUserDataProivder = StateProvider<UserModel?>((ref) {
   return null;
 });
+
+final usertDataProv = StateProvider<List<UserModel>>((ref) {
+  return [UserModel.alternate()];
+});
+final queryProv = StateProvider<String>((ref) {
+  return '';
+});

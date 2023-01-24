@@ -1,16 +1,24 @@
+import 'package:aman_project/data/repositories/user_providers.dart';
+import 'package:aman_project/data/user_management.dart';
 import 'package:aman_project/presentation/dashboard/panel_left/Components/users_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class DashboardUsers extends StatefulWidget {
+class DashboardUsers extends ConsumerStatefulWidget {
   const DashboardUsers({super.key});
 
   @override
-  State<DashboardUsers> createState() => _DashboardUsersState();
+  ConsumerState<DashboardUsers> createState() => _DashboardUsersState();
 }
 
-class _DashboardUsersState extends State<DashboardUsers> {
-  String? query;
+class _DashboardUsersState extends ConsumerState<DashboardUsers> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,15 +32,17 @@ class _DashboardUsersState extends State<DashboardUsers> {
             // onChanged: (value) {
             //   ref.read(searchInputProivder.notifier).state = value;
             // },
-            onChanged: (value) {
-              setState(() {
-                query = value;
-              });
+            onChanged: (value) async {
+              ref.read(queryProv.notifier).state = value;
+              ref.read(usertDataProv.notifier).state =
+                  await UserHelper.getUsersRolesEmails(query: value);
+              setState(() {});
             },
-            onSubmitted: (value) {
-              setState(() {
-                query = value;
-              });
+            onSubmitted: (value) async {
+              ref.read(queryProv.notifier).state = value;
+              ref.read(usertDataProv.notifier).state =
+                  await UserHelper.getUsersRolesEmails(query: value);
+              setState(() {});
             },
             style: const TextStyle(
               fontSize: 28,
@@ -91,7 +101,7 @@ class _DashboardUsersState extends State<DashboardUsers> {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                child: UsersListWidget(query: query)),
+                child: const UsersListWidget()),
           ),
         ),
       ],

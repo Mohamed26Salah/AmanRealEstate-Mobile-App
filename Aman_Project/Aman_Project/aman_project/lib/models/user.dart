@@ -6,6 +6,7 @@ class UserModel {
   String email;
   String role;
   UserModel(this.email, this.role);
+  UserModel.alternate({this.email = '', this.role = ''});
   int compareTo(UserModel other) => email.compareTo(other.email);
 
   factory UserModel.fromSnapshot(DocumentSnapshot snapshot) {

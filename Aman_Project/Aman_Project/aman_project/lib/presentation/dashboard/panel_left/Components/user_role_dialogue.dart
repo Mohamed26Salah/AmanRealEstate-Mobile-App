@@ -1,17 +1,20 @@
+import 'package:aman_project/data/repositories/user_providers.dart';
 import 'package:aman_project/data/user_management.dart';
+import 'package:aman_project/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class UserRoleDialogue extends StatefulWidget {
+class UserRoleDialogue extends ConsumerStatefulWidget {
   final String email;
-  final ValueChanged<int>? update;
+  final ValueChanged<List<UserModel>>? update;
   const UserRoleDialogue({super.key, required this.email, this.update});
 
   @override
-  State<UserRoleDialogue> createState() => _UserRoleDialogueState();
+  ConsumerState<UserRoleDialogue> createState() => _UserRoleDialogueState();
 }
 
-class _UserRoleDialogueState extends State<UserRoleDialogue> {
+class _UserRoleDialogueState extends ConsumerState<UserRoleDialogue> {
   var items = [
     'user',
     'moderator',
@@ -38,10 +41,17 @@ class _UserRoleDialogueState extends State<UserRoleDialogue> {
       actions: [
         TextButton(
             onPressed: () {
-              UserHelper.changeRole(widget.email, dropdownvalue);
-              if (widget.update != null) {
-                widget.update!(100);
-              }
+              var temp = ref.watch(queryProv);
+              UserHelper.changeRole(widget.email, dropdownvalue).then((value) {
+                if (value) {
+                  UserHelper.getUsersRolesEmails(query: temp).then((value2) {
+                    if (widget.update != null) {
+                      widget.update!(value2);
+                    }
+                  });
+                }
+              });
+
               Navigator.of(context).pop();
             },
             child: Text("Submit".tr)),

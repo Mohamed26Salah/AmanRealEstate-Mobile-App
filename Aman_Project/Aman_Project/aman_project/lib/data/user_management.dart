@@ -231,7 +231,7 @@ class UserHelper {
     preferences.setInt("langNumber", langNumber);
   }
 
-  static void changeRole(String email, String dropdownvalue) async {
+  static Future<bool> changeRole(String email, String dropdownvalue) async {
     String path = '';
 
     await FirebaseFirestore.instance
@@ -245,6 +245,11 @@ class UserHelper {
     });
 
     final washingtonRef = FirebaseFirestore.instance.doc(path);
-    washingtonRef.update({"role": dropdownvalue});
+    try {
+      await washingtonRef.update({"role": dropdownvalue});
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
