@@ -32,7 +32,7 @@ class _UsersListWidgetState extends ConsumerState<UsersListWidget> {
   @override
   Widget build(BuildContext context) {
     usertData = ref.watch(usertDataProv);
-    print("User data : " + ref.watch(usertDataProv).toString());
+    // print("User data : " + ref.watch(usertDataProv).toString());
     var rng = Random();
     var borderRadius = const BorderRadius.all(Radius.circular(10));
 

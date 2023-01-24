@@ -88,8 +88,8 @@ class UserHelper {
       BuildContext context,
       TextEditingController emailController,
       TextEditingController passwordController) async {
-    // bool result = await InternetConnectionChecker().hasConnection;
-    bool result = true;
+    bool result = await InternetConnectionChecker().hasConnection;
+    // bool result = true;
     if (result == true) {
       try {
         showDialog(
@@ -178,8 +178,7 @@ class UserHelper {
             ..hideCurrentSnackBar()
             ..showSnackBar(val.snackBar);
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     } else {
       errormessage("Error".tr, "No Internet Connection!");
       ScaffoldMessenger.of(context)

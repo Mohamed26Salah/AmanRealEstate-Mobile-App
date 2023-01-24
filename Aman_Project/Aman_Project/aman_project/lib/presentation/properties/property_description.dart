@@ -68,8 +68,7 @@ class _DetailsState extends ConsumerState<Details> {
           var temp = ref.watch(whishlistProvider);
           temp.add(item);
           ref.read(whishlistProvider.notifier).state = temp.toList();
-        } catch (e) {
-        }
+        } catch (e) {}
       } else {}
     }
 
@@ -83,8 +82,7 @@ class _DetailsState extends ConsumerState<Details> {
           var temp = ref.watch(whishlistProvider);
           temp.remove(item);
           ref.read(whishlistProvider.notifier).state = temp.toList();
-        } catch (e) {
-        }
+        } catch (e) {}
       } else {}
     }
 
@@ -285,7 +283,7 @@ class _DetailsState extends ConsumerState<Details> {
                                     ),
                                   ),
                                   ExtractedWidgets().strokeWidget(
-                                      r"$" + routeArgs.price.toString(), 18),
+                                      routeArgs.price.toString() + r" LE", 18),
                                 ],
                               ),
                               const SizedBox(

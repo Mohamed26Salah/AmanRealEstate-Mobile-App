@@ -48,6 +48,12 @@ class _AlertDailogue2State extends ConsumerState<AddNumberDialogue> {
                           "^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z0-9-_ \\.]*"),
                     )
                   ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "name is required".tr;
+                    }
+                    return null;
+                  },
                 ),
               ),
               FormManagement.buildTextField(

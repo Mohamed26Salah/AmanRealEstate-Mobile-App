@@ -130,7 +130,7 @@ class PropertyWidget extends StatelessWidget {
                             ),
                           ),
                           ExtractedWidgets().strokeWidget(
-                              r"$" + property.price.toString(), 18),
+                              property.price.toString() + r" LE", 18),
                         ],
                       ),
                       const SizedBox(

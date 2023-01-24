@@ -195,7 +195,7 @@ class _RentsDescriptionState extends ConsumerState<RentsDescription> {
                             Center(
                               child: Text(
                                 overflow: TextOverflow.ellipsis,
-                                r"$" + routeArgs.rentPrice.toString(),
+                                routeArgs.rentPrice.toString() + r" LE",
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,

@@ -139,7 +139,7 @@ class CardRent extends StatelessWidget {
                     Center(
                       child: Text(
                         overflow: TextOverflow.ellipsis,
-                        r"$" + rent.rentPrice.toString(),
+                        rent.rentPrice.toString() + r" LE",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
